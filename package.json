@@ -4,18 +4,18 @@
   "main": "index.js",
   "author": "<mail@henrygressmann.de>",
   "scripts": {
-    "dev": "snowpack dev",
-    "build": "snowpack build",
-    "start": "ts-node -O '{\"module\": \"commonjs\"}' server.ts",
-    "lint": "eslint src/ --ext .ts --fix"
+    "dev": "yarn server",
+    "start": "yarn server --prod",
+    "server": "ts-node -O '{\"module\": \"commonjs\"}' server.ts",
+    "lint": "eslint src --ext .ts --fix"
   },
   "dependencies": {
-    "@explodingcamera/eslint-config": "^14.0.0",
+    "@explodingcamera/eslint-config": "^15.1.0",
     "@prefresh/snowpack": "^3.1.0",
     "@snowpack/plugin-react-refresh": "^2.4.0",
     "@types/koa": "^2.13.1",
     "@types/koa-static": "^4.0.1",
-    "@types/node": "^14.14.33",
+    "@types/node": "^14.14.34",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.2",
     "@types/snowpack-env": "^2.3.3",

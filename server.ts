@@ -1,23 +1,33 @@
 import { readFile } from 'fs/promises';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
-import { createConfiguration, ServerRuntime, startServer } from 'snowpack';
+import {
+	createConfiguration,
+	ServerRuntime,
+	SnowpackUserConfig,
+	startServer,
+} from 'snowpack';
 
 import Koa from 'koa';
 import serve from 'koa-static';
 import * as config from './snowpack.config.js';
 
-const app = new Koa();
-
-const serverConfig = createConfiguration({
-	...config,
+const prod =
+	process.env.NODE_ENV === 'production' ??
+	process.argv.slice(-1)[0] === '--production';
+const prodOverwrites: SnowpackUserConfig = {
 	plugins: [],
 	optimize: { bundle: false, minify: false, target: 'es2020' },
+};
+
+const app = new Koa();
+const serverConfig = createConfiguration({
+	...config,
+	...(prod && prodOverwrites),
 });
+
 let snowpackRuntime: ServerRuntime;
-
 app.use(serve('dist', { index: false }));
-
 app.use(async ctx => {
 	// Server-side import our React component
 	const importedComponent = await snowpackRuntime.importModule('/dist/app.js');
