@@ -3,19 +3,20 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
-	mount: {
-		public: '/',
-		src: '/dist',
-	},
 	plugins: ['@snowpack/plugin-react-refresh'],
-	devOptions: { open: 'none' },
+	devOptions: {
+		open: 'none',
+		hmrPort: 45246,
+		port: 45247,
+		output: 'stream',
+	},
 	packageOptions: {},
 	buildOptions: {
 		out: 'dist',
 	},
 	optimize: {
-		bundle: true,
-		minify: true,
-		target: 'es2019',
+		bundle: false,
+		minify: false,
+		target: 'es2020',
 	},
 };

@@ -1,0 +1,37 @@
+{
+  "name": "@snowstorm/core",
+  "version": "0.0.0-beta.1",
+  "author": "<mail@henrygressmann.de>",
+  "main": "./lib/server/index.js",
+  "types": "./lib/server/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rimraf -rf ./lib",
+    "compile": "tsc -p tsconfig.client.json && tsc -p tsconfig.server.json",
+    "prepack": "yarn build"
+  },
+  "dependencies": {
+    "@snowpack/plugin-react-refresh": "^2.4.0",
+    "deepmerge": "^4.2.2",
+    "express": "^4.17.1",
+    "koa": "^2.13.1",
+    "koa-static": "^5.0.0",
+    "node-fetch": "^2.6.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "snowpack": "^3.1.0-pre.13",
+    "ws": "^7.4.4"
+  },
+  "devDependencies": {
+    "@types/deepmerge": "^2.2.0",
+    "@types/koa": "^2.13.1",
+    "@types/koa-static": "^4.0.1",
+    "@types/node": "^14.14.34",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@types/snowpack-env": "^2.3.3"
+  }
+}

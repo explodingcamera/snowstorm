@@ -8,6 +8,8 @@
     "allowJs": true,
     "esModuleInterop": true,
     "lib": ["DOM", "ESNext"],
-    "module": "ESNext"
-  }
+    "module": "ESNext",
+    "outDir": "lib/"
+  },
+  "include": ["**/src/**/*"]
 }

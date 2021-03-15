@@ -1,0 +1,15 @@
+{
+  "name": "@snowstorm/example",
+  "private": "true",
+  "version": "0.0.0-beta.1",
+  "author": "<mail@henrygressmann.de>",
+  "scripts": {
+    "dev": "snowstorm dev",
+    "start": "snowstorm start",
+    "build": "exit 0"
+  },
+  "dependencies": {
+    "@snowstorm/cli": "0.0.0-beta.1",
+    "@snowstorm/core": "0.0.0-beta.1"
+  }
+}
