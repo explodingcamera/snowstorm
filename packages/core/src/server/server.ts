@@ -91,11 +91,14 @@ export const start = async ({
 		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
 			ignoreInitial: true,
 		});
-		watcher.on('add', async path =>
+
+		const listener = async (path: string) =>
 			genRoutes()
 				.then(() => console.log('successfully updated routes', path))
-				.catch(e => console.error(`error updating routes: `, e)),
-		);
+				.catch(e => console.error(`error updating routes: `, e));
+
+		watcher.on('add', listener);
+		watcher.on('remove', listener);
 	} else {
 		await build({
 			config: createConfiguration(deepmerge(prodConfig, configOverride)),

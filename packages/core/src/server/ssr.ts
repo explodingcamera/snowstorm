@@ -6,7 +6,7 @@ import { join } from 'path';
 import serve from 'koa-static';
 
 const startDate = Date.now();
-const version = startDate.toString().substr(0, 5);
+const version = startDate.toString();
 
 let cachedHtml: string;
 export const ssr = ({
@@ -40,24 +40,18 @@ export const ssr = ({
 		}
 	}
 
-	let html: string;
-	if (dev || (!dev && !cachedHtml)) {
-		html = await (
-			await devServer
-				.getServerRuntime()
-				.importModule('/_snowstorm/load-html.js')
-		).exports.loadHTML({
-			pathPrefix: outputFolder,
-		});
-		if (!dev && !cachedHtml) cachedHtml = html;
-	} else {
-		html = cachedHtml;
-	}
+	const html: string = await (
+		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
+	).exports.loadHTML({
+		path: ctx.path,
+	});
 
 	// Load contents of index.html
 	let htmlFile: string;
 	if (dev) {
 		htmlFile = (await devServer.loadUrl('/')).contents.toString();
+	} else if (!dev && cachedHtml) {
+		htmlFile = cachedHtml;
 	} else {
 		htmlFile = await readFile(join(outputFolder, './index.html'), 'utf8');
 	}

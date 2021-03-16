@@ -1,13 +1,19 @@
-import React, { FunctionComponent } from 'react';
-import { Router, Route } from 'wouter';
+import React, { FunctionComponent, useState } from 'react';
+import { Route, Switch } from 'wouter';
+import makeMatcher from 'wouter/matcher';
 
 // @ts-expect-error (Let this be resolved by esbuild instead of typescript)
-import { routes as defaultRoutes } from './internal/routes.js';
+import { routes as _allRoutes } from './internal/routes.js';
 
-interface SnowstormPage extends FunctionComponent {}
-interface SnowstormCustomError extends FunctionComponent {}
-interface SnowstormCustomApp extends FunctionComponent {}
-interface SnowstormRoute {
+export type AllRoutes = {
+	_error: () => SnowstormCustomError;
+	_app: () => SnowstormCustomApp | undefined;
+} & Record<string, () => Promise<Record<string, SnowstormPage>>>;
+const allRoutes = _allRoutes as AllRoutes;
+export interface SnowstormPage extends FunctionComponent {}
+export interface SnowstormCustomError extends FunctionComponent {}
+export interface SnowstormCustomApp extends FunctionComponent {}
+export interface SnowstormRoute {
 	path: string;
 	page: string;
 }
@@ -17,68 +23,122 @@ const capitalize = (string: string) =>
 
 const App = ({
 	Wrapper,
-	InitialPage,
-	initialPageName,
 	ErrorPage,
 	routes,
+	initialPage,
 }: {
 	Wrapper?: SnowstormCustomApp;
-	InitialPage?: SnowstormPage;
-	initialPageName: string;
 	ErrorPage: SnowstormCustomError;
 	routes: SnowstormRoute[];
+	initialPage: InitialPage;
 }) => {
 	const routeComponents = (
-		<>
+		<Switch>
 			{routes.map(r => (
-				<Route path={r.path} key={r.page}>
-					{r.page === initialPageName && InitialPage && <InitialPage />}
-				</Route>
+				<Route
+					path={r.path}
+					key={r.page}
+					component={pageLoader(r.page, initialPage)}
+				/>
 			))}
-		</>
+		</Switch>
 	);
 
 	return Wrapper ? <Wrapper>{routeComponents}</Wrapper> : routeComponents;
 };
 
-const requestPage = async (page: string) => {
-	const pageExports = await defaultRoutes[page]();
+type PageStatus = 'ERROR' | 'LOADING' | 'LOADED';
+const pageLoader = (page: string, initialPage: InitialPage) => {
+	const Component: React.FC = () => {
+		const [status, setStatus] = useState<PageStatus>('LOADING');
+		const [Page, setPage] = useState<SnowstormPage | undefined>(
+			initialPage?.route?.page === page
+				? () => initialPage.component
+				: undefined,
+		);
+
+		console.log(initialPage);
+
+		return Page ? <Page /> : <h1>'loading'</h1>;
+	};
+
+	return Component;
+};
+
+const selectPageExport = (
+	page: string,
+	pageExports: Record<string, SnowstormPage>,
+) => {
+	const alternativeName = capitalize(
+		page.split('/').slice(-1)[0].replace(/\[|\]/g, ''),
+	);
+
 	const Page: SnowstormPage | undefined =
-		pageExports.default || pageExports[capitalize(page)] || undefined;
+		pageExports.default || pageExports[alternativeName] || undefined;
 
 	return Page;
 };
 
-// TODO!!!
-const pathToPagename = (path: string) => {
-	return 'index';
-};
+export const requestPage = async (page: string) =>
+	allRoutes[page]().then(pageExports => selectPageExport(page, pageExports));
 
-// TODO!!!
-const calculateRoutes = (): SnowstormRoute[] => {
-	return [
-		{
-			path: '/',
-			page: 'index',
-		},
-	];
-};
+interface InitialPage {
+	route?: SnowstormRoute;
+	component?: SnowstormPage;
+}
 
-export const loadPage = async () => {
-	const CustomApp: SnowstormCustomApp | undefined = defaultRoutes._app();
-	const ErrorPage: SnowstormCustomError = defaultRoutes._error();
-
-	const initialPageName = pathToPagename(location.pathname);
-	const InitialPage = await requestPage(initialPageName);
-	const routes = calculateRoutes();
+export const Page = ({
+	routes,
+	initialPage,
+}: {
+	routes: SnowstormRoute[];
+	initialPage: InitialPage;
+}) => {
+	const CustomApp: SnowstormCustomApp | undefined = allRoutes._app();
+	const ErrorPage: SnowstormCustomError = allRoutes._error();
 
 	return (
 		<App
+			initialPage={initialPage}
 			routes={routes}
-			InitialPage={InitialPage}
-			initialPageName={initialPageName}
 			Wrapper={CustomApp}
 			ErrorPage={ErrorPage}
 		/>
 	);
+};
+
+export const getCurrentPage = ({
+	routes,
+	location,
+}: {
+	routes: SnowstormRoute[];
+	location: string;
+}) => {
+	const matcher = makeMatcher();
+
+	for (const route of routes) {
+		const match = matcher(route.path, location);
+		if (match[0]) return route;
+	}
+};
+
+export const calculateRoutes = (): SnowstormRoute[] =>
+	Object.keys(allRoutes)
+		.filter(k => !k.startsWith('_'))
+		.map(processPage)
+		.sort(file => (file.parts.slice(-1)[0].startsWith(':') ? 1 : -1));
+
+const processPage = (page: string) => {
+	const parts = page.split('/').map(part => {
+		if (part === 'index') return '';
+		if (part.startsWith('[') && part.endsWith(']'))
+			return ':' + part.replace(/^\[|\]$/g, '');
+		return part;
+	});
+
+	return {
+		path: `/${parts.join('/').replace(/\/$/g, '')}`,
+		page,
+		parts,
+	};
 };
