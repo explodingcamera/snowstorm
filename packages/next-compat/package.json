@@ -4,7 +4,5 @@
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "scripts": {},
-  "dependencies": {
-    "@snowstorm/router": "0.0.0-beta.1"
-  }
+  "dependencies": {}
 }

@@ -13,5 +13,5 @@
     "module": "ESNext",
     "outDir": "lib/"
   },
-  "include": ["**/src/**/*", "packages/example/**/*"]
+  "include": ["**/src/**/*", "packages/example/**/*", "packages/example-*/**/*"]
 }

@@ -4,8 +4,11 @@ import { readFile } from 'fs/promises';
 import { SnowstormConfig } from './server';
 import { join } from 'path';
 import serve from 'koa-static';
-import { loadRoutes } from './routes';
 
+const startDate = Date.now();
+const version = startDate.toString().substr(0, 5);
+
+let cachedHtml: string;
 export const ssr = ({
 	devServer,
 	dev,
@@ -27,11 +30,29 @@ export const ssr = ({
 		return;
 	}
 
-	const html: string = await (
-		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
-	).exports.loadHTML({
-		pathPrefix: outputFolder,
-	});
+	if (!dev) {
+		ctx.status = 200;
+		ctx.set('ETag', version);
+
+		if (ctx.fresh) {
+			ctx.status = 304;
+			return;
+		}
+	}
+
+	let html: string;
+	if (dev || (!dev && !cachedHtml)) {
+		html = await (
+			await devServer
+				.getServerRuntime()
+				.importModule('/_snowstorm/load-html.js')
+		).exports.loadHTML({
+			pathPrefix: outputFolder,
+		});
+		if (!dev && !cachedHtml) cachedHtml = html;
+	} else {
+		html = cachedHtml;
+	}
 
 	// Load contents of index.html
 	let htmlFile: string;
@@ -42,11 +63,12 @@ export const ssr = ({
 	}
 
 	// Inserts the rendered HTML into our main div
-	const doc = htmlFile.replace(
-		/<div id="app"><\/div>/,
-		`<div id="app"${(devServer && 'data-hmr=true') || ''}>${html}</div>`,
-	);
-	// .replace(/(\r\n|\n|\r)/gm, '');
+	const doc = htmlFile
+		.replace(
+			/<div id="app"><\/div>/,
+			`<div id="app"${(dev && 'data-hmr=true') || ''}>${html}</div>`,
+		)
+		.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`);
 
 	// Sends the response back to the client
 	ctx.body = doc;

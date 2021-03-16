@@ -15,7 +15,9 @@ import Koa from 'koa';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 import compress from 'koa-compress';
+import htmlMinify from 'koa-html-minifier';
 import deepmerge from 'deepmerge';
+import glob from 'glob-promise';
 
 import * as devConfig from './snowpack.config.js';
 import * as prodConfig from './snowpack.config.prod.js';
@@ -23,6 +25,7 @@ import * as prodConfig from './snowpack.config.prod.js';
 import { serveHMR } from './hmr';
 import { ssr } from './ssr';
 import { generateRoutes, pagePattern } from './routes';
+import { brotliify } from './brotliify.js';
 
 // a bit hacky, but simplifies dev code a lot, since we can just reuse the client code here on the server
 (global as any).$RefreshReg$ = () => undefined;
@@ -98,6 +101,9 @@ export const start = async ({
 			config: createConfiguration(deepmerge(prodConfig, configOverride)),
 			lockfile: null,
 		});
+
+		const files = await glob(`${snowpackFolder}/**/*`, { nodir: true });
+		brotliify(files);
 	}
 
 	const app = new Koa();
@@ -107,10 +113,25 @@ export const start = async ({
 		lockfile: null,
 	});
 
-	if (!dev) app.use(compress());
 	app.use(serveHMR({ devServer, dev }));
 	app.use(serve(join(path, './public'), { index: false }));
-	app.use(mount(serve(snowpackFolder, { index: false })));
+	app.use(
+		mount(
+			serve(snowpackFolder, {
+				index: false,
+				maxAge: dev ? undefined : 31536000,
+			}),
+		),
+	);
+
+	if (!dev) {
+		app.use(compress());
+		app.use(
+			htmlMinify({
+				collapseWhitespace: true,
+			}),
+		);
+	}
 
 	app.use(
 		ssr({

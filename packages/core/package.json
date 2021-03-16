@@ -27,7 +27,9 @@
     "glob": "^7.1.6",
     "glob-promise": "^4.1.0",
     "koa": "^2.13.1",
+    "koa-cash": "^4.0.5",
     "koa-compress": "^5.0.1",
+    "koa-html-minifier": "^2.0.0",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
@@ -39,6 +41,8 @@
   },
   "devDependencies": {
     "@types/koa": "^2.13.1",
+    "@types/koa-cash": "^4.0.0",
+    "@types/koa-html-minifier": "^1.0.1",
     "@types/koa-mount": "^4.0.0",
     "@types/koa-static": "^4.0.1",
     "@types/node": "^14.14.35",

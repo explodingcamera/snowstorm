@@ -2,7 +2,8 @@
   "extends": "./../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["src/server/*", "src/index.ts"]
 }
