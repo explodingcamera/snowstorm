@@ -5,14 +5,10 @@ import { loadPage } from './router';
 const element = document.getElementById('app');
 
 (async () => {
-	const Component = await loadPage({ pathPrefix: '/', routes: [] });
-
-	console.log(Component);
+	const Component = await loadPage({ routes: [] });
 
 	if (element?.childNodes.length) {
-		hydrate(<Component />, element, () => {
-			console.log('hydrated');
-		});
+		hydrate(<Component />, element);
 	} else {
 		render(<Component />, element);
 	}

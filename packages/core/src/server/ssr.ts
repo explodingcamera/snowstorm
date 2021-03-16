@@ -4,29 +4,35 @@ import { readFile } from 'fs/promises';
 import { SnowstormConfig } from './server';
 import { join } from 'path';
 import serve from 'koa-static';
+import { loadRoutes } from './routes';
 
 export const ssr = ({
 	devServer,
 	dev,
 	outputFolder,
+	pagesFolder,
 	config,
 }: {
 	devServer: SnowpackDevServer;
 	dev: boolean;
 	outputFolder: string;
+	pagesFolder: string;
 	config: SnowstormConfig;
 }): Middleware => async (ctx, next) => {
-	if (ctx.path.startsWith('/_snowstorm')) {
-		console.log(outputFolder);
+	if (
+		ctx.path.startsWith('/_snowstorm') ||
+		ctx.path.startsWith('/favicon.ico')
+	) {
 		serve(outputFolder)(ctx, next);
 		return;
 	}
 
+	const routes = await loadRoutes({ pagesFolder });
 	const html: string = await (
 		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
 	).exports.loadHTML({
 		pathPrefix: outputFolder,
-		routes: [],
+		routes,
 	});
 
 	// Load contents of index.html

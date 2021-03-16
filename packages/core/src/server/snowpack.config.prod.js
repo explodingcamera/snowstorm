@@ -7,5 +7,11 @@ const config = require('./snowpack.config');
 module.exports = {
 	...config,
 	plugins: [],
-	optimize: { bundle: true, minify: true, target: 'es2017' },
+	optimize: {
+		bundle: true,
+		minify: true,
+		target: 'es2017',
+		splitting: true,
+		treeshake: true,
+	},
 };

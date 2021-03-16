@@ -9,6 +9,7 @@ import {
 import { join } from 'path';
 import { mkdir } from 'fs/promises';
 import { performance } from 'perf_hooks';
+import chokidar from 'chokidar';
 
 import Koa from 'koa';
 import mount from 'koa-mount';
@@ -21,6 +22,7 @@ import * as prodConfig from './snowpack.config.prod.js';
 
 import { serveHMR } from './hmr';
 import { ssr } from './ssr';
+import { generateRoutes, pagePattern } from './routes';
 
 // a bit hacky, but simplifies dev code a lot, since we can just reuse the client code here on the server
 (global as any).$RefreshReg$ = () => undefined;
@@ -50,7 +52,9 @@ export const start = async ({
 	const serverStart = performance.now();
 	const cfg = { ...defaultConfig, ...config };
 
-	const snowpackFolder = join(path, './.snowstorm/out');
+	const snowstormFolder = join(path, './.snowstorm');
+	const snowpackFolder = join(snowstormFolder, './out');
+	const internalFolder = join(snowstormFolder, './internal');
 	const pagesFolder = join(path, './pages');
 	const assetsFolder = join(__dirname, '../../assets');
 	const clientFolder = join(__dirname, '../client');
@@ -64,11 +68,32 @@ export const start = async ({
 			[assetsFolder]: '/',
 			[clientFolder]: '/_snowstorm',
 			[pagesFolder]: '/_snowstorm/pages',
+			[internalFolder]: '/_snowstorm/internal',
 		},
 	};
 
-	if (!dev) {
-		await mkdir(snowpackFolder, { recursive: true });
+	await mkdir(internalFolder, { recursive: true });
+	await mkdir(snowpackFolder, { recursive: true });
+
+	const genRoutes = async () =>
+		generateRoutes({
+			pagesFolder,
+			internalFolder,
+			template: join(__dirname, '../../assets/routes.js.template'),
+		});
+
+	await genRoutes();
+
+	if (dev) {
+		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
+			ignoreInitial: true,
+		});
+		watcher.on('add', async path =>
+			genRoutes()
+				.then(() => console.log('successfully updated routes', path))
+				.catch(e => console.error(`error updating routes: `, e)),
+		);
+	} else {
 		await build({
 			config: createConfiguration(deepmerge(prodConfig, configOverride)),
 			lockfile: null,
@@ -76,8 +101,9 @@ export const start = async ({
 	}
 
 	const app = new Koa();
+	const configFinal = createConfiguration(deepmerge(devConfig, configOverride));
 	const devServer = await startServer({
-		config: createConfiguration(deepmerge(devConfig, configOverride)),
+		config: configFinal,
 		lockfile: null,
 	});
 
@@ -91,6 +117,7 @@ export const start = async ({
 			devServer,
 			dev,
 			outputFolder: snowpackFolder,
+			pagesFolder: pagesFolder,
 			config: cfg,
 		}),
 	);
