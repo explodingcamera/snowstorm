@@ -5,7 +5,7 @@ import { loadPage } from './router';
 const element = document.getElementById('app');
 
 (async () => {
-	const Component = await loadPage({ routes: [] });
+	const Component = await loadPage();
 
 	if (element?.childNodes.length) {
 		hydrate(<Component />, element);

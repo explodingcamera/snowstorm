@@ -1,3 +1,4 @@
 import React from 'react';
 
-export const Index = () => <>ups</>;
+const Error = () => <>ups</>;
+export default Error;

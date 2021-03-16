@@ -29,15 +29,23 @@ export const generateRoutes = async ({
 		.filter(isString);
 
 	const customErrorPage = normalizedRoutes.includes('_error');
+	const customAppPage = normalizedRoutes.includes('_app');
 
 	normalizedRoutes = normalizedRoutes
 		.filter(r => !r.startsWith('_'))
 		.map(route => `  "${route}": () => import("../pages/${route}.js")`);
 
+	if (customAppPage) {
+		tmp = `import App from "../pages/_app.js";\n${tmp}`;
+	}
+
+	tmp = `import Error from "${
+		customErrorPage ? '../pages/_error.js' : '../_error.js'
+	}";\n${tmp}`;
+
 	normalizedRoutes.push(
-		`  "_error": () => import("${
-			customErrorPage ? '../pages/_error.js' : '../_error.js'
-		}")`,
+		`  "_app": () => ${customAppPage ? 'App' : 'undefined'}`,
+		`  "_error": () => Error`,
 	);
 
 	// normalizedRoutes.push('_error');

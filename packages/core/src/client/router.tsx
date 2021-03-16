@@ -1,23 +1,40 @@
 import React, { FunctionComponent } from 'react';
-import { App } from './app';
 
 // @ts-expect-error (Let this be resolved by esbuild instead of typescript)
 import { routes as defaultRoutes } from './internal/routes.js';
 
 interface SnowstormPage extends FunctionComponent {}
+interface SnowstormCustomError extends FunctionComponent {}
+interface SnowstormCustomApp extends FunctionComponent {}
+
+const capitalize = (string: string) =>
+	string.charAt(0).toUpperCase() + string.slice(1);
 
 export const loadPage = async () => {
-	let Index: SnowstormPage;
-	try {
-		if (true) {
-			Index = (await defaultRoutes[true ? 'inde' + 'x' : '_error']()).Index;
-			// @ts-expect-error (Let this be resolved by esbuild instead of typescript)
-			await import('./pages/_error.js');
-			// https://github.com/evanw/esbuild/issues/56#issuecomment-643100248
-		}
-	} catch (error: unknown) {}
+	const CustomError: SnowstormCustomError = defaultRoutes._error();
+	const CustomApp: SnowstormCustomApp | undefined = defaultRoutes._app();
 
-	const Component: React.FC = () => <App>{Index && <Index />}</App>;
+	let Page: SnowstormPage;
+	try {
+		const currentPage = 'index';
+		const pageExports = await defaultRoutes[currentPage]();
+
+		Page =
+			pageExports.default ||
+			pageExports[capitalize(currentPage)] ||
+			(() => <CustomError />);
+	} catch (error: unknown) {
+		Page = () => <CustomError />;
+	}
+
+	let Component: React.FC = () => <Page />;
+	if (CustomApp) {
+		Component = () => (
+			<CustomApp>
+				<Page />
+			</CustomApp>
+		);
+	}
 
 	return Component;
 };

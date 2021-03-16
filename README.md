@@ -12,7 +12,8 @@
 
 ### **Key Features**
 * Develop faster, with a dev server that starts up in 100ms or less thanks to [snowpack](https://github.com/snowpackjs/snowpack)
-* Out-of-the-box support for everythin you will ever need
+* Soon: Drop-in replacement for `next.js` using `@snowstorm/next-compat`
+* Out-of-the-box support for everything you will ever need
 * Minimal: no added bloat, loads nothing more than what you use
 * Versitile: supports everything from complex server side code to blazing fast, javascript free static websites
 
