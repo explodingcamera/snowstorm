@@ -1,8 +1,14 @@
 {
   "name": "@snowstorm/root",
-  "private": "true",
   "version": "0.0.0-beta.1",
+  "private": "true",
+  "license": "MIT",
   "author": "<mail@henrygressmann.de>",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "scripts": {
     "build": "run-s -l build:*",
     "build:core": "yarn workspace @snowstorm/core run build ",
@@ -10,11 +16,6 @@
     "watch": "run-p -l watch:*",
     "watch:core": "yarn workspace @snowstorm/core run watch",
     "watch:cli": "yarn workspace @snowstorm/cli run watch"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
   },
   "dependencies": {
     "@explodingcamera/eslint-config": "^15.1.0",
