@@ -6,14 +6,12 @@ module.exports = {
 	plugins: ['@snowpack/plugin-react-refresh'],
 	devOptions: {
 		open: 'none',
+		hmr: true,
 		hmrPort: 45246,
 		port: 45247,
 		output: 'stream',
 	},
 	packageOptions: {},
-	buildOptions: {
-		out: 'dist',
-	},
 	optimize: {
 		bundle: false,
 		minify: false,

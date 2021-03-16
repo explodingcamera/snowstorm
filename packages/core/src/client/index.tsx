@@ -5,7 +5,7 @@ import { loadPage } from './router';
 const element = document.getElementById('app');
 
 (async () => {
-	const Component = await loadPage();
+	const Component = await loadPage({ pathPrefix: '/', routes: [] });
 
 	console.log(Component);
 

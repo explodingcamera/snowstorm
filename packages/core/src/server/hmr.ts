@@ -9,10 +9,7 @@ export const serveHMR = ({
 	dev: boolean;
 }): Middleware => async (ctx, next) => {
 	// serve hmr & dev code in dev mode
-	if (
-		dev &&
-		(ctx.path.startsWith('/dist') || ctx.path.startsWith('/_snowpack'))
-	) {
+	if (dev && ctx.path.startsWith('/_snowstorm')) {
 		const resp = await devServer.loadUrl(ctx.path);
 		ctx.body = resp.contents;
 		ctx.set('Content-Type', resp.contentType.toString());

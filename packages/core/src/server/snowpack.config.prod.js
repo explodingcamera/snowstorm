@@ -7,9 +7,5 @@ const config = require('./snowpack.config');
 module.exports = {
 	...config,
 	plugins: [],
-	devOptions: {
-		port: 45247,
-		hostname: 'localhost', // don't expose the port on production environments
-	},
 	optimize: { bundle: true, minify: true, target: 'es2017' },
 };
