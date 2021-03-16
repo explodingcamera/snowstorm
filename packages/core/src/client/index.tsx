@@ -1,15 +1,14 @@
-import React from 'react';
 import { hydrate, render } from 'react-dom';
 import { loadPage } from './router';
 
 const element = document.getElementById('app');
 
 (async () => {
-	const Component = await loadPage();
+	const page = await loadPage();
 
 	if (element?.childNodes.length) {
-		hydrate(<Component />, element);
+		hydrate(page, element);
 	} else {
-		render(<Component />, element);
+		render(page, element);
 	}
 })();
