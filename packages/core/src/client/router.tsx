@@ -6,7 +6,7 @@ import { routes as defaultRoutes } from './internal/routes.js';
 
 interface SnowstormPage extends FunctionComponent {}
 
-export const loadPage = async ({ routes }: { routes: string[] }) => {
+export const loadPage = async () => {
 	let Index: SnowstormPage;
 	try {
 		if (true) {

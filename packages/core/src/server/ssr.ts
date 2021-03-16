@@ -27,12 +27,10 @@ export const ssr = ({
 		return;
 	}
 
-	const routes = await loadRoutes({ pagesFolder });
 	const html: string = await (
 		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
 	).exports.loadHTML({
 		pathPrefix: outputFolder,
-		routes,
 	});
 
 	// Load contents of index.html

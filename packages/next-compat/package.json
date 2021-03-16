@@ -1,0 +1,9 @@
+{
+  "name": "@snowstorm/next-compat",
+  "version": "0.0.0-beta.1",
+  "author": "<mail@henrygressmann.de>",
+  "scripts": {},
+  "dependencies": {
+    "@snowstorm/router": "0.0.0-beta.1"
+  }
+}
