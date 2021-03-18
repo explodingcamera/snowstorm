@@ -16,5 +16,6 @@
 * Out-of-the-box support for everything you will ever need
 * Minimal: no added bloat, loads nothing more than what you use
 * Versitile: supports everything from complex server side code to blazing fast, javascript free static websites
+* Lots of small quality-of-life improvements
 
 > License: [MIT](LICENSE.md)

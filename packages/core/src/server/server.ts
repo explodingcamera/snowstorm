@@ -26,6 +26,7 @@ import { serveHMR } from './hmr';
 import { ssr } from './ssr';
 import { generateRoutes, pagePattern } from './routes';
 import { brotliify } from './brotliify.js';
+import { loadConfig } from './config.js';
 
 // a bit hacky, but simplifies dev code a lot, since we can just reuse the client code here on the server
 (global as any).$RefreshReg$ = () => undefined;
@@ -147,6 +148,8 @@ export const start = async ({
 	);
 
 	app.listen(2000);
+
+	await loadConfig(path);
 
 	console.log('>> listening on port 2000');
 	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
