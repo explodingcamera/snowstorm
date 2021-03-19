@@ -1,0 +1,15 @@
+{
+  "name": "@snowstorm/hooks",
+  "version": "0.0.0-beta.1",
+  "license": "MIT",
+  "author": "<mail@henrygressmann.de>",
+  "scripts": {
+    "build": "run-s clean compile",
+    "clean": "rimraf -rf ./lib",
+    "compile": "tsc -p tsconfig.build.json",
+    "watch": "tsc -p tsconfig.build.json --watch"
+  },
+  "devDependencies": {
+    "type-fest": "^0.21.3"
+  }
+}

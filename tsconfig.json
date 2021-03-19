@@ -11,7 +11,8 @@
     "esModuleInterop": true,
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
-    "outDir": "lib/"
+    "outDir": "lib/",
+    "typeRoots": ["packages/core/types"]
   },
   "include": ["**/src/**/*", "packages/example/**/*", "packages/example-*/**/*"]
 }

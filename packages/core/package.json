@@ -33,8 +33,6 @@
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "require-from-string": "^2.0.2",
     "snowpack": "^3.0.13",
     "wouter": "^2.7.4",
@@ -52,5 +50,17 @@
     "@types/react-dom": "^17.0.2",
     "@types/require-from-string": "^1.2.0",
     "@types/snowpack-env": "^2.3.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
   }
 }

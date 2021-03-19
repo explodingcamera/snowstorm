@@ -13,9 +13,11 @@
     "build": "run-s -l build:*",
     "build:core": "yarn workspace @snowstorm/core run build ",
     "build:cli": "yarn workspace @snowstorm/cli run build",
+    "build:hooks": "yarn workspace @snowstorm/hooks run build",
     "watch": "run-p -l watch:*",
     "watch:core": "yarn workspace @snowstorm/core run watch",
-    "watch:cli": "yarn workspace @snowstorm/cli run watch"
+    "watch:cli": "yarn workspace @snowstorm/cli run watch",
+    "watch:hooks": "yarn workspace @snowstorm/hooks run watch"
   },
   "dependencies": {
     "@explodingcamera/eslint-config": "^15.1.0",

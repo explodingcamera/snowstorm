@@ -1,0 +1,10 @@
+{
+  "name": "@snowstorm/hooks",
+  "version": "0.0.0-beta.1",
+  "license": "MIT",
+  "author": "<mail@henrygressmann.de>",
+  "scripts": {},
+  "devDependencies": {
+    "type-fest": "^0.21.3"
+  }
+}
