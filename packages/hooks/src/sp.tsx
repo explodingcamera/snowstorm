@@ -4,12 +4,6 @@ declare global {
 	interface Window {
 		__serverdata: Record<string, string>;
 	}
-
-	interface ImportMeta {
-		readonly env: {
-			readonly SSR?: boolean;
-		};
-	}
 }
 
 export interface SSROptionsBuildTime {
@@ -31,6 +25,7 @@ export function createSP<T>(
 	run: () => Promise<T>,
 	options: SPOptions,
 ) {
+	// @ts-expect-error import.meta.env.SSR exists in the environments expected to use this package
 	if (import.meta.env.SSR) {
 		run()
 			.then(res => {
@@ -50,6 +45,7 @@ export function createSP<T>(
 			} catch (error: unknown) {}
 		}
 
+		// @ts-expect-error import.meta.env.SSR exists in the environments expected to use this package
 		if (!import.meta.env.SSR && options.runOnClient) {
 			// TODO: run on client
 			return null; // indicate we're loading data

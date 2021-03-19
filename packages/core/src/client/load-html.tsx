@@ -11,7 +11,7 @@ import {
 import { Router } from 'wouter';
 import staticLocationHook from 'wouter/static-location';
 
-(global as any).location = {};
+(window as any).location = {};
 
 // we have to render the html here to prevent multiple instances of react from existing
 export const loadHTML = async ({ path }: { path: string }) => {

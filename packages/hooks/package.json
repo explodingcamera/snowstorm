@@ -10,6 +10,7 @@
     "watch": "tsc -p tsconfig.build.json --watch"
   },
   "devDependencies": {
+    "@types/snowpack-env": "^2.3.3",
     "type-fest": "^0.21.3"
   }
 }
