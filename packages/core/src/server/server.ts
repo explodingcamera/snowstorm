@@ -4,7 +4,6 @@ import {
 	SnowpackUserConfig,
 	logger,
 	build,
-	clearCache,
 } from 'snowpack';
 
 import { join } from 'path';
@@ -39,24 +38,9 @@ logger.on('warn', e => console.error(e));
 logger.on('info', e => console.error(e));
 logger.on('debug', e => console.error(e));
 
-export interface SnowstormConfig {
-	test?: true;
-}
-
-const defaultConfig: SnowstormConfig = {};
-
-export const start = async ({
-	dev,
-	path,
-	config,
-}: {
-	dev: boolean;
-	path: string;
-	config?: SnowstormConfig;
-}) => {
+export const start = async ({ dev, path }: { dev: boolean; path: string }) => {
 	const serverStart = performance.now();
-	const cfg = { ...defaultConfig, ...config };
-
+	const config = await loadConfig(path);
 	const snowstormFolder = join(path, './.snowstorm');
 	const snowpackFolder = join(snowstormFolder, './out');
 	const internalFolder = join(snowstormFolder, './internal');
@@ -77,33 +61,20 @@ export const start = async ({
 		},
 	};
 
-	await mkdir(internalFolder, { recursive: true });
-	await mkdir(snowpackFolder, { recursive: true });
-
-	const genRoutes = async () =>
-		generateRoutes({
+	const internalFolderReady = mkdir(internalFolder, { recursive: true });
+	const genRoutes = async () => {
+		await internalFolderReady;
+		return generateRoutes({
 			pagesFolder,
 			internalFolder,
 			template: join(__dirname, '../../assets/routes.js.template'),
 		});
+	};
 
-	await genRoutes();
+	const routesDone = genRoutes();
 
-	if (dev) {
-		await clearCache();
-
-		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
-			ignoreInitial: true,
-		});
-
-		const listener = async (path: string) =>
-			genRoutes()
-				.then(() => console.log('successfully updated routes', path))
-				.catch(e => console.error(`error updating routes: `, e));
-
-		watcher.on('add', listener);
-		watcher.on('remove', listener);
-	} else {
+	if (!dev) {
+		await routesDone;
 		await build({
 			config: createConfiguration(deepmerge(prodConfig, configOverride)),
 			lockfile: null,
@@ -114,11 +85,16 @@ export const start = async ({
 	}
 
 	const app = new Koa();
+	// TODO: investigate why createConfiguration takes 50ms?!
 	const configFinal = createConfiguration(deepmerge(devConfig, configOverride));
-	const devServer = await startServer({
-		config: configFinal,
-		lockfile: null,
-	});
+
+	const [devServer] = await Promise.all([
+		startServer({
+			config: configFinal,
+			lockfile: null,
+		}),
+		routesDone,
+	]);
 
 	app.use(serveHMR({ devServer, dev }));
 	app.use(serve(join(path, './public'), { index: false }));
@@ -146,14 +122,26 @@ export const start = async ({
 			dev,
 			outputFolder: snowpackFolder,
 			pagesFolder: pagesFolder,
-			config: cfg,
+			config,
 		}),
 	);
 
 	app.listen(2000);
 
-	await loadConfig(path);
-
 	console.log('>> listening on port 2000');
 	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
+
+	if (dev) {
+		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
+			ignoreInitial: true,
+		});
+
+		const listener = async (path: string) =>
+			genRoutes()
+				.then(() => console.log('successfully updated routes', path))
+				.catch(e => console.error(`error updating routes: `, e));
+
+		watcher.on('add', listener);
+		watcher.on('remove', listener);
+	}
 };

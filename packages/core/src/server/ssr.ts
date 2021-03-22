@@ -1,7 +1,7 @@
 import { Middleware } from 'koa';
 import { SnowpackDevServer } from 'snowpack';
 import { readFile } from 'fs/promises';
-import { SnowstormConfig } from './server';
+import { SnowstormConfig } from './config';
 import { join } from 'path';
 import serve from 'koa-static';
 
@@ -63,6 +63,8 @@ export const ssr = ({
 		htmlFile = await readFile(join(outputFolder, './index.html'), 'utf8');
 	}
 
+	const props: string = await collectProps();
+
 	// Inserts the rendered HTML into our main div
 	const doc = htmlFile
 		.replace(
@@ -70,10 +72,12 @@ export const ssr = ({
 			`<div id="app"${(dev && 'data-hmr=true') || ''}>${html}</div>`,
 		)
 		.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
-		.replace('<!-- SNOWPACK DATA -->', '');
-
-	const props = await collectProps();
-	console.log('collected props', props);
+		.replace(
+			'<!-- SNOWPACK DATA -->',
+			props.length
+				? `<script id="__serverprops" type="application/json">${props}</script>`
+				: '',
+		);
 
 	// Sends the response back to the client
 	ctx.body = doc;

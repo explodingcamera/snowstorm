@@ -11,7 +11,7 @@
 # > Important: Snowstorm isn't Production-Ready yet
 
 ### **Key Features**
-* Develop faster, with a dev server that starts up in 100ms or less thanks to [snowpack](https://github.com/snowpackjs/snowpack)
+* Develop faster, with a dev server that starts up in less then 200ms thanks to [snowpack](https://github.com/snowpackjs/snowpack)
 * Soon: Drop-in replacement for `next.js` using `@snowstorm/next-compat`
 * Out-of-the-box support for everything you will ever need
 * Minimal: no added bloat, loads nothing more than what you use

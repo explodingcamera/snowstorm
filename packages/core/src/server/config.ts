@@ -3,8 +3,6 @@ import glob from 'glob-promise';
 import { join } from 'path';
 import {
 	CompilerOptions,
-	createCompilerHost,
-	createProgram,
 	ModuleKind,
 	ScriptTarget,
 	transpileModule,
@@ -20,8 +18,11 @@ const configFiles = [
 	'snowstorm.config.json',
 ];
 
-const baseConfig = {};
-const defaultConfig = {};
+export interface SnowstormConfig {
+	test?: true;
+}
+
+const baseConfig: SnowstormConfig = {};
 
 export const loadConfig = async (projectPath: string) => {
 	const files = await glob(join(projectPath, '/*'));

@@ -49,7 +49,7 @@ export const registerSP = (
 	spFuncs.push({ name, run, options });
 };
 
-export const collectProps = () => serverProps;
+export const collectProps = () => JSON.stringify(serverProps);
 
 export const getServerProp = (name: string) => {
 	try {
