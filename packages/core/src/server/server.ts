@@ -4,6 +4,7 @@ import {
 	SnowpackUserConfig,
 	logger,
 	build,
+	clearCache,
 } from 'snowpack';
 
 import { join } from 'path';
@@ -89,6 +90,8 @@ export const start = async ({
 	await genRoutes();
 
 	if (dev) {
+		await clearCache();
+
 		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
 			ignoreInitial: true,
 		});

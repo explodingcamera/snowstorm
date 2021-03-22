@@ -19,7 +19,8 @@
     "watch:server": "tsc -p tsconfig.server.json --watch"
   },
   "dependencies": {
-    "@snowpack/plugin-react-refresh": "^2.4.0",
+    "@snowstorm/hooks": "0.0.0-beta.1",
+    "@snowpack/plugin-react-refresh": "^2.4.1",
     "@types/koa-compress": "^4.0.1",
     "chokidar": "^3.5.1",
     "deepmerge": "^4.2.2",
@@ -34,10 +35,10 @@
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
     "require-from-string": "^2.0.2",
-    "snowpack": "^3.0.13",
+    "snowpack": "^3.1.2",
+    "typescript": "^4.0.0",
     "wouter": "^2.7.4",
-    "ws": "^7.4.4",
-    "typescript": "^4.0.0"
+    "ws": "^7.4.4"
   },
   "devDependencies": {
     "@types/koa": "^2.13.1",

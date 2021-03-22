@@ -57,8 +57,6 @@ const pageLoader = (page: string, initialPage: InitialPage) => {
 				: undefined,
 		);
 
-		console.log(initialPage);
-
 		return Page ? <Page /> : <h1>'loading'</h1>;
 	};
 

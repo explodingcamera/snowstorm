@@ -1,1 +1,1 @@
-export * from './sp';
+export * from './server-props';

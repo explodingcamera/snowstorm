@@ -40,9 +40,16 @@ export const ssr = ({
 		}
 	}
 
-	const html: string = await (
+	const { loadPage, renderPage, processSPs, collectProps } = (
 		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
-	).exports.loadHTML({
+	).exports;
+
+	const page = await loadPage({ path: ctx.path });
+
+	await processSPs();
+
+	const html: string = await renderPage({
+		...page,
 		path: ctx.path,
 	});
 
@@ -62,7 +69,11 @@ export const ssr = ({
 			/<div id="app"><\/div>/,
 			`<div id="app"${(dev && 'data-hmr=true') || ''}>${html}</div>`,
 		)
-		.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`);
+		.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
+		.replace('<!-- SNOWPACK DATA -->', '');
+
+	const props = await collectProps();
+	console.log('collected props', props);
 
 	// Sends the response back to the client
 	ctx.body = doc;

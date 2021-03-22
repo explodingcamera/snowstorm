@@ -1,19 +1,15 @@
 import React from 'react';
-
-declare global {
-	interface Window {
-		__serverdata: Record<string, string>;
-	}
-}
+import { getServerProp, registerSP } from './internal';
 
 export interface SSROptionsBuildTime {
-	atBuild: true;
+	type: 'dynamic';
 	runOnClient: boolean;
 }
 export interface SSROptionsRunTime {
-	atRun: true;
+	type: 'static';
 	runOnClient: boolean;
 }
+
 export type SPOptions = SSROptionsBuildTime | SSROptionsRunTime;
 
 export interface SSRHocProps<T> {
@@ -25,29 +21,16 @@ export function createSP<T>(
 	run: () => Promise<T>,
 	options: SPOptions,
 ) {
-	// @ts-expect-error import.meta.env.SSR exists in the environments expected to use this package
-	if (import.meta.env.SSR) {
-		run()
-			.then(res => {
-				window.__serverdata[name] = JSON.stringify(res);
-			})
-			.catch(e => {
-				throw new Error(e);
-			});
-	}
+	registerSP(name, run, options);
 
 	function useSP(): T | undefined | null {
-		const serverdata = window?.__serverdata[name];
-		if (serverdata) {
-			try {
-				const parsedData: T = JSON.parse(serverdata);
-				return parsedData;
-			} catch (error: unknown) {}
-		}
+		const serverdata: T = getServerProp(name);
+		if (serverdata) return serverdata;
 
 		// @ts-expect-error import.meta.env.SSR exists in the environments expected to use this package
 		if (!import.meta.env.SSR && options.runOnClient) {
 			// TODO: run on client
+			// we should maybe run this outside of react, like we do on the server?
 			return null; // indicate we're loading data
 		}
 
