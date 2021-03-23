@@ -1,6 +1,6 @@
 import { Command, flags } from '@oclif/command';
 
-import { startServer } from '@snowstorm/core';
+import { startServer } from '@snowstorm/core/server';
 export default class Dev extends Command {
 	static description = 'Start the dev server';
 
