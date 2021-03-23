@@ -4,8 +4,7 @@ module.exports = {
 	favicon: './../core/assets/public/favicon.ico',
 	organizationName: 'explodingcamera',
 	projectName: 'snowstorm',
-	url: 'https://explodingcamera.github.io',
-	baseUrl: '/snowstorm/',
+	url: 'https://snowstorm.js.org',
 	presets: [
 		[
 			'@docusaurus/preset-classic',
