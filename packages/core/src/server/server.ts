@@ -29,10 +29,6 @@ import { generateRoutes, pagePattern } from './routes';
 import { brotliify } from './brotliify.js';
 import { loadConfig } from './config.js';
 
-// a bit hacky, but simplifies dev code a lot, since we can just reuse the client code here on the server
-(global as any).$RefreshReg$ = () => undefined;
-(global as any).$RefreshSig$ = () => () => undefined;
-
 logger.level = 'silent';
 logger.on('error', e => console.error(e));
 logger.on('warn', e => console.error(e));
@@ -146,7 +142,6 @@ export const start = async ({
 
 	app.listen(2000);
 	console.log('>> listening on http://localhost:2000');
-	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
 
 	if (dev) {
 		console.log('>> started hmr server on ws://localhost:45246');
@@ -163,4 +158,6 @@ export const start = async ({
 		watcher.on('add', listener);
 		watcher.on('remove', listener);
 	}
+
+	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
 };
