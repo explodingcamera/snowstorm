@@ -1,3 +1,4 @@
+import { hydrateSPs } from '@snowstorm/hooks/lib/internal';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import {
@@ -12,7 +13,6 @@ const element = document.getElementById('app');
 
 (async () => {
 	const routes = calculateRoutes();
-
 	const route = getCurrentPage({
 		routes,
 		location: document.location.pathname,
@@ -31,6 +31,7 @@ const element = document.getElementById('app');
 	};
 
 	if (element?.childNodes.length) {
+		hydrateSPs();
 		hydrate(<Page {...pageProps} />, element);
 	} else {
 		render(<Page {...pageProps} />, element);

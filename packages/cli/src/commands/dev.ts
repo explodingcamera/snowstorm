@@ -8,10 +8,20 @@ export default class Dev extends Command {
 
 	static flags = {
 		help: flags.help({ char: 'h' }),
+		clearSnowpackCache: flags.boolean({
+			default: false,
+			char: 'C',
+			hidden: true,
+		}),
 	};
 
 	async run() {
 		const { args, flags } = this.parse(Dev);
-		void startServer({ path: process.cwd(), dev: true });
+
+		void startServer({
+			path: process.cwd(),
+			dev: true,
+			clearSnowpackCache: flags.clearSnowpackCache,
+		});
 	}
 }

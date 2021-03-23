@@ -3,13 +3,17 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
+	workspaceRoot: false,
 	plugins: ['@snowpack/plugin-react-refresh'],
 	devOptions: {
 		open: 'none',
 		hmr: true,
+		port: 0,
 		hmrPort: 45246,
-		port: 45247,
 		output: 'stream',
+	},
+	buildOptions: {
+		watch: true,
 	},
 	packageOptions: {},
 	optimize: {

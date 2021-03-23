@@ -8,7 +8,6 @@ const { useSP: useStuff } = createSP('load-stuff', async () => ({ hi: 1 }), {
 
 export const Index = () => {
 	const data = useStuff();
-	console.log('data', data);
 
-	return <>hi lol eadfs geht</>;
+	return <>hi lol eadfs geht {data?.hi}</>;
 };

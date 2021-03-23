@@ -4,6 +4,7 @@ import {
 	SnowpackUserConfig,
 	logger,
 	build,
+	clearCache,
 } from 'snowpack';
 
 import { join } from 'path';
@@ -38,14 +39,24 @@ logger.on('warn', e => console.error(e));
 logger.on('info', e => console.error(e));
 logger.on('debug', e => console.error(e));
 
-export const start = async ({ dev, path }: { dev: boolean; path: string }) => {
+export const start = async ({
+	dev,
+	path,
+	clearSnowpackCache,
+}: {
+	dev: boolean;
+	path: string;
+	clearSnowpackCache?: boolean;
+}) => {
+	if (clearSnowpackCache) await clearCache();
+
 	const serverStart = performance.now();
 	const config = await loadConfig(path);
 	const snowstormFolder = join(path, './.snowstorm');
 	const snowpackFolder = join(snowstormFolder, './out');
 	const internalFolder = join(snowstormFolder, './internal');
 	const pagesFolder = join(path, './pages');
-	const assetsFolder = join(__dirname, '../../assets');
+	const assetsFolder = join(__dirname, '../../assets/public');
 	const clientFolder = join(__dirname, '../client');
 
 	const configOverride: SnowpackUserConfig = {
@@ -85,19 +96,26 @@ export const start = async ({ dev, path }: { dev: boolean; path: string }) => {
 	}
 
 	const app = new Koa();
+
 	// TODO: investigate why createConfiguration takes 50ms?!
-	const configFinal = createConfiguration(deepmerge(devConfig, configOverride));
+	const configFinal = createConfiguration(
+		deepmerge(dev ? devConfig : prodConfig, configOverride),
+	);
 
 	const [devServer] = await Promise.all([
-		startServer({
-			config: configFinal,
-			lockfile: null,
-		}),
+		startServer(
+			{
+				config: configFinal,
+				lockfile: null,
+			},
+			{ isDev: dev, isWatch: dev },
+		),
 		routesDone,
 	]);
 
 	app.use(serveHMR({ devServer, dev }));
 	app.use(serve(join(path, './public'), { index: false }));
+	app.use(serve(assetsFolder, { index: false }));
 	app.use(
 		mount(
 			serve(snowpackFolder, {
@@ -127,11 +145,12 @@ export const start = async ({ dev, path }: { dev: boolean; path: string }) => {
 	);
 
 	app.listen(2000);
-
-	console.log('>> listening on port 2000');
+	console.log('>> listening on http://localhost:2000');
 	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
 
 	if (dev) {
+		console.log('>> started hmr server on ws://localhost:45246');
+
 		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
 			ignoreInitial: true,
 		});

@@ -21,20 +21,15 @@ export function createSP<T>(
 	run: () => Promise<T>,
 	options: SPOptions,
 ) {
+	if (options.type === 'static')
+		throw new Error('Only dynamic serverporps are not supported yet.');
+	if (options.runOnClient)
+		throw new Error("Clientside Serverprop executions isn't supported yet.");
 	registerSP(name, run, options);
 
 	function useSP(): T | undefined | null {
 		const serverdata: T = getServerProp(name);
-		if (serverdata) return serverdata;
-
-		// @ts-expect-error import.meta.env.SSR exists in the environments expected to use this package
-		if (!import.meta.env.SSR && options.runOnClient) {
-			// TODO: run on client
-			// we should maybe run this outside of react, like we do on the server?
-			return null; // indicate we're loading data
-		}
-
-		return undefined;
+		return serverdata && serverdata;
 	}
 
 	function withSP<P extends SSRHocProps<T>, T>(

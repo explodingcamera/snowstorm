@@ -7,6 +7,14 @@ const config = require('./snowpack.config');
 module.exports = {
 	...config,
 	plugins: [],
+	devOptions: {
+		port: 0,
+		hmr: false,
+	},
+	buildOptions: {
+		ssr: true,
+		watch: false,
+	},
 	optimize: {
 		bundle: true,
 		minify: true,
