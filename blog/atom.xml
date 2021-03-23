@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://explodingcamera.github.io/blog</id>
+    <id>https://snowstorm.js.org/blog</id>
     <title>Snowstorm Blog</title>
     <updated>2015-10-25T23:29:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://explodingcamera.github.io/blog"/>
+    <link rel="alternate" href="https://snowstorm.js.org/blog"/>
     <subtitle>Snowstorm Blog</subtitle>
-    <icon>https://explodingcamera.github.io/./../core/assets/public/favicon.ico</icon>
+    <icon>https://snowstorm.js.org/./../core/assets/public/favicon.ico</icon>
 </feed>
