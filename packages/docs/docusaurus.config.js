@@ -12,6 +12,8 @@ module.exports = {
 			{
 				docs: {
 					sidebarPath: require.resolve('./sidebars.json'),
+					editUrl:
+						'https://github.com/explodingcamera/snowstorm/edit/main/packages/docs',
 					path: '../../docs',
 					showLastUpdateAuthor: true,
 					showLastUpdateTime: true,
@@ -20,7 +22,6 @@ module.exports = {
 		],
 	],
 	themeConfig: {
-		image: 'img/logo-og.png',
 		navbar: {
 			title: 'Snowstorm',
 			logo: {
@@ -28,16 +29,11 @@ module.exports = {
 				src: 'img/logo.svg',
 			},
 			items: [
-				{ to: 'docs/getting-started', label: 'Docs', position: 'right' },
+				{ to: 'docs/getting-started', label: 'Docs', position: 'left' },
 				{
-					href: 'https://reactjs.org/community/support.html',
-					label: 'Help',
-					position: 'right',
-				},
-				{
-					href: 'https://www.github.com/facebook/create-react-app',
+					href: 'https://www.github.com/explodingcamera/snowstorm',
 					label: 'GitHub',
-					position: 'right',
+					position: 'left',
 				},
 			],
 		},
@@ -59,6 +55,10 @@ module.exports = {
 						{
 							label: 'GitHub Discussions',
 							href: 'https://github.com/explodingcamera/snowstorm/discussions',
+						},
+						{
+							label: 'Roadmap',
+							href: 'https://github.com/explodingcamera/snowstorm/projects/1',
 						},
 					],
 				},

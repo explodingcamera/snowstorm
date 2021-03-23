@@ -20,19 +20,19 @@ import styles from './styles.module.css';
 
 const features = [
 	{
-		title: 'Less to Learn',
+		title: 'Fast',
 		content:
-			"You don't need to learn and configure many build tools. Instant reloads help you focus on development. When it's time to deploy, your bundles are optimized automatically.",
+			'like - really fast. Develop faster, with a dev server that starts up in less then 200ms, even in large projects. Thanks to Snowpack, no file is ever build twice.',
 	},
 	{
-		title: 'Only One Dependency',
+		title: 'Zero-Config',
 		content:
-			'Your app only needs one build dependency. We test Create React App to make sure that all of its underlying pieces work together seamlessly – no complicated version mismatches.',
+			"Out-of-the-box support for nearly everything you will ever need. Typescript, MDX, you name it.\nIn addition, there's an extensive plugin ecosystem enabling you to use even the most niche tool.",
 	},
 	{
-		title: 'No Lock-In',
+		title: 'Great Developer Experience',
 		content:
-			'Under the hood, we use webpack, Babel, ESLint, and other amazing projects to power your app. If you ever want an advanced configuration, you can ”eject” from Create React App and edit their config files directly.',
+			'Spent your time building products, not fighting tools. Be it static site generation, server side rendering or Hot Reloading - everything already works.',
 	},
 ];
 
@@ -64,12 +64,15 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			{/* {features && features.length && (
+			{features && features.length && (
 				<div className={styles.features}>
 					<div className="container">
 						<div className="row">
+							<div className={clsx('col col--3', styles.feature, styles.why)}>
+								<h1>Why Snowstorm?</h1>
+							</div>
 							{features.map(({ title, content }, idx) => (
-								<div key={idx} className={clsx('col col--4', styles.feature)}>
+								<div key={idx} className={clsx('col col--3', styles.feature)}>
 									<h2>{title}</h2>
 									<p>{content}</p>
 								</div>
@@ -78,7 +81,7 @@ const Home = () => {
 					</div>
 				</div>
 			)}
-			<div className={styles.gettingStartedSection}>
+			{/* <div className={styles.gettingStartedSection}>
 				<div className="container padding-vert--xl text--left">
 					<div className="row">
 						<div className="col col--4 col--offset-1">
