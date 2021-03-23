@@ -18,7 +18,7 @@
     "watch:core": "yarn workspace @snowstorm/core run watch",
     "watch:cli": "yarn workspace @snowstorm/cli run watch",
     "watch:hooks": "yarn workspace @snowstorm/hooks run watch",
-    "docs:deploy": "yarn workspace @snowstorm/core run deploy"
+    "docs:deploy": "yarn workspace @snowstorm/docs run deploy"
   },
   "dependencies": {
     "@explodingcamera/eslint-config": "^15.1.0",
