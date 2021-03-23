@@ -5,6 +5,7 @@ module.exports = {
 	organizationName: 'explodingcamera',
 	projectName: 'snowstorm',
 	url: 'https://snowstorm.js.org',
+	baseUrl: '/',
 	presets: [
 		[
 			'@docusaurus/preset-classic',
