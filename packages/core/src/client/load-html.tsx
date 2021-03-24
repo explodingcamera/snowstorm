@@ -12,7 +12,7 @@ import {
 import { Router } from 'wouter';
 import staticLocationHook from 'wouter/static-location';
 
-export * as internalHooks from '@snowstorm/hooks/lib/internal';
+export * as internalHooks from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
 
 interface args {

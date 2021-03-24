@@ -1,4 +1,4 @@
-import { hydrateSPs } from '@snowstorm/hooks/lib/internal';
+import { hydrateSPs } from '@snowstorm/serverprops/lib/internal';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 import {

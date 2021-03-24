@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@snowpack/plugin-react-refresh": "^2.4.1",
-    "@snowstorm/hooks": "0.0.0-beta.1",
+    "@snowstorm/serverprops": "0.0.0-beta.1",
     "@snowstorm/head": "0.0.0-beta.1",
     "@types/koa-compress": "^4.0.1",
     "chokidar": "^3.5.1",

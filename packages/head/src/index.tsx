@@ -9,8 +9,6 @@ let headTags: HeadTag[] = [];
 let heads: string[] = [];
 
 const genID = () => Math.random().toString(36).substring(7);
-const unique = genID();
-
 const registerTags = (id: string, tags: ReactElement[]) => {
 	heads.push(id);
 	headTags.push(

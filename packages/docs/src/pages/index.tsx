@@ -12,7 +12,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import Layout from '@theme/Layout';
-import CodeBlock from '@theme/CodeBlock';
+// import CodeBlock from '@theme/CodeBlock';
 
 import clsx from 'clsx';
 
@@ -27,12 +27,12 @@ const features = [
 	{
 		title: 'Zero-Config',
 		content:
-			"Out-of-the-box support for nearly everything you will ever need. Typescript, MDX, you name it.\nIn addition, there's an extensive plugin ecosystem enabling you to use even the most niche tool.",
+			"Out-of-the-box support for nearly everything you will ever need. Typescript, MDX, you name it.\nIn addition, there's an extensive plugin ecosystem enabling you to use even the most niche tools.",
 	},
 	{
 		title: 'Great Developer Experience',
 		content:
-			'Spent your time building products, not fighting tools. Be it static site generation, server side rendering or Hot Reloading - everything already works.',
+			'Spend your time building products, not fighting tools. Be it static site generation, server side rendering or Hot Reloading - everything already works.',
 	},
 ];
 
