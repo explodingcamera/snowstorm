@@ -14,10 +14,12 @@
     "build:core": "yarn workspace @snowstorm/core run build ",
     "build:cli": "yarn workspace @snowstorm/cli run build",
     "build:hooks": "yarn workspace @snowstorm/hooks run build",
+    "build:head": "yarn workspace @snowstorm/head run build",
     "watch": "run-p -l watch:*",
     "watch:core": "yarn workspace @snowstorm/core run watch",
     "watch:cli": "yarn workspace @snowstorm/cli run watch",
     "watch:hooks": "yarn workspace @snowstorm/hooks run watch",
+    "watch:head": "yarn workspace @snowstorm/head run watch",
     "docs:deploy": "yarn workspace @snowstorm/docs run deploy"
   },
   "dependencies": {

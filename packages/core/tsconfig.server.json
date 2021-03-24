@@ -5,5 +5,5 @@
     "module": "CommonJS",
     "lib": ["ESNext", "DOM"]
   },
-  "include": ["src/server/*", "src/types/*", "src/index.ts"]
+  "include": ["./src/server/*", "./src/server.ts"]
 }

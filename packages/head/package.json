@@ -1,0 +1,25 @@
+{
+  "name": "@snowstorm/head",
+  "version": "0.0.0-beta.1",
+  "license": "MIT",
+  "author": "<mail@henrygressmann.de>",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "run-s clean compile",
+    "clean": "rimraf -rf ./lib",
+    "compile": "tsc -p tsconfig.build.json",
+    "watch": "tsc -p tsconfig.build.json --watch"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
+  }
+}

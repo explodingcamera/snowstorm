@@ -6,16 +6,13 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
-    "./server": "./server/index.js",
+    "./server": "./server.js",
     "./": "./index.js"
   },
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "build": "run-s clean compile",
-    "clean": "rimraf -rf ./lib index.d.ts index.js index.js.map server/",
-    "compile": "run-p compile:*",
+    "clean": "rimraf -rf index.d.ts index.js index.js.map server.d.ts server.js server.js.map  server/ client/",
+    "compile": "run-s compile:server compile:client",
     "compile:client": "tsc -p tsconfig.client.json",
     "compile:server": "tsc -p tsconfig.server.json",
     "watch": "run-p watch:*",
@@ -25,6 +22,7 @@
   "dependencies": {
     "@snowpack/plugin-react-refresh": "^2.4.1",
     "@snowstorm/hooks": "0.0.0-beta.1",
+    "@snowstorm/head": "0.0.0-beta.1",
     "@types/koa-compress": "^4.0.1",
     "chokidar": "^3.5.1",
     "deepmerge": "^4.2.2",
@@ -38,6 +36,7 @@
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
+    "react-helmet": "^6.1.0",
     "require-from-string": "^2.0.2",
     "snowpack": "^3.1.2",
     "typescript": "^4.0.0",
@@ -54,7 +53,9 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/require-from-string": "^1.2.0",
-    "@types/snowpack-env": "^2.3.3"
+    "@types/snowpack-env": "^2.3.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "peerDependencies": {
     "react": "^17.0.1",

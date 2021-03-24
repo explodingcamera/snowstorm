@@ -40,7 +40,7 @@ export const ssr = ({
 		}
 	}
 
-	const { loadPage, renderPage, processSPs, collectProps } = (
+	const { loadPage, renderPage, processSPs, collectProps, getHead } = (
 		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
 	).exports;
 
@@ -64,6 +64,7 @@ export const ssr = ({
 	}
 
 	const props: string = await collectProps();
+	const head = getHead();
 
 	// Inserts the rendered HTML into our main div
 	const doc = htmlFile
@@ -77,7 +78,8 @@ export const ssr = ({
 			props.length
 				? `<script id="__serverprops" type="application/json">${props}</script>`
 				: '',
-		);
+		)
+		.replace('<!-- SNOWPACK HEAD -->', head);
 
 	// Sends the response back to the client
 	ctx.body = doc;

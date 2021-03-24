@@ -1,1 +1,163 @@
-export { start as startServer } from './server';
+import {
+	createConfiguration,
+	startServer,
+	SnowpackUserConfig,
+	logger,
+	build,
+	clearCache,
+} from 'snowpack';
+
+import { join } from 'path';
+import { mkdir } from 'fs/promises';
+import { performance } from 'perf_hooks';
+import chokidar from 'chokidar';
+
+import Koa from 'koa';
+import mount from 'koa-mount';
+import serve from 'koa-static';
+import compress from 'koa-compress';
+import htmlMinify from 'koa-html-minifier';
+import deepmerge from 'deepmerge';
+import glob from 'glob-promise';
+
+import * as devConfig from './snowpack.config.js';
+import * as prodConfig from './snowpack.config.prod.js';
+
+import { serveHMR } from './hmr';
+import { ssr } from './ssr';
+import { generateRoutes, pagePattern } from './routes';
+import { brotliify } from './brotliify.js';
+import { loadConfig } from './config.js';
+
+logger.level = 'silent';
+logger.on('error', e => console.error(e));
+logger.on('warn', e => console.error(e));
+logger.on('info', e => console.error(e));
+logger.on('debug', e => console.error(e));
+
+export const start = async ({
+	dev,
+	path,
+	clearSnowpackCache,
+}: {
+	dev: boolean;
+	path: string;
+	clearSnowpackCache?: boolean;
+}) => {
+	if (clearSnowpackCache) await clearCache();
+
+	const serverStart = performance.now();
+	const config = await loadConfig(path);
+	const snowstormFolder = join(path, './.snowstorm');
+	const snowpackFolder = join(snowstormFolder, './out');
+	const internalFolder = join(snowstormFolder, './internal');
+	const pagesFolder = join(path, './pages');
+	const assetsFolder = join(__dirname, '../assets/public');
+	const clientFolder = join(__dirname, '../client');
+
+	const configOverride: SnowpackUserConfig = {
+		buildOptions: {
+			out: snowpackFolder,
+			metaUrlPath: '_snowstorm',
+		},
+		mount: {
+			[assetsFolder]: '/',
+			[clientFolder]: '/_snowstorm',
+			[pagesFolder]: '/_snowstorm/pages',
+			[internalFolder]: '/_snowstorm/internal',
+		},
+	};
+
+	const internalFolderReady = mkdir(internalFolder, { recursive: true });
+	const genRoutes = async () => {
+		await internalFolderReady;
+		return generateRoutes({
+			pagesFolder,
+			internalFolder,
+			template: join(__dirname, '../assets/routes.js.template'),
+		});
+	};
+
+	const routesDone = genRoutes();
+
+	if (!dev) {
+		await routesDone;
+		await build({
+			config: createConfiguration(deepmerge(prodConfig, configOverride)),
+			lockfile: null,
+		});
+
+		const files = await glob(`${snowpackFolder}/**/*`, { nodir: true });
+		brotliify(files);
+	}
+
+	const app = new Koa();
+
+	// TODO: investigate why createConfiguration takes 50ms?!
+	const configFinal = createConfiguration(
+		deepmerge(dev ? devConfig : prodConfig, configOverride),
+	);
+
+	const [devServer] = await Promise.all([
+		startServer(
+			{
+				config: configFinal,
+				lockfile: null,
+			},
+			{ isDev: dev, isWatch: dev },
+		),
+		routesDone,
+	]);
+
+	app.use(serveHMR({ devServer, dev }));
+	app.use(serve(join(path, './public'), { index: false }));
+	app.use(serve(assetsFolder, { index: false }));
+	app.use(
+		mount(
+			serve(snowpackFolder, {
+				index: false,
+				maxAge: dev ? undefined : 31536000,
+			}),
+		),
+	);
+
+	if (!dev) {
+		app.use(compress());
+		app.use(
+			htmlMinify({
+				collapseWhitespace: true,
+			}),
+		);
+	}
+
+	app.use(
+		ssr({
+			devServer,
+			dev,
+			outputFolder: snowpackFolder,
+			pagesFolder: pagesFolder,
+			config,
+		}),
+	);
+
+	app.listen(2000);
+	console.log('>> listening on http://localhost:2000');
+
+	if (dev) {
+		console.log('>> started hmr server on ws://localhost:45246');
+
+		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
+			ignoreInitial: true,
+		});
+
+		const listener = async (path: string) =>
+			genRoutes()
+				.then(() => console.log('successfully updated routes', path))
+				.catch(e => console.error(`error updating routes: `, e));
+
+		watcher.on('add', listener);
+		watcher.on('remove', listener);
+	}
+
+	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
+};

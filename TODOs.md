@@ -4,3 +4,6 @@
 * add basepath support
   * currently we have absolute stuff hardcoded all over the place, wouters basepath support should hopefully help a lot
 * Routing only works on pageload rn, add page transitions :p
+* HEAD
+  * Only updates the head @ ssr rn, we need to add dynamic titles
+  * We need to remove duplicate tags

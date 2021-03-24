@@ -13,6 +13,7 @@ import { Router } from 'wouter';
 import staticLocationHook from 'wouter/static-location';
 
 export * as internalHooks from '@snowstorm/hooks/lib/internal';
+export { getHead } from '@snowstorm/head/lib/internal';
 
 interface args {
 	pageComponent: SnowstormPage | undefined;
@@ -27,7 +28,9 @@ export const loadPage = async ({ path }: { path: string }): Promise<args> => {
 	let pageComponent: SnowstormPage | undefined;
 	try {
 		if (route?.page) pageComponent = await requestPage(route?.page);
-	} catch (error: unknown) {}
+	} catch (error: unknown) {
+		console.log(error);
+	}
 
 	return { pageComponent, route, routes };
 };
