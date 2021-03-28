@@ -25,7 +25,18 @@ const unregisterTags = (id: string) => {
 };
 
 export const getHeadTags = () => {
-	return headTags;
+	const headNoTitle = headTags.filter(tag => tag.component.type !== 'title');
+	const titleTags = headTags.filter(tag => tag.component.type === 'title');
+	const headTag = titleTags.slice(-1);
+
+	return [...headTag, ...headNoTitle];
+};
+
+const handleTitle = (title: ReactElement<HTMLTitleElement>) => {
+	const titleText = title.props.children;
+	if (typeof titleText !== 'string')
+		throw new Error('title has to be of type string');
+	document.title = titleText;
 };
 
 export const Head = ({ children }: { children: ReactElement[] }) => {
@@ -43,6 +54,9 @@ export const Head = ({ children }: { children: ReactElement[] }) => {
 		} else {
 			unregisterTags(id);
 			registerTags(id, children);
+
+			const title = children.find(c => c.type === 'title');
+			if (title) handleTitle(title);
 		}
 
 		return () => unregisterTags(id);
