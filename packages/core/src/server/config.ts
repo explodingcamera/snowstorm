@@ -18,14 +18,42 @@ const configFiles = [
 	'snowstorm.config.json',
 ];
 
-export interface SnowstormConfig {
+export interface SnowstormConfigInternal {
 	test?: true;
+	internal: {
+		snowstormFolder: string;
+		snowpackFolder: string;
+		internalFolder: string;
+		pagesFolder: string;
+		assetsFolder: string;
+		clientFolder: string;
+	};
 }
 
-const baseConfig: SnowstormConfig = {};
+type SnowstormConfig = Partial<SnowstormConfigInternal>;
 
-export const loadConfig = async (projectPath: string) => {
-	const files = await glob(join(projectPath, '/*'));
+export const loadConfig = async (
+	path: string,
+): Promise<SnowstormConfigInternal> => {
+	const snowstormFolder = join(path, './.snowstorm');
+	const snowpackFolder = join(snowstormFolder, './out');
+	const internalFolder = join(snowstormFolder, './internal');
+	const pagesFolder = join(path, './pages');
+	const assetsFolder = join(__dirname, '../assets/public');
+	const clientFolder = join(__dirname, '../client');
+
+	const baseConfig: SnowstormConfig = {
+		internal: {
+			snowstormFolder,
+			snowpackFolder,
+			internalFolder,
+			pagesFolder,
+			assetsFolder,
+			clientFolder,
+		},
+	};
+
+	const files = await glob(join(path, '/*'));
 	const existingFiles = configFiles.filter(cfg =>
 		files.find(file => file.endsWith(cfg)),
 	);
@@ -37,16 +65,14 @@ export const loadConfig = async (projectPath: string) => {
 			case 'snowstorm.config.js':
 			case 'snowstorm.config.mjs':
 			case 'snowstorm.config.cjs': {
-				const file = await compile(join(projectPath, `/${existingFiles[0]}`));
+				const file = await compile(join(path, `/${existingFiles[0]}`));
 				const config = requireFromString(file);
 				userConfig = config.default || config.Config || config;
 				break;
 			}
 
 			case 'snowstorm.config.json': {
-				const config = await import(
-					join(projectPath, '/snowstorm.config.json')
-				);
+				const config = await import(join(path, '/snowstorm.config.json'));
 				userConfig = config.default;
 				break;
 			}

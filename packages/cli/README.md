@@ -19,6 +19,7 @@ USAGE
 <!-- commands -->
 * [`snowstorm build`](#snowstorm-build)
 * [`snowstorm dev`](#snowstorm-dev)
+* [`snowstorm export`](#snowstorm-export)
 * [`snowstorm help [COMMAND]`](#snowstorm-help-command)
 * [`snowstorm start`](#snowstorm-start)
 
@@ -50,6 +51,21 @@ OPTIONS
 
 EXAMPLE
   $ snowstorm dev
+```
+
+## `snowstorm export`
+
+Export
+
+```
+USAGE
+  $ snowstorm export
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  $ snowstorm export
 ```
 
 ## `snowstorm help [COMMAND]`

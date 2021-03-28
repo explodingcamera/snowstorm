@@ -48,12 +48,14 @@ export const start = async ({
 
 	const serverStart = performance.now();
 	const config = await loadConfig(path);
-	const snowstormFolder = join(path, './.snowstorm');
-	const snowpackFolder = join(snowstormFolder, './out');
-	const internalFolder = join(snowstormFolder, './internal');
-	const pagesFolder = join(path, './pages');
-	const assetsFolder = join(__dirname, '../assets/public');
-	const clientFolder = join(__dirname, '../client');
+
+	const {
+		snowpackFolder,
+		internalFolder,
+		pagesFolder,
+		assetsFolder,
+		clientFolder,
+	} = config.internal;
 
 	const configOverride: SnowpackUserConfig = {
 		buildOptions: {

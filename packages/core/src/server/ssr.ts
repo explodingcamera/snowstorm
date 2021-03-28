@@ -1,7 +1,7 @@
 import { Middleware } from 'koa';
 import { SnowpackDevServer } from 'snowpack';
 import { readFile } from 'fs/promises';
-import { SnowstormConfig } from './config';
+import { SnowstormConfigInternal } from './config';
 import { join } from 'path';
 import serve from 'koa-static';
 
@@ -20,7 +20,7 @@ export const ssr = ({
 	dev: boolean;
 	outputFolder: string;
 	pagesFolder: string;
-	config: SnowstormConfig;
+	config: SnowstormConfigInternal;
 }): Middleware => async (ctx, next) => {
 	if (
 		ctx.path.startsWith('/_snowstorm') ||
