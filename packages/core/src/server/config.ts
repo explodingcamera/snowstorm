@@ -1,25 +1,16 @@
 import deepmerge from 'deepmerge';
-import glob from 'glob-promise';
 import { join } from 'path';
-import {
-	CompilerOptions,
-	ModuleKind,
-	ScriptTarget,
-	transpileModule,
-} from 'typescript';
-import requireFromString from 'require-from-string';
-import { readFile } from 'fs/promises';
-
-const configFiles = [
-	'snowstorm.config.ts',
-	'snowstorm.config.js',
-	'snowstorm.config.cjs',
-	'snowstorm.config.mjs',
-	'snowstorm.config.json',
-];
+import { importFile } from './utils/import-file';
 
 export interface SnowstormConfigInternal {
-	test?: true;
+	export: {
+		target:
+			| 'github-pages'
+			| 'gitlab-pages'
+			| 'cloudflare-pages'
+			| 'netlify'
+			| 'independent';
+	};
 	internal: {
 		snowstormFolder: string;
 		snowpackFolder: string;
@@ -43,6 +34,7 @@ export const loadConfig = async (
 	const clientFolder = join(__dirname, '../client');
 
 	const baseConfig: SnowstormConfig = {
+		export: { target: 'independent' },
 		internal: {
 			snowstormFolder,
 			snowpackFolder,
@@ -53,53 +45,14 @@ export const loadConfig = async (
 		},
 	};
 
-	const files = await glob(join(path, '/*'));
-	const existingFiles = configFiles.filter(cfg =>
-		files.find(file => file.endsWith(cfg)),
+	const config = await importFile<SnowstormConfig>(
+		path,
+		'snowstorm.config',
+		'Config',
 	);
-
-	let userConfig;
-	try {
-		switch (existingFiles[0] || undefined) {
-			case 'snowstorm.config.ts':
-			case 'snowstorm.config.js':
-			case 'snowstorm.config.mjs':
-			case 'snowstorm.config.cjs': {
-				const file = await compile(join(path, `/${existingFiles[0]}`));
-				const config = requireFromString(file);
-				userConfig = config.default || config.Config || config;
-				break;
-			}
-
-			case 'snowstorm.config.json': {
-				const config = await import(join(path, '/snowstorm.config.json'));
-				userConfig = config.default;
-				break;
-			}
-
-			default:
-				userConfig = baseConfig;
-		}
-	} catch (error: unknown) {
-		userConfig = baseConfig;
-	}
 
 	return deepmerge(
 		baseConfig,
-		typeof userConfig === 'object' ? userConfig : baseConfig,
+		typeof config === 'object' ? config : baseConfig,
 	);
-};
-
-const options: CompilerOptions = {
-	allowJs: true,
-	checkJs: true,
-	lib: ['ESNext'],
-	target: ScriptTarget.ESNext,
-	module: ModuleKind.CommonJS,
-};
-
-export const compile = async (file: string) => {
-	const code = await readFile(file);
-	const res = transpileModule(code.toString(), { compilerOptions: options });
-	return res.outputText;
 };

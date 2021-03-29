@@ -7,6 +7,7 @@
   "types": "./index.d.ts",
   "exports": {
     "./server": "./server.js",
+    "./server/export": "./server/export.js",
     "./": "./index.js"
   },
   "scripts": {

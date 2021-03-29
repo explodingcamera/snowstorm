@@ -1,6 +1,6 @@
 import { Command, flags } from '@oclif/command';
 
-import { startServer } from '@snowstorm/core/server';
+import { exportProject } from '@snowstorm/core/server/export';
 export default class Export extends Command {
 	static description = 'Export';
 
@@ -13,9 +13,8 @@ export default class Export extends Command {
 	async run() {
 		const { args, flags } = this.parse(Export);
 
-		void startServer({
+		void exportProject({
 			path: process.cwd(),
-			dev: true,
 		});
 	}
 }

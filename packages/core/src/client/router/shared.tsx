@@ -18,7 +18,7 @@ export const calculateRoutes = (allRoutes: AllRoutes): SnowstormRoute[] =>
 		.map(processPage)
 		.sort(file => (file.parts.slice(-1)[0].startsWith(':') ? 1 : -1));
 
-const processPage = (page: string) => {
+export const processPage = (page: string) => {
 	const parts = page.split('/').map(part => {
 		if (part === 'index') return '';
 		if (part.startsWith('[') && part.endsWith(']'))
