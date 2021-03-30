@@ -25,7 +25,7 @@ import * as prodConfig from './snowpack.config.prod.js';
 
 import { serveHMR } from './hmr';
 import { ssr } from './ssr';
-import { generateRoutes, pagePattern } from './routes';
+import { generateRouter, pagePattern } from './router';
 import { brotliify } from './brotliify.js';
 import { loadConfig } from './config.js';
 
@@ -73,10 +73,9 @@ export const start = async ({
 	const internalFolderReady = mkdir(internalFolder, { recursive: true });
 	const genRoutes = async () => {
 		await internalFolderReady;
-		return generateRoutes({
-			pagesFolder,
-			internalFolder,
+		return generateRouter({
 			template: join(__dirname, '../assets/routes.js.template'),
+			config,
 		});
 	};
 
@@ -94,8 +93,6 @@ export const start = async ({
 	}
 
 	const app = new Koa();
-
-	// TODO: investigate why createConfiguration takes 50ms?!
 	const configFinal = createConfiguration(
 		deepmerge(dev ? devConfig : prodConfig, configOverride),
 	);

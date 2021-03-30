@@ -3,15 +3,14 @@ import { Route, Switch } from 'wouter';
 import makeMatcher from 'wouter/matcher';
 
 // @ts-expect-error (Let this be resolved by esbuild instead of typescript)
-import { routes as _allRoutes } from './../internal/routes.js';
+import { routes as _allRoutes, pages as _pages } from './../internal/routes.js';
 
 import {
-	AllRoutes,
+	Pages,
 	SnowstormCustomApp,
 	SnowstormCustomError,
 	SnowstormPage,
 	SnowstormRoute,
-	calculateRoutes as calculateRoutesInternal,
 } from './shared.js';
 
 export {
@@ -21,11 +20,11 @@ export {
 	SnowstormRoute,
 };
 
-const allRoutes = _allRoutes as AllRoutes;
+export const allPages = _pages as Pages;
+export const allRoutes = _allRoutes as SnowstormRoute[];
+
 const capitalize = (string: string) =>
 	string.charAt(0).toUpperCase() + string.slice(1);
-
-export const calculateRoutes = () => calculateRoutesInternal(allRoutes);
 
 const pagesCache = new Map<string, SnowstormPage>();
 let lastPage = '';
@@ -33,15 +32,13 @@ let lastPage = '';
 const App = ({
 	Wrapper,
 	ErrorPage,
-	routes,
 }: {
 	Wrapper?: SnowstormCustomApp;
 	ErrorPage: SnowstormCustomError;
-	routes: SnowstormRoute[];
 }) => {
 	const routeComponents = (
 		<Switch>
-			{routes.map(r => (
+			{allRoutes.map(r => (
 				<Route
 					path={r.path}
 					key={r.page}
@@ -108,22 +105,16 @@ const selectPageExport = (
 };
 
 export const requestPage = async (page: string) =>
-	allRoutes[page]().then(pageExports => selectPageExport(page, pageExports));
+	allPages[page]().then(pageExports => selectPageExport(page, pageExports));
 
 interface InitialPage {
 	route?: SnowstormRoute;
 	component?: SnowstormPage;
 }
 
-export const Page = ({
-	routes,
-	initialPage,
-}: {
-	routes: SnowstormRoute[];
-	initialPage: InitialPage;
-}) => {
-	const CustomApp: SnowstormCustomApp | undefined = allRoutes._app();
-	const ErrorPage: SnowstormCustomError = allRoutes._error();
+export const Page = ({ initialPage }: { initialPage: InitialPage }) => {
+	const CustomApp: SnowstormCustomApp | undefined = allPages._app();
+	const ErrorPage: SnowstormCustomError = allPages._error();
 
 	useState(() => {
 		const initalPageName = initialPage.route?.page;
@@ -133,19 +124,13 @@ export const Page = ({
 		}
 	});
 
-	return <App routes={routes} Wrapper={CustomApp} ErrorPage={ErrorPage} />;
+	return <App Wrapper={CustomApp} ErrorPage={ErrorPage} />;
 };
 
-export const getCurrentPage = ({
-	routes,
-	location,
-}: {
-	routes: SnowstormRoute[];
-	location: string;
-}) => {
+export const getCurrentPage = ({ location }: { location: string }) => {
 	const matcher = makeMatcher();
 
-	for (const route of routes) {
+	for (const route of allRoutes) {
 		const match = matcher(route.path, location);
 		if (match[0]) return route;
 	}

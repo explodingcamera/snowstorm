@@ -12,6 +12,7 @@ export interface SnowstormConfigInternal {
 			| 'independent';
 	};
 	internal: {
+		projectPath: string;
 		snowstormFolder: string;
 		snowpackFolder: string;
 		internalFolder: string;
@@ -36,6 +37,7 @@ export const loadConfig = async (
 	const baseConfig: SnowstormConfig = {
 		export: { target: 'independent' },
 		internal: {
+			projectPath: path,
 			snowstormFolder,
 			snowpackFolder,
 			internalFolder,

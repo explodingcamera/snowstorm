@@ -1,3 +1,7 @@
-export const routes = {
+export const pages = {
 // insert-pages
 };
+
+export const routes = [
+// insert-routes
+];
