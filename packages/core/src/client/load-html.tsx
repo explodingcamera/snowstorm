@@ -42,7 +42,6 @@ export const renderPage = async ({
 	initialPage,
 }: args & { path: string }) => {
 	const loc = basePath === '/' ? path : basePath + path;
-
 	return renderToString(
 		<Router
 			hook={staticLocationHook(loc)}

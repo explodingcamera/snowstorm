@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { SnowstormConfigInternal } from '../config';
 import { loadNormalizedPages } from './pages';
-import { loadRoutes } from './routes';
+import { loadRoutes, SnowstormRoute } from './routes';
 
 export { pagePattern } from './pages';
 
@@ -45,7 +45,12 @@ export const generateRouter = async ({
 	const processedRoutes = routes.map(route => {
 		let routeString;
 		try {
-			routeString = JSON.stringify(route);
+			const clientRoute: SnowstormRoute = {
+				page: route.page,
+				parts: route.parts ?? [],
+				path: route.path,
+			};
+			routeString = JSON.stringify(clientRoute);
 		} catch (error: unknown) {
 			console.error('invalid route: ', route);
 			return '';

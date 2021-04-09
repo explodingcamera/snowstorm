@@ -11,4 +11,5 @@ export interface SnowstormCustomApp extends FunctionComponent {}
 export interface SnowstormRoute {
 	path: string;
 	page: string;
+	parts: string[];
 }
