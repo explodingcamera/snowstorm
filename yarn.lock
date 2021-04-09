@@ -11761,10 +11761,10 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-staticgen-node@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/staticgen-node/-/staticgen-node-1.2.1.tgz#0bce223143361fa49706d903f4148f9c8ac7a655"
-  integrity sha512-1IJUEjvL/TQ9MhXNVWk1OnSjaXKv/c2Y5mxq7kUaPev/z8zbemG7KJKB+U+XSdXXJegvSu52FjNRe//xuqPX7w==
+staticgen-node@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/staticgen-node/-/staticgen-node-1.2.3.tgz#ed586bf4b3a8c1ed660f5d7abceeed67f242e26d"
+  integrity sha512-He4rfM3hs1z/5wFmB4N+ThRLeUz7EYDoA6S5A+/fzuhLkHXUZXU2bodZXbDZw0jjI68+lMKxInagPu+3pdy70g==
 
 "statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2", statuses@^1.5.0, statuses@~1.5.0:
   version "1.5.0"

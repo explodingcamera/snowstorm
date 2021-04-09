@@ -10,7 +10,7 @@ export interface SnowstormRoute {
 export interface SnowstormCustomRoute {
 	page: string; // for now this is required, we might add automatic page detection for custom routes later
 	disabled?: boolean;
-	exportProps?: () => Record<string, () => Promise<string[]>>;
+	exportParams?: () => Promise<string[][]>;
 }
 
 export type SnowstormCustomRoutes = Record<string, SnowstormCustomRoute>;
@@ -24,7 +24,7 @@ export interface RoutesConfigInternal {
 	customRoutes?: SnowstormCustomRoutes;
 }
 
-export type RoutesConfig = Partial<RoutesConfigInternal>;
+export type SnowstormRoutesConfig = Partial<RoutesConfigInternal>;
 
 const defaultRouteConfig: RoutesConfigInternal = {
 	fileSystemRouting: true,
@@ -46,7 +46,11 @@ const processPage = (page: string) => {
 };
 
 export const loadRoutes = async (path: string, pages: string[]) => {
-	const routesFile = await importFile<RoutesConfig>(path, 'routes', 'Routes');
+	const routesFile = await importFile<SnowstormRoutesConfig>(
+		path,
+		'routes',
+		'Routes',
+	);
 
 	const routesConfig = routesFile
 		? deepmerge(defaultRouteConfig, routesFile)

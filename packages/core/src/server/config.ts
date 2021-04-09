@@ -76,5 +76,10 @@ export const loadConfig = async (
 		'Config',
 	);
 
-	return deepmerge(baseConfig, typeof config === 'object' ? config : {});
+	const res = deepmerge(baseConfig, typeof config === 'object' ? config : {});
+	if (!res.server.basePath.startsWith('/'))
+		throw new Error(
+			"Snowstorm: config.server.basepath needs to begin with '/'",
+		);
+	return res;
 };

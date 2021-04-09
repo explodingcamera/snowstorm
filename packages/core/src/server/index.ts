@@ -29,6 +29,7 @@ import { generateRouter, pagePattern } from './router';
 import { brotliify } from './brotliify.js';
 import { loadConfig } from './config.js';
 import { getFreePort } from './utils/free-port.js';
+import { SnowstormConfigInternal } from './config';
 
 logger.level = 'silent';
 logger.on('error', e => console.error(e));
@@ -40,13 +41,16 @@ export const start = async ({
 	dev,
 	path,
 	clearSnowpackCache,
+	overrideConfig,
 }: {
 	dev: boolean;
 	path: string;
 	clearSnowpackCache?: boolean;
+	overrideConfig?: SnowstormConfigInternal;
 }) => {
 	const serverStart = performance.now();
-	const config = await loadConfig(path);
+
+	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 
 	if (clearSnowpackCache) await clearCache();
 	if (dev) config.server.basePath = '/';
@@ -87,7 +91,6 @@ export const start = async ({
 	};
 
 	const routesDone = genRoutes();
-
 	const snowpackConfig = createConfiguration(
 		deepmerge(dev ? devConfig : prodConfig, configOverride),
 	);
@@ -153,10 +156,13 @@ export const start = async ({
 	const server = new Koa();
 	server.use(mount(config.server.basePath, app));
 
-	server.listen(port);
-	console.log(
-		`>> listening on http://localhost:${port}${config.server.basePath}`,
-	);
+	const listening = new Promise<void>(resolve => {
+		server.listen(port, () => resolve());
+
+		console.log(
+			`>> listening on http://localhost:${port}${config.server.basePath}`,
+		);
+	});
 
 	if (dev) {
 		console.log(`>> started hmr server on ws://localhost:${hmrPort}`);
@@ -175,4 +181,5 @@ export const start = async ({
 	}
 
 	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
+	await listening;
 };
