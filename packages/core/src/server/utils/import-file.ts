@@ -17,7 +17,7 @@ export async function importFile<FileType>(
 	);
 
 	const existingFiles = importFiles.filter(cfg =>
-		files.find(file => file.endsWith('/' + file + cfg)),
+		files.includes(join(path, '/', cfg)),
 	);
 
 	let importedFile;

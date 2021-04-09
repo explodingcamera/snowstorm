@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
 import { join } from 'path';
 import { importFile } from './utils/import-file';
-import { Except } from 'type-fest';
+import { Except, PartialDeep } from 'type-fest';
 
 export interface SnowstormConfigInternal {
 	export: {
@@ -18,6 +18,7 @@ export interface SnowstormConfigInternal {
 	};
 	server: {
 		port: number;
+		basePath: string;
 	};
 
 	/**
@@ -35,7 +36,7 @@ export interface SnowstormConfigInternal {
 }
 
 export type SnowstormConfig = Except<
-	Partial<SnowstormConfigInternal>,
+	PartialDeep<SnowstormConfigInternal>,
 	'internal'
 >;
 
@@ -55,7 +56,8 @@ export const loadConfig = async (
 			port: 2020,
 		},
 		server: {
-			port: 2020,
+			port: 8080,
+			basePath: '/',
 		},
 		internal: {
 			projectPath: path,

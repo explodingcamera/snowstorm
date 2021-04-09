@@ -1,14 +1,26 @@
 import { hydrateSPs } from '@snowstorm/serverprops/lib/internal';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
-import { findRoute, Page, requestPage, SnowstormPage } from './router';
+import { Router } from 'wouter';
+import {
+	basePath,
+	findRoute,
+	Page,
+	requestPage,
+	SnowstormPage,
+} from './router';
 
 const element = document.getElementById('app');
 
+let loc = document.location.pathname;
+if (loc.startsWith(basePath)) loc = loc.substr(basePath.length);
+if (!loc.startsWith('/')) loc = '/' + loc;
+
 (async () => {
 	const route = findRoute({
-		location: document.location.pathname,
+		location: loc,
 	});
+
 	let pageComponent: SnowstormPage | undefined;
 	try {
 		if (route?.page) pageComponent = await requestPage(route?.page);
@@ -21,10 +33,16 @@ const element = document.getElementById('app');
 		},
 	};
 
+	const page = (
+		<Router base={basePath === '/' ? undefined : basePath}>
+			<Page {...pageProps} />
+		</Router>
+	);
+
 	if (element?.childNodes.length) {
 		hydrateSPs();
-		hydrate(<Page {...pageProps} />, element);
+		hydrate(page, element);
 	} else {
-		render(<Page {...pageProps} />, element);
+		render(page, element);
 	}
 })();

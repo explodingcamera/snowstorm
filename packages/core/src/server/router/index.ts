@@ -14,23 +14,25 @@ export const generateRouter = async ({
 	config: SnowstormConfigInternal;
 }) => {
 	let tmp = (await readFile(template)).toString();
+	const basePath = config.server.basePath.replace(/"/g, '');
+
+	const pagesLocation = '../pages';
 
 	let normalizedPages = await loadNormalizedPages(config.internal.pagesFolder);
 	const customErrorPage = normalizedPages.includes('_error');
 	const customAppPage = normalizedPages.includes('_app');
 
-	const basepath = '';
 	normalizedPages = normalizedPages.filter(r => !r.startsWith('_'));
 	const processedPages = normalizedPages.map(
-		route => `  "${route}": () => import("pages/${route}.js")`,
+		route => `  "${route}": () => import("${pagesLocation}/${route}.js")`,
 	);
 
 	if (customAppPage) {
-		tmp = `import App from "pages/_app.js";\n${tmp}`;
+		tmp = `import App from "${pagesLocation}/_app.js";\n${tmp}`;
 	}
 
 	tmp = `import Error from "${
-		customErrorPage ? `pages/_error.js` : `./_error.js`
+		customErrorPage ? `${pagesLocation}/_error.js` : `./_error.js`
 	}";\n${tmp}`;
 
 	processedPages.push(
@@ -52,8 +54,10 @@ export const generateRouter = async ({
 		return routeString;
 	});
 
-	tmp = tmp.replace('// insert-pages', processedPages.join(',\n'));
-	tmp = tmp.replace('// insert-routes', processedRoutes.join(',\n'));
+	tmp = tmp
+		.replace('// insert-pages', processedPages.join(',\n'))
+		.replace('// insert-routes', processedRoutes.join(',\n'))
+		.replace('/* insert-base-path */', basePath);
 
 	await writeFile(join(config.internal.internalFolder, '/routes.js'), tmp);
 };

@@ -6,6 +6,7 @@ import {
 	requestPage,
 	SnowstormPage,
 	SnowstormRoute,
+	basePath,
 } from './router';
 
 import { Router } from 'wouter';
@@ -40,8 +41,13 @@ export const renderPage = async ({
 	route,
 	initialPage,
 }: args & { path: string }) => {
+	const loc = basePath === '/' ? path : basePath + path;
+
 	return renderToString(
-		<Router hook={staticLocationHook(path)}>
+		<Router
+			hook={staticLocationHook(loc)}
+			base={basePath === '/' ? undefined : basePath}
+		>
 			<Page
 				initialPage={{
 					route: route,

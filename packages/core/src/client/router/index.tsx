@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'wouter';
 import makeMatcher from 'wouter/matcher';
 
-// @ts-expect-error (Let this be resolved by esbuild instead of typescript)
-import { routes as _allRoutes, pages as _pages } from './../internal/routes.js';
+import {
+	routes as _allRoutes,
+	pages as _pages,
+	basePath as _basePath,
+	// @ts-expect-error (Let this be resolved by esbuild instead of typescript)
+} from './../internal/routes.js';
 
 import {
 	Pages,
@@ -20,8 +24,9 @@ export {
 	SnowstormRoute,
 };
 
-export const allPages = _pages as Pages;
-export const allRoutes = _allRoutes as SnowstormRoute[];
+export const allPages: Pages = _pages;
+export const allRoutes: SnowstormRoute[] = _allRoutes;
+export const basePath: string = _basePath;
 
 const capitalize = (string: string) =>
 	string.charAt(0).toUpperCase() + string.slice(1);

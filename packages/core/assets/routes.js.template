@@ -5,3 +5,5 @@ export const pages = {
 export const routes = [
 // insert-routes
 ];
+
+export const basePath = "/* insert-base-path */";

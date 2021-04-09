@@ -12,21 +12,17 @@ let cachedHtml: string;
 export const ssr = ({
 	devServer,
 	dev,
-	outputFolder,
-	pagesFolder,
 	config,
 }: {
 	devServer: SnowpackDevServer;
 	dev: boolean;
-	outputFolder: string;
-	pagesFolder: string;
 	config: SnowstormConfigInternal;
 }): Middleware => async (ctx, next) => {
 	if (
 		ctx.path.startsWith('/_snowstorm') ||
 		ctx.path.startsWith('/favicon.ico')
 	) {
-		serve(outputFolder)(ctx, next);
+		serve(config.internal.snowpackFolder)(ctx, next);
 		return;
 	}
 
@@ -60,11 +56,15 @@ export const ssr = ({
 	} else if (!dev && cachedHtml) {
 		htmlFile = cachedHtml;
 	} else {
-		htmlFile = await readFile(join(outputFolder, './index.html'), 'utf8');
+		htmlFile = await readFile(
+			join(config.internal.snowpackFolder, './index.html'),
+			'utf8',
+		);
 	}
 
 	const props: string = await collectProps();
 	const head = getHead();
+	const basePath = config.server.basePath === '/' ? '' : config.server.basePath;
 
 	// Inserts the rendered HTML into our main div
 	const doc = htmlFile
@@ -73,6 +73,7 @@ export const ssr = ({
 			`<div id="app"${(dev && 'data-hmr=true') || ''}>${html}</div>`,
 		)
 		.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
+		.replace(/\/_snowstorm/g, `${basePath}/_snowstorm`)
 		.replace(
 			'<!-- SNOWPACK DATA -->',
 			props.length

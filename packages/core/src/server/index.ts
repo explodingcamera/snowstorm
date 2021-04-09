@@ -45,10 +45,11 @@ export const start = async ({
 	path: string;
 	clearSnowpackCache?: boolean;
 }) => {
-	if (clearSnowpackCache) await clearCache();
-
 	const serverStart = performance.now();
 	const config = await loadConfig(path);
+
+	if (clearSnowpackCache) await clearCache();
+	if (dev) config.server.basePath = '/';
 
 	const {
 		snowpackFolder,
@@ -59,23 +60,20 @@ export const start = async ({
 	} = config.internal;
 
 	const hmrPort = (dev && (await getFreePort())) || 0;
+
 	const configOverride: SnowpackUserConfig = {
 		buildOptions: {
 			out: snowpackFolder,
 			metaUrlPath: '_snowstorm',
-			baseUrl: '', // important! no leading slashes: https://github.com/snowpackjs/snowpack/issues/3111#issuecomment-816578171
 		},
 		devOptions: {
 			hmrPort,
 		},
-		alias: {
-			pages: pagesFolder,
-		},
 		mount: {
-			[assetsFolder]: '/',
-			[clientFolder]: '/_snowstorm',
-			[pagesFolder]: '/_snowstorm/pages',
-			[internalFolder]: '/_snowstorm/internal',
+			[assetsFolder]: `/`,
+			[clientFolder]: `/_snowstorm`,
+			[pagesFolder]: `/_snowstorm/pages`,
+			[internalFolder]: `/_snowstorm/internal`,
 		},
 	};
 
@@ -90,12 +88,18 @@ export const start = async ({
 
 	const routesDone = genRoutes();
 
-	if (!dev) {
-		console.log('no dev');
+	const snowpackConfig = createConfiguration(
+		deepmerge(dev ? devConfig : prodConfig, configOverride),
+	);
 
+	// important! no leading slashes: https://github.com/snowpackjs/snowpack/issues/3111#issuecomment-816578171
+	snowpackConfig.buildOptions.baseUrl = '';
+
+	if (!dev) {
 		await routesDone;
+
 		await build({
-			config: createConfiguration(deepmerge(prodConfig, configOverride)),
+			config: snowpackConfig,
 			lockfile: null,
 		});
 
@@ -104,14 +108,10 @@ export const start = async ({
 	}
 
 	const app = new Koa();
-	const configFinal = createConfiguration(
-		deepmerge(dev ? devConfig : prodConfig, configOverride),
-	);
-
 	const [devServer] = await Promise.all([
 		startServer(
 			{
-				config: configFinal,
+				config: snowpackConfig,
 				lockfile: null,
 			},
 			{ isDev: dev, isWatch: dev },
@@ -144,16 +144,19 @@ export const start = async ({
 		ssr({
 			devServer,
 			dev,
-			outputFolder: snowpackFolder,
-			pagesFolder: pagesFolder,
 			config,
 		}),
 	);
 
 	const port = dev ? config.devServer.port : config.server.port;
 
-	app.listen(port);
-	console.log(`>> listening on http://localhost:${port}`);
+	const server = new Koa();
+	server.use(mount(config.server.basePath, app));
+
+	server.listen(port);
+	console.log(
+		`>> listening on http://localhost:${port}${config.server.basePath}`,
+	);
 
 	if (dev) {
 		console.log(`>> started hmr server on ws://localhost:${hmrPort}`);
