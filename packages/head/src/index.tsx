@@ -39,6 +39,14 @@ const handleTitle = (title: ReactElement<HTMLTitleElement>) => {
 	document.title = titleText;
 };
 
+/**
+ * @example
+ * ```
+ * <Head>
+ * 	<title>Hello World!</title>
+ * </Head>
+ * ```
+ */
 export const Head = ({ children }: { children: ReactElement[] }) => {
 	const isInitialMount = useRef(true);
 	const [id] = useState(() => {

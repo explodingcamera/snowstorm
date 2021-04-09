@@ -1,12 +1,12 @@
 import { hydrateSPs } from '@snowstorm/serverprops/lib/internal';
 import React from 'react';
 import { hydrate, render } from 'react-dom';
-import { getCurrentPage, Page, requestPage, SnowstormPage } from './router';
+import { findRoute, Page, requestPage, SnowstormPage } from './router';
 
 const element = document.getElementById('app');
 
 (async () => {
-	const route = getCurrentPage({
+	const route = findRoute({
 		location: document.location.pathname,
 	});
 	let pageComponent: SnowstormPage | undefined;

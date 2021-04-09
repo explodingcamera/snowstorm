@@ -1,9 +1,11 @@
 import deepmerge from 'deepmerge';
 import { join } from 'path';
 import { importFile } from './utils/import-file';
+import { Except } from 'type-fest';
 
 export interface SnowstormConfigInternal {
 	export: {
+		outDir: string;
 		target:
 			| 'github-pages'
 			| 'gitlab-pages'
@@ -11,6 +13,16 @@ export interface SnowstormConfigInternal {
 			| 'netlify'
 			| 'independent';
 	};
+	devServer: {
+		port: number;
+	};
+	server: {
+		port: number;
+	};
+
+	/**
+	 * @ignore
+	 */
 	internal: {
 		projectPath: string;
 		snowstormFolder: string;
@@ -22,7 +34,10 @@ export interface SnowstormConfigInternal {
 	};
 }
 
-type SnowstormConfig = Partial<SnowstormConfigInternal>;
+export type SnowstormConfig = Except<
+	Partial<SnowstormConfigInternal>,
+	'internal'
+>;
 
 export const loadConfig = async (
 	path: string,
@@ -34,8 +49,14 @@ export const loadConfig = async (
 	const assetsFolder = join(__dirname, '../assets/public');
 	const clientFolder = join(__dirname, '../client');
 
-	const baseConfig: SnowstormConfig = {
-		export: { target: 'independent' },
+	const baseConfig: SnowstormConfigInternal = {
+		export: { target: 'independent', outDir: 'dist' },
+		devServer: {
+			port: 2020,
+		},
+		server: {
+			port: 2020,
+		},
 		internal: {
 			projectPath: path,
 			snowstormFolder,
@@ -47,14 +68,11 @@ export const loadConfig = async (
 		},
 	};
 
-	const config = await importFile<SnowstormConfig>(
+	const config = await importFile<Partial<SnowstormConfigInternal>>(
 		path,
 		'snowstorm.config',
 		'Config',
 	);
 
-	return deepmerge(
-		baseConfig,
-		typeof config === 'object' ? config : baseConfig,
-	);
+	return deepmerge(baseConfig, typeof config === 'object' ? config : {});
 };

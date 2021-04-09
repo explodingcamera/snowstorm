@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import {
 	Page,
-	getCurrentPage,
+	findRoute,
 	requestPage,
 	SnowstormPage,
 	SnowstormRoute,
@@ -11,6 +11,7 @@ import {
 import { Router } from 'wouter';
 import staticLocationHook from 'wouter/static-location';
 
+// these are exported so we can use the transformed client code on our server
 export * as internalHooks from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
 
@@ -20,7 +21,7 @@ interface args {
 }
 
 export const loadPage = async ({ path }: { path: string }): Promise<args> => {
-	const route = getCurrentPage({ location: path });
+	const route = findRoute({ location: path });
 
 	let initialPage: SnowstormPage | undefined;
 	try {
@@ -32,7 +33,8 @@ export const loadPage = async ({ path }: { path: string }): Promise<args> => {
 	return { initialPage, route };
 };
 
-// we have to render the html here to prevent multiple instances of react from existing
+// we have to render the html here in the client code to prevent issues like
+// multiple instances of react from existing
 export const renderPage = async ({
 	path,
 	route,

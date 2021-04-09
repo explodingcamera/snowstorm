@@ -28,6 +28,7 @@ import { ssr } from './ssr';
 import { generateRouter, pagePattern } from './router';
 import { brotliify } from './brotliify.js';
 import { loadConfig } from './config.js';
+import { getFreePort } from './utils/free-port.js';
 
 logger.level = 'silent';
 logger.on('error', e => console.error(e));
@@ -57,10 +58,18 @@ export const start = async ({
 		clientFolder,
 	} = config.internal;
 
+	const hmrPort = (dev && (await getFreePort())) || 0;
 	const configOverride: SnowpackUserConfig = {
 		buildOptions: {
 			out: snowpackFolder,
 			metaUrlPath: '_snowstorm',
+			baseUrl: '', // important! no leading slashes: https://github.com/snowpackjs/snowpack/issues/3111#issuecomment-816578171
+		},
+		devOptions: {
+			hmrPort,
+		},
+		alias: {
+			pages: pagesFolder,
 		},
 		mount: {
 			[assetsFolder]: '/',
@@ -82,6 +91,8 @@ export const start = async ({
 	const routesDone = genRoutes();
 
 	if (!dev) {
+		console.log('no dev');
+
 		await routesDone;
 		await build({
 			config: createConfiguration(deepmerge(prodConfig, configOverride)),
@@ -139,11 +150,13 @@ export const start = async ({
 		}),
 	);
 
-	app.listen(2000);
-	console.log('>> listening on http://localhost:2000');
+	const port = dev ? config.devServer.port : config.server.port;
+
+	app.listen(port);
+	console.log(`>> listening on http://localhost:${port}`);
 
 	if (dev) {
-		console.log('>> started hmr server on ws://localhost:45246');
+		console.log(`>> started hmr server on ws://localhost:${hmrPort}`);
 
 		const watcher = chokidar.watch(join(pagesFolder, pagePattern), {
 			ignoreInitial: true,

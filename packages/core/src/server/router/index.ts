@@ -19,17 +19,18 @@ export const generateRouter = async ({
 	const customErrorPage = normalizedPages.includes('_error');
 	const customAppPage = normalizedPages.includes('_app');
 
+	const basepath = '';
 	normalizedPages = normalizedPages.filter(r => !r.startsWith('_'));
 	const processedPages = normalizedPages.map(
-		route => `  "${route}": () => import("../pages/${route}.js")`,
+		route => `  "${route}": () => import("pages/${route}.js")`,
 	);
 
 	if (customAppPage) {
-		tmp = `import App from "../pages/_app.js";\n${tmp}`;
+		tmp = `import App from "pages/_app.js";\n${tmp}`;
 	}
 
 	tmp = `import Error from "${
-		customErrorPage ? '../pages/_error.js' : '../_error.js'
+		customErrorPage ? `pages/_error.js` : `./_error.js`
 	}";\n${tmp}`;
 
 	processedPages.push(

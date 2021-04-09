@@ -19,7 +19,7 @@ module.exports = {
 		bundle: true,
 		minify: true,
 		target: 'es2017',
-		splitting: false, // due to the small sizes this actually improves times
+		splitting: true,
 		treeshake: true,
 	},
 };

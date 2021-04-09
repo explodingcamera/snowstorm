@@ -127,7 +127,10 @@ export const Page = ({ initialPage }: { initialPage: InitialPage }) => {
 	return <App Wrapper={CustomApp} ErrorPage={ErrorPage} />;
 };
 
-export const getCurrentPage = ({ location }: { location: string }) => {
+/**
+ * @description finds the route name corresponding to a location string
+ */
+export const findRoute = ({ location }: { location: string }) => {
 	const matcher = makeMatcher();
 
 	for (const route of allRoutes) {

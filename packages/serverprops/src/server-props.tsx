@@ -16,6 +16,20 @@ export interface SSRHocProps<T> {
 	ssr: T;
 }
 
+/**
+ * createSP creates a new ServerProp instance that can be consumed using either the returned useSP hook or  withSP higher-order-component.
+ *
+ * NOTE: The async function's result needs to be convertable to JSON.
+ * @example
+ * ```
+ * const { useSP: useStuff } = createSP('load-stuff', async () => Promise.resolve('foo'), {
+ * 	type: 'dynamic',
+ * 	runOnClient: false,
+ * });
+ * ```
+ * @param name a unique name for this server prop
+ * @param run the async function that is run to generate the server prop
+ */
 export function createSP<T>(
 	name: string,
 	run: () => Promise<T>,

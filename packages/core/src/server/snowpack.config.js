@@ -9,7 +9,6 @@ module.exports = {
 		open: 'none',
 		hmr: true,
 		port: 0,
-		hmrPort: 45246,
 		output: 'stream',
 	},
 	buildOptions: {
