@@ -1,0 +1,13 @@
+diff --git a/node_modules/snowpack/lib/index.js b/node_modules/snowpack/lib/index.js
+index ffdd06e..f92718e 100644
+--- a/node_modules/snowpack/lib/index.js
++++ b/node_modules/snowpack/lib/index.js
+@@ -104329,7 +104329,7 @@ class PackageSourceLocal {
+                 ],
+             });
+             const isSymlink = !entrypoint.includes(path_1.default.join('node_modules', _packageName));
+-            if (isSymlink) {
++            if (isSymlink && !_packageName.startsWith("@snowstorm")) {
+                 return;
+             }
+         }

@@ -20,17 +20,20 @@
     "watch:cli": "yarn workspace @snowstorm/cli run watch",
     "watch:serverprops": "yarn workspace @snowstorm/serverprops run watch",
     "watch:head": "yarn workspace @snowstorm/head run watch",
-    "docs:deploy": "yarn workspace @snowstorm/docs run deploy"
+    "docs:deploy": "yarn workspace @snowstorm/docs run deploy",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@explodingcamera/eslint-config": "^15.1.0",
-    "eslint": "^7.22.0",
+    "eslint": "^7.24.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
     "rimraf": "^3.0.2"
   }
 }

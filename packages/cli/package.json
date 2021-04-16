@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.26.0",
-    "@types/node": "^14.14.35",
+    "@types/node": "^14.14.41",
     "globby": "^11.0.3"
   },
   "oclif": {
