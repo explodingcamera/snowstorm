@@ -9,6 +9,8 @@ import {
 
 import { join } from 'path';
 import { mkdir } from 'fs/promises';
+import { existsSync } from 'fs';
+
 import { performance } from 'perf_hooks';
 import chokidar from 'chokidar';
 
@@ -51,6 +53,8 @@ export const start = async ({
 	const serverStart = performance.now();
 
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
+
+	const multiSiteMode = existsSync(join(path, 'sites'));
 
 	if (clearSnowpackCache) await clearCache();
 	if (dev) config.server.basePath = '/';
