@@ -1,6 +1,8 @@
 import { logger, clearCache } from 'snowpack';
 import { performance } from 'perf_hooks';
+
 import Koa from 'koa';
+import mount from 'koa-mount';
 
 import { loadConfig, SnowstormInternalSiteConfig } from './config.js';
 import { SnowstormConfigInternal } from './config';
@@ -30,11 +32,12 @@ export const start = async ({
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 	const server = new Koa();
 
-	// TODO: generate a list of SnowstormInternalSiteConfig
-	const sites: SnowstormInternalSiteConfig[] = [];
-	const startSites = sites.map(async site => startSite(dev, config, site));
+	const startSites = config.internal.sites.map(async site =>
+		startSite(dev, config, site),
+	);
+
 	for await (const siteApp of startSites) {
-		// TODO: mount siteApp on the correct domain
+		server.use(mount(siteApp));
 	}
 
 	const port = dev ? config.development.port : config.production.port;
@@ -42,7 +45,7 @@ export const start = async ({
 	const listening = new Promise<void>(resolve => {
 		server.listen(port, () => resolve());
 
-		sites.forEach(site => {
+		config.internal.sites.forEach(site => {
 			if (site.domain === '*')
 				return console.log(
 					`>> listening on http://localhost:${port}${site.basePath}`,

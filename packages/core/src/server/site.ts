@@ -54,6 +54,8 @@ export const startSite = async (
 		},
 	};
 
+	console.log(site.internal.internalFolder);
+
 	const internalFolderReady = mkdir(site.internal.internalFolder, {
 		recursive: true,
 	});

@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { importFile } from './utils/import-file';
 import { checkFileExists } from './utils/file-exists';
 import { Except, PartialDeep } from 'type-fest';
@@ -129,8 +129,7 @@ export const loadConfig = async (
 		typeof config === 'object' ? config : {},
 	);
 
-	const rootFolder = join(path, res.rootFolder);
-
+	const rootFolder = resolve(path, res.rootFolder);
 	const sitesFolderExists = !(
 		!res.sitesFolder || !(await checkFileExists(join(rootFolder, './sites')))
 	);
