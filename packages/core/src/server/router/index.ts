@@ -1,6 +1,10 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { SnowstormConfigInternal } from '../config';
+import {
+	SnowstormConfigInternal,
+	SnowstormInternalSiteConfig,
+} from '../config';
+
 import { loadNormalizedPages } from './pages';
 import { loadRoutes, SnowstormRoute } from './routes';
 
@@ -8,17 +12,19 @@ export { pagePattern } from './pages';
 
 export const generateRouter = async ({
 	template,
+	site,
 	config,
 }: {
 	template: string;
+	site: SnowstormInternalSiteConfig;
 	config: SnowstormConfigInternal;
 }) => {
 	let tmp = (await readFile(template)).toString();
-	const basePath = config.server.basePath.replace(/"/g, '');
+	const basePath = site.basePath.replace(/"/g, '');
 
 	const pagesLocation = '../pages';
 
-	let normalizedPages = await loadNormalizedPages(config.internal.pagesFolder);
+	let normalizedPages = await loadNormalizedPages(site.internal.pagesFolder);
 	const customErrorPage = normalizedPages.includes('_error');
 	const customAppPage = normalizedPages.includes('_app');
 
@@ -40,7 +46,7 @@ export const generateRouter = async ({
 		`  "_error": () => Error`,
 	);
 
-	const routes = await loadRoutes(config.internal.projectPath, normalizedPages);
+	const routes = await loadRoutes(config.internal.rootFolder, normalizedPages);
 
 	const processedRoutes = routes.map(route => {
 		let routeString;
@@ -64,5 +70,5 @@ export const generateRouter = async ({
 		.replace('// insert-routes', processedRoutes.join(',\n'))
 		.replace('/* insert-base-path */', basePath);
 
-	await writeFile(join(config.internal.internalFolder, '/routes.js'), tmp);
+	await writeFile(join(site.internal.internalFolder, '/routes.js'), tmp);
 };

@@ -1,7 +1,7 @@
 import { Middleware } from 'koa';
 import { SnowpackDevServer } from 'snowpack';
 import { readFile } from 'fs/promises';
-import { SnowstormConfigInternal } from './config';
+import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
 import { join } from 'path';
 import serve from 'koa-static';
 
@@ -13,16 +13,18 @@ export const ssr = ({
 	devServer,
 	dev,
 	config,
+	site,
 }: {
 	devServer: SnowpackDevServer;
 	dev: boolean;
 	config: SnowstormConfigInternal;
+	site: SnowstormInternalSiteConfig;
 }): Middleware => async (ctx, next) => {
 	if (
 		ctx.path.startsWith('/_snowstorm') ||
 		ctx.path.startsWith('/favicon.ico')
 	) {
-		serve(config.internal.snowpackFolder)(ctx, next);
+		serve(site.internal.snowpackFolder)(ctx, next);
 		return;
 	}
 
@@ -57,14 +59,14 @@ export const ssr = ({
 		htmlFile = cachedHtml;
 	} else {
 		htmlFile = await readFile(
-			join(config.internal.snowpackFolder, './index.html'),
+			join(site.internal.snowpackFolder, './index.html'),
 			'utf8',
 		);
 	}
 
 	const props: string = await collectProps();
 	const head = getHead();
-	const basePath = config.server.basePath === '/' ? '' : config.server.basePath;
+	const basePath = site.basePath === '/' ? '' : site.basePath;
 
 	// Inserts the rendered HTML into our main div
 	const doc = htmlFile
