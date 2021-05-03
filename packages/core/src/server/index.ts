@@ -4,7 +4,7 @@ import { performance } from 'perf_hooks';
 import Koa from 'koa';
 import mount from 'koa-mount';
 
-import { loadConfig, SnowstormInternalSiteConfig } from './config.js';
+import { loadConfig } from './config.js';
 import { SnowstormConfigInternal } from './config';
 import { startSite } from './site.js';
 
@@ -32,21 +32,33 @@ export const start = async ({
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 	const server = new Koa();
 
-	const startSites = config.internal.sites.map(async site =>
-		startSite(dev, config, site),
+	const startSites = await Promise.all(
+		config.internal.sites.map(async site =>
+			startSite(dev, config, site).then(app => ({
+				site,
+				app,
+			})),
+		),
 	);
 
-	for await (const siteApp of startSites) {
-		server.use(mount(siteApp));
-	}
+	const defaultSite = startSites.find(site => site.site.domain === 'default');
+
+	server.use((ctx, next) => {
+		const site = startSites.find(site =>
+			ctx.hostname.startsWith(site.site.domain),
+		);
+
+		if (site) return mount(site.app)(ctx, next);
+		if (defaultSite) return mount(defaultSite.app)(ctx, next);
+	});
 
 	const port = dev ? config.development.port : config.production.port;
 
 	const listening = new Promise<void>(resolve => {
 		server.listen(port, () => resolve());
 
-		config.internal.sites.forEach(site => {
-			if (site.domain === '*')
+		startSites.forEach(({ site }) => {
+			if (site.domain === 'default')
 				return console.log(
 					`>> listening on http://localhost:${port}${site.basePath}`,
 				);

@@ -85,6 +85,7 @@ export interface SnowstormConfigInternal {
 	 */
 	internal: {
 		rootFolder: string;
+		sitesFolder?: string;
 		snowstormFolder: string;
 		snowstormAssetsFolder: string;
 		snowstormClientFolder: string;
@@ -108,6 +109,7 @@ export const loadConfig = async (
 ): Promise<SnowstormConfigInternal> => {
 	const baseConfig: SnowstormBaseConfig = {
 		rootFolder: path,
+		sitesFolder: './sites',
 		sites: [],
 		site: baseSite,
 		development: {
@@ -130,11 +132,10 @@ export const loadConfig = async (
 	);
 
 	const rootFolder = resolve(path, res.rootFolder);
-	const sitesFolderExists = !(
-		!res.sitesFolder || !(await checkFileExists(join(rootFolder, './sites')))
-	);
 
-	if (!sitesFolderExists) res.sitesFolder = undefined;
+	let sitesFolder = res.sitesFolder && resolve(rootFolder, res.sitesFolder);
+	const sitesFolderExists = sitesFolder && (await checkFileExists(sitesFolder));
+	if (!sitesFolderExists) sitesFolder = undefined;
 
 	if (!res.site.basePath?.startsWith('/'))
 		throw new Error("Snowstorm: config.site.basepath needs to begin with '/'");
@@ -145,6 +146,7 @@ export const loadConfig = async (
 		...res,
 		internal: {
 			rootFolder,
+			sitesFolder,
 			snowstormFolder,
 			snowstormAssetsFolder: join(__dirname, '../assets/public'),
 			snowstormClientFolder: join(__dirname, '../client'),
@@ -175,7 +177,7 @@ const processSites = async (
 			sites.push(
 				deepmerge(
 					{
-						domain: siteName,
+						domain: /([^/]*)\/*$/.exec(siteName)?.[1] ?? '',
 					},
 					existingConfig ?? {},
 				),
@@ -183,35 +185,41 @@ const processSites = async (
 		}
 	}
 
-	return sites.map(site => {
-		const name = (site.domain || 'default')
-			.replace(/[^a-z0-9]/gi, '_')
-			.toLowerCase();
+	return sites
+		.map(site => {
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			const name = (site.domain || 'default')
+				.replace(/[^a-z0-9]/gi, '_')
+				.toLowerCase();
 
-		const basePath = config.sitesFolder
-			? join(config.sitesFolder, `./${name}`)
-			: config.internal.rootFolder;
+			const basePath = config.internal.sitesFolder
+				? join(
+						config.internal.sitesFolder,
+						site.domain ? `./${site.domain}` : '../',
+				  )
+				: config.internal.rootFolder;
 
-		const resultSite = deepmerge(baseSite, site);
+			const resultSite = deepmerge(baseSite, site);
 
-		return {
-			...resultSite,
-			domain: 'default',
-			internal: {
-				name,
-				snowpackFolder: join(
-					config.internal.snowstormFolder,
-					`./${name}`,
-					'./out',
-				),
-				internalFolder: join(
-					config.internal.snowstormFolder,
-					`./${name}`,
-					'./internal',
-				),
-				pagesFolder: join(basePath, resultSite.pagesFolder),
-				staticFolder: join(basePath, resultSite.staticFolder),
-			},
-		};
-	});
+			return {
+				...resultSite,
+				domain: site.domain ?? 'default',
+				internal: {
+					name,
+					snowpackFolder: join(
+						config.internal.snowstormFolder,
+						`./${name}`,
+						'./out',
+					),
+					internalFolder: join(
+						config.internal.snowstormFolder,
+						`./${name}`,
+						'./internal',
+					),
+					pagesFolder: join(basePath, resultSite.pagesFolder),
+					staticFolder: join(basePath, resultSite.staticFolder),
+				},
+			};
+		})
+		.sort((a, b) => a.domain.length - b.domain.length);
 };

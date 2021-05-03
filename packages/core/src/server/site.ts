@@ -48,13 +48,11 @@ export const startSite = async (
 		},
 		mount: {
 			[snowstormAssetsFolder]: `/`,
-			[snowstormClientFolder]: `/_snowstorm`,
-			[site.pagesFolder]: `/_snowstorm/pages`,
+			[site.internal.pagesFolder]: `/_snowstorm/pages`,
+			[snowstormClientFolder]: `/_snowstorm/internal`,
 			[site.internal.internalFolder]: `/_snowstorm/internal`,
 		},
 	};
-
-	console.log(site.internal.internalFolder);
 
 	const internalFolderReady = mkdir(site.internal.internalFolder, {
 		recursive: true,

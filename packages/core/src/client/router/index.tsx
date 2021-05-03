@@ -7,7 +7,7 @@ import {
 	pages as _pages,
 	basePath as _basePath,
 	// @ts-expect-error (Let this be resolved by esbuild instead of typescript)
-} from './../internal/routes.js';
+} from './../routes.js';
 
 import {
 	Pages,

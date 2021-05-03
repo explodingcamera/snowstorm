@@ -39,7 +39,9 @@ export const ssr = ({
 	}
 
 	const { loadPage, renderPage, processSPs, collectProps, getHead } = (
-		await devServer.getServerRuntime().importModule('/_snowstorm/load-html.js')
+		await devServer
+			.getServerRuntime()
+			.importModule('/_snowstorm/internal/load-html.js')
 	).exports;
 
 	const page = await loadPage({ path: ctx.path });
@@ -54,7 +56,7 @@ export const ssr = ({
 	// Load contents of index.html
 	let htmlFile: string;
 	if (dev) {
-		htmlFile = (await devServer.loadUrl('/')).contents.toString();
+		htmlFile = (await devServer.loadUrl('/'))?.contents.toString() ?? '';
 	} else if (!dev && cachedHtml) {
 		htmlFile = cachedHtml;
 	} else {

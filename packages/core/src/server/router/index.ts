@@ -21,10 +21,10 @@ export const generateRouter = async ({
 }) => {
 	let tmp = (await readFile(template)).toString();
 	const basePath = site.basePath.replace(/"/g, '');
-
 	const pagesLocation = '../pages';
 
 	let normalizedPages = await loadNormalizedPages(site.internal.pagesFolder);
+
 	const customErrorPage = normalizedPages.includes('_error');
 	const customAppPage = normalizedPages.includes('_app');
 
@@ -46,6 +46,7 @@ export const generateRouter = async ({
 		`  "_error": () => Error`,
 	);
 
+	// TODO seperate routes file per site
 	const routes = await loadRoutes(config.internal.rootFolder, normalizedPages);
 
 	const processedRoutes = routes.map(route => {

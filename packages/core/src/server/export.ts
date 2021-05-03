@@ -49,8 +49,6 @@ export const exportProject = async ({ path }: { path: string }) => {
 	// 	)
 	// ).flat();
 
-	// console.log(paths);
-
 	// config.server.port = await getFreePort();
 	// await startServer({ dev: false, path, overrideConfig: config });
 
