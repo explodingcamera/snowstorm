@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { importFile } from '../utils/import-file';
+import { SnowstormInternalSiteConfig } from './../config';
 
 export interface SnowstormRoute {
 	path: string;
@@ -19,14 +19,12 @@ type SnowstormCustomRoutesInternal = Record<
 	SnowstormCustomRoute & Partial<SnowstormRoute> & { fileSystemRoute?: true }
 >;
 
-export interface RoutesConfigInternal {
-	fileSystemRouting: boolean;
+export interface SnowstormRoutesConfig {
+	fileSystemRouting?: boolean;
 	customRoutes?: SnowstormCustomRoutes;
 }
 
-export type SnowstormRoutesConfig = Partial<RoutesConfigInternal>;
-
-const defaultRouteConfig: RoutesConfigInternal = {
+const defaultRouteConfig: SnowstormRoutesConfig = {
 	fileSystemRouting: true,
 };
 
@@ -45,15 +43,12 @@ const processPage = (page: string) => {
 	};
 };
 
-export const loadRoutes = async (path: string, pages: string[]) => {
-	const routesFile = await importFile<SnowstormRoutesConfig>(
-		path,
-		'routes',
-		'Routes',
-	);
-
-	const routesConfig = routesFile
-		? deepmerge(defaultRouteConfig, routesFile)
+export const loadRoutes = async (
+	pages: string[],
+	site: SnowstormInternalSiteConfig,
+) => {
+	const routesConfig = site.routes
+		? deepmerge(defaultRouteConfig, site.routes)
 		: defaultRouteConfig;
 
 	const fileSystemRoutes: string[] = [];

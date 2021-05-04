@@ -4,6 +4,7 @@ import { importFile } from './utils/import-file';
 import { checkFileExists } from './utils/file-exists';
 import { Except, PartialDeep } from 'type-fest';
 import glob from 'glob-promise';
+import { SnowstormRoutesConfig } from './router/routes';
 
 export interface SnowstormInternalSiteConfig {
 	pagesFolder: string;
@@ -24,6 +25,8 @@ export interface SnowstormInternalSiteConfig {
 			| 'netlify'
 			| 'independent';
 	};
+
+	routes?: SnowstormRoutesConfig;
 
 	/**
 	 * @ignore

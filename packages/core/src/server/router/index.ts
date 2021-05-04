@@ -46,8 +46,7 @@ export const generateRouter = async ({
 		`  "_error": () => Error`,
 	);
 
-	// TODO seperate routes file per site
-	const routes = await loadRoutes(config.internal.rootFolder, normalizedPages);
+	const routes = await loadRoutes(normalizedPages, site);
 
 	const processedRoutes = routes.map(route => {
 		let routeString;

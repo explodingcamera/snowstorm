@@ -24,7 +24,7 @@
 // SOFTWARE.
 
 import React, { useEffect, useState, useRef } from 'react';
-import { useLocation } from './../../';
+import { useLocation } from 'wouter';
 
 export const RouteAnnouncer = () => {
 	const [location] = useLocation();
