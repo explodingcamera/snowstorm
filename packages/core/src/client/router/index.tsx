@@ -8,6 +8,7 @@ import {
 	basePath as _basePath,
 	// @ts-expect-error (Let this be resolved by esbuild instead of typescript)
 } from './../routes.js';
+import { RouteAnnouncer } from './route-announcer';
 
 import {
 	Pages,
@@ -57,7 +58,14 @@ const App = ({
 		</Switch>
 	);
 
-	return Wrapper ? <Wrapper>{routeComponents}</Wrapper> : routeComponents;
+	const site = Wrapper ? <Wrapper>{routeComponents}</Wrapper> : routeComponents;
+
+	return (
+		<>
+			<RouteAnnouncer />
+			{site}
+		</>
+	);
 };
 
 type PageStatus = 'ERROR' | 'LOADING' | 'LOADED';
