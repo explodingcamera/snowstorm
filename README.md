@@ -5,18 +5,32 @@
   </a>
 </p>
 
-## The lightning-fast and minimalist React Framework
-### Snowstorm is the new React Framework which - through the power of [ES-Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and Server Side Rendering - makes web development fun again<br><br>
+## Important: Snowstorm isn't Production-Ready yet
+# The lightning-fast and minimalist React Framework
 
-# > Important: Snowstorm isn't Production-Ready yet
+## What?
+Snowstorm is a "framework" for react, which handles the heavy lifting involved with shipping a react project so you can focus on creating awesome things!
 
-### **Key Features**
+## Why?
 * Develop faster, with a dev server that starts up in less then 100ms
-* Modular design: Most features can be used independently of snowstorm and are only included when actually used
-* Soon: Drop-in replacement for `next.js` using `@snowstorm/next-compat`
-* Out-of-the-box support for everything you will ever need
-* Minimal: no added bloat, loads nothing more than what you use
+* Unbloated: only includes features which you actually use
+* Builds thousands of pages in minutes
 * Versitile: supports everything from complex server side code to blazing fast, javascript free static websites
-* Lots of small quality-of-life improvements
+* File system based routing (which can also be disabled)
+* Multi-Site support: route not only based on path but also domain
+
+## How?
+
+```bash
+$ npm install -S @snowstorm/core @snowstorm/cli
+$ mkdir pages
+$ echo "export const Index = () => <h1>Hello World</h1>" > pages/index.ts
+$ npx snowstorm dev
+>> listening on http://localhost:2020/
+```
+
+### Visit [snowstorm.js.org/docs](https://snowstorm.js.org/docs/getting-started) for the full documentation
+
+<br/>
 
 > License: [MIT](LICENSE.md)
