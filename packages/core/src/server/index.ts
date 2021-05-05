@@ -25,8 +25,10 @@ export const start = async ({
 	clearSnowpackCache?: boolean;
 	overrideConfig?: SnowstormConfigInternal;
 }) => {
-	if (clearSnowpackCache) await clearCache();
-	console.log('>> successfully cleared the cache');
+	if (clearSnowpackCache) {
+		await clearCache();
+		console.log('>> successfully cleared the cache');
+	}
 
 	const serverStart = performance.now();
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
@@ -34,7 +36,7 @@ export const start = async ({
 
 	const startSites = await Promise.all(
 		config.internal.sites.map(async site =>
-			startSite(dev, config, site).then(app => ({
+			startSite({ dev, config, site }).then(app => ({
 				site,
 				app,
 			})),

@@ -11,8 +11,7 @@ import {
 	SnowpackUserConfig,
 	startServer,
 } from 'snowpack';
-import * as devConfig from './snowpack.config.js';
-import * as prodConfig from './snowpack.config.prod.js';
+import { prodConfig, devConfig } from './snowpack-config';
 
 import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
 
@@ -28,17 +27,20 @@ import { ssr } from './ssr';
 import { serveHMR } from './hmr';
 import { generateRouter, pagePattern } from './router';
 
-export const startSite = async (
-	dev: boolean,
-	config: SnowstormConfigInternal,
-	site: SnowstormInternalSiteConfig,
-): Promise<Koa> => {
-	if (dev) site.basePath = '/';
+const createSnowstormConfig = async ({
+	dev,
+	config,
+	site,
+}: {
+	dev: boolean;
+	config: SnowstormConfigInternal;
+	site: SnowstormInternalSiteConfig;
+}) => {
 	const hmrPort = (dev && (await getFreePort())) || 0;
-
 	const { snowstormAssetsFolder, snowstormClientFolder } = config.internal;
 
 	const configOverride: SnowpackUserConfig = {
+		root: config.internal.rootFolder,
 		buildOptions: {
 			out: site.internal.snowpackFolder,
 			metaUrlPath: '_snowstorm',
@@ -54,6 +56,38 @@ export const startSite = async (
 		},
 	};
 
+	if (site.build.sass) {
+		configOverride.plugins?.push([
+			'@snowpack/plugin-sass',
+			typeof site.build.sass === 'object' ? site.build.sass : {},
+		]);
+	}
+
+	if (site.build.postcss) {
+		configOverride.plugins?.push([
+			'@snowpack/plugin-postcss',
+			typeof site.build.postcss === 'object' ? site.build.postcss : {},
+		]);
+	}
+
+	const snowpackConfig = createConfiguration(
+		deepmerge(dev ? devConfig : prodConfig, configOverride),
+	);
+
+	return snowpackConfig;
+};
+
+export const startSite = async ({
+	dev,
+	config,
+	site,
+}: {
+	dev: boolean;
+	config: SnowstormConfigInternal;
+	site: SnowstormInternalSiteConfig;
+}): Promise<Koa> => {
+	if (dev) site.basePath = '/';
+
 	const internalFolderReady = mkdir(site.internal.internalFolder, {
 		recursive: true,
 	});
@@ -68,12 +102,7 @@ export const startSite = async (
 	};
 
 	const routesDone = genRoutes();
-	const snowpackConfig = createConfiguration(
-		deepmerge(dev ? devConfig : prodConfig, configOverride),
-	);
-
-	// important! no leading slashes: https://github.com/snowpackjs/snowpack/issues/3111#issuecomment-816578171
-	snowpackConfig.buildOptions.baseUrl = '';
+	const snowpackConfig = await createSnowstormConfig({ dev, config, site });
 
 	if (!dev) {
 		await routesDone;

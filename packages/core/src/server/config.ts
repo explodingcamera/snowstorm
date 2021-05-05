@@ -5,26 +5,95 @@ import { checkFileExists } from './utils/file-exists';
 import { Except, PartialDeep } from 'type-fest';
 import glob from 'glob-promise';
 import { SnowstormRoutesConfig } from './router/routes';
+export interface SnowstormExportConfig {
+	/**
+	 * The directory where the website will be output to.
+	 * In the case of `site`, this can be relative to the project root or an absoulte path,
+	 * in the case of `sites`, relative paths are relative to the outputDir set in `site`
+	 */
+	outDir: string;
+	target:
+		| 'github-pages'
+		| 'gitlab-pages'
+		| 'cloudflare-pages'
+		| 'netlify'
+		| 'independent';
+}
+
+export interface SassOptions {
+	/**
+	 * Add directories to Sass's load path, to support looking up and loading partials (etc.) by name.
+	 */
+	loadPath?: string | string[];
+
+	/**
+	 * The output style. Specify 'compressed' to enable Sass’ built-in minification (default: 'expanded').
+	 */
+	style?: 'expanded' | 'Compressed';
+
+	/**
+	 * Enable / disable source maps (default: true).
+	 */
+	sourceMap?: boolean;
+
+	/**
+	 * How to link from source maps to source files (default: 'relative').
+	 */
+	sourceMapUrls?: 'relative' | 'absolute';
+
+	/**
+	 * Embed source file contents in source maps (default: false).
+	 */
+	embedSources?: boolean;
+
+	/**
+	 * Embed source map contents in CSS (default: false).
+	 */
+	embedSourceMap?: boolean;
+
+	/**
+	 * Emit a @charset or BOM for CSS with non-ASCII characters. (default: true).
+	 */
+	charset?: boolean;
+
+	/**
+	 * Compile only out-of-date stylesheets (default: false).
+	 */
+	update?: boolean;
+}
+
+interface PostCSSOptions {
+	/**
+	 * File extensions to transform (default: ['.css'])
+	 */
+	input?: string[];
+
+	/**
+	 * (optional) Set a custom path to your PostCSS config (in case PostCSS has trouble loading it automatically, or in case you want multiple PostCSS setups)
+	 */
+	config?: string;
+}
+
+export interface SnowstormBuildConfig {
+	sass?: boolean | SassOptions;
+	postcss?: boolean | PostCSSOptions;
+}
 
 export interface SnowstormInternalSiteConfig {
 	pagesFolder: string;
 	staticFolder: string;
 	basePath: string;
 	domain: string;
-	export: {
-		/**
-		 * The directory where the website will be output to.
-		 * In the case of `site`, this can be relative to the project root or an absoulte path,
-		 * in the case of `sites`, relative paths are relative to the outputDir set in `site`
-		 */
-		outDir: string;
-		target:
-			| 'github-pages'
-			| 'gitlab-pages'
-			| 'cloudflare-pages'
-			| 'netlify'
-			| 'independent';
-	};
+
+	/**
+	 * The base config for building a snowstorm site
+	 */
+	build: SnowstormBuildConfig;
+
+	/**
+	 * The base config for exporting a snowstorm site
+	 */
+	export: SnowstormExportConfig;
 
 	routes?: SnowstormRoutesConfig;
 
@@ -103,6 +172,7 @@ export type SnowstormConfig = PartialDeep<SnowstormBaseConfig>;
 const baseSite: Except<SnowstormInternalSiteConfig, 'domain' | 'internal'> = {
 	pagesFolder: './pages',
 	export: { target: 'independent', outDir: 'dist' },
+	build: {},
 	basePath: '/',
 	staticFolder: './static',
 };

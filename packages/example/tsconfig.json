@@ -13,6 +13,6 @@
     "isolatedModules": true,
     "jsx": "react"
   },
-  "include": ["pages/*"],
+  "include": ["pages/*", "types.d.ts"],
   "exclude": ["node_modules", ".snowstorm"]
 }

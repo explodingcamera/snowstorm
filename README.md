@@ -14,10 +14,10 @@ Snowstorm is a "framework" for react, which handles the heavy lifting involved w
 ## Why?
 * Develop faster, with a dev server that starts up in less then 100ms
 * Unbloated: only includes features which you actually use
-* Builds thousands of pages in minutes
+* Builds thousands of pages in seconds
 * Versitile: supports everything from complex server side code to blazing fast, javascript free static websites
 * File system based routing (which can also be disabled)
-* Multi-Site support: route not only based on path but also domain
+* Multi-Site support: routes can not only based on the path but also your domain
 
 ## How?
 

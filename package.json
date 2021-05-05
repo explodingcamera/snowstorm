@@ -24,7 +24,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@explodingcamera/eslint-config": "^15.1.0",
+    "@explodingcamera/eslint-config": "^16.0.0",
     "eslint": "^7.25.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
