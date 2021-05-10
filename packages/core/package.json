@@ -31,7 +31,7 @@
     "chokidar": "^3.5.1",
     "deepmerge": "^4.2.2",
     "express": "^4.17.1",
-    "glob": "^7.1.6",
+    "glob": "^7.1.7",
     "glob-promise": "^4.1.0",
     "koa": "^2.13.1",
     "koa-cash": "^4.0.5",
@@ -44,7 +44,7 @@
     "require-from-string": "^2.0.2",
     "snowpack": "^3.3.7",
     "staticgen-node": "^1.2.4",
-    "type-fest": "^1.0.2",
+    "type-fest": "^1.1.1",
     "typescript": "^4.2.4",
     "wouter": "^2.7.4",
     "ws": "^7.4.5"
