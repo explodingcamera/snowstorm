@@ -24,7 +24,7 @@ if (!loc.startsWith('/')) loc = '/' + loc;
 	let pageComponent: SnowstormPage | undefined;
 	try {
 		if (route?.page) pageComponent = await requestPage(route?.page);
-	} catch (error: unknown) {}
+	} catch (_: unknown) {}
 
 	const pageProps = {
 		initialPage: {

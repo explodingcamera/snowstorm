@@ -1,9 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import {
-	SnowstormConfigInternal,
-	SnowstormInternalSiteConfig,
-} from '../config';
+import { SnowstormInternalSiteConfig } from '../config';
 
 import { loadNormalizedPages } from './pages';
 import { loadRoutes, SnowstormRoute } from './routes';
@@ -13,11 +10,9 @@ export { pagePattern } from './pages';
 export const generateRouter = async ({
 	template,
 	site,
-	config,
 }: {
 	template: string;
 	site: SnowstormInternalSiteConfig;
-	config: SnowstormConfigInternal;
 }) => {
 	let tmp = (await readFile(template)).toString();
 	const basePath = site.basePath.replace(/"/g, '');
@@ -47,17 +42,16 @@ export const generateRouter = async ({
 	);
 
 	const routes = await loadRoutes(normalizedPages, site);
-
 	const processedRoutes = routes.map(route => {
 		let routeString;
 		try {
 			const clientRoute: SnowstormRoute = {
 				page: route.page,
 				parts: route.parts ?? [],
-				path: route.path,
+				path: route.path ?? '',
 			};
 			routeString = JSON.stringify(clientRoute);
-		} catch (error: unknown) {
+		} catch (_: unknown) {
 			console.error('invalid route: ', route);
 			return '';
 		}

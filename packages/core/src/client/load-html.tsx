@@ -49,7 +49,7 @@ export const renderPage = async ({
 		>
 			<Page
 				initialPage={{
-					route: route,
+					route,
 					component: initialPage,
 				}}
 			/>

@@ -42,7 +42,7 @@ export async function importFile<FileType>(
 			const config = await import(join(path, '/snowstorm.config.json'));
 			importedFile = config.default;
 		}
-	} catch (error: unknown) {}
+	} catch (_: unknown) {}
 
 	return importedFile;
 }

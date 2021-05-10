@@ -5,7 +5,7 @@ export async function getFreePort(): Promise<number> {
 		const server = net.createServer();
 		let calledFn = false;
 
-		server.on('error', function (err) {
+		server.on('error', err => {
 			server.close();
 
 			if (calledFn) return;
@@ -13,7 +13,7 @@ export async function getFreePort(): Promise<number> {
 			reject(err);
 		});
 
-		server.listen(0, function () {
+		server.listen(0, () => {
 			const address = server?.address?.();
 			const port = typeof address === 'object' ? address?.port : undefined;
 			server.close();

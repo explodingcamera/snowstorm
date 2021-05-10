@@ -2,59 +2,89 @@ import { loadConfig } from './config';
 import { generate } from 'staticgen-node';
 import { getFreePort } from './utils/free-port';
 import { loadNormalizedPages } from './router/pages';
-import { loadRoutes } from './router/routes';
+import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes';
 import { start as startServer } from './';
+import { join } from 'path';
+import { basePath } from '../client/router';
 
 export const exportProject = async ({ path }: { path: string }) => {
 	const config = await loadConfig(path);
 
-	// TODO: multisite mode
-	// const normalizedPages = await loadNormalizedPages(
-	// 	config.internal.pagesFolder,
-	// );
-	// const routes = await loadRoutes(config.internal.projectPath, normalizedPages);
+	const sites = await Promise.all(
+		config.internal.sites.map(async site => {
+			const normalizedPages = await loadNormalizedPages(
+				site.internal.pagesFolder,
+			);
 
-	// const paths = (
-	// 	await Promise.all(
-	// 		routes.map(async route => {
-	// 			const dynamicParams = route.parts?.filter(p => p.startsWith(':'));
-	// 			const exportParams =
-	// 				(route.exportParams && (await route.exportParams())) ?? [];
+			const routes = await loadRoutes(normalizedPages, site);
+			return { site, routes, paths: await calculatePaths(routes) };
+		}),
+	);
 
-	// 			if (dynamicParams?.length) {
-	// 				if (!exportParams) return Promise.resolve([]);
+	config.production.port = await getFreePort();
+	await startServer({ dev: false, path, overrideConfig: config });
 
-	// 				const paths = [];
-	// 				for (const param of exportParams) {
-	// 					if (param.length !== dynamicParams.length)
-	// 						return Promise.reject(
-	// 							new Error(
-	// 								`exportParam mismatch: ${route.path}: have ${param.length}, want ${dynamicParams.length}`,
-	// 							),
-	// 						);
+	for (const { site, paths } of sites) {
+		// We need to refactor this; starting with how the config is handled this should be figured out there
+		const directory =
+			sites.length === 1
+				? join(basePath, site.export.outDir)
+				: join(
+						config.site.export?.outDir ||
+							join(config.internal.rootFolder, './out'),
+						site.export.outDir || site.internal.name,
+				  );
 
-	// 					paths.push(
-	// 						dynamicParams.reduce(
-	// 							(prev, cur, i) => prev.replace(cur, param[i]),
-	// 							route.path,
-	// 						),
-	// 					);
-	// 				}
-
-	// 				return Promise.resolve(paths);
-	// 			}
-
-	// 			return Promise.resolve([route.path]);
-	// 		}),
-	// 	)
-	// ).flat();
-
-	// config.server.port = await getFreePort();
-	// await startServer({ dev: false, path, overrideConfig: config });
-
-	// generate({
-	// 	pages: ['test', 'pog'],
-	// 	directory: config.export.outDir,
-	// 	url: `http://localhost:${config.server.port}`,
-	// });
+		generate({
+			pages: paths,
+			directory,
+			url: `http://${site.domain === 'default' ? '' : site.domain}.localhost:${
+				config.production.port
+			}`,
+		});
+	}
 };
+
+const calculatePaths = async (
+	routes: SnowstormCustomRouteInternal[],
+): Promise<string[]> =>
+	(
+		await Promise.all(
+			routes.map(async route => {
+				const dynamicParams = route.parts?.filter(p => p.startsWith(':'));
+				const exportParams =
+					(route.exportParams && (await route.exportParams())) ?? [];
+
+				if (dynamicParams?.length) {
+					if (!exportParams) return Promise.resolve([]);
+
+					const paths = [];
+					for (const param of exportParams) {
+						if (param.length !== dynamicParams.length)
+							return Promise.reject(
+								new Error(
+									`exportParam mismatch: ${route.path}: have ${param.length}, want ${dynamicParams.length}`,
+								),
+							);
+
+						paths.push(
+							dynamicParams.reduce(
+								(prev, cur, i) => prev?.replace(cur, param[i]),
+								route.path,
+							),
+						);
+					}
+
+					return Promise.resolve(paths);
+				}
+
+				return Promise.resolve([route.path]);
+			}),
+		)
+	)
+		.flat()
+		.filter(isString);
+
+function isString(x: any): x is string {
+	return typeof x === 'string';
+}

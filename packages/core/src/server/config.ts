@@ -104,6 +104,7 @@ export interface SnowstormInternalSiteConfig {
 		name: string;
 		snowpackFolder: string;
 		internalFolder: string;
+		baseFolder: string;
 		staticFolder: string;
 		pagesFolder: string;
 	};
@@ -258,41 +259,45 @@ const processSites = async (
 		}
 	}
 
-	return sites
-		.map(site => {
-			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-			const name = (site.domain || 'default')
-				.replace(/[^a-z0-9]/gi, '_')
-				.toLowerCase();
+	return (
+		sites
+			.map(site => {
+				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+				const name = (site.domain || 'default')
+					.replace(/[^a-z0-9]/gi, '_')
+					.toLowerCase();
 
-			const basePath = config.internal.sitesFolder
-				? join(
-						config.internal.sitesFolder,
-						site.domain ? `./${site.domain}` : '../',
-				  )
-				: config.internal.rootFolder;
+				const baseFolder = config.internal.sitesFolder
+					? join(
+							config.internal.sitesFolder,
+							site.domain ? `./${site.domain}` : '../',
+					  )
+					: config.internal.rootFolder;
 
-			const resultSite = deepmerge(baseSite, site);
+				const resultSite = deepmerge(baseSite, site);
 
-			return {
-				...resultSite,
-				domain: site.domain ?? 'default',
-				internal: {
-					name,
-					snowpackFolder: join(
-						config.internal.snowstormFolder,
-						`./${name}`,
-						'./out',
-					),
-					internalFolder: join(
-						config.internal.snowstormFolder,
-						`./${name}`,
-						'./internal',
-					),
-					pagesFolder: join(basePath, resultSite.pagesFolder),
-					staticFolder: join(basePath, resultSite.staticFolder),
-				},
-			};
-		})
-		.sort((a, b) => a.domain.length - b.domain.length);
+				return {
+					...resultSite,
+					domain: site.domain ?? 'default',
+					internal: {
+						name,
+						baseFolder,
+						snowpackFolder: join(
+							config.internal.snowstormFolder,
+							`./${name}`,
+							'./out',
+						),
+						internalFolder: join(
+							config.internal.snowstormFolder,
+							`./${name}`,
+							'./internal',
+						),
+						pagesFolder: join(baseFolder, resultSite.pagesFolder),
+						staticFolder: join(baseFolder, resultSite.staticFolder),
+					},
+				};
+			})
+			// sort domains by length to prevent issues with routing logic
+			.sort((a, b) => a.domain.length - b.domain.length)
+	);
 };

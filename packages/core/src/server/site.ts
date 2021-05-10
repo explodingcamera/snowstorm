@@ -97,7 +97,6 @@ export const startSite = async ({
 		return generateRouter({
 			template: join(__dirname, '../assets/routes.js.template'),
 			site,
-			config,
 		});
 	};
 
@@ -157,7 +156,6 @@ export const startSite = async ({
 		ssr({
 			devServer,
 			dev,
-			config,
 			site,
 		}),
 	);

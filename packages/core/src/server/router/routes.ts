@@ -14,9 +14,12 @@ export interface SnowstormCustomRoute {
 }
 
 export type SnowstormCustomRoutes = Record<string, SnowstormCustomRoute>;
-type SnowstormCustomRoutesInternal = Record<
+export type SnowstormCustomRouteInternal = SnowstormCustomRoute &
+	Partial<SnowstormRoute> & { fileSystemRoute?: true };
+
+export type SnowstormCustomRoutesInternal = Record<
 	string,
-	SnowstormCustomRoute & Partial<SnowstormRoute> & { fileSystemRoute?: true }
+	SnowstormCustomRouteInternal
 >;
 
 export interface SnowstormRoutesConfig {
@@ -67,7 +70,7 @@ export const loadRoutes = async (
 	if (routesConfig.customRoutes)
 		routes = { ...routes, ...routesConfig.customRoutes };
 
-	return Object.entries(routes)
+	const x: SnowstormCustomRouteInternal[] = Object.entries(routes)
 		.filter(([, { disabled }]) => !disabled)
 		.map(([path, route]) => ({ ...route, path }))
 		.map(route => {
@@ -82,4 +85,6 @@ export const loadRoutes = async (
 			};
 		})
 		.sort(page => (page.parts?.slice(-1)[0].startsWith(':') ? 1 : -1));
+
+	return x;
 };
