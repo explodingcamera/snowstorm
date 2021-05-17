@@ -89,12 +89,6 @@ export interface SnowstormInternalSiteConfig {
 	 * The base config for building a snowstorm site
 	 */
 	build: SnowstormBuildConfig;
-
-	/**
-	 * The base config for exporting a snowstorm site
-	 */
-	export: SnowstormExportConfig;
-
 	routes?: SnowstormRoutesConfig;
 
 	/**
@@ -139,6 +133,8 @@ export interface SnowstormConfigInternal {
 	 */
 	site: SnowstormSiteConfig;
 
+	export: SnowstormExportConfig;
+
 	/**
 	 * Configuration relevant for development
 	 */
@@ -172,7 +168,6 @@ export type SnowstormConfig = PartialDeep<SnowstormBaseConfig>;
 
 const baseSite: Except<SnowstormInternalSiteConfig, 'domain' | 'internal'> = {
 	pagesFolder: './pages',
-	export: { target: 'independent', outDir: 'dist' },
 	build: {},
 	basePath: '/',
 	staticFolder: './static',
@@ -186,6 +181,7 @@ export const loadConfig = async (
 		sitesFolder: './sites',
 		sites: [],
 		site: baseSite,
+		export: { target: 'independent', outDir: 'dist' },
 		development: {
 			port: 2020,
 		},

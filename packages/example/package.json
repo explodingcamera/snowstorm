@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "snowstorm dev",
     "start": "snowstorm start",
+    "export": "snowstorm export",
     "build": "exit 0"
   },
   "dependencies": {

@@ -1,10 +1,12 @@
 import { loadConfig } from './config';
-import { generate } from 'staticgen-node';
 import { getFreePort } from './utils/free-port';
 import { loadNormalizedPages } from './router/pages';
 import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes';
 import { start as startServer } from './';
 import { join } from 'path';
+import { outputFile } from 'fs-extra';
+
+import scrape from 'website-scraper';
 
 export const exportProject = async ({ path }: { path: string }) => {
 	const config = await loadConfig(path);
@@ -23,26 +25,67 @@ export const exportProject = async ({ path }: { path: string }) => {
 	config.production.port = await getFreePort();
 	await startServer({ dev: false, path, overrideConfig: config });
 
+	const urls: string[] = [];
 	for (const { site, paths } of sites) {
-		// We need to refactor this; starting with how the config is handled this should be figured out there
-		const directory =
-			sites.length === 1
-				? join(config.internal.rootFolder, site.export.outDir)
-				: join(
-						config.site.export?.outDir ||
-							join(config.internal.rootFolder, './out'),
-						site.export.outDir || site.internal.name,
-				  );
-
-		generate({
-			pages: paths,
-			directory,
-			url: `http://${site.domain === 'default' ? '' : site.domain}.localhost:${
-				config.production.port
-			}`,
-		});
+		const url = `http://${
+			site.domain === 'default' ? '' : site.domain + '.'
+		}localhost:${config.production.port}`;
+		urls.push(...paths.map(path => url + path));
 	}
+
+	const directory = join(config.internal.rootFolder, config.export.outDir);
+
+	console.log('>> rendering pages...');
+	await scrape({
+		urls,
+		directory,
+		filenameGenerator: 'bySiteStructure',
+		plugins: [
+			new SnowstormScrapePlugin({ multisite: sites.length > 1 || undefined }),
+		],
+	});
+	console.log('>> done!');
+	process.exit(0);
 };
+
+class SnowstormScrapePlugin {
+	multisite?: true;
+	constructor({ multisite }: { multisite?: true }) {
+		this.multisite = multisite;
+	}
+
+	apply = (
+		registerAction: (arg1: string, arg2: (arg1: any) => any) => void,
+	) => {
+		let absoluteDirectoryPath: string;
+		const loadedResources = [];
+
+		registerAction('beforeStart', ({ options }) => {
+			absoluteDirectoryPath = options.directory;
+		});
+
+		registerAction('saveResource', async ({ resource }) => {
+			const parts = (resource.getFilename() as string).split('/');
+			const filename = join(
+				absoluteDirectoryPath,
+				(this.multisite
+					? [
+							parts[0].replace(/\.?localhost_[0-9]{4,6}/, '') || 'default',
+							...parts.slice(1),
+					  ]
+					: parts.slice(1)
+				).join('/'),
+			);
+
+			const text = resource.getText();
+			await outputFile(filename, text, { encoding: 'binary' });
+
+			console.log('>>> created ', filename);
+
+			loadedResources.push(resource);
+		});
+	};
+}
 
 const calculatePaths = async (
 	routes: SnowstormCustomRouteInternal[],
