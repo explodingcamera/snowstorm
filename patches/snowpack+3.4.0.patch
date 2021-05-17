@@ -1,8 +1,8 @@
 diff --git a/node_modules/snowpack/lib/index.js b/node_modules/snowpack/lib/index.js
-index baadf56..92614c5 100644
+index 9ca12c0..6a340b4 100644
 --- a/node_modules/snowpack/lib/index.js
 +++ b/node_modules/snowpack/lib/index.js
-@@ -122905,7 +122905,7 @@ class PackageSourceLocal {
+@@ -123176,7 +123176,7 @@ class PackageSourceLocal {
                  ],
              });
              const isSymlink = !entrypoint.includes(path_1.default.join('node_modules', _packageName));

@@ -5,7 +5,6 @@ import { loadNormalizedPages } from './router/pages';
 import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes';
 import { start as startServer } from './';
 import { join } from 'path';
-import { basePath } from '../client/router';
 
 export const exportProject = async ({ path }: { path: string }) => {
 	const config = await loadConfig(path);
@@ -28,7 +27,7 @@ export const exportProject = async ({ path }: { path: string }) => {
 		// We need to refactor this; starting with how the config is handled this should be figured out there
 		const directory =
 			sites.length === 1
-				? join(basePath, site.export.outDir)
+				? join(config.internal.rootFolder, site.export.outDir)
 				: join(
 						config.site.export?.outDir ||
 							join(config.internal.rootFolder, './out'),
@@ -85,6 +84,6 @@ const calculatePaths = async (
 		.flat()
 		.filter(isString);
 
-function isString(x: any): x is string {
+function isString(x: unknown): x is string {
 	return typeof x === 'string';
 }
