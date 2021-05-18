@@ -24,7 +24,6 @@
     "@snowpack/plugin-postcss": "^1.2.2",
     "@snowpack/plugin-react-refresh": "^2.5.0",
     "@snowpack/plugin-sass": "^1.4.0",
-    "@snowpack/plugin-webpack": "^2.3.1",
     "@snowstorm/head": "^0.0.1-alpha.1",
     "@snowstorm/serverprops": "^0.0.1-alpha.1",
     "chokidar": "^3.5.1",
