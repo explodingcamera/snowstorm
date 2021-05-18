@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/next-compat",
-  "version": "0.0.0-beta.1",
+  "version": "0.0.1-alpha.0",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "scripts": {},
