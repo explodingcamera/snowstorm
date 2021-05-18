@@ -35,6 +35,9 @@
     "@types/node": "^15.3.0",
     "globby": "^11.0.3"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "oclif": {
     "commands": "./lib/commands",
     "bin": "snowstorm",

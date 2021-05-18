@@ -21,5 +21,8 @@
     "react-dom": {
       "optional": false
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
