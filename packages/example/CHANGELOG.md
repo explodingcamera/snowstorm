@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.3](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/example@0.0.1-alpha.2...@snowstorm/example@0.0.1-alpha.3) (2021-05-18)
+
+**Note:** Version bump only for package @snowstorm/example
+
+
+
+
+
 ## [0.0.1-alpha.2](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/example@0.0.1-alpha.1...@snowstorm/example@0.0.1-alpha.2) (2021-05-18)
 
 **Note:** Version bump only for package @snowstorm/example

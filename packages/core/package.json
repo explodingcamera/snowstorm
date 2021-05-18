@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/core",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.3",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "exports": {
@@ -24,8 +24,8 @@
     "@snowpack/plugin-postcss": "^1.2.2",
     "@snowpack/plugin-react-refresh": "^2.5.0",
     "@snowpack/plugin-sass": "^1.4.0",
-    "@snowstorm/head": "^0.0.1-alpha.1",
-    "@snowstorm/serverprops": "^0.0.1-alpha.1",
+    "@snowstorm/head": "0.0.1-alpha.3",
+    "@snowstorm/serverprops": "0.0.1-alpha.3",
     "chokidar": "^3.5.1",
     "deepmerge": "^4.2.2",
     "fs-extra": "^10.0.0",
