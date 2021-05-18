@@ -1,4 +1,4 @@
-import { logger, clearCache } from 'snowpack';
+import { clearCache } from 'snowpack';
 import { performance } from 'perf_hooks';
 
 import Koa from 'koa';
@@ -8,11 +8,7 @@ import { loadConfig } from './config.js';
 import { SnowstormConfigInternal } from './config';
 import { startSite } from './site.js';
 
-logger.level = 'silent';
-logger.on('error', e => console.error(e));
-logger.on('warn', e => console.error(e));
-logger.on('info', e => console.error(e));
-logger.on('debug', e => console.error(e));
+import pkg from './../../package.json';
 
 export const start = async ({
 	dev,
@@ -25,13 +21,17 @@ export const start = async ({
 	clearSnowpackCache?: boolean;
 	overrideConfig?: SnowstormConfigInternal;
 }) => {
+	const config = overrideConfig ? overrideConfig : await loadConfig(path);
+	const { log } = config.internal;
+
+	log.info('starting snowstorm ', pkg.version);
+
 	if (clearSnowpackCache) {
 		await clearCache();
-		console.log('>> successfully cleared the cache');
+		log.info('successfully cleared the cache');
 	}
 
 	const serverStart = performance.now();
-	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 	const server = new Koa();
 
 	const startSites = await Promise.all(
@@ -61,15 +61,15 @@ export const start = async ({
 
 		startSites.forEach(({ site }) => {
 			if (site.domain === 'default')
-				return console.log(
-					`>> listening on http://localhost:${port}${site.basePath}`,
+				return site.internal.log.info(
+					`listening on http://localhost:${port}${site.basePath}`,
 				);
-			console.log(
-				`>> listening on http://${site.domain}.localhost:${port}${site.basePath}`,
+			site.internal.log.info(
+				`listening on http://${site.domain}.localhost:${port}${site.basePath}`,
 			);
 		});
 	});
 
-	console.log(`>> started in ${Math.round(performance.now() - serverStart)}ms`);
+	log.info(`started in ${Math.round(performance.now() - serverStart)}ms`);
 	await listening;
 };

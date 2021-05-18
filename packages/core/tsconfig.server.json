@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "./",
     "module": "CommonJS",
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "resolveJsonModule": true
   },
   "include": ["./src/server/*", "./src/server.ts", "./src/types.ts"]
 }

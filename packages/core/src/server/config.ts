@@ -5,6 +5,16 @@ import { checkFileExists } from './utils/file-exists';
 import { Except, PartialDeep } from 'type-fest';
 import glob from 'glob-promise';
 import { SnowstormRoutesConfig } from './router/routes';
+import { Logger } from 'tslog';
+
+import { logger } from 'snowpack';
+
+logger.level = 'silent';
+logger.on('error', e => console.error(e));
+logger.on('warn', e => console.error(e));
+logger.on('info', e => console.error(e));
+logger.on('debug', e => console.error(e));
+
 export interface SnowstormExportConfig {
 	/**
 	 * The directory where the website will be output to.
@@ -101,6 +111,7 @@ export interface SnowstormInternalSiteConfig {
 		baseFolder: string;
 		staticFolder: string;
 		pagesFolder: string;
+		log: Logger;
 	};
 }
 
@@ -160,6 +171,7 @@ export interface SnowstormConfigInternal {
 		snowstormClientFolder: string;
 		sites: SnowstormInternalSiteConfig[];
 		chwd: string;
+		log: Logger;
 	};
 }
 
@@ -212,6 +224,13 @@ export const loadConfig = async (
 
 	const snowstormFolder = join(rootFolder, './.snowstorm');
 
+	const log = new Logger({
+		displayDateTime: false,
+		displayFilePath: 'hidden',
+		displayFunctionName: false,
+		minLevel: 'info',
+	});
+
 	const conf: SnowstormConfigInternal = {
 		...res,
 		internal: {
@@ -222,6 +241,7 @@ export const loadConfig = async (
 			snowstormClientFolder: join(__dirname, '../client'),
 			sites: [],
 			chwd: path,
+			log,
 		},
 	};
 	conf.internal.sites = await processSites(conf);
@@ -276,6 +296,10 @@ const processSites = async (
 					...resultSite,
 					domain: site.domain ?? 'default',
 					internal: {
+						log: config.internal.log.getChildLogger({
+							displayLoggerName: sites.length > 1,
+							name,
+						}),
 						name,
 						baseFolder,
 						snowpackFolder: join(

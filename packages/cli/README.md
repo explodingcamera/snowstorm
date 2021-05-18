@@ -8,7 +8,7 @@ $ npm install -g @snowstorm/cli
 $ snowstorm COMMAND
 running command...
 $ snowstorm (-v|--version|version)
-@snowstorm/cli/0.0.0-beta.1 linux-x64 node-v16.1.0
+@snowstorm/cli/0.0.1-alpha.3 linux-x64 node-v16.1.0
 $ snowstorm --help [COMMAND]
 USAGE
   $ snowstorm COMMAND
