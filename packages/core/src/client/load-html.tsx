@@ -25,11 +25,7 @@ export const loadPage = async ({ path }: { path: string }): Promise<args> => {
 	const route = findRoute({ location: path });
 
 	let initialPage: SnowstormPage | undefined;
-	try {
-		if (route?.page) initialPage = await requestPage(route?.page);
-	} catch (error: unknown) {
-		console.log(error);
-	}
+	if (route?.page) initialPage = await requestPage(route?.page);
 
 	return { initialPage, route };
 };

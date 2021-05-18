@@ -9,12 +9,6 @@ import { Logger } from 'tslog';
 
 import { logger } from 'snowpack';
 
-logger.level = 'silent';
-logger.on('error', e => console.error(e));
-logger.on('warn', e => console.error(e));
-logger.on('info', e => console.error(e));
-logger.on('debug', e => console.error(e));
-
 export interface SnowstormExportConfig {
 	/**
 	 * The directory where the website will be output to.
@@ -231,6 +225,12 @@ export const loadConfig = async (
 		minLevel: 'info',
 	});
 
+	logger.level = 'silent';
+	logger.error = msg => log.error(msg);
+	logger.warn = msg => log.warn(msg);
+	logger.debug = msg => log.debug(msg);
+	logger.info = msg => log.debug(msg);
+
 	const conf: SnowstormConfigInternal = {
 		...res,
 		internal: {
@@ -278,7 +278,6 @@ const processSites = async (
 	return (
 		sites
 			.map(site => {
-				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				const name = (site.domain || 'default')
 					.replace(/[^a-z0-9]/gi, '_')
 					.toLowerCase();

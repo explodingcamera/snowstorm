@@ -168,10 +168,13 @@ export const startSite = async ({
 			},
 		);
 
-		const listener = async (path: string) =>
+		const listener = async (path: string) => {
+			site.internal.log.info('updating routes:', path);
+
 			genRoutes()
-				.then(() => console.log('successfully updated routes', path))
-				.catch(e => console.error(`error updating routes: `, e));
+				.then(() => site.internal.log.info('successfully updated routes'))
+				.catch(e => site.internal.log.error(`error updating routes`, e));
+		};
 
 		watcher.on('add', listener);
 		watcher.on('remove', listener);

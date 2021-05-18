@@ -8,7 +8,7 @@ import { loadConfig } from './config.js';
 import { SnowstormConfigInternal } from './config';
 import { startSite } from './site.js';
 
-import pkg from './../../package.json';
+import pkg from './../package.json';
 
 export const start = async ({
 	dev,
@@ -24,7 +24,7 @@ export const start = async ({
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 	const { log } = config.internal;
 
-	log.info('starting snowstorm ', pkg.version);
+	log.info(`starting snowstorm v${pkg.version as string}`);
 
 	if (clearSnowpackCache) {
 		await clearCache();

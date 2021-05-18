@@ -14,6 +14,7 @@ export const devConfig: SnowpackUserConfig = {
 	},
 	buildOptions: {
 		watch: true,
+		sourcemap: 'inline',
 	},
 	packageOptions: {},
 	optimize: {
@@ -33,6 +34,7 @@ export const prodConfig: SnowpackUserConfig = {
 	buildOptions: {
 		ssr: true,
 		watch: false,
+		sourcemap: 'inline',
 	},
 	optimize: {
 		bundle: true,

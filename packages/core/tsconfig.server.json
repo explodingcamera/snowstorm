@@ -4,7 +4,8 @@
     "outDir": "./",
     "module": "CommonJS",
     "lib": ["ESNext", "DOM"],
-    "resolveJsonModule": true
+    "resolveJsonModule": false,
+    "rootDir": "./src"
   },
   "include": ["./src/server/*", "./src/server.ts", "./src/types.ts"]
 }

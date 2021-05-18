@@ -10,6 +10,7 @@ import scrape from 'website-scraper';
 
 export const exportProject = async ({ path }: { path: string }) => {
 	const config = await loadConfig(path);
+	const { log } = config.internal;
 
 	const sites = await Promise.all(
 		config.internal.sites.map(async site => {
@@ -35,7 +36,8 @@ export const exportProject = async ({ path }: { path: string }) => {
 
 	const directory = join(config.internal.rootFolder, config.export.outDir);
 
-	console.log('>> rendering pages...');
+	log.info('rendering pages...');
+	const renderStart = performance.now();
 	await scrape({
 		urls,
 		directory,
@@ -44,7 +46,10 @@ export const exportProject = async ({ path }: { path: string }) => {
 			new SnowstormScrapePlugin({ multisite: sites.length > 1 || undefined }),
 		],
 	});
-	console.log('>> done!');
+	log.info(
+		`finished rendering in ${Math.round(performance.now() - renderStart)}ms`,
+	);
+
 	process.exit(0);
 };
 
@@ -79,8 +84,6 @@ class SnowstormScrapePlugin {
 
 			const text = resource.getText();
 			await outputFile(filename, text, { encoding: 'binary' });
-
-			console.log('>>> created ', filename);
 
 			loadedResources.push(resource);
 		});
