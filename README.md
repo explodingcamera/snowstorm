@@ -26,8 +26,10 @@ $ npm install -S @snowstorm/core @snowstorm/cli react react-dom
 $ mkdir pages
 $ echo "export const Index = () => <h1>Hello World</h1>" > pages/index.ts
 $ npx snowstorm dev
->> listening on http://localhost:2020/
 ```
+<pre><code><b>INFO</b> starting snowstorm v0.0.1
+<b>INFO</b> listening on <u>http://localhost:2020/</u>
+<b>INFO</b> started in 103ms</code></pre>
 
 ### Visit [snowstorm.js.org/docs](https://snowstorm.js.org/docs/getting-started) for the full documentation
 
