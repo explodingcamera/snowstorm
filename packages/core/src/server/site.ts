@@ -58,14 +58,14 @@ const createSnowstormConfig = async ({
 
 	if (site.build.sass) {
 		configOverride.plugins?.push([
-			'@snowpack/plugin-sass',
+			require.resolve('@snowpack/plugin-sass'),
 			typeof site.build.sass === 'object' ? site.build.sass : {},
 		]);
 	}
 
 	if (site.build.postcss) {
 		configOverride.plugins?.push([
-			'@snowpack/plugin-postcss',
+			require.resolve('@snowpack/plugin-postcss'),
 			typeof site.build.postcss === 'object' ? site.build.postcss : {},
 		]);
 	}
