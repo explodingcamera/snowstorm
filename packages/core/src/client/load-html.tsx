@@ -1,5 +1,7 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+
+import { pipeToNodeWritable } from 'react-dom/unstable-fizz';
+
 import {
 	Page,
 	findRoute,
@@ -38,7 +40,8 @@ export const renderPage = async ({
 	initialPage,
 }: args & { path: string }) => {
 	const loc = basePath === '/' ? path : basePath + path;
-	return renderToString(
+
+	const app = (
 		<Router
 			hook={staticLocationHook(loc)}
 			base={basePath === '/' ? undefined : basePath}
@@ -49,6 +52,23 @@ export const renderPage = async ({
 					component: initialPage,
 				}}
 			/>
-		</Router>,
+		</Router>
 	);
+
+	return new Promise((resolve, reject) => {
+		let didError = false;
+		const { startWriting, abort } = pipeToNodeWritable(app, res, {
+			onReadyToStream() {
+				// If something errored before we started streaming, we set the error code appropriately.
+				res.statusCode = didError ? 500 : 200;
+				res.setHeader('Content-type', 'text/html');
+				res.write('<!DOCTYPE html>');
+				startWriting();
+			},
+			onError(x) {
+				didError = true;
+				console.error(x);
+			},
+		});
+	});
 };

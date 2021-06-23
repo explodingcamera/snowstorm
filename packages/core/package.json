@@ -38,9 +38,9 @@
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
     "require-from-string": "^2.0.2",
-    "snowpack": "^3.5.6",
+    "snowpack": "^3.6.0",
     "tslog": "^3.2.0",
-    "typescript": "^4.3.2",
+    "typescript": "^4.3.4",
     "website-scraper": "^4.2.3",
     "wouter": "^2.7.4"
   },
@@ -51,16 +51,16 @@
     "@types/koa-html-minifier": "^1.0.1",
     "@types/koa-mount": "^4.0.0",
     "@types/koa-static": "^4.0.1",
-    "@types/node": "^15.12.2",
+    "@types/node": "^15.12.4",
     "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.7",
+    "@types/react-dom": "^17.0.8",
     "@types/require-from-string": "^1.2.0",
     "@types/sass": "^1.16.0",
     "@types/snowpack-env": "^2.3.3",
     "@types/website-scraper": "^1.2.5",
-    "react": "^18.0.0-alpha-1a3f1afbd",
-    "react-dom": "^18.0.0-alpha-1a3f1afbd",
-    "type-fest": "^1.2.0"
+    "react": "^18.0.0-alpha-dbe3363cc",
+    "react-dom": "^18.0.0-alpha-dbe3363cc",
+    "type-fest": "^1.2.1"
   },
   "peerDependencies": {
     "react": "^17.0.1",
