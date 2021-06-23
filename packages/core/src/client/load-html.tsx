@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { pipeToNodeWritable } from 'react-dom/unstable-fizz';
-
 import {
 	Page,
 	findRoute,
@@ -17,6 +15,7 @@ import staticLocationHook from 'wouter/static-location';
 // these are exported so we can use the transformed client code on our server
 export * as internalHooks from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
+export { pipeToNodeWritable } from 'react-dom/unstable-fizz.node';
 
 interface args {
 	initialPage: SnowstormPage | undefined;
@@ -41,7 +40,7 @@ export const renderPage = async ({
 }: args & { path: string }) => {
 	const loc = basePath === '/' ? path : basePath + path;
 
-	const app = (
+	return (
 		<Router
 			hook={staticLocationHook(loc)}
 			base={basePath === '/' ? undefined : basePath}
@@ -54,21 +53,4 @@ export const renderPage = async ({
 			/>
 		</Router>
 	);
-
-	return new Promise((resolve, reject) => {
-		let didError = false;
-		const { startWriting, abort } = pipeToNodeWritable(app, res, {
-			onReadyToStream() {
-				// If something errored before we started streaming, we set the error code appropriately.
-				res.statusCode = didError ? 500 : 200;
-				res.setHeader('Content-type', 'text/html');
-				res.write('<!DOCTYPE html>');
-				startWriting();
-			},
-			onError(x) {
-				didError = true;
-				console.error(x);
-			},
-		});
-	});
 };

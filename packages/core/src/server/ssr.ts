@@ -7,6 +7,7 @@ import serve from 'koa-static';
 
 const startDate = Date.now();
 const version = startDate.toString();
+const ABORT_DELAY = 2000;
 
 let cachedHtml: string;
 export const ssr =
@@ -28,8 +29,8 @@ export const ssr =
 			return;
 		}
 
+		ctx.status = 200;
 		if (!dev) {
-			ctx.status = 200;
 			ctx.set('ETag', version);
 
 			if (ctx.fresh) {
@@ -39,7 +40,14 @@ export const ssr =
 		}
 
 		try {
-			const { loadPage, renderPage, processSPs, collectProps, getHead } = (
+			const {
+				loadPage,
+				renderPage,
+				processSPs,
+				collectProps,
+				getHead,
+				pipeToNodeWritable,
+			} = (
 				await devServer
 					.getServerRuntime()
 					.importModule('/_snowstorm/internal/load-html.js')
@@ -48,8 +56,7 @@ export const ssr =
 			const page = await loadPage({ path: ctx.path });
 
 			await processSPs();
-
-			const html: string = await renderPage({
+			const reactPage: string = await renderPage({
 				...page,
 				path: ctx.path,
 			});
@@ -71,25 +78,43 @@ export const ssr =
 			const head: string = getHead();
 			const basePath = site.basePath === '/' ? '' : site.basePath;
 
-			// Inserts the rendered HTML into our main div
 			const doc = htmlFile
-				.replace(
-					/<div id="app"><\/div>/,
-					`<div id="app"${(dev && 'data-hmr=true') || ''}>${html}</div>`,
-				)
 				.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
 				.replace(/\/_snowstorm/g, `${basePath}/_snowstorm`)
 				.replace(
-					'<!-- SNOWPACK DATA -->',
+					'{{SNOWPACK DATA}}',
 					props.length
 						? `<script id="__serverprops" type="application/json">${props}</script>`
 						: '',
 				)
-				.replace('<!-- SNOWPACK HEAD -->', head);
+				.replace('{{SNOWPACK HEAD}}', head);
 
-			// Sends the response back to the client
-			ctx.body = doc;
-			return;
+			ctx.res.socket?.on('error', error => {
+				console.error('Fatal', error);
+			});
+
+			ctx.respond = false;
+
+			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
+				onReadyToStream() {
+					// If something errored before we started streaming, we set the error code appropriately.
+					const [top, bottom] = doc.split('{{SNOWPACK APP}}');
+
+					ctx.res.write(
+						top + `\n<div id="app"${(dev && 'data-hmr=true') || ''}>`,
+					);
+
+					startWriting();
+					ctx.res.write('</div>\n' + bottom);
+				},
+				onError(_: unknown) {
+					ctx.status = 500;
+					throw new Error();
+				},
+			});
+			// Abandon and switch to client rendering if enough time passes.
+			// Try lowering this to see the client recover.
+			setTimeout(abort as () => void, ABORT_DELAY);
 		} catch (error: unknown) {
 			if (!(error instanceof Error)) return;
 			error.stack = error.stack?.replaceAll(
@@ -97,7 +122,6 @@ export const ssr =
 				site.internal.pagesFolder,
 			);
 			site.internal.log.error(error.name, error.message, error.stack);
+			ctx.status = 500;
 		}
-
-		ctx.status = 500;
 	};

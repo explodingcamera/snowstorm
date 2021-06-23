@@ -5,7 +5,9 @@
     "module": "CommonJS",
     "lib": ["ESNext", "DOM"],
     "resolveJsonModule": false,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "allowJs": true,
+    "checkJs": false
   },
   "include": ["./src/server/*", "./src/server.ts", "./src/types.ts"]
 }

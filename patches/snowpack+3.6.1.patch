@@ -1,5 +1,5 @@
 diff --git a/node_modules/snowpack/lib/index.js b/node_modules/snowpack/lib/index.js
-index 196c47d..086bb83 100644
+index 3fe5292..aabad31 100644
 --- a/node_modules/snowpack/lib/index.js
 +++ b/node_modules/snowpack/lib/index.js
 @@ -123241,7 +123241,7 @@ class PackageSourceLocal {

@@ -58,8 +58,8 @@
     "@types/sass": "^1.16.0",
     "@types/snowpack-env": "^2.3.3",
     "@types/website-scraper": "^1.2.5",
-    "react": "^18.0.0-alpha-dbe3363cc",
-    "react-dom": "^18.0.0-alpha-dbe3363cc",
+    "react": "^18.0.0-alpha-d7dce572c",
+    "react-dom": "^18.0.0-alpha-d7dce572c",
     "type-fest": "^1.2.1"
   },
   "peerDependencies": {
