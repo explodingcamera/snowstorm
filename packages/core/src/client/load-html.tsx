@@ -15,7 +15,8 @@ import staticLocationHook from 'wouter/static-location';
 // these are exported so we can use the transformed client code on our server
 export * as internalHooks from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
-export { pipeToNodeWritable } from 'react-dom/unstable-fizz.node';
+
+export { pipeToNodeWritable } from 'react-dom/server.node';
 
 interface args {
 	initialPage: SnowstormPage | undefined;

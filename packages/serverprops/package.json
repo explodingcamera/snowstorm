@@ -11,8 +11,8 @@
     "watch": "tsc -p tsconfig.build.json --watch"
   },
   "devDependencies": {
-    "@types/snowpack-env": "^2.3.3",
-    "type-fest": "^1.2.1"
+    "@types/snowpack-env": "^2.3.4",
+    "type-fest": "^1.2.2"
   },
   "publishConfig": {
     "access": "public"

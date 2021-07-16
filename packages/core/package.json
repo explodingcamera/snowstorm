@@ -21,7 +21,7 @@
     "watch:server": "tsc -p tsconfig.server.json --watch"
   },
   "dependencies": {
-    "@snowpack/plugin-postcss": "^1.4.1",
+    "@snowpack/plugin-postcss": "^1.4.3",
     "@snowpack/plugin-react-refresh": "^2.5.0",
     "@snowpack/plugin-sass": "^1.4.0",
     "@snowstorm/head": "0.0.1-alpha.3",
@@ -38,33 +38,33 @@
     "koa-static": "^5.0.0",
     "node-fetch": "^2.6.1",
     "require-from-string": "^2.0.2",
-    "snowpack": "^3.6.0",
+    "snowpack": "^3.8.2",
     "tslog": "^3.2.0",
-    "typescript": "^4.3.4",
+    "typescript": "^4.3.5",
     "website-scraper": "^4.2.3",
     "wouter": "^2.7.4"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.11",
-    "@types/koa": "^2.13.3",
-    "@types/koa-compress": "^4.0.1",
+    "@types/fs-extra": "^9.0.12",
+    "@types/koa": "^2.13.4",
+    "@types/koa-compress": "^4.0.3",
     "@types/koa-html-minifier": "^1.0.1",
     "@types/koa-mount": "^4.0.0",
-    "@types/koa-static": "^4.0.1",
-    "@types/node": "^15.12.4",
-    "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.8",
-    "@types/require-from-string": "^1.2.0",
-    "@types/sass": "^1.16.0",
-    "@types/snowpack-env": "^2.3.3",
-    "@types/website-scraper": "^1.2.5",
-    "react": "^18.0.0-alpha-d7dce572c",
-    "react-dom": "^18.0.0-alpha-d7dce572c",
-    "type-fest": "^1.2.1"
+    "@types/koa-static": "^4.0.2",
+    "@types/node": "^16.3.2",
+    "@types/react": "17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/require-from-string": "^1.2.1",
+    "@types/sass": "^1.16.1",
+    "@types/snowpack-env": "^2.3.4",
+    "@types/website-scraper": "^1.2.6",
+    "react": "18.0.0-alpha-d5de45820-20210714",
+    "react-dom": "18.0.0-alpha-d5de45820-20210714",
+    "type-fest": "^1.2.2"
   },
   "peerDependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "18.0.0-alpha-d5de45820-20210714",
+    "react-dom": "18.0.0-alpha-d5de45820-20210714"
   },
   "peerDependenciesMeta": {
     "react": {

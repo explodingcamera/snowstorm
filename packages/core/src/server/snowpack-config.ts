@@ -2,6 +2,7 @@
 // See all supported options: https://www.snowpack.dev/reference/configuration
 
 import { SnowpackUserConfig } from 'snowpack';
+
 export const devConfig: SnowpackUserConfig = {
 	workspaceRoot: undefined,
 	plugins: [require.resolve('@snowpack/plugin-react-refresh')],
@@ -15,7 +16,9 @@ export const devConfig: SnowpackUserConfig = {
 		watch: true,
 		sourcemap: 'inline',
 	},
-	packageOptions: {},
+	packageOptions: {
+		polyfillNode: true,
+	},
 	optimize: {
 		bundle: false,
 		minify: false,
