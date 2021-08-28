@@ -1,9 +1,10 @@
 import { Middleware } from 'koa';
-import { SnowpackDevServer } from 'snowpack';
+// import { SnowpackDevServer } from 'snowpack';
 import { readFile } from 'fs/promises';
 import { SnowstormInternalSiteConfig } from './config';
 import { join } from 'path';
 import serve from 'koa-static';
+import { ViteDevServer } from 'vite';
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -16,7 +17,7 @@ export const ssr =
 		dev,
 		site,
 	}: {
-		devServer: SnowpackDevServer;
+		devServer: ViteDevServer;
 		dev: boolean;
 		site: SnowstormInternalSiteConfig;
 	}): Middleware =>
@@ -47,11 +48,8 @@ export const ssr =
 				collectProps,
 				getHead,
 				pipeToNodeWritable,
-			} = (
-				await devServer
-					.getServerRuntime()
-					.importModule('/_snowstorm/internal/load-html.js')
-			).exports;
+			} = (await devServer.ssrLoadModule('/_snowstorm/internal/load-html.js'))
+				.exports;
 
 			const page = await loadPage({ path: ctx.path });
 
@@ -63,16 +61,16 @@ export const ssr =
 
 			// Load contents of index.html
 			let htmlFile: string;
-			if (dev) {
-				htmlFile = (await devServer.loadUrl('/'))?.contents.toString() ?? '';
-			} else if (!dev && cachedHtml) {
-				htmlFile = cachedHtml;
-			} else {
-				htmlFile = await readFile(
-					join(site.internal.snowpackFolder, './index.html'),
-					'utf8',
-				);
-			}
+			// if (dev) {
+			// 	htmlFile = (await devServer.loadUrl('/'))?.contents.toString() ?? '';
+			// } else if (!dev && cachedHtml) {
+			// 	htmlFile = cachedHtml;
+			// } else {
+			htmlFile = await readFile(
+				join(site.internal.snowpackFolder, './index.html'),
+				'utf8',
+			);
+			// }
 
 			const props: string = await collectProps();
 			const head: string = getHead();
