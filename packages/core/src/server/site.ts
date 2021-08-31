@@ -33,13 +33,28 @@ const createViteServer = async ({
 	site: SnowstormInternalSiteConfig;
 }) => {
 	const hmrPort = (dev && (await getFreePort())) || 0;
-	// const { snowstormAssetsFolder, snowstormClientFolder } = config.internal;
+	const { snowstormAssetsFolder, snowstormClientFolder } = config.internal;
 
 	const server = await createServer({
 		// any valid user config options, plus `mode` and `configFile`
 		configFile: false,
 		server: { middlewareMode: 'html', hmr: { port: hmrPort } },
 		root: config.internal.rootFolder,
+		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
+		ssr: { noExternal: ['wouter'] },
+		build: {
+			rollupOptions: {
+				input: snowstormClientFolder + '/index.js',
+			},
+		},
+		publicDir: snowstormAssetsFolder,
+		resolve: {
+			alias: {
+				_snowstorm: snowstormClientFolder,
+				'_snowstorm-internal': site.internal.internalFolder,
+				'_snowstorm-pages': site.internal.pagesFolder,
+			},
+		},
 	});
 
 	// const configOverride: SnowpackUserConfig = {
@@ -150,6 +165,7 @@ export const startSite = async ({
 			devServer: viteServer,
 			dev,
 			site,
+			config,
 		}),
 	);
 

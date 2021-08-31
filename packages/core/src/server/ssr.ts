@@ -1,7 +1,7 @@
 import { Middleware } from 'koa';
 // import { SnowpackDevServer } from 'snowpack';
 import { readFile } from 'fs/promises';
-import { SnowstormInternalSiteConfig } from './config';
+import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
 import { join } from 'path';
 import serve from 'koa-static';
 import { ViteDevServer } from 'vite';
@@ -10,16 +10,18 @@ const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
 
-let cachedHtml: string;
+// let cachedHtml: string;
 export const ssr =
 	({
 		devServer,
 		dev,
 		site,
+		config,
 	}: {
 		devServer: ViteDevServer;
 		dev: boolean;
 		site: SnowstormInternalSiteConfig;
+		config: SnowstormConfigInternal;
 	}): Middleware =>
 	async (ctx, next) => {
 		if (
@@ -41,38 +43,30 @@ export const ssr =
 		}
 
 		try {
-			const {
-				loadPage,
-				renderPage,
-				processSPs,
-				collectProps,
-				getHead,
-				pipeToNodeWritable,
-			} = (await devServer.ssrLoadModule('/_snowstorm/internal/load-html.js'))
-				.exports;
+			const ssrModule = await devServer.ssrLoadModule(
+				'_snowstorm/load-html.js',
+			);
+
+			const { loadPage, renderPage, serverprops, getHead, pipeToNodeWritable } =
+				ssrModule;
 
 			const page = await loadPage({ path: ctx.path });
 
-			await processSPs();
+			await serverprops.processSPs();
 			const reactPage: string = await renderPage({
 				...page,
 				path: ctx.path,
 			});
 
 			// Load contents of index.html
-			let htmlFile: string;
-			// if (dev) {
-			// 	htmlFile = (await devServer.loadUrl('/'))?.contents.toString() ?? '';
-			// } else if (!dev && cachedHtml) {
-			// 	htmlFile = cachedHtml;
-			// } else {
-			htmlFile = await readFile(
-				join(site.internal.snowpackFolder, './index.html'),
+			let htmlFile = await readFile(
+				join(config.internal.snowstormAssetsFolder, './index.html'),
 				'utf8',
 			);
-			// }
 
-			const props: string = await collectProps();
+			htmlFile = await devServer.transformIndexHtml(ctx.path, htmlFile);
+
+			const props: string = await serverprops.collectProps();
 			const head: string = getHead();
 			const basePath = site.basePath === '/' ? '' : site.basePath;
 
@@ -80,12 +74,12 @@ export const ssr =
 				.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
 				.replace(/\/_snowstorm/g, `${basePath}/_snowstorm`)
 				.replace(
-					'{{SNOWPACK DATA}}',
+					'{{SNOWSTORM DATA}}',
 					props.length
 						? `<script id="__serverprops" type="application/json">${props}</script>`
 						: '',
 				)
-				.replace('{{SNOWPACK HEAD}}', head);
+				.replace('{{SNOWSTORM HEAD}}', head);
 
 			ctx.res.socket?.on('error', error => {
 				console.error('Fatal', error);
@@ -96,7 +90,7 @@ export const ssr =
 			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
 				onReadyToStream() {
 					// If something errored before we started streaming, we set the error code appropriately.
-					const [top, bottom] = doc.split('{{SNOWPACK APP}}');
+					const [top, bottom] = doc.split('{{SNOWSTORM APP}}');
 
 					ctx.res.write(
 						top + `\n<div id="app"${(dev && 'data-hmr=true') || ''}>`,
@@ -105,9 +99,10 @@ export const ssr =
 					startWriting();
 					ctx.res.write('</div>\n' + bottom);
 				},
-				onError(_: unknown) {
+				onError(err: unknown) {
 					ctx.status = 500;
-					throw new Error();
+					console.error(err);
+					// throw err;
 				},
 			});
 			// Abandon and switch to client rendering if enough time passes.

@@ -6,7 +6,7 @@
   "exports": {
     "./server": "./server.js",
     "./server/export": "./server/export.js",
-    "./": "./index.js"
+    ".": "./index.js"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
