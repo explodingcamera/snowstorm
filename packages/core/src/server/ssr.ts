@@ -10,7 +10,6 @@ const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
 
-// let cachedHtml: string;
 export const ssr =
 	({
 		devServer,
@@ -42,6 +41,8 @@ export const ssr =
 			}
 		}
 
+		let top = '';
+		let bottom = '';
 		try {
 			const ssrModule = await devServer.ssrLoadModule(
 				'_snowstorm/load-html.js',
@@ -86,11 +87,10 @@ export const ssr =
 			});
 
 			ctx.respond = false;
-
+			[top, bottom] = doc.split('{{SNOWSTORM APP}}');
 			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
 				onReadyToStream() {
 					// If something errored before we started streaming, we set the error code appropriately.
-					const [top, bottom] = doc.split('{{SNOWSTORM APP}}');
 
 					ctx.res.write(
 						top + `\n<div id="app"${(dev && 'data-hmr=true') || ''}>`,
@@ -99,17 +99,19 @@ export const ssr =
 					startWriting();
 					ctx.res.write('</div>\n' + bottom);
 				},
-				onError(err: unknown) {
+				onError(error: unknown) {
+					if (!(error instanceof Error)) return;
+					devServer.ssrFixStacktrace(error);
 					ctx.status = 500;
-					console.error(err);
-					// throw err;
+					console.log('err');
 				},
 			});
 			// Abandon and switch to client rendering if enough time passes.
-			// Try lowering this to see the client recover.
 			setTimeout(abort as () => void, ABORT_DELAY);
 		} catch (error: unknown) {
 			if (!(error instanceof Error)) return;
+			devServer.ssrFixStacktrace(error);
+
 			error.stack = error.stack?.replaceAll(
 				'/_snowstorm/pages',
 				site.internal.pagesFolder,

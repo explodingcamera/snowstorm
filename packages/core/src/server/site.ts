@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import c2k from 'koa-connect';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 import compress from 'koa-compress';
@@ -10,6 +11,7 @@ import { createServer } from 'vite';
 // import { prodConfig, devConfig } from './snowpack-config';
 
 import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
+import reactRefresh from '@vitejs/plugin-react-refresh';
 
 import { join } from 'path';
 import glob from 'glob-promise';
@@ -34,20 +36,20 @@ const createViteServer = async ({
 }) => {
 	const hmrPort = (dev && (await getFreePort())) || 0;
 	const { snowstormAssetsFolder, snowstormClientFolder } = config.internal;
-
 	const server = await createServer({
 		// any valid user config options, plus `mode` and `configFile`
 		configFile: false,
-		server: { middlewareMode: 'html', hmr: { port: hmrPort } },
-		root: config.internal.rootFolder,
+		server: { middlewareMode: 'ssr', hmr: { port: hmrPort } },
+		root: snowstormAssetsFolder,
 		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
 		ssr: { noExternal: ['wouter'] },
-		build: {
-			rollupOptions: {
-				input: snowstormClientFolder + '/index.js',
-			},
-		},
-		publicDir: snowstormAssetsFolder,
+		// build: {
+		// 	rollupOptions: {
+		// 		input: snowstormAssetsFolder + '/index.html',
+		// 	},
+		// },
+		plugins: [reactRefresh()],
+		// publicDir: snowstormAssetsFolder,
 		resolve: {
 			alias: {
 				_snowstorm: snowstormClientFolder,
@@ -141,7 +143,7 @@ export const startSite = async ({
 	app.use(
 		serve(join(site.internal.staticFolder, './public'), { index: false }),
 	);
-	app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
+	// app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
 	app.use(
 		mount(
 			serve(site.internal.snowpackFolder, {
@@ -150,6 +152,8 @@ export const startSite = async ({
 			}),
 		),
 	);
+
+	app.use(async (ctx, next) => c2k(viteServer.middlewares)(ctx, next));
 
 	if (!dev) {
 		app.use(compress());

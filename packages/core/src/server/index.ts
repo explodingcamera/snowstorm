@@ -9,6 +9,8 @@ import { startSite } from './site.js';
 
 import pkg from './../package.json';
 
+process.setMaxListeners(10000);
+
 export const start = async ({
 	dev,
 	path,
