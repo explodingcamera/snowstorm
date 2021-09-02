@@ -16,7 +16,7 @@ export const generateRouter = async ({
 }) => {
 	let tmp = (await readFile(template)).toString();
 	const basePath = site.basePath.replace(/"/g, '');
-	const pagesLocation = '../pages';
+	const pagesLocation = '_snowstorm-pages';
 
 	let normalizedPages = await loadNormalizedPages(site.internal.pagesFolder);
 
@@ -25,15 +25,15 @@ export const generateRouter = async ({
 
 	normalizedPages = normalizedPages.filter(r => !r.startsWith('_'));
 	const processedPages = normalizedPages.map(
-		route => `  "${route}": () => import("${pagesLocation}/${route}.js")`,
+		route => `  "${route}": () => import("${pagesLocation}/${route}")`,
 	);
 
 	if (customAppPage) {
-		tmp = `import App from "${pagesLocation}/_app.js";\n${tmp}`;
+		tmp = `import App from "${pagesLocation}/_app";\n${tmp}`;
 	}
 
 	tmp = `import Error from "${
-		customErrorPage ? `${pagesLocation}/_error.js` : `./_error.js`
+		customErrorPage ? `${pagesLocation}/_error` : `./_error.js`
 	}";\n${tmp}`;
 
 	processedPages.push(

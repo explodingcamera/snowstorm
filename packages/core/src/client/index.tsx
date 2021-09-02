@@ -11,6 +11,7 @@ import {
 	requestPage,
 	SnowstormPage,
 } from './router';
+import makeMatcher from 'wouter/matcher';
 
 const element = document.getElementById('app');
 
@@ -35,8 +36,9 @@ if (!loc.startsWith('/')) loc = '/' + loc;
 		},
 	};
 
+	const matcher = makeMatcher();
 	const page = (
-		<Router base={basePath === '/' ? undefined : basePath}>
+		<Router matcher={matcher} base={basePath === '/' ? undefined : basePath}>
 			<Page {...pageProps} />
 		</Router>
 	);

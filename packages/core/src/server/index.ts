@@ -1,4 +1,3 @@
-import { clearCache } from 'snowpack';
 import { performance } from 'perf_hooks';
 
 import Koa from 'koa';
@@ -10,15 +9,17 @@ import { startSite } from './site.js';
 
 import pkg from './../package.json';
 
+process.setMaxListeners(10000);
+
 export const start = async ({
 	dev,
 	path,
-	clearSnowpackCache,
+	clearCache,
 	overrideConfig,
 }: {
 	dev: boolean;
 	path: string;
-	clearSnowpackCache?: boolean;
+	clearCache?: boolean;
 	overrideConfig?: SnowstormConfigInternal;
 }) => {
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
@@ -26,9 +27,8 @@ export const start = async ({
 
 	log.info(`starting snowstorm v${pkg.version as string}`);
 
-	if (clearSnowpackCache) {
-		await clearCache();
-		log.info('successfully cleared the cache');
+	if (clearCache) {
+		log.error('TODO: not supportet');
 	}
 
 	const serverStart = performance.now();

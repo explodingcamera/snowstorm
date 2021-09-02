@@ -4,6 +4,7 @@
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "main": "./lib/index.js",
+  "type": "module",
   "scripts": {
     "build": "run-s clean compile",
     "clean": "rimraf -rf ./lib",
@@ -12,7 +13,7 @@
   },
   "devDependencies": {
     "@types/snowpack-env": "^2.3.4",
-    "type-fest": "^1.2.2"
+    "type-fest": "^2.1.0"
   },
   "publishConfig": {
     "access": "public"

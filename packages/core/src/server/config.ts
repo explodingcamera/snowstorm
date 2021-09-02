@@ -7,7 +7,7 @@ import glob from 'glob-promise';
 import { SnowstormRoutesConfig } from './router/routes';
 import { Logger } from 'tslog';
 
-import { logger } from 'snowpack';
+// import { logger } from 'snowpack';
 
 export interface SnowstormExportConfig {
 	/**
@@ -225,11 +225,11 @@ export const loadConfig = async (
 		minLevel: 'info',
 	});
 
-	logger.level = 'silent';
-	logger.error = msg => log.error(msg);
-	logger.warn = msg => log.warn(msg);
-	logger.debug = msg => log.debug(msg);
-	logger.info = msg => log.debug(msg);
+	// logger.level = 'silent';
+	// logger.error = msg => log.error(msg);
+	// logger.warn = msg => log.warn(msg);
+	// logger.debug = msg => log.debug(msg);
+	// logger.info = msg => log.debug(msg);
 
 	const conf: SnowstormConfigInternal = {
 		...res,

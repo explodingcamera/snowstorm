@@ -22,7 +22,7 @@ const features = [
 	{
 		title: 'Fast',
 		content:
-			'like - really fast. Develop faster, with a dev server that starts up in less then 200ms, even in large projects. Thanks to Snowpack, no file is ever build twice.',
+			'like - really fast. Develop faster, with a dev server that starts up in less then 200ms, even in large projects. Thanks to Vite, no file is ever build twice.',
 	},
 	{
 		title: 'Zero-Config',

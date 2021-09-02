@@ -11,12 +11,13 @@ import {
 
 import { Router } from 'wouter';
 import staticLocationHook from 'wouter/static-location';
+import makeMatcher from 'wouter/matcher';
 
 // these are exported so we can use the transformed client code on our server
-export * as internalHooks from '@snowstorm/serverprops/lib/internal';
+export * as serverprops from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
 
-export { pipeToNodeWritable } from 'react-dom/server.node';
+export { pipeToNodeWritable } from 'react-dom/server';
 
 interface args {
 	initialPage: SnowstormPage | undefined;
@@ -40,9 +41,11 @@ export const renderPage = async ({
 	initialPage,
 }: args & { path: string }) => {
 	const loc = basePath === '/' ? path : basePath + path;
+	const matcher = makeMatcher();
 
 	return (
 		<Router
+			matcher={matcher}
 			hook={staticLocationHook(loc)}
 			base={basePath === '/' ? undefined : basePath}
 		>

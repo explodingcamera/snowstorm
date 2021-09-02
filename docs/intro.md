@@ -4,7 +4,7 @@ title: Introduction
 sidebar_label: Introduction
 ---
 
-## Welcome to Snowpack!
+## Welcome to Snowstorm!
 
 Currently, we're working hard on implementing new features and improving the developer experience, so some parts of this Documentation might be outdated or lacking.
 

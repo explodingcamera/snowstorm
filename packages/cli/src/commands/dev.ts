@@ -8,7 +8,7 @@ export default class Dev extends Command {
 
 	static flags = {
 		help: flags.help({ char: 'h' }),
-		clearSnowpackCache: flags.boolean({
+		clearCache: flags.boolean({
 			default: false,
 			char: 'C',
 			hidden: true,
@@ -21,7 +21,7 @@ export default class Dev extends Command {
 		void startServer({
 			path: process.cwd(),
 			dev: true,
-			clearSnowpackCache: flags.clearSnowpackCache,
+			clearCache: flags.clearCache,
 		});
 	}
 }
