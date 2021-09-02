@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.0](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/core@0.0.1-alpha.3...@snowstorm/core@0.1.0-alpha.0) (2021-09-02)
+
+
+### Features
+
+* basic react 18 support ([8f4b40f](https://github.com/explodingcamera/streamer.page/commit/8f4b40fdd63ebe2b525db30fe450f3c6b849102a))
+* bye bye snowpack - switching to vite ([#3](https://github.com/explodingcamera/streamer.page/issues/3)) ([4afd144](https://github.com/explodingcamera/streamer.page/commit/4afd144dd88e748b8aaf1bedb86f833a2e3a64c0))
+* fully support react 18 alpha ([49420e4](https://github.com/explodingcamera/streamer.page/commit/49420e4a25d179f9bf60796df3fd05c55b4294db))
+* propper logging ([c7e44b7](https://github.com/explodingcamera/streamer.page/commit/c7e44b74c5950f7184a89b173888fe91cf3d5cb5))
+
+
+
+
+
 ## [0.0.1-alpha.3](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/core@0.0.1-alpha.1...@snowstorm/core@0.0.1-alpha.3) (2021-05-18)
 
 **Note:** Version bump only for package @snowstorm/core

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.0](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/head@0.0.1-alpha.3...@snowstorm/head@0.1.0-alpha.0) (2021-09-02)
+
+
+### Features
+
+* bye bye snowpack - switching to vite ([#3](https://github.com/explodingcamera/streamer.page/issues/3)) ([4afd144](https://github.com/explodingcamera/streamer.page/commit/4afd144dd88e748b8aaf1bedb86f833a2e3a64c0))
+
+
+
+
+
 ## [0.0.1-alpha.3](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/head@0.0.1-alpha.1...@snowstorm/head@0.0.1-alpha.3) (2021-05-18)
 
 **Note:** Version bump only for package @snowstorm/head
