@@ -38,7 +38,7 @@
     "koa-html-minifier": "^2.1.0",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.0.0",
     "require-from-string": "^2.0.2",
     "tslog": "^3.2.1",
     "typescript": "^4.4.2",
