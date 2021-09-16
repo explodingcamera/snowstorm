@@ -14,6 +14,10 @@
     "react": "18.0.0-alpha-a8cabb564-20210915",
     "react-dom": "18.0.0-alpha-a8cabb564-20210915"
   },
+  "devDependencies": {
+    "react": "18.0.0-alpha-a8cabb564-20210915",
+    "react-dom": "18.0.0-alpha-a8cabb564-20210915"
+  },
   "peerDependenciesMeta": {
     "react": {
       "optional": false

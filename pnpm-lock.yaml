@@ -179,7 +179,12 @@ importers:
       react-dom: 18.0.0-alpha-a8cabb564-20210915_153749ad2f622160b395cc1406982c77
 
   packages/head:
-    specifiers: {}
+    specifiers:
+      react: 18.0.0-alpha-a8cabb564-20210915
+      react-dom: 18.0.0-alpha-a8cabb564-20210915
+    devDependencies:
+      react: 18.0.0-alpha-a8cabb564-20210915
+      react-dom: 18.0.0-alpha-a8cabb564-20210915_153749ad2f622160b395cc1406982c77
 
   packages/next-compat:
     specifiers:
@@ -190,9 +195,13 @@ importers:
   packages/serverprops:
     specifiers:
       '@types/snowpack-env': ^2.3.4
+      react: 18.0.0-alpha-a8cabb564-20210915
+      react-dom: 18.0.0-alpha-a8cabb564-20210915
       type-fest: ^2.3.2
     devDependencies:
       '@types/snowpack-env': 2.3.4
+      react: 18.0.0-alpha-a8cabb564-20210915
+      react-dom: 18.0.0-alpha-a8cabb564-20210915_153749ad2f622160b395cc1406982c77
       type-fest: 2.3.2
 
 packages:
