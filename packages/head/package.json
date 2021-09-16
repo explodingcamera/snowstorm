@@ -11,8 +11,8 @@
     "watch": "tsc -p tsconfig.build.json --watch"
   },
   "peerDependencies": {
-    "react": "18.0.0-alpha-8723e772b-20210826",
-    "react-dom": "18.0.0-alpha-8723e772b-20210826"
+    "react": "18.0.0-alpha-a8cabb564-20210915",
+    "react-dom": "18.0.0-alpha-a8cabb564-20210915"
   },
   "peerDependenciesMeta": {
     "react": {

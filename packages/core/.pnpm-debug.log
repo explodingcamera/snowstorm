@@ -1,0 +1,20 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "errno": 1,
+    "code": "ELIFECYCLE",
+    "pkgid": "@snowstorm/core@0.1.0-alpha.0",
+    "stage": "compile",
+    "script": "run-s compile:server compile:client",
+    "pkgname": "@snowstorm/core",
+    "err": {
+      "name": "pnpm",
+      "message": "@snowstorm/core@0.1.0-alpha.0 compile: `run-s compile:server compile:client`\nExit status 1",
+      "code": "ELIFECYCLE",
+      "stack": "pnpm: @snowstorm/core@0.1.0-alpha.0 compile: `run-s compile:server compile:client`\nExit status 1\n    at EventEmitter.<anonymous> (/home/henry/.fnm/node-versions/v16.1.0/installation/lib/node_modules/pnpm/dist/pnpm.cjs:104889:20)\n    at EventEmitter.emit (node:events:365:28)\n    at ChildProcess.<anonymous> (/home/henry/.fnm/node-versions/v16.1.0/installation/lib/node_modules/pnpm/dist/pnpm.cjs:92878:18)\n    at ChildProcess.emit (node:events:365:28)\n    at maybeClose (node:internal/child_process:1067:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)"
+    }
+  },
+  "2 warn pnpm:global": " Local package.json exists, but node_modules missing, did you mean to install?"
+}

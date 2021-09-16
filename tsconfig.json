@@ -5,7 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "target": "ES2017",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true,

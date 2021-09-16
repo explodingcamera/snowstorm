@@ -13,7 +13,7 @@
   "dependencies": {
     "@snowstorm/cli": "^0.1.0-alpha.0",
     "@snowstorm/core": "^0.1.0-alpha.0",
-    "react": "18.0.0-alpha-8723e772b-20210826",
-    "react-dom": "18.0.0-alpha-8723e772b-20210826"
+    "react": "18.0.0-alpha-a8cabb564-20210915",
+    "react-dom": "18.0.0-alpha-a8cabb564-20210915"
   }
 }

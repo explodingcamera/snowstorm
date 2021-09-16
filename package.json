@@ -11,27 +11,26 @@
   },
   "scripts": {
     "build": "run-s -l build:*",
-    "build:core": "yarn workspace @snowstorm/core run build ",
-    "build:cli": "yarn workspace @snowstorm/cli run build",
-    "build:serverprops": "yarn workspace @snowstorm/serverprops run build",
-    "build:head": "yarn workspace @snowstorm/head run build",
+    "build:core": "pnpm run --filter \"@snowstorm/core\" build ",
+    "build:cli": "pnpm run --filter \"@snowstorm/cli\" build",
+    "build:serverprops": "pnpm run --filter \"@snowstorm/serverprops\" build",
+    "build:head": "pnpm run --filter \"@snowstorm/head\" build",
     "watch": "run-p -l watch:*",
-    "watch:core": "yarn workspace @snowstorm/core run watch",
-    "watch:cli": "yarn workspace @snowstorm/cli run watch",
-    "watch:serverprops": "yarn workspace @snowstorm/serverprops run watch",
-    "watch:head": "yarn workspace @snowstorm/head run watch",
-    "docs:deploy": "yarn workspace @snowstorm/docs run deploy"
+    "watch:core": "pnpm run --filter \"@snowstorm/core\" watch",
+    "watch:cli": "pnpm run --filter \"@snowstorm/cli\" watch",
+    "watch:serverprops": "pnpm run --filter \"@snowstorm/serverprops\" watch",
+    "watch:head": "pnpm run --filter \"@snowstorm/head\" watch",
+    "docs:deploy": "pnpm run --filter \"@snowstorm/docs\" deploy"
   },
   "dependencies": {
     "@explodingcamera/eslint-config": "^18.0.0",
     "eslint": "^7.32.0",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.1",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^4.0.0",
-    "lerna": "^4.0.0",
     "npm-run-all": "^4.1.5",
     "postinstall-postinstall": "^2.1.0",
     "rimraf": "^3.0.2"

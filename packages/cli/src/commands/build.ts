@@ -5,7 +5,7 @@ export default class Build extends Command {
 
 	static examples = [`$ snowstorm build`];
 
-	static flags = {
+	static flags: Record<string, any> = {
 		help: flags.help({ char: 'h' }),
 	};
 

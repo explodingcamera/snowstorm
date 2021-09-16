@@ -23,14 +23,6 @@ export const ssr =
 		config: SnowstormConfigInternal;
 	}): Middleware =>
 	async (ctx, next) => {
-		if (
-			ctx.path.startsWith('/_snowstorm') ||
-			ctx.path.startsWith('/favicon.ico')
-		) {
-			serve(site.internal.snowpackFolder)(ctx, next);
-			return;
-		}
-
 		ctx.status = 200;
 		if (!dev) {
 			ctx.set('ETag', version);

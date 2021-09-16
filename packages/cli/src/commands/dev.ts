@@ -6,7 +6,7 @@ export default class Dev extends Command {
 
 	static examples = [`$ snowstorm dev`];
 
-	static flags = {
+	static flags: Record<string, any> = {
 		help: flags.help({ char: 'h' }),
 		clearCache: flags.boolean({
 			default: false,
@@ -21,7 +21,7 @@ export default class Dev extends Command {
 		void startServer({
 			path: process.cwd(),
 			dev: true,
-			clearCache: flags.clearCache,
+			clearCache: flags.clearCache as boolean,
 		});
 	}
 }

@@ -6,7 +6,7 @@ export default class Start extends Command {
 
 	static examples = [`$ snowstorm start`];
 
-	static flags = {
+	static flags: Record<string, any> = {
 		help: flags.help({ char: 'h' }),
 	};
 

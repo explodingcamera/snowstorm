@@ -6,7 +6,7 @@ export default class Export extends Command {
 
 	static examples = [`$ snowstorm export`];
 
-	static flags = {
+	static flags: Record<string, any> = {
 		help: flags.help({ char: 'h' }),
 	};
 

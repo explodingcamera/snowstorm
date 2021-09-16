@@ -25,7 +25,11 @@ export const start = async ({
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 	const { log } = config.internal;
 
-	log.info(`starting snowstorm v${pkg.version as string}`);
+	log.info(
+		`starting snowstorm v${pkg.version as string}${
+			(dev && ' (development mode)') || ''
+		}`,
+	);
 
 	if (clearCache) {
 		log.error('TODO: not supportet');
