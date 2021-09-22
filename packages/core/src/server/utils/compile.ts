@@ -1,11 +1,7 @@
-import {
-	CompilerOptions,
-	ModuleKind,
-	ScriptTarget,
-	transpileModule,
-} from 'typescript';
+import typescript, { CompilerOptions } from 'typescript';
 import { readFile } from 'fs/promises';
 
+const { ModuleKind, ScriptTarget, transpileModule } = typescript;
 const options: CompilerOptions = {
 	allowJs: true,
 	checkJs: true,

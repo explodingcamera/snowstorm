@@ -1,11 +1,11 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { SnowstormInternalSiteConfig } from '../config';
+import { SnowstormInternalSiteConfig } from '../config.js';
 
-import { loadNormalizedPages } from './pages';
-import { loadRoutes, SnowstormRoute } from './routes';
+import { loadNormalizedPages } from './pages.js';
+import { loadRoutes, SnowstormRoute } from './routes.js';
 
-export { pagePattern } from './pages';
+export { pagePattern } from './pages.js';
 
 export const generateRouter = async ({
 	template,

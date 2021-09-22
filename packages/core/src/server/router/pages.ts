@@ -1,5 +1,5 @@
 import glob from 'glob-promise';
-import { isString } from '../utils/is-string';
+import { isString } from '../utils/is-string.js';
 import { join } from 'path';
 
 export const pagePattern = '/**/*.{js,jsx,ts,tsx}';

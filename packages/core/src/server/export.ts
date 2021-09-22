@@ -1,7 +1,7 @@
-import { loadConfig } from './config';
-import { getFreePort } from './utils/free-port';
-import { loadNormalizedPages } from './router/pages';
-import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes';
+import { loadConfig } from './config.js';
+import { getFreePort } from './utils/free-port.js';
+import { loadNormalizedPages } from './router/pages.js';
+import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
 import { start as startServer } from './';
 import { join } from 'path';
 import { outputFile } from 'fs-extra';

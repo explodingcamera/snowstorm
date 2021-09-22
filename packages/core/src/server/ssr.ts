@@ -1,10 +1,10 @@
 import { Middleware } from 'koa';
-// import { SnowpackDevServer } from 'snowpack';
 import { readFile } from 'fs/promises';
 import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
 import { join } from 'path';
-import serve from 'koa-static';
 import { ViteDevServer } from 'vite';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -36,9 +36,10 @@ export const ssr =
 		let top = '';
 		let bottom = '';
 		try {
-			const ssrModule = await devServer.ssrLoadModule(
-				'_snowstorm/load-html.js',
-			);
+			const ssrModule = dev
+				? await devServer.ssrLoadModule('_snowstorm/load-html.js')
+				: // eslint-disable-next-line @typescript-eslint/no-require-imports
+				  require(site.internal.viteFolder + '/_snowstorm/load-html.js');
 
 			const { loadPage, renderPage, serverprops, getHead, pipeToNodeWritable } =
 				ssrModule;

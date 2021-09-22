@@ -3,12 +3,15 @@ import { performance } from 'perf_hooks';
 import Koa from 'koa';
 import mount from 'koa-mount';
 
-import { loadConfig } from './config.js';
-import { SnowstormConfigInternal } from './config';
+import { loadConfig, SnowstormConfigInternal } from './config.js';
 import { startSite } from './site.js';
+import { isSnowstormProject } from './utils/is-snowstorm-project.js';
 
-import pkg from './../package.json';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
+const pkg = require('./../package.json');
 process.setMaxListeners(10000);
 
 export const start = async ({
@@ -32,7 +35,17 @@ export const start = async ({
 	);
 
 	if (clearCache) {
-		log.error('TODO: not supportet');
+		log.error('TODO: not supported');
+		process.exit();
+	}
+
+	const reason = isSnowstormProject();
+	if (reason) {
+		log.fatal(
+			'Please run this command only in a valid snowstorm project: ',
+			reason,
+		);
+		process.exit();
 	}
 
 	const serverStart = performance.now();

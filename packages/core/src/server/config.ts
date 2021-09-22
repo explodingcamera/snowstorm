@@ -1,13 +1,15 @@
 import deepmerge from 'deepmerge';
-import { join, resolve } from 'path';
-import { importFile } from './utils/import-file';
-import { checkFileExists } from './utils/file-exists';
+import { dirname, join, resolve } from 'path';
+import { importFile } from './utils/import-file.js';
+import { checkFileExists } from './utils/file-exists.js';
 import { Except, PartialDeep } from 'type-fest';
 import glob from 'glob-promise';
-import { SnowstormRoutesConfig } from './router/routes';
+import { SnowstormRoutesConfig } from './router/routes.js';
 import { Logger } from 'tslog';
+import { fileURLToPath } from 'url';
 
-// import { logger } from 'snowpack';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export interface SnowstormExportConfig {
 	/**
@@ -100,7 +102,7 @@ export interface SnowstormInternalSiteConfig {
 	 */
 	internal: {
 		name: string;
-		snowpackFolder: string;
+		viteFolder: string;
 		internalFolder: string;
 		baseFolder: string;
 		staticFolder: string;
@@ -301,7 +303,7 @@ const processSites = async (
 						}),
 						name,
 						baseFolder,
-						snowpackFolder: join(
+						viteFolder: join(
 							config.internal.snowstormFolder,
 							`./${name}`,
 							'./out',

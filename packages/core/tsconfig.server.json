@@ -2,8 +2,9 @@
   "extends": "./../../tsconfig.build.json",
   "compilerOptions": {
     "outDir": "./",
-    "module": "CommonJS",
+    "module": "ESNext",
     "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
     "resolveJsonModule": false,
     "rootDir": "./src",
     "allowJs": true,

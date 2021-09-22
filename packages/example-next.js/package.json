@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^11.1.0",
+    "next": "^11.1.2",
     "react": "18.0.0-alpha-a8cabb564-20210915",
     "react-dom": "18.0.0-alpha-a8cabb564-20210915"
   }

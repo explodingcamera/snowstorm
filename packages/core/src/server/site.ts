@@ -6,24 +6,50 @@ import compress from 'koa-compress';
 import htmlMinify from 'koa-html-minifier';
 import chokidar from 'chokidar';
 
-import { createServer } from 'vite';
+import { build, createServer } from 'vite';
 
-// import { prodConfig, devConfig } from './snowpack-config';
-
-import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
+import {
+	SnowstormConfigInternal,
+	SnowstormInternalSiteConfig,
+} from './config.js';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
-import { join } from 'path';
-import glob from 'glob-promise';
-// import deepmerge from 'deepmerge';
+import path, { dirname, join } from 'path';
 import { mkdir } from 'fs/promises';
 
-import { getFreePort } from './utils/free-port';
-import { brotliify } from './utils/brotliify';
+import { getFreePort } from './utils/free-port.js';
+import { ssr } from './ssr.js';
+import { generateRouter, pagePattern } from './router/index.js';
+import { fileURLToPath } from 'url';
 
-import { ssr } from './ssr';
-// import { serveHMR } from './hmr';
-import { generateRouter, pagePattern } from './router';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const viteBaseConfig = (
+	config: SnowstormConfigInternal,
+	site: SnowstormInternalSiteConfig,
+) => ({
+	root: config.internal.snowstormAssetsFolder,
+	configFile: false,
+	plugins: [reactRefresh()],
+	resolve: {
+		alias: {
+			_snowstorm: config.internal.snowstormClientFolder,
+			'_snowstorm-internal': site.internal.internalFolder,
+			'_snowstorm-pages': site.internal.pagesFolder,
+		},
+	},
+});
+
+const viteProdConfig = (
+	config: SnowstormConfigInternal,
+	site: SnowstormInternalSiteConfig,
+) => ({
+	...viteBaseConfig(config, site),
+	build: {
+		outDir: site.internal.viteFolder,
+	},
+});
 
 const createViteServer = async ({
 	dev,
@@ -37,62 +63,12 @@ const createViteServer = async ({
 	const hmrPort = (dev && (await getFreePort())) || 0;
 	const { snowstormAssetsFolder, snowstormClientFolder } = config.internal;
 	const server = await createServer({
-		// any valid user config options, plus `mode` and `configFile`
-		configFile: false,
 		server: { middlewareMode: 'ssr', hmr: { port: hmrPort } },
-		root: snowstormAssetsFolder,
 		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
 		ssr: { noExternal: ['wouter'] },
-		// build: {
-		// 	rollupOptions: {
-		// 		input: snowstormAssetsFolder + '/index.html',
-		// 	},
-		// },
-		plugins: [reactRefresh()],
 		// publicDir: snowstormAssetsFolder,
-		resolve: {
-			alias: {
-				_snowstorm: snowstormClientFolder,
-				'_snowstorm-internal': site.internal.internalFolder,
-				'_snowstorm-pages': site.internal.pagesFolder,
-			},
-		},
+		...viteBaseConfig(config, site),
 	});
-
-	// const configOverride: SnowpackUserConfig = {
-	// 	root: config.internal.rootFolder,
-	// 	buildOptions: {
-	// 		out: site.internal.snowpackFolder,
-	// 		metaUrlPath: '_snowstorm',
-	// 	},
-	// 	devOptions: {
-	// 		hmrPort,
-	// 	},
-	// 	mount: {
-	// 		[snowstormAssetsFolder]: `/`,
-	// 		[site.internal.pagesFolder]: `/_snowstorm/pages`,
-	// 		[snowstormClientFolder]: `/_snowstorm/internal`,
-	// 		[site.internal.internalFolder]: `/_snowstorm/internal`,
-	// 	},
-	// };
-
-	// if (site.build.sass) {
-	// 	configOverride.plugins?.push([
-	// 		require.resolve('@snowpack/plugin-sass'),
-	// 		typeof site.build.sass === 'object' ? site.build.sass : {},
-	// 	]);
-	// }
-
-	// if (site.build.postcss) {
-	// 	configOverride.plugins?.push([
-	// 		require.resolve('@snowpack/plugin-postcss'),
-	// 		typeof site.build.postcss === 'object' ? site.build.postcss : {},
-	// 	]);
-	// }
-
-	// const snowpackConfig = createConfiguration(
-	// 	deepmerge(dev ? devConfig : prodConfig, configOverride),
-	// );
 
 	return server;
 };
@@ -123,35 +99,35 @@ export const startSite = async ({
 	const routesDone = genRoutes();
 	const viteServer = await createViteServer({ dev, config, site });
 
-	// if (!dev) {
-	// 	await routesDone;
-	// 	await build({
-	// 		config: snowpackConfig,
-	// 		lockfile: null,
-	// 	});
-
-	// 	const files = await glob(`${site.internal.snowpackFolder}/**/*`, {
-	// 		nodir: true,
-	// 	});
-
-	// 	brotliify(files);
-	// }
-
 	const app = new Koa();
 	await routesDone;
+
+	if (!dev) {
+		await build({
+			...viteProdConfig(config, site),
+			configFile: false,
+		});
+
+		// const files = await glob(`${site.internal.snowpackFolder}/**/*`, {
+		// 	nodir: true,
+		// });
+
+		// brotliify(files);
+	}
 
 	app.use(
 		serve(join(site.internal.staticFolder, './public'), { index: false }),
 	);
+
 	// app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
-	app.use(
-		mount(
-			serve(site.internal.snowpackFolder, {
-				index: false,
-				maxAge: dev ? undefined : 31536000,
-			}),
-		),
-	);
+	// app.use(
+	// 	mount(
+	// 		serve(site.internal.snowpackFolder, {
+	// 			index: false,
+	// 			maxAge: dev ? undefined : 31536000,
+	// 		}),
+	// 	),
+	// );
 
 	app.use(async (ctx, next) => c2k(viteServer.middlewares)(ctx, next));
 
