@@ -6,7 +6,7 @@ import compress from 'koa-compress';
 import htmlMinify from 'koa-html-minifier';
 import chokidar from 'chokidar';
 
-import { build, createServer } from 'vite';
+import { build, createServer, InlineConfig } from 'vite';
 
 import {
 	SnowstormConfigInternal,
@@ -28,10 +28,12 @@ const __dirname = dirname(__filename);
 const viteBaseConfig = (
 	config: SnowstormConfigInternal,
 	site: SnowstormInternalSiteConfig,
-) => ({
+): InlineConfig => ({
 	root: config.internal.snowstormAssetsFolder,
 	configFile: false,
 	plugins: [reactRefresh()],
+	// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
+	ssr: { noExternal: ['wouter'] },
 	resolve: {
 		alias: {
 			_snowstorm: config.internal.snowstormClientFolder,
@@ -44,10 +46,20 @@ const viteBaseConfig = (
 const viteProdConfig = (
 	config: SnowstormConfigInternal,
 	site: SnowstormInternalSiteConfig,
-) => ({
+	server: boolean,
+): InlineConfig => ({
 	...viteBaseConfig(config, site),
+	plugins: [],
 	build: {
-		outDir: site.internal.viteFolder,
+		outDir: site.internal.viteFolder + (server ? '/server' : '/client'),
+		emptyOutDir: true,
+		ssr: server,
+		ssrManifest: !server,
+		rollupOptions: {
+			input: server
+				? join(config.internal.snowstormClientFolder, './load-html.js')
+				: join(config.internal.snowstormAssetsFolder, './index.html'),
+		},
 	},
 });
 
@@ -61,11 +73,8 @@ const createViteServer = async ({
 	site: SnowstormInternalSiteConfig;
 }) => {
 	const hmrPort = (dev && (await getFreePort())) || 0;
-	const { snowstormAssetsFolder, snowstormClientFolder } = config.internal;
 	const server = await createServer({
 		server: { middlewareMode: 'ssr', hmr: { port: hmrPort } },
-		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
-		ssr: { noExternal: ['wouter'] },
 		// publicDir: snowstormAssetsFolder,
 		...viteBaseConfig(config, site),
 	});
@@ -83,6 +92,7 @@ export const startSite = async ({
 	site: SnowstormInternalSiteConfig;
 }): Promise<Koa> => {
 	if (dev) site.basePath = '/';
+	console.log(join(config.internal.snowstormClientFolder, './load-html.js'));
 
 	const internalFolderReady = mkdir(site.internal.internalFolder, {
 		recursive: true,
@@ -103,10 +113,16 @@ export const startSite = async ({
 	await routesDone;
 
 	if (!dev) {
-		await build({
-			...viteProdConfig(config, site),
-			configFile: false,
-		});
+		await Promise.all([
+			build({
+				...viteProdConfig(config, site, false),
+				configFile: false,
+			}),
+			build({
+				...viteProdConfig(config, site, true),
+				configFile: false,
+			}),
+		]);
 
 		// const files = await glob(`${site.internal.snowpackFolder}/**/*`, {
 		// 	nodir: true,
@@ -119,15 +135,17 @@ export const startSite = async ({
 		serve(join(site.internal.staticFolder, './public'), { index: false }),
 	);
 
-	// app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
-	// app.use(
-	// 	mount(
-	// 		serve(site.internal.snowpackFolder, {
-	// 			index: false,
-	// 			maxAge: dev ? undefined : 31536000,
-	// 		}),
-	// 	),
-	// );
+	app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
+	if (!dev) {
+		app.use(
+			mount(
+				serve(site.internal.viteFolder + '/client', {
+					index: false,
+					maxAge: dev ? undefined : 31536000,
+				}),
+			),
+		);
+	}
 
 	app.use(async (ctx, next) => c2k(viteServer.middlewares)(ctx, next));
 

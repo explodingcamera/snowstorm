@@ -293,6 +293,12 @@ const processSites = async (
 
 				const resultSite = deepmerge(baseSite, site);
 
+				const internalFolder = join(
+					config.internal.snowstormFolder,
+					`./${name}`,
+					'./internal',
+				);
+
 				return {
 					...resultSite,
 					domain: site.domain ?? 'default',
@@ -303,16 +309,8 @@ const processSites = async (
 						}),
 						name,
 						baseFolder,
-						viteFolder: join(
-							config.internal.snowstormFolder,
-							`./${name}`,
-							'./out',
-						),
-						internalFolder: join(
-							config.internal.snowstormFolder,
-							`./${name}`,
-							'./internal',
-						),
+						viteFolder: join(internalFolder, './vite-out'),
+						internalFolder,
 						pagesFolder: join(baseFolder, resultSite.pagesFolder),
 						staticFolder: join(baseFolder, resultSite.staticFolder),
 					},

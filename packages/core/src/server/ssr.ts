@@ -39,7 +39,7 @@ export const ssr =
 			const ssrModule = dev
 				? await devServer.ssrLoadModule('_snowstorm/load-html.js')
 				: // eslint-disable-next-line @typescript-eslint/no-require-imports
-				  require(site.internal.viteFolder + '/_snowstorm/load-html.js');
+				  require(site.internal.viteFolder + '/server/load-html.js');
 
 			const { loadPage, renderPage, serverprops, getHead, pipeToNodeWritable } =
 				ssrModule;
@@ -52,13 +52,16 @@ export const ssr =
 				path: ctx.path,
 			});
 
-			// Load contents of index.html
-			let htmlFile = await readFile(
-				join(config.internal.snowstormAssetsFolder, './index.html'),
-				'utf8',
-			);
+			const indexHTML = dev
+				? join(config.internal.snowstormAssetsFolder, './index.html')
+				: join(site.internal.viteFolder, './client/index.html');
 
-			htmlFile = await devServer.transformIndexHtml(ctx.path, htmlFile);
+			// Load contents of index.html
+			let htmlFile = await readFile(indexHTML, 'utf8');
+
+			if (dev) {
+				htmlFile = await devServer.transformIndexHtml(ctx.path, htmlFile);
+			}
 
 			const props: string = await serverprops.collectProps();
 			const head: string = getHead();
@@ -86,17 +89,16 @@ export const ssr =
 					// If something errored before we started streaming, we set the error code appropriately.
 
 					ctx.res.write(
-						top + `\n<div id="app"${(dev && 'data-hmr=true') || ''}>`,
+						top + `<div id="app"${(dev && 'data-hmr=true') || ''}>`,
 					);
 
 					startWriting();
-					ctx.res.write('</div>\n' + bottom);
+					ctx.res.write('</div>' + bottom);
 				},
 				onError(error: unknown) {
 					if (!(error instanceof Error)) return;
 					devServer.ssrFixStacktrace(error);
 					ctx.status = 500;
-					console.log('err');
 				},
 			});
 			// Abandon and switch to client rendering if enough time passes.

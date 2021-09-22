@@ -29,7 +29,6 @@ yargs(hideBin(process.argv))
 		flags => {
 			startServer({
 				path: process.cwd(),
-				dev: true,
 				clearCache: flags.clearCache,
 			});
 		},

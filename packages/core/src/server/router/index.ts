@@ -33,7 +33,7 @@ export const generateRouter = async ({
 	}
 
 	tmp = `import Error from "${
-		customErrorPage ? `${pagesLocation}/_error` : `./_error.js`
+		customErrorPage ? `${pagesLocation}/_error` : `_snowstorm/_error.js`
 	}";\n${tmp}`;
 
 	processedPages.push(
