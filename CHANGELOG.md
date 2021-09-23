@@ -1,3 +1,19 @@
+# v0.1.1 (Thu Sep 23 2021)
+
+#### 🐛 Bug Fix
+
+- build: set github name ([@explodingcamera](https://github.com/explodingcamera))
+- build: remove release lable requirement ([@explodingcamera](https://github.com/explodingcamera))
+- chore: set root package to private ([@explodingcamera](https://github.com/explodingcamera))
+- chore: change auto workflow ([@explodingcamera](https://github.com/explodingcamera))
+- build: add auto for releasing [#4](https://github.com/explodingcamera/snowstorm/pull/4) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # Changelog
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
