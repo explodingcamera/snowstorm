@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/head",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "main": "./lib/index.js",

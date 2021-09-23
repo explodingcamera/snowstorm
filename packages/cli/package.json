@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/cli",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "license": "MIT",
   "type": "module",
   "description": "",
@@ -10,7 +10,7 @@
   },
   "author": "",
   "dependencies": {
-    "@snowstorm/core": "workspace:^0.1.0-alpha.0",
+    "@snowstorm/core": "workspace:^0.1.0",
     "meow": "^10.1.1",
     "yargs": "^17.2.0"
   }

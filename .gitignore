@@ -9,3 +9,4 @@ packages/*/lib
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+.pnpm-debug.log

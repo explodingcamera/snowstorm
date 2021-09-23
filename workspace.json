@@ -20,18 +20,6 @@
     "@snowstorm/serverprops": {
       "root": "packages/serverprops",
       "projectType": "library"
-    },
-    "workspace": {
-      "root": ".",
-      "targets": {
-        "version": {
-          "executor": "@jscutlery/semver:version",
-          "options": {
-            "baseBranch": "main",
-            "syncVersions": true
-          }
-        }
-      }
     }
   }
 }
