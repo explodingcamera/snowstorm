@@ -40,11 +40,11 @@ importers:
     specifiers:
       '@snowstorm/core': workspace:^0.1.0-alpha.0
       meow: ^10.1.1
-      yargs: ^17.1.1-candidate.0
+      yargs: ^17.2.0
     dependencies:
       '@snowstorm/core': link:../core
       meow: 10.1.1
-      yargs: 17.1.1-candidate.0
+      yargs: 17.2.0
 
   packages/core:
     specifiers:
@@ -71,7 +71,7 @@ importers:
       chokidar: ^3.5.2
       deepmerge: ^4.2.2
       fs-extra: ^10.0.0
-      glob: ^7.1.7
+      glob: ^7.2.0
       glob-promise: ^4.2.0
       koa: ^2.13.1
       koa-compress: ^5.1.0
@@ -91,7 +91,7 @@ importers:
       website-scraper: ^4.2.3
       wouter: ^2.7.5
     dependencies:
-      '@snowpack/plugin-postcss': 1.4.3_ts-node@10.2.1
+      '@snowpack/plugin-postcss': 1.4.3
       '@snowpack/plugin-react-refresh': 2.5.0_9d6719237bd2b74e9596eead5dbc5cfa
       '@snowpack/plugin-sass': 1.4.0
       '@snowstorm/head': link:../head
@@ -100,8 +100,8 @@ importers:
       chokidar: 3.5.2
       deepmerge: 4.2.2
       fs-extra: 10.0.0
-      glob: 7.1.7
-      glob-promise: 4.2.0_glob@7.1.7
+      glob: 7.2.0
+      glob-promise: 4.2.0_glob@7.2.0
       koa: 2.13.1
       koa-compress: 5.1.0
       koa-connect: 2.1.0
@@ -953,14 +953,14 @@ packages:
       '@sinonjs/commons': 1.8.3
     dev: true
 
-  /@snowpack/plugin-postcss/1.4.3_ts-node@10.2.1:
+  /@snowpack/plugin-postcss/1.4.3:
     resolution: {integrity: sha512-RJGYagse6Pi86Bqm8vPukhCwFVa92VIB81qP3PXPQ/ITQy5gVWDYi4oU+r1A6hsEZ9scUNZevfw6ISya+oiMNQ==}
     peerDependencies:
       postcss: '*'
     dependencies:
       minimatch: 3.0.4
       normalize-path: 3.0.0
-      postcss-load-config: 3.1.0_ts-node@10.2.1
+      postcss-load-config: 3.1.0
       workerpool: 6.1.5
     transitivePeerDependencies:
       - ts-node
@@ -3413,14 +3413,14 @@ packages:
     dependencies:
       is-glob: 4.0.1
 
-  /glob-promise/4.2.0_glob@7.1.7:
+  /glob-promise/4.2.0_glob@7.2.0:
     resolution: {integrity: sha512-XQlQamNoMi++Sd5c8Y3l/FE2aqia+Lo1ghXEJZiqXdOvWOosA/zVetMahrdfRwwPjCXcFjg3fUogryAMa7IRQQ==}
     engines: {node: '>=12'}
     peerDependencies:
       glob: ^7.1.6
     dependencies:
       '@types/glob': 7.1.4
-      glob: 7.1.7
+      glob: 7.2.0
     dev: false
 
   /glob/7.1.4:
@@ -3443,6 +3443,17 @@ packages:
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
+
+  /glob/7.2.0:
+    resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==}
+    dependencies:
+      fs.realpath: 1.0.0
+      inflight: 1.0.6
+      inherits: 2.0.4
+      minimatch: 3.0.4
+      once: 1.4.0
+      path-is-absolute: 1.0.1
+    dev: false
 
   /globals/11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
@@ -5457,7 +5468,7 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /postcss-load-config/3.1.0_ts-node@10.2.1:
+  /postcss-load-config/3.1.0:
     resolution: {integrity: sha512-ipM8Ds01ZUophjDTQYSVP70slFSYg3T0/zyfII5vzhN6V57YSxMgG5syXuwi5VtS8wSf3iL30v0uBdoIVx4Q0g==}
     engines: {node: '>= 10'}
     peerDependencies:
@@ -5468,7 +5479,6 @@ packages:
     dependencies:
       import-cwd: 3.0.0
       lilconfig: 2.0.3
-      ts-node: 10.2.1_typescript@4.4.3
       yaml: 1.10.2
     dev: false
 
@@ -6861,8 +6871,8 @@ packages:
       yargs-parser: 20.2.9
     dev: true
 
-  /yargs/17.1.1-candidate.0:
-    resolution: {integrity: sha512-Ftfk8B5HLHpNSOD9FQ08LVbuvhjqngT4klgsykPkTq5iRy+hVDh+OD9R15lTBIWqiTonFFZji2xwAKLzQ6wDHA==}
+  /yargs/17.2.0:
+    resolution: {integrity: sha512-UPeZv4h9Xv510ibpt5rdsUNzgD78nMa1rhxxCgvkKiq06hlKCEHJLiJ6Ub8zDg/wR6hedEI6ovnd2vCvJ4nusA==}
     engines: {node: '>=12'}
     dependencies:
       cliui: 7.0.4

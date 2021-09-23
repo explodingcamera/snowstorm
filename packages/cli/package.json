@@ -10,8 +10,8 @@
   },
   "author": "",
   "dependencies": {
-    "meow": "^10.1.1",
     "@snowstorm/core": "workspace:^0.1.0-alpha.0",
-    "yargs": "^17.1.1-candidate.0"
+    "meow": "^10.1.1",
+    "yargs": "^17.2.0"
   }
 }

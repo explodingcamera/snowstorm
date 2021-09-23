@@ -13,12 +13,16 @@ export const isSnowstormProject = (): string | void => {
 		return 'No package.json in current working directory';
 	}
 
+	let pagesExists;
+	let sitesExists;
+	try {
+		pagesExists = lstatSync(join(process.cwd(), './pages')).isDirectory();
+		sitesExists = lstatSync(join(process.cwd(), './sites')).isDirectory();
+	} catch (_: unknown) {}
+
 	if (!Object.keys(userPkg.dependencies).find(k => k.includes('snowstorm'))) {
 		return 'snowstorm not installed';
 	}
-
-	const pagesExists = lstatSync(join(process.cwd(), './pages')).isDirectory();
-	const sitesExists = lstatSync(join(process.cwd(), './sites')).isDirectory();
 
 	if (!pagesExists && !sitesExists) {
 		return 'no pages/sites directory';
