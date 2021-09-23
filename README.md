@@ -44,7 +44,7 @@ $ npx snowstorm dev
 <details>
   <summary>Why are issues disabled?</summary>
   I'm not responding to bug reports and other issues.
-  For smaller things, you can open a pr, outside of that discussions are available to ask questions and paid support is also available at [henrygressmann.de](https://henrygressmann.de).
+  For smaller things, you can open a pr, outside of that discussions are available to ask questions and paid support is also available at (henrygressmann.de)[https://henrygressmann.de].
 </details>
 
 > License: [MIT](LICENSE.md)
