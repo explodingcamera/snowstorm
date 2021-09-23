@@ -22,10 +22,11 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: build deps
+        run: pnpx build
+
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          pnpx build
-          pnpx auto shipit
+        run: pnpx auto shipit -vv
