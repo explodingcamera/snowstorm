@@ -1,7 +1,7 @@
 {
   "name": "@snowstorm/root",
   "version": "0.1.0",
-  "private": "true",
+  "private": true,
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "workspaces": [
@@ -46,7 +46,12 @@
     "plugins": [
       "npm",
       "all-contributors",
-      ["conventional-commits", { "defaultReleaseType": "patch" }],
+      [
+        "conventional-commits",
+        {
+          "defaultReleaseType": "patch"
+        }
+      ],
       "released"
     ],
     "onlyPublishWithReleaseLabel": true
