@@ -1,7 +1,6 @@
-# Change Log
+# Changelog
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
 # [0.1.0-alpha.0](https://github.com/explodingcamera/streamer.page/compare/@snowstorm/core@0.0.1-alpha.3...@snowstorm/core@0.1.0-alpha.0) (2021-09-02)
 
