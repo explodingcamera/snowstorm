@@ -92,8 +92,6 @@ export const startSite = async ({
 	site: SnowstormInternalSiteConfig;
 }): Promise<Koa> => {
 	if (dev) site.basePath = '/';
-	console.log(join(config.internal.snowstormClientFolder, './load-html.js'));
-
 	const internalFolderReady = mkdir(site.internal.internalFolder, {
 		recursive: true,
 	});

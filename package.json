@@ -10,17 +10,12 @@
     ]
   },
   "scripts": {
-    "build": "run-s -l build:*",
-    "build:core": "pnpm run --filter \"@snowstorm/core\" build ",
-    "build:cli": "pnpm run --filter \"@snowstorm/cli\" build",
-    "build:serverprops": "pnpm run --filter \"@snowstorm/serverprops\" build",
-    "build:head": "pnpm run --filter \"@snowstorm/head\" build",
-    "watch": "run-p -l watch:*",
-    "watch:core": "pnpm run --filter \"@snowstorm/core\" watch",
-    "watch:cli": "pnpm run --filter \"@snowstorm/cli\" watch",
-    "watch:serverprops": "pnpm run --filter \"@snowstorm/serverprops\" watch",
-    "watch:head": "pnpm run --filter \"@snowstorm/head\" watch",
-    "docs:deploy": "pnpm run --filter \"@snowstorm/docs\" deploy"
+    "build": "nx run-many --target=build --all --parallel",
+    "watch": "nx run-many --target=watch --all --parallel --skip-nx-cache",
+    "watch:core": "nx run @snowstorm/core:watch",
+    "watch:cli": "nx run @snowstorm/cli:watch",
+    "watch:serverprops": "nx run @snowstorm/serverprops:watch",
+    "watch:head": "nx run @snowstorm/head:watch"
   },
   "dependencies": {
     "@explodingcamera/eslint-config": "^18.0.0",
@@ -30,6 +25,10 @@
     "typescript": "^4.4.3"
   },
   "devDependencies": {
+    "@jscutlery/semver": "^2.8.0",
+    "@nrwl/cli": "latest",
+    "@nrwl/tao": "latest",
+    "@nrwl/workspace": "latest",
     "eslint-plugin-prettier": "^4.0.0",
     "npm-run-all": "^4.1.5",
     "postinstall-postinstall": "^2.1.0",

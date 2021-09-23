@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "projects": {
+    "@snowstorm/cli": {
+      "root": "packages/cli",
+      "projectType": "library"
+    },
+    "@snowstorm/core": {
+      "root": "packages/core",
+      "projectType": "library"
+    },
+    "@snowstorm/example": {
+      "root": "packages/example",
+      "projectType": "application"
+    },
+    "@snowstorm/head": {
+      "root": "packages/head",
+      "projectType": "library"
+    },
+    "@snowstorm/serverprops": {
+      "root": "packages/serverprops",
+      "projectType": "library"
+    },
+    "workspace": {
+      "root": ".",
+      "targets": {
+        "version": {
+          "executor": "@jscutlery/semver:version",
+          "options": {
+            "baseBranch": "main",
+            "versionTagPrefix": "${target}@v",
+            "syncVersions": true
+          }
+        }
+      }
+    }
+  }
+}

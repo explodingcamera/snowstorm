@@ -1,0 +1,60 @@
+{
+  "extends": "@nrwl/workspace/presets/npm.json",
+  "npmScope": "snowstorm",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "compile",
+          "test",
+          "lint",
+          "package",
+          "prepare"
+        ]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ],
+    "prepare": [
+      {
+        "target": "prepare",
+        "projects": "dependencies"
+      }
+    ],
+    "package": [
+      {
+        "target": "package",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "@snowstorm/cli": {
+      "implicitDependencies": []
+    },
+    "@snowstorm/core": {
+      "implicitDependencies": []
+    },
+    "@snowstorm/example": {
+      "implicitDependencies": []
+    },
+    "@snowstorm/head": {
+      "implicitDependencies": []
+    },
+    "@snowstorm/serverprops": {
+      "implicitDependencies": []
+    },
+    "workspace": {}
+  },
+  "affected": {
+    "defaultBase": "main"
+  }
+}
