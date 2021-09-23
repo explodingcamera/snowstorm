@@ -28,7 +28,6 @@
           "executor": "@jscutlery/semver:version",
           "options": {
             "baseBranch": "main",
-            "versionTagPrefix": "${target}@v",
             "syncVersions": true
           }
         }

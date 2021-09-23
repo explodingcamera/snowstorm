@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "target": "ES2017",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "lib": ["DOM", "ESNext"],
+    "module": "ESNext",
+    "outDir": "lib/",
+    "declaration": true
+  },
+  "include": ["**/src/**/*", "packages/example/**/*", "packages/example-*/**/*"]
+}

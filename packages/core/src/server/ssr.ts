@@ -114,4 +114,6 @@ export const ssr =
 			site.internal.log.error(error.name, error.message, error.stack);
 			ctx.status = 500;
 		}
+
+		ctx.set('Content-Type', 'text/html; charset=UTF-8');
 	};

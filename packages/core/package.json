@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/core",
-  "version": "0.0.1-alpha.0",
+  "version": "0.1.0-alpha.0",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "exports": {
@@ -37,6 +37,7 @@
     "koa-compress": "^5.1.0",
     "koa-connect": "^2.1.0",
     "koa-html-minifier": "^2.1.0",
+    "koa-logger": "^3.2.1",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
     "node-fetch": "^3.0.0",
@@ -52,6 +53,7 @@
     "@types/koa": "^2.13.4",
     "@types/koa-compress": "^4.0.3",
     "@types/koa-html-minifier": "^1.0.1",
+    "@types/koa-logger": "^3.1.1",
     "@types/koa-mount": "^4.0.1",
     "@types/koa-static": "^4.0.2",
     "@types/node": "^16.9.6",

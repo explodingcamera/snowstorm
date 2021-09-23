@@ -2,13 +2,20 @@ import { loadConfig } from './config.js';
 import { getFreePort } from './utils/free-port.js';
 import { loadNormalizedPages } from './router/pages.js';
 import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
-import { start as startServer } from './';
+import { start as startServer } from './index.js';
 import { join } from 'path';
 import { outputFile } from 'fs-extra';
 
 import scrape from 'website-scraper';
+import bySiteStructureFilenameGenerator from 'website-scraper/lib/filename-generator/by-site-structure.js';
 
-export const exportProject = async ({ path }: { path: string }) => {
+export const exportProject = async ({
+	path,
+	debug,
+}: {
+	path: string;
+	debug?: boolean;
+}) => {
 	const config = await loadConfig(path);
 	const { log } = config.internal;
 
@@ -24,7 +31,7 @@ export const exportProject = async ({ path }: { path: string }) => {
 	);
 
 	config.production.port = await getFreePort();
-	await startServer({ dev: false, path, overrideConfig: config });
+	await startServer({ dev: false, path, overrideConfig: config, debug });
 
 	const urls: string[] = [];
 	for (const { site, paths } of sites) {
@@ -41,11 +48,18 @@ export const exportProject = async ({ path }: { path: string }) => {
 	await scrape({
 		urls,
 		directory,
-		filenameGenerator: 'bySiteStructure',
+		filenameGenerator: '',
+		request: {
+			headers: {
+				Accept:
+					'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+			},
+		},
 		plugins: [
 			new SnowstormScrapePlugin({ multisite: sites.length > 1 || undefined }),
 		],
 	});
+
 	log.info(
 		`finished rendering in ${Math.round(performance.now() - renderStart)}ms`,
 	);
@@ -64,6 +78,13 @@ class SnowstormScrapePlugin {
 	) => {
 		let absoluteDirectoryPath: string;
 		const loadedResources = [];
+
+		registerAction('generateFilename', ({ resource }) => {
+			const filename = bySiteStructureFilenameGenerator(resource, {
+				defaultFilename: 'index.html',
+			});
+			return { filename };
+		});
 
 		registerAction('beforeStart', ({ options }) => {
 			absoluteDirectoryPath = options.directory;
@@ -84,6 +105,7 @@ class SnowstormScrapePlugin {
 
 			const text = resource.getText();
 			await outputFile(filename, text, { encoding: 'binary' });
+			console.log('created ', filename);
 
 			loadedResources.push(resource);
 		});

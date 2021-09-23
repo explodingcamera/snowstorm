@@ -2,6 +2,7 @@ import { performance } from 'perf_hooks';
 
 import Koa from 'koa';
 import mount from 'koa-mount';
+import logger from 'koa-logger';
 
 import { loadConfig, SnowstormConfigInternal } from './config.js';
 import { startSite } from './site.js';
@@ -17,11 +18,13 @@ process.setMaxListeners(10000);
 export const start = async ({
 	dev,
 	path,
+	debug,
 	clearCache,
 	overrideConfig,
 }: {
 	dev: boolean;
 	path: string;
+	debug?: boolean;
 	clearCache?: boolean;
 	overrideConfig?: SnowstormConfigInternal;
 }) => {
@@ -61,6 +64,10 @@ export const start = async ({
 	);
 
 	const defaultSite = startSites.find(site => site.site.domain === 'default');
+
+	if (debug) {
+		server.use(logger());
+	}
 
 	server.use((ctx, next) => {
 		const site = startSites.find(site =>
