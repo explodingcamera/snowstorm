@@ -22,6 +22,11 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Set Github Name
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions - update submodules"
+
       - name: build deps
         run: pnpx build
 
