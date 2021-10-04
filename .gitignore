@@ -2,11 +2,5 @@ node_modules
 packages/*/dist
 packages/*/lib
 
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
 .pnp.*
 .pnpm-debug.log
