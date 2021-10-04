@@ -28,7 +28,7 @@ jobs:
           git config user.name "GitHub Actions - update submodules"
 
       - name: build deps
-        run: pnpx build
+        run: pnpm build
 
       - name: Create Release
         env:
