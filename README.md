@@ -5,9 +5,11 @@
   </a>
 </p>
 
-## Important: Snowstorm isn't Production-Ready yet
-
 # The lightning-fast and minimalist React Framework
+
+## Warning
+
+Important: Snowstorm isn't Production-Ready yet. Documentation is rough, outdated and inconsistent and only the latest alpha versions of react 18 are supported.
 
 ## What?
 
