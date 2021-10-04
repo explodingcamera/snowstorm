@@ -78,6 +78,7 @@ const createViteServer = async ({
 		...viteBaseConfig(config, site),
 	});
 
+	console.log(config.internal.snowstormClientFolder);
 	return server;
 };
 
@@ -124,7 +125,6 @@ export const startSite = async ({
 		// const files = await glob(`${site.internal.snowpackFolder}/**/*`, {
 		// 	nodir: true,
 		// });
-
 		// brotliify(files);
 	}
 
@@ -132,7 +132,6 @@ export const startSite = async ({
 		serve(join(site.internal.staticFolder, './public'), { index: false }),
 	);
 
-	app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
 	if (!dev) {
 		app.use(
 			mount(
