@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/example",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
@@ -11,8 +11,8 @@
     "build": "exit 0"
   },
   "dependencies": {
-    "@snowstorm/cli": "0.1.3",
-    "@snowstorm/core": "0.1.3",
+    "@snowstorm/cli": "^0.1.4",
+    "@snowstorm/core": "^0.1.4",
     "react": "18.0.0-alpha-a8cabb564-20210915",
     "react-dom": "18.0.0-alpha-a8cabb564-20210915"
   }
