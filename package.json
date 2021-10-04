@@ -42,6 +42,8 @@
   },
   "repository": "explodingcamera/snowstorm",
   "auto": {
+    "onlyPublishWithReleaseLabel": true,
+    "baseBranch": "main",
     "plugins": [
       "npm",
       "all-contributors",
