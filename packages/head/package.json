@@ -4,6 +4,9 @@
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "main": "./lib/index.js",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "build": "run-s clean compile",
     "clean": "rimraf -rf ./lib",
