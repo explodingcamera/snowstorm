@@ -1,3 +1,16 @@
+# v0.1.4 (Mon Oct 04 2021)
+
+#### 🐛 Bug Fix
+
+- `@snowstorm/cli`, `@snowstorm/core`
+  - build: use esbuild to build core, fix missing files [#8](https://github.com/explodingcamera/snowstorm/pull/8) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.1.2 (Mon Oct 04 2021)
 
 #### 🐛 Bug Fix
