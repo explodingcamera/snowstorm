@@ -1,13 +1,15 @@
-import { loadConfig } from './config.js';
-import { getFreePort } from './utils/free-port.js';
-import { loadNormalizedPages } from './router/pages.js';
-import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
-import { start as startServer } from './index.js';
 import { join } from 'path';
-import { outputFile } from 'fs-extra';
-
 import scrape from 'website-scraper';
 import bySiteStructureFilenameGenerator from 'website-scraper/lib/filename-generator/by-site-structure.js';
+
+import { loadConfig } from './config.js';
+import { start as startServer } from './index.js';
+
+import { getFreePort } from './utils/free-port.js';
+import { outputFile } from './utils/output';
+
+import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
+import { loadNormalizedPages } from './router/pages.js';
 
 export const exportProject = async ({
 	path,

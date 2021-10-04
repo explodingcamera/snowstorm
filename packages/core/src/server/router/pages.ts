@@ -1,4 +1,4 @@
-import glob from 'glob-promise';
+import glob from 'fast-glob';
 import { isString } from '../utils/is-string.js';
 import { join } from 'path';
 

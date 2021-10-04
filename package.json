@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/root",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "private": true,
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
@@ -19,7 +19,6 @@
     "@explodingcamera/eslint-config": "^18.0.0",
     "eslint": "^7.32.0",
     "prettier": "^2.4.1",
-    "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
   "devDependencies": {

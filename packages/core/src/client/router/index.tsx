@@ -85,7 +85,7 @@ const pageLoader = (page: string, lastPage: string) => {
 			return { Page: cachedPage, loadPageAsync: cachedPage !== undefined };
 		});
 
-		// load page asyncronusly when the current page !== last page and
+		// load page asynchronously when the current page !== last page and
 		useEffect(() => {
 			if (loadPageAsync) {
 				requestPage(page)

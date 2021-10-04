@@ -3,7 +3,6 @@ import c2k from 'koa-connect';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 import compress from 'koa-compress';
-import htmlMinify from 'koa-html-minifier';
 import chokidar from 'chokidar';
 
 import { build, createServer, InlineConfig } from 'vite';
@@ -79,6 +78,7 @@ const createViteServer = async ({
 		...viteBaseConfig(config, site),
 	});
 
+	console.log(config.internal.snowstormClientFolder);
 	return server;
 };
 
@@ -125,7 +125,6 @@ export const startSite = async ({
 		// const files = await glob(`${site.internal.snowpackFolder}/**/*`, {
 		// 	nodir: true,
 		// });
-
 		// brotliify(files);
 	}
 
@@ -133,7 +132,6 @@ export const startSite = async ({
 		serve(join(site.internal.staticFolder, './public'), { index: false }),
 	);
 
-	app.use(serve(config.internal.snowstormAssetsFolder, { index: false }));
 	if (!dev) {
 		app.use(
 			mount(
@@ -149,11 +147,12 @@ export const startSite = async ({
 
 	if (!dev) {
 		app.use(compress());
-		app.use(
-			htmlMinify({
-				collapseWhitespace: true,
-			}),
-		);
+		// TODO: use a simpler html minifyer (previously koa html minifier was used)
+		// app.use(
+		// 	htmlMinify({
+		// 		collapseWhitespace: true,
+		// 	}),
+		// );
 	}
 
 	app.use(
