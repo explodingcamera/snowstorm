@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/serverprops",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "main": "./lib/index.js",
