@@ -3,7 +3,8 @@
   "npmClient": "pnpm",
   "command": {
     "publish": {
-      "message": "chore(release): publish"
+      "message": "chore(release): publish",
+      "verifyAccess": false
     },
     "bootstrap": {
       "ignore": "*"
