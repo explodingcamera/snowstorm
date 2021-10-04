@@ -84,10 +84,11 @@ export const ssr =
 
 			ctx.respond = false;
 			[top, bottom] = doc.split('{{SNOWSTORM APP}}');
-			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
-				onReadyToStream() {
-					// If something errored before we started streaming, we set the error code appropriately.
 
+			let didError = false;
+			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
+				onCompleteShell() {
+					ctx.status = didError ? 500 : 200;
 					ctx.res.write(
 						top + `<div id="app"${(dev && 'data-hmr=true') || ''}>`,
 					);
@@ -98,7 +99,7 @@ export const ssr =
 				onError(error: unknown) {
 					if (!(error instanceof Error)) return;
 					devServer.ssrFixStacktrace(error);
-					ctx.status = 500;
+					didError = true;
 				},
 			});
 			// Abandon and switch to client rendering if enough time passes.

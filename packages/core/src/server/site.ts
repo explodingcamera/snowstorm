@@ -78,7 +78,6 @@ const createViteServer = async ({
 		...viteBaseConfig(config, site),
 	});
 
-	console.log(config.internal.snowstormClientFolder);
 	return server;
 };
 
