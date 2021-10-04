@@ -11,8 +11,8 @@
     "build": "exit 0"
   },
   "dependencies": {
-    "@snowstorm/cli": "workspace:*",
-    "@snowstorm/core": "workspace:*",
+    "@snowstorm/cli": "*",
+    "@snowstorm/core": "*",
     "react": "18.0.0-alpha-f2c381131-20211004",
     "react-dom": "18.0.0-alpha-f2c381131-20211004"
   }
