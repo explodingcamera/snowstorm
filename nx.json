@@ -51,8 +51,7 @@
     },
     "@snowstorm/serverprops": {
       "implicitDependencies": []
-    },
-    "workspace": {}
+    }
   },
   "affected": {
     "defaultBase": "main"

@@ -12,6 +12,6 @@
   "dependencies": {
     "@snowstorm/core": "workspace:^0.1.0",
     "meow": "^10.1.1",
-    "yargs": "^17.2.0"
+    "yargs": "^17.2.1"
   }
 }
