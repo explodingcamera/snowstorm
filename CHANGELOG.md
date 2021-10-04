@@ -1,3 +1,20 @@
+# v0.1.2 (Mon Oct 04 2021)
+
+#### 🐛 Bug Fix
+
+- build: fix incorrect lerna publish behavior [#7](https://github.com/explodingcamera/snowstorm/pull/7) ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/cli`, `@snowstorm/core`, `@snowstorm/head`, `@snowstorm/serverprops`
+  - build: fix old versions [#6](https://github.com/explodingcamera/snowstorm/pull/6) ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/cli`, `@snowstorm/core`
+  - chore: update dependencies [#5](https://github.com/explodingcamera/snowstorm/pull/5) ([@explodingcamera](https://github.com/explodingcamera))
+  - chore: fix build setup ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.1.1 (Thu Sep 23 2021)
 
 #### 🐛 Bug Fix
