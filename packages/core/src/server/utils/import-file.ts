@@ -1,7 +1,7 @@
-import glob from 'glob-promise';
-import requireFromString from 'require-from-string';
+import glob from 'fast-glob';
 import { join } from 'path';
 import { compile } from './compile.js';
+import { requireFromString } from './require-from-string.js';
 
 const supportedFileEndings = ['.ts', '.js', '.cjs', '.mjs', '.json'];
 

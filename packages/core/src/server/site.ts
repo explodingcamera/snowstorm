@@ -3,7 +3,6 @@ import c2k from 'koa-connect';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 import compress from 'koa-compress';
-import htmlMinify from 'koa-html-minifier';
 import chokidar from 'chokidar';
 
 import { build, createServer, InlineConfig } from 'vite';
@@ -149,11 +148,12 @@ export const startSite = async ({
 
 	if (!dev) {
 		app.use(compress());
-		app.use(
-			htmlMinify({
-				collapseWhitespace: true,
-			}),
-		);
+		// TODO: use a simpler html minifyer (previously koa html minifier was used)
+		// app.use(
+		// 	htmlMinify({
+		// 		collapseWhitespace: true,
+		// 	}),
+		// );
 	}
 
 	app.use(
