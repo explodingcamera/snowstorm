@@ -13,7 +13,7 @@ import {
 } from './config.js';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
-import path, { dirname, join } from 'path';
+import { dirname, join } from 'path';
 import { mkdir } from 'fs/promises';
 
 import { getFreePort } from './utils/free-port.js';
@@ -33,6 +33,11 @@ const viteBaseConfig = (
 	plugins: [reactRefresh()],
 	// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
 	ssr: { noExternal: ['wouter'] },
+	esbuild: {
+		jsxFactory: '_jsx',
+		jsxFragment: '_jsxFragment',
+		jsxInject: `import { createElement as _jsx, Fragment as _jsxFragment } from 'react'`,
+	},
 	resolve: {
 		alias: {
 			_snowstorm: config.internal.snowstormClientFolder,

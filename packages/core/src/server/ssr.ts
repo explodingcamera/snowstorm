@@ -97,6 +97,7 @@ export const ssr =
 					ctx.res.write('</div>' + bottom);
 				},
 				onError(error: unknown) {
+					config.internal.log.error(error);
 					if (!(error instanceof Error)) return;
 					devServer.ssrFixStacktrace(error);
 					didError = true;
