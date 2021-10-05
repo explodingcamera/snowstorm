@@ -258,7 +258,8 @@ const processSites = async (
 
 	if (config.sitesFolder) {
 		const sitesContent = await glob(
-			join(config.internal.rootFolder, config.sitesFolder, '/*'),
+			join(config.internal.rootFolder, config.sitesFolder, '/**'),
+			{ onlyFiles: false, deep: 1 },
 		);
 
 		for (const siteName of sitesContent) {
