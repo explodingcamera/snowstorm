@@ -1,3 +1,19 @@
+# v0.2.1 (Wed Oct 06 2021)
+
+#### 🐛 Bug Fix
+
+- build: only publish with release lable ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/core`
+  - fix: fix developmentmode hmr [#11](https://github.com/explodingcamera/snowstorm/pull/11) ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/cli`, `@snowstorm/core`
+  - fix: fix multi site mode, add default help ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.2.0 (Mon Oct 04 2021)
 
 #### 🚀 Enhancement
