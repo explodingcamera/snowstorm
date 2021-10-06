@@ -28,7 +28,8 @@ const viteBaseConfig = (
 	config: SnowstormConfigInternal,
 	site: SnowstormInternalSiteConfig,
 ): InlineConfig => ({
-	root: config.internal.snowstormAssetsFolder,
+	root: config.internal.rootFolder,
+	cacheDir: join(site.internal.viteFolder, './.vite'),
 	configFile: false,
 	plugins: [reactRefresh()],
 	// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
@@ -45,6 +46,11 @@ const viteBaseConfig = (
 			'_snowstorm-pages': site.internal.pagesFolder,
 		},
 	},
+	build: {
+		rollupOptions: {
+			input: join(config.internal.snowstormAssetsFolder, './index.js'),
+		},
+	},
 });
 
 const viteProdConfig = (
@@ -53,6 +59,8 @@ const viteProdConfig = (
 	server: boolean,
 ): InlineConfig => ({
 	...viteBaseConfig(config, site),
+	// kinda ugly :(
+	root: config.internal.snowstormAssetsFolder,
 	plugins: [],
 	build: {
 		outDir: site.internal.viteFolder + (server ? '/server' : '/client'),

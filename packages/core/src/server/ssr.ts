@@ -60,6 +60,13 @@ export const ssr =
 			let htmlFile = await readFile(indexHTML, 'utf8');
 
 			if (dev) {
+				htmlFile = htmlFile.replace(
+					/<!--SNOWSTORM ENTRYPOINT-->[\s\S]*?<!--\/SNOWSTORM ENTRYPOINT-->/,
+					`<script type="module" src="${join(
+						config.internal.snowstormClientFolder,
+						'./index.js',
+					)}"></script>`,
+				);
 				htmlFile = await devServer.transformIndexHtml(ctx.path, htmlFile);
 			}
 
@@ -71,19 +78,19 @@ export const ssr =
 				.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
 				.replace(/\/_snowstorm/g, `${basePath}/_snowstorm`)
 				.replace(
-					'{{SNOWSTORM DATA}}',
+					'<!--SNOWSTORM DATA-->',
 					props.length
 						? `<script id="__serverprops" type="application/json">${props}</script>`
 						: '',
 				)
-				.replace('{{SNOWSTORM HEAD}}', head);
+				.replace('<!--SNOWSTORM HEAD-->', head);
 
 			ctx.res.socket?.on('error', error => {
 				console.error('Fatal', error);
 			});
 
 			ctx.respond = false;
-			[top, bottom] = doc.split('{{SNOWSTORM APP}}');
+			[top, bottom] = doc.split('<!--SNOWSTORM APP-->');
 
 			let didError = false;
 			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
