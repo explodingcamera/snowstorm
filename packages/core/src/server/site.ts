@@ -5,11 +5,18 @@ import serve from 'koa-static';
 import compress from 'koa-compress';
 import chokidar from 'chokidar';
 
-import { build, createServer, InlineConfig } from 'vite';
+import {
+	build,
+	createServer,
+	CSSOptions,
+	InlineConfig,
+	JsonOptions,
+	PluginOption,
+} from 'vite';
 
 import {
 	SnowstormConfigInternal,
-	SnowstormInternalSiteConfig,
+	SnowstormSiteConfigInternal,
 } from './config.js';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
@@ -20,20 +27,44 @@ import { getFreePort } from './utils/free-port.js';
 import { ssr } from './ssr.js';
 import { generateRouter, pagePattern } from './router/index.js';
 import { fileURLToPath } from 'url';
+import deepmerge from 'deepmerge';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const viteBaseConfig = (
 	config: SnowstormConfigInternal,
-	site: SnowstormInternalSiteConfig,
+	site: SnowstormSiteConfigInternal,
 ): InlineConfig => ({
 	root: config.internal.rootFolder,
 	cacheDir: join(site.internal.viteFolder, './.vite'),
 	configFile: false,
-	plugins: [reactRefresh()],
+	plugins: [
+		// snowstorm's default plugins
+		...[reactRefresh()],
+
+		// default site plugins
+		...(site.build.vitePlugins || []),
+
+		// site specific plugins
+		...((config.site.build?.vitePlugins as Array<
+			PluginOption | PluginOption[]
+		>) || []),
+	],
 	// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
 	ssr: { noExternal: ['wouter'] },
+	css: deepmerge.all([
+		// snowstorm's default css options
+		{
+			modules: { localsConvention: 'camelCaseOnly' },
+			postcss: {},
+		},
+		// default site css options
+		site.build.css || {},
+		// site specific css options
+		config.site.build?.css || {},
+	]),
+	json: deepmerge.all([site.build.json || {}, config.site.build?.css || {}]),
 	esbuild: {
 		jsxFactory: '_jsx',
 		jsxFragment: '_jsxFragment',
@@ -55,7 +86,7 @@ const viteBaseConfig = (
 
 const viteProdConfig = (
 	config: SnowstormConfigInternal,
-	site: SnowstormInternalSiteConfig,
+	site: SnowstormSiteConfigInternal,
 	server: boolean,
 ): InlineConfig => ({
 	...viteBaseConfig(config, site),
@@ -82,7 +113,7 @@ const createViteServer = async ({
 }: {
 	dev: boolean;
 	config: SnowstormConfigInternal;
-	site: SnowstormInternalSiteConfig;
+	site: SnowstormSiteConfigInternal;
 }) => {
 	const hmrPort = (dev && (await getFreePort())) || 0;
 	const server = await createServer({
@@ -101,7 +132,7 @@ export const startSite = async ({
 }: {
 	dev: boolean;
 	config: SnowstormConfigInternal;
-	site: SnowstormInternalSiteConfig;
+	site: SnowstormSiteConfigInternal;
 }): Promise<Koa> => {
 	if (dev) site.basePath = '/';
 	const internalFolderReady = mkdir(site.internal.internalFolder, {

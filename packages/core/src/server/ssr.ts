@@ -1,6 +1,6 @@
 import { Middleware } from 'koa';
 import { readFile } from 'fs/promises';
-import { SnowstormConfigInternal, SnowstormInternalSiteConfig } from './config';
+import { SnowstormConfigInternal, SnowstormSiteConfigInternal } from './config';
 import { join } from 'path';
 import { ViteDevServer } from 'vite';
 import { createRequire } from 'module';
@@ -19,7 +19,7 @@ export const ssr =
 	}: {
 		devServer: ViteDevServer;
 		dev: boolean;
-		site: SnowstormInternalSiteConfig;
+		site: SnowstormSiteConfigInternal;
 		config: SnowstormConfigInternal;
 	}): Middleware =>
 	async (ctx, next) => {

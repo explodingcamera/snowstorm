@@ -7,6 +7,7 @@ import glob from 'fast-glob';
 import { SnowstormRoutesConfig } from './router/routes.js';
 import { Logger } from 'tslog';
 import { fileURLToPath } from 'url';
+import { CSSOptions, JsonOptions, PluginOption } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,7 +15,7 @@ const __dirname = dirname(__filename);
 export interface SnowstormExportConfig {
 	/**
 	 * The directory where the website will be output to.
-	 * In the case of `site`, this can be relative to the project root or an absoulte path,
+	 * In the case of `site`, this can be relative to the project root or an absolute path,
 	 * in the case of `sites`, relative paths are relative to the outputDir set in `site`
 	 */
 	outDir: string;
@@ -26,66 +27,13 @@ export interface SnowstormExportConfig {
 		| 'independent';
 }
 
-export interface SassOptions {
-	/**
-	 * Add directories to Sass's load path, to support looking up and loading partials (etc.) by name.
-	 */
-	loadPath?: string | string[];
-
-	/**
-	 * The output style. Specify 'compressed' to enable Sass’ built-in minification (default: 'expanded').
-	 */
-	style?: 'expanded' | 'Compressed';
-
-	/**
-	 * Enable / disable source maps (default: true).
-	 */
-	sourceMap?: boolean;
-
-	/**
-	 * How to link from source maps to source files (default: 'relative').
-	 */
-	sourceMapUrls?: 'relative' | 'absolute';
-
-	/**
-	 * Embed source file contents in source maps (default: false).
-	 */
-	embedSources?: boolean;
-
-	/**
-	 * Embed source map contents in CSS (default: false).
-	 */
-	embedSourceMap?: boolean;
-
-	/**
-	 * Emit a @charset or BOM for CSS with non-ASCII characters. (default: true).
-	 */
-	charset?: boolean;
-
-	/**
-	 * Compile only out-of-date stylesheets (default: false).
-	 */
-	update?: boolean;
+export interface SnowstormBuildOptions {
+	css?: CSSOptions;
+	json?: JsonOptions;
+	vitePlugins?: Array<PluginOption | PluginOption[]>;
 }
 
-interface PostCSSOptions {
-	/**
-	 * File extensions to transform (default: ['.css'])
-	 */
-	input?: string[];
-
-	/**
-	 * (optional) Set a custom path to your PostCSS config (in case PostCSS has trouble loading it automatically, or in case you want multiple PostCSS setups)
-	 */
-	config?: string;
-}
-
-export interface SnowstormBuildConfig {
-	sass?: boolean | SassOptions;
-	postcss?: boolean | PostCSSOptions;
-}
-
-export interface SnowstormInternalSiteConfig {
+export interface SnowstormSiteConfigInternal {
 	pagesFolder: string;
 	staticFolder: string;
 	basePath: string;
@@ -94,7 +42,7 @@ export interface SnowstormInternalSiteConfig {
 	/**
 	 * The base config for building a snowstorm site
 	 */
-	build: SnowstormBuildConfig;
+	build: SnowstormBuildOptions;
 	routes?: SnowstormRoutesConfig;
 
 	/**
@@ -112,7 +60,7 @@ export interface SnowstormInternalSiteConfig {
 }
 
 export type SnowstormSiteConfig = PartialDeep<
-	Except<SnowstormInternalSiteConfig, 'internal'>
+	Except<SnowstormSiteConfigInternal, 'internal'>
 >;
 export interface SnowstormMultiSiteConfig extends SnowstormSiteConfig {
 	domain: string;
@@ -140,6 +88,9 @@ export interface SnowstormConfigInternal {
 	 */
 	site: SnowstormSiteConfig;
 
+	/**
+	 * Configuration relevant for exporting sites
+	 */
 	export: SnowstormExportConfig;
 
 	/**
@@ -165,7 +116,7 @@ export interface SnowstormConfigInternal {
 		snowstormFolder: string;
 		snowstormAssetsFolder: string;
 		snowstormClientFolder: string;
-		sites: SnowstormInternalSiteConfig[];
+		sites: SnowstormSiteConfigInternal[];
 		chwd: string;
 		log: Logger;
 	};
@@ -174,7 +125,7 @@ export interface SnowstormConfigInternal {
 export type SnowstormBaseConfig = Except<SnowstormConfigInternal, 'internal'>;
 export type SnowstormConfig = PartialDeep<SnowstormBaseConfig>;
 
-const baseSite: Except<SnowstormInternalSiteConfig, 'domain' | 'internal'> = {
+const baseSite: Except<SnowstormSiteConfigInternal, 'domain' | 'internal'> = {
 	pagesFolder: './pages',
 	build: {},
 	basePath: '/',
@@ -253,10 +204,10 @@ export const loadConfig = async (
 
 const processSites = async (
 	config: SnowstormConfigInternal,
-): Promise<SnowstormInternalSiteConfig[]> => {
+): Promise<SnowstormSiteConfigInternal[]> => {
 	const sites = [config.site];
 
-	if (config.sitesFolder) {
+	if (config.sitesFolder && config.sites.length) {
 		const sitesContent = await glob(
 			join(config.internal.rootFolder, config.sitesFolder, '/**'),
 			{ onlyFiles: false, deep: 1 },

@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { SnowstormInternalSiteConfig } from './../config';
+import { SnowstormSiteConfigInternal } from './../config';
 
 export interface SnowstormRoute {
 	path: string;
@@ -48,7 +48,7 @@ const processPage = (page: string) => {
 
 export const loadRoutes = async (
 	pages: string[],
-	site: SnowstormInternalSiteConfig,
+	site: SnowstormSiteConfigInternal,
 ) => {
 	const routesConfig = site.routes
 		? deepmerge(defaultRouteConfig, site.routes)

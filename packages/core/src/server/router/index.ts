@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { SnowstormInternalSiteConfig } from '../config.js';
+import { SnowstormSiteConfigInternal } from '../config.js';
 
 import { loadNormalizedPages } from './pages.js';
 import { loadRoutes, SnowstormRoute } from './routes.js';
@@ -12,7 +12,7 @@ export const generateRouter = async ({
 	site,
 }: {
 	template: string;
-	site: SnowstormInternalSiteConfig;
+	site: SnowstormSiteConfigInternal;
 }) => {
 	let tmp = (await readFile(template)).toString();
 	const basePath = site.basePath.replace(/"/g, '');
