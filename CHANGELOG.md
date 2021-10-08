@@ -1,3 +1,17 @@
+# v0.3.1 (Fri Oct 08 2021)
+
+#### 🐛 Bug Fix
+
+- build: fix lockfile [#14](https://github.com/explodingcamera/snowstorm/pull/14) ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/core`
+  - fix: fix typescript types [#13](https://github.com/explodingcamera/snowstorm/pull/13) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.3.0 (Fri Oct 08 2021)
 
 #### 🚀 Enhancement
