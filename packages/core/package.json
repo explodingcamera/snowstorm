@@ -15,7 +15,7 @@
   "types": "./index.d.ts",
   "files": [
     "tsconfig.base.json",
-    "types.d.js",
+    "types.d.ts",
     "index.js",
     "index.d.ts",
     "server.js",
