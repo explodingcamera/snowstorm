@@ -1,3 +1,21 @@
+# v0.3.0 (Fri Oct 08 2021)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`
+  - feat: add typescript types @ `snowstorm/client` [#12](https://github.com/explodingcamera/snowstorm/pull/12) ([@explodingcamera](https://github.com/explodingcamera))
+  - feat: add custom css config options ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- fix: fix out-of-date lockfile ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.2.1 (Wed Oct 06 2021)
 
 #### 🐛 Bug Fix
