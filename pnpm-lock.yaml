@@ -123,8 +123,8 @@ importers:
 
   packages/example:
     specifiers:
-      '@snowstorm/cli': ^0.3.1
-      '@snowstorm/core': ^0.3.1
+      '@snowstorm/cli': ^0.3.2
+      '@snowstorm/core': ^0.3.2
       react: 18.0.0-alpha-f2c381131-20211004
       react-dom: 18.0.0-alpha-f2c381131-20211004
     dependencies:
