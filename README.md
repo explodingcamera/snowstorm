@@ -29,7 +29,7 @@ Snowstorm is a "framework" for react, which handles the heavy lifting involved w
 ```bash
 $ npm install -S @snowstorm/core @snowstorm/cli react react-dom
 $ mkdir pages
-$ echo "export const Index = () => <h1>Hello World</h1>" > pages/index.ts
+$ echo "export const Index = () => <h1>Hello World</h1>" > pages/index.tsx
 $ npx snowstorm dev
 ```
 
