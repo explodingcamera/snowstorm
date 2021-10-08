@@ -52,7 +52,7 @@ const viteBaseConfig = (
 		>) || []),
 	],
 	// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
-	ssr: { noExternal: ['wouter'] },
+	ssr: { noExternal: ['wouter', /@snowstorm/] },
 	css: deepmerge.all([
 		// snowstorm's default css options
 		{
@@ -79,7 +79,7 @@ const viteBaseConfig = (
 	},
 	build: {
 		rollupOptions: {
-			input: join(config.internal.snowstormAssetsFolder, './index.js'),
+			input: join(config.internal.snowstormClientFolder, './index.js'),
 		},
 	},
 });

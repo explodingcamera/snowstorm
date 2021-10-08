@@ -9,6 +9,8 @@ import { startSite } from './site.js';
 import { isSnowstormProject } from './utils/is-snowstorm-project.js';
 
 import { createRequire } from 'module';
+import { rejects } from 'assert';
+import { createServer } from 'http';
 const require = createRequire(import.meta.url);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
@@ -80,20 +82,36 @@ export const start = async ({
 
 	const port = dev ? config.development.port : config.production.port;
 
-	const listening = new Promise<void>(resolve => {
-		server.listen(port, () => resolve());
-
-		startSites.forEach(({ site }) => {
-			if (site.domain === 'default')
-				return site.internal.log.info(
-					`listening on http://localhost:${port}${site.basePath}`,
-				);
-			site.internal.log.info(
-				`listening on http://${site.domain}.localhost:${port}${site.basePath}`,
-			);
+	const listening = new Promise<void>((resolve, reject) => {
+		const httpServer = createServer(server.callback());
+		httpServer.on('error', e => {
+			if (((e as any).code as string) === 'EADDRINUSE') {
+				reject(new Error('Address in use'));
+			}
 		});
+
+		try {
+			httpServer.listen(port, () => resolve());
+		} catch (error: unknown) {
+			reject(error);
+		}
 	});
 
 	log.info(`started in ${Math.round(performance.now() - serverStart)}ms`);
-	await listening;
+	listening
+		.then(() => {
+			startSites.forEach(({ site }) => {
+				if (site.domain === 'default')
+					return site.internal.log.info(
+						`listening on http://localhost:${port}${site.basePath}`,
+					);
+				site.internal.log.info(
+					`listening on http://${site.domain}.localhost:${port}${site.basePath}`,
+				);
+			});
+		})
+		.catch(_ => {
+			log.error(`failed to listen on port ${port}`);
+			process.exit(0);
+		});
 };
