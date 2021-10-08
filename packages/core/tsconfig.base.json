@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "isolatedModules": true
+  }
+}
