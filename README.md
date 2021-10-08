@@ -23,13 +23,24 @@ Snowstorm is a "framework" for react, which handles the heavy lifting involved w
 - Versitile: supports everything from complex server side code to blazing fast, javascript free static websites
 - File system based routing (which can also be disabled)
 - Multi-Site support: routes can not only based on the path but also your domain
+- First-class static exports: no features gated behind proprietary "serverless solutions
 
 ## How?
 
+Getting started with snowstorm takes less than a minute and doesn't any require confusing `init` commands:
+
 ```bash
+# install the required dependencies
 $ npm install -S @snowstorm/core @snowstorm/cli react react-dom
+
+# this folder will contain all webpages
 $ mkdir pages
-$ echo "export const Index = () => <h1>Hello World</h1>" > pages/index.tsx
+$ echo 'export const Index = () => <h1>Hello World</h1>' > pages/index.tsx
+
+# (optional) enable typescript support
+$ echo '{ "extends": "@snowstorm/core/tsconfig.base.json" }' > tsconfig.json
+
+# start the development server
 $ npx snowstorm dev
 ```
 
