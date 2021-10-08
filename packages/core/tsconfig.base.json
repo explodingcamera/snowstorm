@@ -6,6 +6,7 @@
     "strict": false,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["@snowstorm/core/types"]
   }
 }
