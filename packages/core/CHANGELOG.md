@@ -1,3 +1,17 @@
+# v0.3.2 (Fri Oct 08 2021)
+
+#### 🐛 Bug Fix
+
+- chore: add tsconfig base [#16](https://github.com/explodingcamera/snowstorm/pull/16) ([@explodingcamera](https://github.com/explodingcamera) [@actions-user](https://github.com/actions-user))
+- fix: fix types take 2 [#15](https://github.com/explodingcamera/snowstorm/pull/15) ([@explodingcamera](https://github.com/explodingcamera) [@actions-user](https://github.com/actions-user))
+
+#### Authors: 2
+
+- [@actions-user](https://github.com/actions-user)
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.3.1 (Fri Oct 08 2021)
 
 #### 🐛 Bug Fix
