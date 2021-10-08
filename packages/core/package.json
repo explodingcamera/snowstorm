@@ -30,7 +30,7 @@
     "build:client": "esbuild src/client/index.tsx src/client/load-html.tsx src/client/_error.tsx src/client/router/index.tsx --bundle --splitting --chunk-names=../chunks/[name]-[hash] --outdir=client --platform=node --target=node16 --format=esm --metafile=client.meta.json --external:_snowstorm* --external:wouter --external:@snowstorm/* --external:react --external:react-dom --minify",
     "build:index": "esbuild src/index.ts --outdir=. --platform=node --target=node16 --format=esm --minify",
     "build:server": "esbuild src/server.ts src/server/export.ts --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=. --platform=node --target=node16 --format=esm --metafile=server.meta.json --external:wouter --external:typescript --external:node-fetch --external:vite --external:@vitejs/* --banner:js='import { createRequire as topLevelCreateRequire } from \"module\";\n const require = topLevelCreateRequire(import.meta.url);'",
-    "clean": "rimraf -rf index.d.ts index.js index.js.map server.d.ts server.js server.js.map server/ client/",
+    "clean": "rimraf -rf index.d.ts index.js index.js.map server.d.ts server.js server.meta.json client.meta.json server/ client/",
     "types": "run-p --print-label types:**",
     "types:client": "tsc -p tsconfig.client.json",
     "types:server": "tsc -p tsconfig.server.json",
