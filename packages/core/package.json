@@ -13,6 +13,7 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "files": [
+    "types.d.js",
     "client.d.js",
     "index.js",
     "index.d.ts",
