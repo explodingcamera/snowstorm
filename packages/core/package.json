@@ -14,6 +14,7 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "files": [
+    "tsconfig.base.json",
     "types.d.js",
     "index.js",
     "index.d.ts",
