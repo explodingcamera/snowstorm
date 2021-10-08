@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { createSP, Head, Link } from '@snowstorm/core';
+import { useState } from 'react';
+import styles from './index.module.css';
 
 const { useSP: useStuff } = createSP('load-stuff', async () => ({ hi: 1 }), {
 	type: 'dynamic',
@@ -17,7 +18,11 @@ export const Index = () => {
 				<title>{title}</title>
 				<link rel="canonical" href="http://mysite.com/example" />
 			</Head>
-			<input value={title} onChange={e => setTitle(e.target.value)} />
+			<input
+				className={styles.lol}
+				value={title}
+				onChange={e => setTitle(e.target.value)}
+			/>
 			hi lol eadfs geht {data?.hi}
 			<Link href="/zasdf">
 				<a>hier</a>

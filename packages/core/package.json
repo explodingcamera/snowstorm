@@ -7,11 +7,13 @@
   "exports": {
     "./server": "./server.js",
     "./server/export": "./server/export.js",
-    ".": "./index.js"
+    ".": "./index.js",
+    "./client": "./client.d.ts"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
   "files": [
+    "client.d.js",
     "index.js",
     "index.d.ts",
     "server.js",

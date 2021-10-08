@@ -1,3 +1,6 @@
 {
-  "extends": "@explodingcamera/eslint-config"
+  "extends": "@explodingcamera/eslint-config",
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  }
 }
