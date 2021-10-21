@@ -16,18 +16,18 @@
     "watch:head": "nx run @snowstorm/head:watch"
   },
   "dependencies": {
-    "@explodingcamera/eslint-config": "^18.0.0",
-    "eslint": "^7.32.0",
+    "@explodingcamera/eslint-config": "^19.1.0",
+    "eslint": "^8.0.1",
     "prettier": "^2.4.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "devDependencies": {
     "@auto-it/all-contributors": "^10.32.1",
     "@auto-it/conventional-commits": "^10.32.1",
     "@auto-it/npm": "^10.32.1",
-    "@nrwl/cli": "^12.9.0",
-    "@nrwl/tao": "^12.9.0",
-    "@nrwl/workspace": "^12.9.0",
+    "@nrwl/cli": "^13.0.1",
+    "@nrwl/tao": "^13.0.1",
+    "@nrwl/workspace": "^13.0.1",
     "auto": "^10.32.1",
     "eslint-plugin-prettier": "^4.0.0",
     "lerna": "^4.0.0",
@@ -37,7 +37,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "17.0.27"
+      "@types/react": "17.0.31"
     }
   },
   "repository": "explodingcamera/snowstorm",

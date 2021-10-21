@@ -16,9 +16,9 @@
   },
   "devDependencies": {
     "@types/snowpack-env": "^2.3.4",
-    "react": "18.0.0-alpha-f2c381131-20211004",
-    "react-dom": "18.0.0-alpha-f2c381131-20211004",
-    "type-fest": "^2.3.4"
+    "react": "18.0.0-alpha-f6abf4b40-20211020",
+    "react-dom": "18.0.0-alpha-f6abf4b40-20211020",
+    "type-fest": "^2.5.1"
   },
   "publishConfig": {
     "access": "public"

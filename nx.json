@@ -36,23 +36,6 @@
       }
     ]
   },
-  "projects": {
-    "@snowstorm/cli": {
-      "implicitDependencies": []
-    },
-    "@snowstorm/core": {
-      "implicitDependencies": []
-    },
-    "@snowstorm/example": {
-      "implicitDependencies": []
-    },
-    "@snowstorm/head": {
-      "implicitDependencies": []
-    },
-    "@snowstorm/serverprops": {
-      "implicitDependencies": []
-    }
-  },
   "affected": {
     "defaultBase": "main"
   }

@@ -3,23 +3,28 @@
   "projects": {
     "@snowstorm/cli": {
       "root": "packages/cli",
-      "projectType": "library"
+      "projectType": "library",
+      "implicitDependencies": []
     },
     "@snowstorm/core": {
       "root": "packages/core",
-      "projectType": "library"
+      "projectType": "library",
+      "implicitDependencies": []
     },
     "@snowstorm/example": {
       "root": "packages/example",
-      "projectType": "application"
+      "projectType": "application",
+      "implicitDependencies": []
     },
     "@snowstorm/head": {
       "root": "packages/head",
-      "projectType": "library"
+      "projectType": "library",
+      "implicitDependencies": []
     },
     "@snowstorm/serverprops": {
       "root": "packages/serverprops",
-      "projectType": "library"
+      "projectType": "library",
+      "implicitDependencies": []
     }
   }
 }
