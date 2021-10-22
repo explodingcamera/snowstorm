@@ -1,3 +1,26 @@
+# v0.4.0 (Fri Oct 22 2021)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`
+  - feat: update to latest react alpha, minor improvements [#17](https://github.com/explodingcamera/snowstorm/pull/17) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- fix: update pnpm lock ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/core`, `@snowstorm/head`, `@snowstorm/serverprops`
+  - chore: upgrade dependencies ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/core`
+  - fix: improve error messages ([@explodingcamera](https://github.com/explodingcamera))
+  - fix: missing types definition' ([@explodingcamera](https://github.com/explodingcamera))
+  - fix: fix config not resolving through tsconfck ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.3.2 (Fri Oct 08 2021)
 
 #### 🐛 Bug Fix

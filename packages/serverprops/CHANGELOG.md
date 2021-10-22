@@ -1,3 +1,15 @@
+# v0.4.0 (Fri Oct 22 2021)
+
+#### 🐛 Bug Fix
+
+- chore: upgrade dependencies ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.1.5 (Mon Oct 04 2021)
 
 #### 🐛 Bug Fix
