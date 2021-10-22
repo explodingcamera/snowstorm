@@ -18,7 +18,7 @@ export * as serverprops from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
 
 import {} from 'react-dom/next';
-export { pipeToNodeWritable } from 'react-dom/server';
+export { renderToPipeableStream } from 'react-dom/server';
 
 interface args {
 	initialPage: SnowstormPage | undefined;
@@ -29,6 +29,7 @@ export const loadPage = async ({ path }: { path: string }): Promise<args> => {
 	const route = findRoute({ location: path });
 
 	let initialPage: SnowstormPage | undefined;
+
 	if (route?.page) initialPage = await requestPage(route?.page);
 
 	return { initialPage, route };

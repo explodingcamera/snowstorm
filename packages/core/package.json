@@ -10,7 +10,8 @@
     ".": "./index.js",
     "./client": "./client.d.ts",
     "./types": "./types.d.ts",
-    "./tsconfig.base.json": "./tsconfig.base.json"
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./base.css": "./base.css"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -18,6 +19,7 @@
     "tsconfig.base.json",
     "types.d.ts",
     "index.js",
+    "base.css",
     "index.d.ts",
     "server.js",
     "server.d.ts",

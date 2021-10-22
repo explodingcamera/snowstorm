@@ -1,7 +1,5 @@
+import '@types/react-dom/server';
+
 declare module 'react-dom/server' {
-	export function pipeToNodeWritable(
-		node: any,
-		writable: any,
-		options: any,
-	): any;
+	export function renderToPipeableStream(node: any, options: any): any;
 }
