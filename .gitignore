@@ -4,3 +4,5 @@ packages/*/lib
 
 .pnp.*
 .pnpm-debug.log
+
+**/.snowstorm

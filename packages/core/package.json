@@ -10,7 +10,8 @@
     ".": "./index.js",
     "./client": "./client.d.ts",
     "./types": "./types.d.ts",
-    "./tsconfig.base.json": "./tsconfig.base.json"
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./base.css": "./base.css"
   },
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -18,6 +19,7 @@
     "tsconfig.base.json",
     "types.d.ts",
     "index.js",
+    "base.css",
     "index.d.ts",
     "server.js",
     "server.d.ts",
@@ -53,7 +55,7 @@
     "@types/koa-logger": "^3.1.2",
     "@types/koa-mount": "^4.0.1",
     "@types/koa-static": "^4.0.2",
-    "@types/node": "^16.11.2",
+    "@types/node": "^16.11.3",
     "@types/react": "17.0.31",
     "@types/react-dom": "^17.0.10",
     "@types/website-scraper": "^1.2.6",

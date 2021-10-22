@@ -38,11 +38,15 @@ export const ssr =
 		try {
 			const ssrModule = dev
 				? await devServer.ssrLoadModule('_snowstorm/load-html.js')
-				: // eslint-disable-next-line @typescript-eslint/no-require-imports
-				  require(site.internal.viteFolder + '/server/load-html.js');
+				: require(site.internal.viteFolder + '/server/load-html.js');
 
-			const { loadPage, renderPage, serverprops, getHead, pipeToNodeWritable } =
-				ssrModule;
+			const {
+				loadPage,
+				renderPage,
+				serverprops,
+				getHead,
+				renderToPipeableStream,
+			} = ssrModule;
 
 			const page = await loadPage({ path: ctx.path });
 
@@ -93,14 +97,14 @@ export const ssr =
 			[top, bottom] = doc.split('<!--SNOWSTORM APP-->');
 
 			let didError = false;
-			const { startWriting, abort } = pipeToNodeWritable(reactPage, ctx.res, {
+			const { pipe, abort } = renderToPipeableStream(reactPage, {
 				onCompleteShell() {
 					ctx.status = didError ? 500 : 200;
 					ctx.res.write(
 						top + `<div id="app"${(dev && 'data-hmr=true') || ''}>`,
 					);
 
-					startWriting();
+					pipe(ctx.res);
 					ctx.res.write('</div>' + bottom);
 				},
 				onError(error: unknown) {

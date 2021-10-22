@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import { Route, Switch } from 'wouter';
 import makeMatcher from 'wouter/matcher';
 
@@ -68,10 +68,15 @@ const App = ({
 	);
 };
 
+const h1Style: CSSProperties = {
+	fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
+};
+
 type PageStatus = 'ERROR' | 'LOADING' | 'LOADED';
 const pageLoader = (page: string, lastPage: string) => {
 	const Component: React.FC = () => {
 		const [status, setStatus] = useState<PageStatus>('LOADING');
+		const [error, setError] = useState<string>('');
 		const [{ Page, loadPageAsync }, setPage] = useState<{
 			loadPageAsync: boolean;
 			Page: SnowstormPage | undefined;
@@ -93,32 +98,48 @@ const pageLoader = (page: string, lastPage: string) => {
 						if (!pagesCache.get(page)) pagesCache.set(page, LoadedPage);
 						setPage({ Page: LoadedPage, loadPageAsync: false });
 					})
-					.catch(e => console.error(e));
+					.catch(e => {
+						console.log(e);
+						setError(e);
+					});
 			}
 		}, [loadPageAsync]);
 
-		return Page ? <Page /> : <h1>loading</h1>;
+		if (error !== '') return <h1 style={h1Style} />;
+
+		return Page ? <Page /> : <h1 style={h1Style}>loading</h1>;
 	};
 
 	return Component;
 };
 
+const calculateAlternativePageName = (page: string) =>
+	capitalize(page.split('/').slice(-1)[0].replace(/\[|\]/g, ''));
+
 const selectPageExport = (
 	page: string,
 	pageExports: Record<string, SnowstormPage>,
 ) => {
-	const alternativeName = capitalize(
-		page.split('/').slice(-1)[0].replace(/\[|\]/g, ''),
-	);
-
+	const alternativeName = calculateAlternativePageName(page);
 	const Page: SnowstormPage | undefined =
 		pageExports.default || pageExports[alternativeName] || undefined;
 
 	return Page;
 };
 
-export const requestPage = async (page: string) =>
-	allPages[page]().then(pageExports => selectPageExport(page, pageExports));
+export const requestPage = async (page: string) => {
+	const pageExports = await allPages[page]();
+	const pageExport = selectPageExport(page, pageExports);
+	if (!pageExport)
+		return Promise.reject(
+			new Error(
+				`Failed to find page export for page '${page}'. Expected 'export default /* react component */' or 'export const ${calculateAlternativePageName(
+					page,
+				)} = /* react component */' `,
+			),
+		);
+	return pageExport;
+};
 
 interface InitialPage {
 	route?: SnowstormRoute;

@@ -16,7 +16,7 @@
     "watch:head": "nx run @snowstorm/head:watch"
   },
   "dependencies": {
-    "@explodingcamera/eslint-config": "^19.1.0",
+    "@explodingcamera/eslint-config": "^20.0.0",
     "eslint": "^8.0.1",
     "prettier": "^2.4.1",
     "typescript": "^4.4.4"
