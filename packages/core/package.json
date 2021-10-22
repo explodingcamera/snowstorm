@@ -53,7 +53,7 @@
     "@types/koa-logger": "^3.1.2",
     "@types/koa-mount": "^4.0.1",
     "@types/koa-static": "^4.0.2",
-    "@types/node": "^16.11.2",
+    "@types/node": "^16.11.3",
     "@types/react": "17.0.31",
     "@types/react-dom": "^17.0.10",
     "@types/website-scraper": "^1.2.6",

@@ -11,8 +11,8 @@
     "start": "snowstorm start"
   },
   "dependencies": {
-    "@snowstorm/cli": "workspace:^0.3.2",
-    "@snowstorm/core": "workspace:^0.3.2",
+    "@snowstorm/cli": "link:../cli",
+    "@snowstorm/core": "link:../core",
     "@types/react": "^17.0.31",
     "react": "18.0.0-alpha-f6abf4b40-20211020",
     "react-dom": "18.0.0-alpha-f6abf4b40-20211020",
