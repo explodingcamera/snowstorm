@@ -1,3 +1,15 @@
+# v0.4.1 (Wed Nov 03 2021)
+
+#### 🐛 Bug Fix
+
+- fix: fix multisite mode [#18](https://github.com/explodingcamera/snowstorm/pull/18) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.4.0 (Fri Oct 22 2021)
 
 #### 🚀 Enhancement
