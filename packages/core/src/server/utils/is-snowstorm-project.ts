@@ -17,6 +17,9 @@ export const isSnowstormProject = (): string | void => {
 	let sitesExists;
 	try {
 		pagesExists = lstatSync(join(process.cwd(), './pages')).isDirectory();
+	} catch (_: unknown) {}
+
+	try {
 		sitesExists = lstatSync(join(process.cwd(), './sites')).isDirectory();
 	} catch (_: unknown) {}
 
