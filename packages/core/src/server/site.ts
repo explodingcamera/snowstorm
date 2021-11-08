@@ -92,7 +92,6 @@ const viteProdConfig = (
 	...viteBaseConfig(config, site),
 	// kinda ugly :(
 	root: config.internal.snowstormAssetsFolder,
-	plugins: [],
 	build: {
 		outDir: site.internal.viteFolder + (server ? '/server' : '/client'),
 		emptyOutDir: true,
