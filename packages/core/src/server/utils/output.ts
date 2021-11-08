@@ -28,6 +28,8 @@ export async function outputFile(
 	const exists = await checkFileExists(dir);
 	if (exists) return fs.writeFile(file, data, encoding);
 
+	console.log('yeeet');
+
 	await fs.mkdir(dir, {
 		mode: getMode(options),
 		recursive: true,
