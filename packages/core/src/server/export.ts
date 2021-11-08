@@ -10,6 +10,7 @@ import { outputFile } from './utils/output';
 
 import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
 import { loadNormalizedPages } from './router/pages.js';
+import { cp } from 'fs/promises';
 
 export const exportProject = async ({
 	path,
@@ -33,17 +34,38 @@ export const exportProject = async ({
 	);
 
 	config.production.port = await getFreePort();
-	await startServer({ dev: false, path, overrideConfig: config, debug });
+	await startServer({ dev: false, path, overrideConfig: config, debug }).catch(
+		e => log.error('failed to start server', e),
+	);
+	const directory = join(config.internal.rootFolder, config.export.outDir);
 
 	const urls: string[] = [];
+	const copy = [];
 	for (const { site, paths } of sites) {
+		copy.push(
+			cp(
+				join(site.internal.viteFolder, '/client'),
+				join(directory, site.domain),
+				{
+					recursive: true,
+					dereference: false,
+				},
+			),
+		);
+
 		const url = `http://${
 			site.domain === 'default' ? '' : site.domain + '.'
 		}localhost:${config.production.port}`;
 		urls.push(...paths.map(path => url + path));
 	}
 
-	const directory = join(config.internal.rootFolder, config.export.outDir);
+	log.info('copying build results...');
+	await Promise.all(copy).catch(
+		_e => {
+			// ignore result here, always throws error even though it worked
+		},
+		// log.error('failed to copy build results', e),
+	);
 
 	log.info('rendering pages...');
 	const renderStart = performance.now();
@@ -60,7 +82,7 @@ export const exportProject = async ({
 		plugins: [
 			new SnowstormScrapePlugin({ multisite: sites.length > 1 || undefined }),
 		],
-	});
+	}).catch(e => log.error('failed to scrape files', e));
 
 	log.info(
 		`finished rendering in ${Math.round(performance.now() - renderStart)}ms`,

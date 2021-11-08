@@ -7,14 +7,13 @@ const require = createRequire(import.meta.url);
 export const isSnowstormProject = (): string | void => {
 	let userPkg;
 	try {
-		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		userPkg = require(join(process.cwd(), './package.json'));
 	} catch (_: unknown) {
 		return 'No package.json in current working directory';
 	}
 
-	let pagesExists;
-	let sitesExists;
+	let pagesExists = false;
+	let sitesExists = false;
 	try {
 		pagesExists = lstatSync(join(process.cwd(), './pages')).isDirectory();
 	} catch (_: unknown) {}
@@ -29,5 +28,9 @@ export const isSnowstormProject = (): string | void => {
 
 	if (!pagesExists && !sitesExists) {
 		return 'no pages/sites directory';
+	}
+
+	if (pagesExists && sitesExists) {
+		return "pages and sites directories can't exist at the same time";
 	}
 };

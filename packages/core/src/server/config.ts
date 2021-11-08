@@ -239,7 +239,7 @@ const processSites = async (
 				const baseFolder = config.internal.sitesFolder
 					? join(
 							config.internal.sitesFolder,
-							site.domain ? `./${site.domain}` : '../',
+							site.domain ? `./${site.domain}` : './default',
 					  )
 					: config.internal.rootFolder;
 
