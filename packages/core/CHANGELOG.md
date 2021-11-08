@@ -1,3 +1,15 @@
+# v0.5.0 (Mon Nov 08 2021)
+
+#### 🚀 Enhancement
+
+- feat: full export support [#19](https://github.com/explodingcamera/snowstorm/pull/19) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.4.1 (Wed Nov 03 2021)
 
 #### 🐛 Bug Fix
