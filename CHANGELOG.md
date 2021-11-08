@@ -1,3 +1,16 @@
+# v0.5.1 (Mon Nov 08 2021)
+
+#### 🐛 Bug Fix
+
+- `@snowstorm/core`, `@snowstorm/serverprops`
+  - fix: fix plugin loading in production [#20](https://github.com/explodingcamera/snowstorm/pull/20) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.5.0 (Mon Nov 08 2021)
 
 #### 🚀 Enhancement
