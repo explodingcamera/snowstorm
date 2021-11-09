@@ -78,6 +78,9 @@ const viteBaseConfig = (
 		},
 	},
 	build: {
+		commonjsOptions: {
+			transformMixedEsModules: true,
+		},
 		rollupOptions: {
 			input: join(config.internal.snowstormClientFolder, './index.js'),
 		},
