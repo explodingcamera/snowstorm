@@ -174,7 +174,7 @@ const collectPreload = async (
 
 	return entries[0]
 		.map(v => {
-			if (!Array.isArray(v) || v.length !== 2) return '';
+			if (!Array.isArray(v)) return '';
 
 			return v
 				.map((e: unknown) => {
