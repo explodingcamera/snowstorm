@@ -129,8 +129,6 @@ class SnowstormScrapePlugin {
 
 			const text = resource.getText();
 			await outputFile(filename, text, { encoding: 'binary' });
-			console.log('created ', filename);
-
 			loadedResources.push(resource);
 		});
 	};

@@ -99,7 +99,7 @@ const pageLoader = (page: string, lastPage: string) => {
 						setPage({ Page: LoadedPage, loadPageAsync: false });
 					})
 					.catch(e => {
-						console.log(e);
+						console.error(e);
 						setError(e);
 					});
 			}
