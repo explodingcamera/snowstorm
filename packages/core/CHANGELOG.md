@@ -1,3 +1,15 @@
+# v0.6.0 (Wed Nov 10 2021)
+
+#### 🚀 Enhancement
+
+- feat: preload css & js modules [#21](https://github.com/explodingcamera/snowstorm/pull/21) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.5.1 (Mon Nov 08 2021)
 
 #### 🐛 Bug Fix
