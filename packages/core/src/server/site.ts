@@ -77,7 +77,16 @@ const viteBaseConfig = (
 			'_snowstorm-pages': site.internal.pagesFolder,
 		},
 	},
+	optimizeDeps: {
+		include: [
+			...(site.build.forcePrebundle || []),
+			...(config.site?.build?.forcePrebundle || []),
+		] as string[],
+	},
 	build: {
+		commonjsOptions: {
+			transformMixedEsModules: true,
+		},
 		rollupOptions: {
 			input: join(config.internal.snowstormClientFolder, './index.js'),
 		},
@@ -93,6 +102,9 @@ const viteProdConfig = (
 	// kinda ugly :(
 	root: config.internal.snowstormAssetsFolder,
 	build: {
+		commonjsOptions: {
+			transformMixedEsModules: true,
+		},
 		outDir: site.internal.viteFolder + (server ? '/server' : '/client'),
 		emptyOutDir: true,
 		ssr: server,

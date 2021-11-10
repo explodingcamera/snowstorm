@@ -31,6 +31,9 @@ export interface SnowstormBuildOptions {
 	css?: CSSOptions;
 	json?: JsonOptions;
 	vitePlugins?: Array<PluginOption | PluginOption[]>;
+
+	// force pre-bundle module. can be helpful if commonjs packages are not detected and thus not converted to esm
+	forcePrebundle?: string[];
 }
 
 export interface SnowstormSiteConfigInternal {

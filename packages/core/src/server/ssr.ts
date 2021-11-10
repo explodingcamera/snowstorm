@@ -1,14 +1,21 @@
 import { Middleware } from 'koa';
 import { readFile } from 'fs/promises';
-import { SnowstormConfigInternal, SnowstormSiteConfigInternal } from './config';
+import {
+	SnowstormConfigInternal,
+	SnowstormSiteConfig,
+	SnowstormSiteConfigInternal,
+} from './config';
 import { join } from 'path';
 import { ViteDevServer } from 'vite';
 import { createRequire } from 'module';
+import { checkFileExists } from './utils/file-exists';
 const require = createRequire(import.meta.url);
 
 const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
+
+let manifest: Record<string, unknown> | undefined;
 
 export const ssr =
 	({
@@ -22,7 +29,7 @@ export const ssr =
 		site: SnowstormSiteConfigInternal;
 		config: SnowstormConfigInternal;
 	}): Middleware =>
-	async (ctx, next) => {
+	async ctx => {
 		ctx.status = 200;
 		if (!dev) {
 			ctx.set('ETag', version);
@@ -30,6 +37,16 @@ export const ssr =
 			if (ctx.fresh) {
 				ctx.status = 304;
 				return;
+			}
+		}
+
+		if (!dev && !manifest) {
+			const loc = join(site.internal.viteFolder, './client/ssr-manifest.json');
+			if (await checkFileExists(loc)) {
+				const data = await readFile(loc, 'utf-8');
+				try {
+					if (!manifest) manifest = JSON.parse(data);
+				} catch {}
 			}
 		}
 
@@ -49,6 +66,11 @@ export const ssr =
 			} = ssrModule;
 
 			const page = await loadPage({ path: ctx.path });
+
+			let internalHead = '';
+			if (!dev && manifest) {
+				internalHead = await collectPreload(page.page, site, manifest);
+			}
 
 			await serverprops.processSPs();
 			const reactPage: string = await renderPage({
@@ -87,6 +109,7 @@ export const ssr =
 						? `<script id="__serverprops" type="application/json">${props}</script>`
 						: '',
 				)
+				.replace('<!--SNOWSTORM INTERNAL-HEAD-->', internalHead)
 				.replace('<!--SNOWSTORM HEAD-->', head);
 
 			ctx.res.socket?.on('error', error => {
@@ -130,3 +153,40 @@ export const ssr =
 
 		ctx.set('Content-Type', 'text/html; charset=UTF-8');
 	};
+
+const collectPreload = async (
+	page: string,
+	site: SnowstormSiteConfig,
+	manifest: Record<string, unknown>,
+) => {
+	const entries = Object.entries(manifest).filter(
+		([key]) =>
+			key.includes(`/pages/${page}.`) &&
+			/.(js|mjs|jsx|ts|tsx|md|mdx)$/.test(key),
+	);
+
+	if (!entries.length) return '';
+	if (entries.length !== 1) {
+		throw new Error(
+			'something went wrong while collecting assets for page ' + page,
+		);
+	}
+
+	return entries[0]
+		.map(v => {
+			if (!Array.isArray(v) || v.length !== 2) return '';
+
+			return v
+				.map((e: unknown) => {
+					if (typeof e !== 'string') return '';
+
+					if (e.endsWith('.js'))
+						return `<link rel="modulepreload" href="${e}"/>`;
+					if (e.endsWith('.css')) return `<link rel="stylesheet" href="${e}"/>`;
+
+					return '';
+				})
+				.join('');
+		})
+		.join('');
+};

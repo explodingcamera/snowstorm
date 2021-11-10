@@ -23,6 +23,7 @@ export { renderToPipeableStream } from 'react-dom/server';
 interface args {
 	initialPage: SnowstormPage | undefined;
 	route: SnowstormRoute | undefined;
+	page?: string;
 }
 
 export const loadPage = async ({ path }: { path: string }): Promise<args> => {
@@ -32,7 +33,7 @@ export const loadPage = async ({ path }: { path: string }): Promise<args> => {
 
 	if (route?.page) initialPage = await requestPage(route?.page);
 
-	return { initialPage, route };
+	return { initialPage, route, page: route?.page };
 };
 
 // we have to render the html here in the client code to prevent issues like
