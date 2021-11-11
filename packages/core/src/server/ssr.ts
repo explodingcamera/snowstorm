@@ -10,8 +10,6 @@ const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
 
-let manifest: Record<string, string[]> | undefined;
-
 export const ssr =
 	({
 		devServer,
@@ -35,6 +33,7 @@ export const ssr =
 			}
 		}
 
+		let manifest: Record<string, string[]> | undefined;
 		if (!dev && !manifest) {
 			const loc = join(site.internal.viteFolder, './client/ssr-manifest.json');
 			if (await checkFileExists(loc)) {
