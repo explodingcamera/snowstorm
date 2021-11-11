@@ -171,7 +171,7 @@ const collectPreload = async (
 			const isPage =
 				key.includes(`/pages/${page}.`) &&
 				/.(js|mjs|jsx|ts|tsx|md|mdx)$/.test(key);
-			const isDep = children.some(c => key.includes(c));
+			const isDep = children?.some(c => key.includes(c)) || false;
 			return isPage || isDep;
 		})
 		.map(x => x[1])
