@@ -2,6 +2,8 @@ import { createSP, Head, Link } from '@snowstorm/core';
 import { useState } from 'react';
 import styles from './index.module.css';
 
+import './../components/lol';
+
 const { useSP: useStuff } = createSP('load-stuff', async () => ({ hi: 1 }), {
 	type: 'dynamic',
 	runOnClient: false,

@@ -1,15 +1,10 @@
 import { Middleware } from 'koa';
 import { readFile } from 'fs/promises';
-import {
-	SnowstormConfigInternal,
-	SnowstormSiteConfig,
-	SnowstormSiteConfigInternal,
-} from './config';
+import { SnowstormConfigInternal, SnowstormSiteConfigInternal } from './config';
 import { join } from 'path';
 import { ViteDevServer } from 'vite';
-import { createRequire } from 'module';
 import { checkFileExists } from './utils/file-exists';
-const require = createRequire(import.meta.url);
+import { modules } from './site';
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -53,9 +48,11 @@ export const ssr =
 		let top = '';
 		let bottom = '';
 		try {
+			(global as any).___snowstorm_collect_modules = [];
+
 			const ssrModule = dev
 				? await devServer.ssrLoadModule('_snowstorm/load-html.js')
-				: require(site.internal.viteFolder + '/server/load-html.js');
+				: await import(site.internal.viteFolder + '/server/load-html.js');
 
 			const {
 				loadPage,
@@ -156,9 +153,20 @@ export const ssr =
 
 const collectPreload = async (
 	page: string,
-	site: SnowstormSiteConfig,
+	site: SnowstormSiteConfigInternal,
 	manifest: Record<string, unknown>,
 ) => {
+	const children = modules
+		.filter(m => m.id.startsWith(`${site.internal.baseFolder}/pages/${page}`))
+		.map(m => ({
+			id: m.id,
+			dependencies: m.dependencies
+				.filter(d => d.startsWith(site.internal.baseFolder))
+				.map(d => d.replace(site.internal.baseFolder, '')),
+		}));
+
+	console.log(children);
+
 	const entries = Object.entries(manifest).filter(
 		([key]) =>
 			key.includes(`/pages/${page}.`) &&
