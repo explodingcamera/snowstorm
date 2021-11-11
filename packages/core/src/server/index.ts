@@ -13,7 +13,7 @@ import { rejects } from 'assert';
 import { createServer } from 'http';
 const require = createRequire(import.meta.url);
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('./../package.json');
 process.setMaxListeners(10000);
 
@@ -98,6 +98,7 @@ export const start = async ({
 	});
 
 	log.info(`started in ${Math.round(performance.now() - serverStart)}ms`);
+
 	listening
 		.then(() => {
 			startSites.forEach(({ site }) => {

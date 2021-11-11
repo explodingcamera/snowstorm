@@ -10,7 +10,7 @@ const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
 
-let manifest: Record<string, unknown> | undefined;
+let manifest: Record<string, string[]> | undefined;
 
 export const ssr =
 	({
@@ -66,7 +66,7 @@ export const ssr =
 
 			let internalHead = '';
 			if (!dev && manifest) {
-				internalHead = await collectPreload(page.page, site, manifest);
+				internalHead = await collectPreload(page.page, site, config, manifest);
 			}
 
 			await serverprops.processSPs();
@@ -154,47 +154,38 @@ export const ssr =
 const collectPreload = async (
 	page: string,
 	site: SnowstormSiteConfigInternal,
-	manifest: Record<string, unknown>,
+	config: SnowstormConfigInternal,
+	manifest: Record<string, string[]>,
 ) => {
 	const children = modules
-		.filter(m => m.id.startsWith(`${site.internal.baseFolder}/pages/${page}`))
+		.filter(m => m.id.includes(`${site.internal.baseFolder}/pages/${page}`))
 		.map(m => ({
 			id: m.id,
 			dependencies: m.dependencies
-				.filter(d => d.startsWith(site.internal.baseFolder))
-				.map(d => d.replace(site.internal.baseFolder, '')),
-		}));
+				.filter(d => d.startsWith(config.internal.rootFolder))
+				.map(d => d.replace(config.internal.rootFolder, '')),
+		}))?.[0]?.dependencies;
 
-	console.log(children);
-
-	const entries = Object.entries(manifest).filter(
-		([key]) =>
-			key.includes(`/pages/${page}.`) &&
-			/.(js|mjs|jsx|ts|tsx|md|mdx)$/.test(key),
-	);
-
-	if (!entries.length) return '';
-	if (entries.length !== 1) {
-		throw new Error(
-			'something went wrong while collecting assets for page ' + page,
-		);
-	}
-
-	return entries[0]
-		.map(v => {
-			if (!Array.isArray(v)) return '';
-
-			return v
-				.map((e: unknown) => {
-					if (typeof e !== 'string') return '';
-
-					if (e.endsWith('.js'))
-						return `<link rel="modulepreload" href="${e}"/>`;
-					if (e.endsWith('.css')) return `<link rel="stylesheet" href="${e}"/>`;
-
-					return '';
-				})
-				.join('');
+	const entries: string[] = Object.entries(manifest)
+		.filter(([key]) => {
+			const isPage =
+				key.includes(`/pages/${page}.`) &&
+				/.(js|mjs|jsx|ts|tsx|md|mdx)$/.test(key);
+			const isDep = children.some(c => key.includes(c));
+			return isPage || isDep;
 		})
-		.join('');
+		.map(x => x[1])
+		.flat();
+
+	const preload = [...new Set(entries)];
+
+	const html = preload
+		.map(v => {
+			if (v.endsWith('.js')) return `<link rel="modulepreload" href="${v}"/>`;
+			if (v.endsWith('.css')) return `<link rel="stylesheet" href="${v}"/>`;
+			return '';
+		})
+		.join('\n');
+
+	return html;
 };
