@@ -208,7 +208,7 @@ export const loadConfig = async (
 const processSites = async (
 	config: SnowstormConfigInternal,
 ): Promise<SnowstormSiteConfigInternal[]> => {
-	const sites = [config.site];
+	const sites = [];
 
 	if (config.sitesFolder) {
 		const sitesContent = await glob(
@@ -230,6 +230,8 @@ const processSites = async (
 				),
 			);
 		}
+	} else {
+		sites.push(config.site);
 	}
 
 	return (

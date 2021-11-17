@@ -11,6 +11,7 @@ import {
 	CSSOptions,
 	InlineConfig,
 	JsonOptions,
+	Plugin,
 	PluginOption,
 } from 'vite';
 
@@ -32,6 +33,46 @@ import deepmerge from 'deepmerge';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+export let modules: Array<{
+	id: string;
+	dependencies: string[];
+}> = [];
+
+function snowstormCollectModules(base: string): Plugin {
+	return {
+		name: 'snowstorm-collect-modules',
+		generateBundle() {
+			const ids: string[] = [];
+			for (const moduleId of this.getModuleIds()) {
+				ids.push(moduleId);
+			}
+
+			const getAllDeps = (id: string) => {
+				let seen: string[] = [];
+				const getDependencies = (id: string) => {
+					if (seen.includes(id)) return;
+					seen.push(id);
+					let deps = this.getModuleInfo(id)?.importedIds;
+					if (!deps) return;
+					deps = deps.filter(d => !seen.includes(d));
+					seen = [...seen, ...deps];
+					for (const dep of deps) getDependencies(dep);
+				};
+
+				getDependencies(id);
+				return seen.filter(i => i !== id);
+			};
+
+			modules = ids
+				.filter(id => id.startsWith(base))
+				.map(id => ({
+					id,
+					dependencies: getAllDeps(id),
+				}));
+		},
+	};
+}
+
 const viteBaseConfig = (
 	config: SnowstormConfigInternal,
 	site: SnowstormSiteConfigInternal,
@@ -41,7 +82,7 @@ const viteBaseConfig = (
 	configFile: false,
 	plugins: [
 		// snowstorm's default plugins
-		...[reactRefresh()],
+		...[reactRefresh(), snowstormCollectModules(site.internal.baseFolder)],
 
 		// default site plugins
 		...(site.build.vitePlugins || []),
