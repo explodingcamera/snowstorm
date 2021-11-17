@@ -1,3 +1,15 @@
+# v0.6.1 (Wed Nov 17 2021)
+
+#### 🐛 Bug Fix
+
+- fix: fix ssr preload [#22](https://github.com/explodingcamera/snowstorm/pull/22) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.6.0 (Wed Nov 10 2021)
 
 #### 🚀 Enhancement
