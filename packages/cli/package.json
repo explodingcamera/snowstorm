@@ -11,7 +11,7 @@
   "author": "",
   "dependencies": {
     "@snowstorm/core": "link:../core",
-    "meow": "^10.1.1",
-    "yargs": "^17.2.1"
+    "meow": "^10.1.2",
+    "yargs": "^17.3.0"
   }
 }
