@@ -13,9 +13,9 @@
   "dependencies": {
     "@snowstorm/cli": "link:../cli",
     "@snowstorm/core": "link:../core",
-    "@types/react": "17.0.37",
-    "react": "18.0.0-beta-12bffc78d-20211206",
-    "react-dom": "18.0.0-alpha-f6abf4b40-20211020",
+    "@types/react": "17.0.38",
+    "react": "18.0.0-rc.0",
+    "react-dom": "18.0.0-rc.0",
     "sass": "^1.44.0",
     "vite-plugin-fonts": "^0.2.2",
     "wouter": "^2.7.5"
