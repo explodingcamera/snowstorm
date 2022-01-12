@@ -210,11 +210,11 @@ const processSites = async (
 ): Promise<SnowstormSiteConfigInternal[]> => {
 	const sites = [];
 
-	if (config.sitesFolder) {
-		const sitesContent = await glob(
-			join(config.internal.rootFolder, config.sitesFolder, '/**'),
-			{ onlyFiles: false, deep: 1 },
-		);
+	if (config.internal.sitesFolder) {
+		const sitesContent = await glob(join(config.internal.sitesFolder, '/**'), {
+			onlyFiles: false,
+			deep: 1,
+		});
 
 		for (const siteName of sitesContent) {
 			const existingConfig = config.sites.find(
