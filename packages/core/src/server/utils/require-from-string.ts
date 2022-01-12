@@ -17,8 +17,6 @@ export function requireFromString(code: string) {
 // export function requireFromString(code: string, filename?: string) {
 // 	filename = filename || 'snowstorm.config.js';
 
-// 	console.log('requiring from string');
-
 // 	if (typeof code !== 'string') {
 // 		throw new Error('code must be a string, not ' + typeof code);
 // 	}

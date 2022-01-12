@@ -138,7 +138,10 @@ const viteBaseConfig = (
 
 	res?.plugins?.push(
 		// snowstorm's default plugins
-		...[react(), snowstormCollectModules(site.internal.baseFolder)],
+		...[
+			react({ jsxRuntime: 'classic' }),
+			snowstormCollectModules(site.internal.baseFolder),
+		],
 		// default site plugins
 		...(site.build.vitePlugins || []),
 	);

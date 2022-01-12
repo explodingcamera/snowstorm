@@ -5,9 +5,13 @@ export type Pages = {
 	_app: () => SnowstormCustomApp | undefined;
 } & Record<string, () => Promise<Record<string, SnowstormPage>>>;
 
-export interface SnowstormPage extends FunctionComponent {}
-export interface SnowstormCustomError extends FunctionComponent {}
-export interface SnowstormCustomApp extends FunctionComponent {}
+export type SnowstormPage = FunctionComponent;
+export type SnowstormCustomError = FunctionComponent;
+export type SnowstormCustomApp = FunctionComponent<{
+	exports?: Record<string, any>;
+	children: React.ReactNode;
+}>;
+
 export interface SnowstormRoute {
 	path: string;
 	page: string;

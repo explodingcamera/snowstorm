@@ -21,9 +21,10 @@ export const generateRouter = async ({
 	const pagesLocation = '_snowstorm-pages';
 
 	let pages = await loadPages(site.internal.pagesFolder);
+	const normalizedPages = stripFileExtensions(pages);
 
-	const customErrorPage = pages.includes('_error');
-	const customAppPage = pages.includes('_app');
+	const customErrorPage = normalizedPages.includes('_error');
+	const customAppPage = normalizedPages.includes('_app');
 
 	pages = pages.filter(r => !r.startsWith('_'));
 	const processedPages = pages.map(
@@ -46,7 +47,6 @@ export const generateRouter = async ({
 		`  "_error": () => Error`,
 	);
 
-	const normalizedPages = stripFileExtensions(pages);
 	const routes = await loadRoutes(normalizedPages, site);
 	const processedRoutes = routes.map(route => {
 		let routeString;

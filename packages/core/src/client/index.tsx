@@ -7,9 +7,9 @@ import { Router } from 'wouter';
 import {
 	basePath,
 	findRoute,
+	ImportedPageModule,
 	Page,
 	requestPage,
-	SnowstormPage,
 } from './router';
 import makeMatcher from 'wouter/matcher';
 
@@ -24,20 +24,19 @@ if (!loc.startsWith('/')) loc = '/' + loc;
 		location: loc,
 	});
 
-	let pageComponent: SnowstormPage | undefined;
+	let pageComponent: ImportedPageModule | undefined;
 	if (route?.page) pageComponent = await requestPage(route?.page);
 
-	const pageProps = {
-		initialPage: {
-			route,
-			component: pageComponent,
-		},
+	const initialPage = {
+		route,
+		Component: pageComponent?.Component,
+		exports: pageComponent?.exports,
 	};
 
 	const matcher = makeMatcher();
 	const page = (
 		<Router matcher={matcher} base={basePath === '/' ? undefined : basePath}>
-			<Page {...pageProps} />
+			<Page initialPage={initialPage} />
 		</Router>
 	);
 

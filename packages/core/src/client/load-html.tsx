@@ -4,9 +4,9 @@ import {
 	Page,
 	findRoute,
 	requestPage,
-	SnowstormPage,
 	SnowstormRoute,
 	basePath,
+	ImportedPageModule,
 } from './router';
 
 import { Router } from 'wouter';
@@ -21,18 +21,15 @@ import {} from 'react-dom/next';
 export { renderToPipeableStream } from 'react-dom/server';
 
 interface args {
-	initialPage: SnowstormPage | undefined;
+	initialPage: ImportedPageModule | undefined;
 	route: SnowstormRoute | undefined;
 	page?: string;
 }
 
 export const loadPage = async ({ path }: { path: string }): Promise<args> => {
 	const route = findRoute({ location: path });
-
-	let initialPage: SnowstormPage | undefined;
-
+	let initialPage: ImportedPageModule | undefined;
 	if (route?.page) initialPage = await requestPage(route?.page);
-
 	return { initialPage, route, page: route?.page };
 };
 
@@ -55,7 +52,8 @@ export const renderPage = async ({
 			<Page
 				initialPage={{
 					route,
-					component: initialPage,
+					Component: initialPage?.Component,
+					exports: initialPage?.exports,
 				}}
 			/>
 		</Router>

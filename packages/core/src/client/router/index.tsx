@@ -1,5 +1,5 @@
-import React, { CSSProperties, useEffect, useState } from 'react';
-import { Route, Switch } from 'wouter';
+import React, { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
+import { Route, Switch, useLocation } from 'wouter';
 import makeMatcher from 'wouter/matcher';
 
 import {
@@ -29,36 +29,69 @@ export const allPages: Pages = _pages;
 export const allRoutes: SnowstormRoute[] = _allRoutes;
 export const basePath: string = _basePath;
 
+export interface ImportedPageModule {
+	Component: SnowstormPage;
+	exports: Record<string, any>;
+}
+
+export interface InitialPage {
+	route?: SnowstormRoute;
+	Component?: SnowstormPage;
+	exports?: Record<string, any>;
+}
+
 const capitalize = (string: string) =>
 	string.charAt(0).toUpperCase() + string.slice(1);
 
-const pagesCache = new Map<string, SnowstormPage>();
+const pagesCache = new Map<string, ImportedPageModule>();
 let lastPage = '';
 
+let curr: ImportedPageModule | undefined;
 const App = ({
 	Wrapper,
 	ErrorPage,
-}: {
+	initialPageName,
+}: { 
 	Wrapper?: SnowstormCustomApp;
 	ErrorPage: SnowstormCustomError;
+	initialPageName?: string;
 }) => {
-	const routeComponents = (
+	const [currentPage, setCurrentPage] = useState<ImportedPageModule | undefined>(() => initialPageName && pagesCache.get(initialPageName) || undefined);
+	curr = currentPage;
+
+	const setPage = (page?: ImportedPageModule) => {
+		if (page !== currentPage) 
+			setCurrentPage(page)
+	}
+ 
+	const pageLoader = (r: SnowstormRoute) => () => {
+		const page = usePage(r.page, lastPage);
+		console.log(1);
+
+		useEffect(() => {
+			setPage(page)
+		}, [page]);
+
+		lastPage = r.page;
+		if (!page?.Component) return <h1>loading</h1>
+
+		const {Component} = page;
+		return <Component/>
+	}
+
+	const routeComponents = useMemo(() => (
 		<Switch>
 			{allRoutes.map(r => (
 				<Route
 					path={r.path}
 					key={r.page}
-					component={() => {
-						const page = pageLoader(r.page, lastPage);
-						lastPage = r.page;
-						return page({});
-					}}
+					component={pageLoader(r)}
 				/>
 			))}
 		</Switch>
-	);
+	), []);
 
-	const site = Wrapper ? <Wrapper>{routeComponents}</Wrapper> : routeComponents;
+	const site = Wrapper ? <Wrapper exports={currentPage?.exports}>{routeComponents}</Wrapper> : routeComponents;
 
 	return (
 		<>
@@ -73,19 +106,21 @@ const h1Style: CSSProperties = {
 };
 
 type PageStatus = 'ERROR' | 'LOADING' | 'LOADED';
-const pageLoader = (page: string, lastPage: string) => {
-	const Component: React.FC = () => {
+
+const usePage = (page: string, lastPage: string) => {
 		const [status, setStatus] = useState<PageStatus>('LOADING');
 		const [error, setError] = useState<string>('');
+
 		const [{ Page, loadPageAsync }, setPage] = useState<{
 			loadPageAsync: boolean;
-			Page: SnowstormPage | undefined;
+			Page: ImportedPageModule | undefined;
 		}>(() => {
 			const cachedPage = pagesCache.get(page);
-
 			if (lastPage !== '' && lastPage !== page && !cachedPage) {
 				return { Page: pagesCache.get(lastPage), loadPageAsync: true }; // keep the old page rendered till the new one is loaded
 			}
+
+			
 
 			return { Page: cachedPage, loadPageAsync: cachedPage !== undefined };
 		});
@@ -94,9 +129,9 @@ const pageLoader = (page: string, lastPage: string) => {
 		useEffect(() => {
 			if (loadPageAsync) {
 				requestPage(page)
-					.then(LoadedPage => {
-						if (!pagesCache.get(page)) pagesCache.set(page, LoadedPage);
-						setPage({ Page: LoadedPage, loadPageAsync: false });
+					.then(loadedPage => {
+						if (!pagesCache.get(page)) pagesCache.set(page, loadedPage);
+							setPage({ Page: loadedPage, loadPageAsync: false });
 					})
 					.catch(e => {
 						console.error(e);
@@ -104,13 +139,7 @@ const pageLoader = (page: string, lastPage: string) => {
 					});
 			}
 		}, [loadPageAsync]);
-
-		if (error !== '') return <h1 style={h1Style} />;
-
-		return Page ? <Page /> : <h1 style={h1Style}>loading</h1>;
-	};
-
-	return Component;
+		return Page;
 };
 
 const calculateAlternativePageName = (page: string) =>
@@ -127,7 +156,9 @@ const selectPageExport = (
 	return Page;
 };
 
-export const requestPage = async (page: string) => {
+export const requestPage = async (
+	page: string,
+): Promise<ImportedPageModule> => {
 	const pageExports = await allPages[page]();
 	const pageExport = selectPageExport(page, pageExports);
 	if (!pageExport)
@@ -138,27 +169,26 @@ export const requestPage = async (page: string) => {
 				)} = /* react component */' `,
 			),
 		);
-	return pageExport;
+	return { Component: pageExport, exports: pageExports };
 };
-
-interface InitialPage {
-	route?: SnowstormRoute;
-	component?: SnowstormPage;
-}
 
 export const Page = ({ initialPage }: { initialPage: InitialPage }) => {
 	const CustomApp: SnowstormCustomApp | undefined = allPages._app();
 	const ErrorPage: SnowstormCustomError = allPages._error();
 
+	const initalPageName = initialPage.route?.page;
+
 	useState(() => {
-		const initalPageName = initialPage.route?.page;
-		if (initalPageName && initialPage.component) {
-			pagesCache.set(initalPageName, initialPage.component);
+		if (initalPageName && initialPage.Component) {
+			pagesCache.set(initalPageName, {
+				Component: initialPage.Component,
+				exports: initialPage.exports || {},
+			});
 			lastPage = initalPageName;
 		}
 	});
 
-	return <App Wrapper={CustomApp} ErrorPage={ErrorPage} />;
+	return <App Wrapper={CustomApp} ErrorPage={ErrorPage} initialPageName={initalPageName} />;
 };
 
 /**

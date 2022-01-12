@@ -145,7 +145,7 @@ export const ssr =
 				site.internal.pagesFolder,
 			);
 
-			console.log(error);
+			console.error(error);
 
 			site.internal.log.error(
 				'SSR error:',
