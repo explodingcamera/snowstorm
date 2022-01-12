@@ -6,8 +6,8 @@ const options: CompilerOptions = {
 	allowJs: true,
 	checkJs: true,
 	lib: ['ESNext'],
-	target: ScriptTarget.ESNext,
-	module: ModuleKind.CommonJS,
+	target: ScriptTarget.ES2021,
+	module: ModuleKind.ES2022,
 };
 
 export const compile = async (file: string) => {

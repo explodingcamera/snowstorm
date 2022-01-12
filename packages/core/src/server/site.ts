@@ -19,16 +19,17 @@ import {
 	SnowstormConfigInternal,
 	SnowstormSiteConfigInternal,
 } from './config.js';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 
 import { dirname, join } from 'path';
 import { mkdir } from 'fs/promises';
 
 import { getFreePort } from './utils/free-port.js';
 import { ssr } from './ssr.js';
-import { generateRouter, pagePattern } from './router/index.js';
+import { generateRouter } from './router/index.js';
 import { fileURLToPath } from 'url';
 import deepmerge from 'deepmerge';
+import { pageGlob } from './utils/is-page.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -76,63 +77,87 @@ function snowstormCollectModules(base: string): Plugin {
 const viteBaseConfig = (
 	config: SnowstormConfigInternal,
 	site: SnowstormSiteConfigInternal,
-): InlineConfig => ({
-	root: config.internal.rootFolder,
-	cacheDir: join(site.internal.viteFolder, './.vite'),
-	configFile: false,
-	plugins: [
-		// snowstorm's default plugins
-		...[reactRefresh(), snowstormCollectModules(site.internal.baseFolder)],
+): InlineConfig => {
+	const res: InlineConfig = {
+		root: config.internal.rootFolder,
+		cacheDir: join(site.internal.viteFolder, './.vite'),
+		configFile: false,
+		plugins: [],
+		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
+		ssr: { noExternal: ['wouter', /@snowstorm/] },
+		css: deepmerge.all([
+			// snowstorm's default css options
+			{
+				modules: { localsConvention: 'camelCaseOnly' },
+				postcss: {},
+			},
+			// default site css options
+			site.build.css || {},
+			// site specific css options
+			config.site.build?.css || {},
+		]),
+		json: deepmerge.all([site.build.json || {}, config.site.build?.css || {}]),
+		esbuild: {
+			jsxFactory: '_jsx',
+			jsxFragment: '_jsxFragment',
+			jsxInject: `import { createElement as _jsx, Fragment as _jsxFragment } from 'react'`,
+		},
+		resolve: {
+			alias: {
+				_snowstorm: config.internal.snowstormClientFolder,
+				'_snowstorm-internal': site.internal.internalFolder,
+				'_snowstorm-pages': site.internal.pagesFolder,
+			},
+		},
+		optimizeDeps: {
+			include: [
+				...(site.build.forcePrebundle || []),
+				...(config.site?.build?.forcePrebundle || []),
+			] as string[],
+		},
+		build: {
+			commonjsOptions: {
+				transformMixedEsModules: true,
+			},
+			rollupOptions: {
+				input: join(config.internal.snowstormClientFolder, './index.js'),
+			},
+		},
+	};
 
+	// // we use a set to remove any duplicate plugins
+	// ...new Set([
+	//
+	// 	...[react(), snowstormCollectModules(site.internal.baseFolder)],
+
+	//
+	//
+
+	//
+	// ]),
+
+	res?.plugins?.push(
+		// snowstorm's default plugins
+		...[react(), snowstormCollectModules(site.internal.baseFolder)],
 		// default site plugins
 		...(site.build.vitePlugins || []),
+	);
 
-		// site specific plugins
-		...((config.site.build?.vitePlugins as Array<
-			PluginOption | PluginOption[]
-		>) || []),
-	],
-	// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
-	ssr: { noExternal: ['wouter', /@snowstorm/] },
-	css: deepmerge.all([
-		// snowstorm's default css options
-		{
-			modules: { localsConvention: 'camelCaseOnly' },
-			postcss: {},
-		},
-		// default site css options
-		site.build.css || {},
-		// site specific css options
-		config.site.build?.css || {},
-	]),
-	json: deepmerge.all([site.build.json || {}, config.site.build?.css || {}]),
-	esbuild: {
-		jsxFactory: '_jsx',
-		jsxFragment: '_jsxFragment',
-		jsxInject: `import { createElement as _jsx, Fragment as _jsxFragment } from 'react'`,
-	},
-	resolve: {
-		alias: {
-			_snowstorm: config.internal.snowstormClientFolder,
-			'_snowstorm-internal': site.internal.internalFolder,
-			'_snowstorm-pages': site.internal.pagesFolder,
-		},
-	},
-	optimizeDeps: {
-		include: [
-			...(site.build.forcePrebundle || []),
-			...(config.site?.build?.forcePrebundle || []),
-		] as string[],
-	},
-	build: {
-		commonjsOptions: {
-			transformMixedEsModules: true,
-		},
-		rollupOptions: {
-			input: join(config.internal.snowstormClientFolder, './index.js'),
-		},
-	},
-});
+	// site specific plugins
+	// (we don't want to include the default site plugins twice)
+	if (
+		config.internal.sitesFolder &&
+		site.pagesFolder.startsWith(config.internal.sitesFolder)
+	) {
+		res?.plugins?.push(
+			...((config.site.build?.vitePlugins as Array<
+				PluginOption | PluginOption[]
+			>) || []),
+		);
+	}
+
+	return res;
+};
 
 const viteProdConfig = (
 	config: SnowstormConfigInternal,
@@ -242,7 +267,7 @@ export const startSite = async ({
 
 	if (!dev) {
 		app.use(compress());
-		// TODO: use a simpler html minifyer (previously koa html minifier was used)
+		// TODO: use a simpler html minifier (previously koa html minifier was used)
 		// app.use(
 		// 	htmlMinify({
 		// 		collapseWhitespace: true,
@@ -260,12 +285,9 @@ export const startSite = async ({
 	);
 
 	if (dev) {
-		const watcher = chokidar.watch(
-			join(site.internal.pagesFolder, pagePattern),
-			{
-				ignoreInitial: true,
-			},
-		);
+		const watcher = chokidar.watch(join(site.internal.pagesFolder, pageGlob), {
+			ignoreInitial: true,
+		});
 
 		const listener = async (path: string) => {
 			site.internal.log.info('updating routes:', path);

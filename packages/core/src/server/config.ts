@@ -152,9 +152,13 @@ export const loadConfig = async (
 		},
 	};
 
+	const rootFolder = path;
+	const snowstormFolder = join(rootFolder, './.snowstorm');
+
 	const config = await importFile<SnowstormBaseConfig>(
 		path,
 		'snowstorm.config',
+		snowstormFolder,
 		'Config',
 	);
 
@@ -162,8 +166,7 @@ export const loadConfig = async (
 		baseConfig,
 		typeof config === 'object' ? config : {},
 	);
-
-	const rootFolder = resolve(path, res.rootFolder);
+	res.rootFolder = rootFolder;
 
 	let sitesFolder = res.sitesFolder && resolve(rootFolder, res.sitesFolder);
 	const sitesFolderExists = sitesFolder && (await checkFileExists(sitesFolder));
@@ -171,8 +174,6 @@ export const loadConfig = async (
 
 	if (!res.site.basePath?.startsWith('/'))
 		throw new Error("Snowstorm: config.site.basepath needs to begin with '/'");
-
-	const snowstormFolder = join(rootFolder, './.snowstorm');
 
 	const log = new Logger({
 		displayDateTime: false,

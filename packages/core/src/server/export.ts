@@ -9,8 +9,9 @@ import { getFreePort } from './utils/free-port.js';
 import { outputFile } from './utils/output';
 
 import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
-import { loadNormalizedPages } from './router/pages.js';
+import { loadPages } from './router/pages.js';
 import { cp } from 'fs/promises';
+import { stripFileExtension } from './utils/strip-file-extension.js';
 
 export const exportProject = async ({
 	path,
@@ -24,11 +25,8 @@ export const exportProject = async ({
 
 	const sites = await Promise.all(
 		config.internal.sites.map(async site => {
-			const normalizedPages = await loadNormalizedPages(
-				site.internal.pagesFolder,
-			);
-
-			const routes = await loadRoutes(normalizedPages, site);
+			const pages = await loadPages(site.internal.pagesFolder);
+			const routes = await loadRoutes(stripFileExtension(pages), site);
 			return { site, routes, paths: await calculatePaths(routes) };
 		}),
 	);

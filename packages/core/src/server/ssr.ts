@@ -5,6 +5,7 @@ import { join } from 'path';
 import { ViteDevServer } from 'vite';
 import { checkFileExists } from './utils/file-exists';
 import { modules } from './site';
+import { fileIsPage } from './utils/is-page';
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -143,7 +144,15 @@ export const ssr =
 				'/_snowstorm/pages',
 				site.internal.pagesFolder,
 			);
-			site.internal.log.error(error.name, error.message, error.stack);
+
+			console.log(error);
+
+			site.internal.log.error(
+				'SSR error:',
+				error.name,
+				error.message,
+				error.stack,
+			);
 			ctx.status = 500;
 		}
 
@@ -167,9 +176,7 @@ const collectPreload = async (
 
 	const entries: string[] = Object.entries(manifest)
 		.filter(([key]) => {
-			const isPage =
-				key.includes(`/pages/${page}.`) &&
-				/.(js|mjs|jsx|ts|tsx|md|mdx)$/.test(key);
+			const isPage = key.includes(`/pages/${page}.`) && fileIsPage(key);
 			const isDep = children?.some(c => key.includes(c)) || false;
 			return isPage || isDep;
 		})

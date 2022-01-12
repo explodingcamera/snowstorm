@@ -1,5 +1,6 @@
 import { SnowstormConfig } from '@snowstorm/core/server';
-import VitePluginFonts from 'vite-plugin-fonts';
+import { Plugin as VitePluginFonts } from 'vite-plugin-fonts';
+import RollupPluginMdx from '@mdx-js/rollup';
 
 export const Config: SnowstormConfig = {
 	site: {
@@ -10,6 +11,7 @@ export const Config: SnowstormConfig = {
 						families: ['Inter'],
 					},
 				}),
+				RollupPluginMdx({}),
 			],
 		},
 	},

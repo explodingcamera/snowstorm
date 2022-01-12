@@ -1,11 +1,13 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { SnowstormSiteConfigInternal } from '../config.js';
+import {
+	stripFileExtension,
+	stripFileExtensions,
+} from '../utils/strip-file-extension.js';
 
-import { loadNormalizedPages } from './pages.js';
+import { loadPages } from './pages.js';
 import { loadRoutes, SnowstormRoute } from './routes.js';
-
-export { pagePattern } from './pages.js';
 
 export const generateRouter = async ({
 	template,
@@ -18,14 +20,17 @@ export const generateRouter = async ({
 	const basePath = site.basePath.replace(/"/g, '');
 	const pagesLocation = '_snowstorm-pages';
 
-	let normalizedPages = await loadNormalizedPages(site.internal.pagesFolder);
+	let pages = await loadPages(site.internal.pagesFolder);
 
-	const customErrorPage = normalizedPages.includes('_error');
-	const customAppPage = normalizedPages.includes('_app');
+	const customErrorPage = pages.includes('_error');
+	const customAppPage = pages.includes('_app');
 
-	normalizedPages = normalizedPages.filter(r => !r.startsWith('_'));
-	const processedPages = normalizedPages.map(
-		route => `  "${route}": () => import("${pagesLocation}/${route}")`,
+	pages = pages.filter(r => !r.startsWith('_'));
+	const processedPages = pages.map(
+		route =>
+			`  "${stripFileExtension(
+				route,
+			)}": () => import("${pagesLocation}/${route}")`,
 	);
 
 	if (customAppPage) {
@@ -41,6 +46,7 @@ export const generateRouter = async ({
 		`  "_error": () => Error`,
 	);
 
+	const normalizedPages = stripFileExtensions(pages);
 	const routes = await loadRoutes(normalizedPages, site);
 	const processedRoutes = routes.map(route => {
 		let routeString;

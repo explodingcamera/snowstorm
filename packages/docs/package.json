@@ -11,6 +11,7 @@
     "start": "snowstorm start"
   },
   "dependencies": {
+    "@mdx-js/rollup": "^2.0.0-rc.1",
     "@snowstorm/cli": "link:../cli",
     "@snowstorm/core": "link:../core",
     "@types/react": "17.0.38",
