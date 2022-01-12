@@ -1,0 +1,19 @@
+.wrapper {
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+}

@@ -7,10 +7,12 @@ export type Pages = {
 
 export type SnowstormPage = FunctionComponent;
 export type SnowstormCustomError = FunctionComponent;
-export type SnowstormCustomApp = FunctionComponent<{
+
+export interface SnowstormCustomAppProps {
 	exports?: Record<string, any>;
 	children: React.ReactNode;
-}>;
+}
+export type SnowstormCustomApp = FunctionComponent<SnowstormCustomAppProps>;
 
 export interface SnowstormRoute {
 	path: string;
