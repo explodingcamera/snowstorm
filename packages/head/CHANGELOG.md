@@ -1,3 +1,16 @@
+# v0.7.0 (Thu Jan 13 2022)
+
+#### 🐛 Bug Fix
+
+- chore: upgrade to react 18-rc ([@explodingcamera](https://github.com/explodingcamera))
+- chore: update deps ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.4.0 (Fri Oct 22 2021)
 
 #### 🐛 Bug Fix

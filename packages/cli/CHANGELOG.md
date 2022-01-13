@@ -1,3 +1,15 @@
+# v0.7.0 (Thu Jan 13 2022)
+
+#### 🐛 Bug Fix
+
+- chore: update deps ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.2.1 (Wed Oct 06 2021)
 
 #### 🐛 Bug Fix

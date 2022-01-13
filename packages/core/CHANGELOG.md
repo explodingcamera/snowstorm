@@ -1,3 +1,23 @@
+# v0.7.0 (Thu Jan 13 2022)
+
+#### 🚀 Enhancement
+
+- feat: finish basic website [#23](https://github.com/explodingcamera/snowstorm/pull/23) ([@explodingcamera](https://github.com/explodingcamera))
+- feat: add access to exports to custom apps ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- fix: fix config loading for esm & config ordering ([@explodingcamera](https://github.com/explodingcamera))
+- fix: check for correct site folder ([@explodingcamera](https://github.com/explodingcamera))
+- chore: upgrade to react 18-rc ([@explodingcamera](https://github.com/explodingcamera))
+- chore: update deps ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.6.1 (Wed Nov 17 2021)
 
 #### 🐛 Bug Fix
