@@ -17,6 +17,9 @@
   "../../../www/components/layout/global.scss": [
     "/assets/logo.4a8e5f82.svg"
   ],
+  "../../../www/components/layout/dracula.css": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
   "../../../www/components/layout/index.module.scss?used": [
     "/assets/logo.4a8e5f82.svg"
   ],
@@ -117,7 +120,7 @@
     "/assets/vendor.82f5f2d7.js"
   ],
   "../../../www/pages/impressum.mdx": [
-    "/assets/impressum.937ffcbd.js"
+    "/assets/impressum.efd75f0b.js"
   ],
   "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0-rc.0/node_modules/react/jsx-runtime.js?commonjs-module": [
     "/assets/jsx-runtime.4a4136f8.js"
@@ -132,17 +135,17 @@
     "/assets/jsx-runtime.4a4136f8.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.21414bee.js",
-    "/assets/index.33e71a53.css"
+    "/assets/index.fefaf31c.js",
+    "/assets/index.e9fd4148.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.21414bee.js",
-    "/assets/index.33e71a53.css"
+    "/assets/index.fefaf31c.js",
+    "/assets/index.e9fd4148.css"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.059442da.js"
+    "/assets/getting-started.fc9fbe0e.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.275a5c72.js"
+    "/assets/index.720e3873.js"
   ]
 }

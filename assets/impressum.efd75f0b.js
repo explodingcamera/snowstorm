@@ -6,7 +6,7 @@ import{j as e}from"./jsx-runtime.4a4136f8.js";import"./vendor.82f5f2d7.js";const
 `,e.exports.jsx(t.p,{children:"Lohm\xFChlenstra\xDFe 65"}),`
 `,e.exports.jsx(t.p,{children:"12435 Berlin"}),`
 `,e.exports.jsx(t.p,{children:"Germany"}),`
-`,e.exports.jsx(t.p,{children:"E-Mail: mail@henrygressmann.de"}),`
+`,e.exports.jsxs(t.p,{children:["E-Mail: ",e.exports.jsx(t.a,{href:"mailto:mail@henrygressmann.de",children:"mail@henrygressmann.de"})]}),`
 `,e.exports.jsx(t.p,{children:"Tel: +49 030-98442918"}),`
 `,e.exports.jsx("br",{}),`
 `,e.exports.jsxs(t.p,{children:[`The European Commission provides a platform for out-of-court online dispute resolution
@@ -19,8 +19,8 @@ procedure`]}),`
 `,e.exports.jsx(t.p,{children:"We don't collect any personal data, this is just a static website hosted with cloudflare pages."}),`
 `,e.exports.jsxs(t.p,{children:["Responsible person in terms of data protection laws, in particular the EU General Data Protection Regulation (DSGVO), is Henry Gressmann (contact information are above)",e.exports.jsx("br",{})]}),`
 `,e.exports.jsx(t.h2,{children:"Your data protection rights"}),`
-`,e.exports.jsx(t.p,{children:`If you contact us by e-mail, the data provided will be stored by us in order to process your request.
-As a data subject, you have the right to information, the right to rectification or deletion, the right to restrict processing and the right to object to the processing of your data. If you have given us consent, you can revoke this at any time with effect for the future. Please send your objection [or revocation] informally to the following address: mail@henrygressmann.de.`}),`
+`,e.exports.jsxs(t.p,{children:[`If you contact us by e-mail, the data provided will be stored by us in order to process your request.
+As a data subject, you have the right to information, the right to rectification or deletion, the right to restrict processing and the right to object to the processing of your data. If you have given us consent, you can revoke this at any time with effect for the future. Please send your objection [or revocation] informally to the following address: `,e.exports.jsx(t.a,{href:"mailto:mail@henrygressmann.de",children:"mail@henrygressmann.de"}),"."]}),`
 `,e.exports.jsx(t.p,{children:`If you have given us consent, you can revoke it at any time with effect for the
 future.`}),`
 `,e.exports.jsx(t.p,{children:`You may at any time lodge a complaint with a supervisory authority, e.g. the competent
