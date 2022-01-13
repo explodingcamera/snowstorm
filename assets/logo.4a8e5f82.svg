@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="136.949 138.884 236.107 248.461" width="236.107" height="248.461" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="255" cy="192.313" r="0" id="gradient-15" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+      <stop offset="0" style="stop-color: rgba(187, 218, 85, 1)"/>
+      <stop offset="1" style="stop-color: rgba(135, 165, 36, 1)"/>
+    </radialGradient>
+    <radialGradient id="gradient-0-0" gradientUnits="userSpaceOnUse" cx="255.003" cy="263.114" r="122.641" gradientTransform="matrix(0.711607, 0, 0, 0.711607, 73.540928, 75.880368)" xlink:href="#gradient-0"/>
+    <linearGradient id="gradient-0" bx:pinned="true">
+      <stop offset="0.061" style="stop-color: rgb(58, 85, 243);"/>
+      <stop offset="1" style="stop-color: rgb(0, 187, 255);"/>
+    </linearGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="159.897" cy="234.705" r="22.946" id="gradient-22" gradientTransform="matrix(0.811152, 0, 0, 0.811152, 48.156807, 49.688744)">
+      <stop offset="0" style="stop-color: rgba(187, 218, 85, 1)"/>
+      <stop offset="1" style="stop-color: rgba(135, 165, 36, 1)"/>
+    </radialGradient>
+    <radialGradient id="gradient-12-0" gradientUnits="userSpaceOnUse" cx="255.003" cy="263.117" r="118.053" gradientTransform="matrix(0.811152, 0, 0, 0.811152, 48.156807, 49.688744)" xlink:href="#gradient-12"/>
+    <linearGradient id="gradient-12" bx:pinned="true">
+      <stop offset="0" style="stop-color: rgb(0, 179, 255);"/>
+      <stop offset="1" style="stop-color: rgb(124, 216, 255);"/>
+    </linearGradient>
+  </defs>
+  <path d="M 255 263.118 L 255 162.345 M 255 263.118 L 167.73 212.726 M 255 263.118 L 167.73 313.507 M 255 263.118 L 255 363.884 M 255 263.118 L 342.275 313.501 M 255 263.118 L 342.275 212.731" style="fill: url(#gradient-15); fill-rule: evenodd; stroke-miterlimit: 13; stroke-linecap: round; paint-order: stroke; stroke: url(#gradient-0-0); stroke-width: 17px;"/>
+  <path d="M 196.47 229.325 L 159.245 250.815 M 255 195.532 L 217.769 174.042 M 255 195.532 L 292.23 174.042 M 255 330.707 L 217.769 352.192 M 313.532 229.329 L 313.532 186.339 M 313.532 229.329 L 350.762 250.819 M 196.469 296.91 L 159.243 275.419 M 196.47 296.91 L 196.47 339.911 M 255 330.707 L 292.226 352.192 M 313.532 296.91 L 350.758 275.419 M 313.532 296.91 L 313.532 339.892 M 196.47 229.325 L 196.47 186.337" style="fill: url(#gradient-22); fill-rule: evenodd; paint-order: stroke; stroke-width: 10px; stroke-miterlimit: 13; filter: none; stroke: url(#gradient-12-0); stroke-linecap: round;"/>
+</svg>
