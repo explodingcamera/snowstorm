@@ -27,6 +27,7 @@ jobs:
 
       - name: Build Website
         run: |
+          pnpm run build
           pnpm run www:export
 
       - name: Deploy

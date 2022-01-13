@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@mdx-js/rollup": "^2.0.0-rc.1",
-    "@snowstorm/cli": "0.7.0",
-    "@snowstorm/core": "0.7.0",
+    "@snowstorm/cli": "link:../cli",
+    "@snowstorm/core": "link:../core",
     "@types/react": "17.0.38",
     "react": "18.0.0-rc.0",
     "react-dom": "18.0.0-rc.0",

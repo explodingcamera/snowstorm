@@ -3,6 +3,7 @@
   "version": "0.7.0",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
+  "type": "module",
   "main": "./lib/index.js",
   "files": [
     "lib/"
