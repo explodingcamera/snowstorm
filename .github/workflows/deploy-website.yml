@@ -1,9 +1,6 @@
 name: Deploy Website
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   release:
@@ -14,7 +11,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.15.1
+          version: 6.26.1
           run_install: true
 
       - name: Prepare repository
@@ -35,3 +32,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./packages/www/dist
+          cname: snowstorm.js.org
