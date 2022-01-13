@@ -1,5 +1,5 @@
 import glob from 'fast-glob';
-import { unlink, writeFile } from 'fs/promises';
+import { readFile, unlink, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { compile } from './compile.js';
 
@@ -43,6 +43,8 @@ export async function importFile<FileType>(
 			console.log(file);
 
 			await writeFile(tempPath, file, 'utf8');
+			console.log('read', await readFile(tempPath));
+
 			await new Promise(resolve => {
 				setTimeout(resolve, 100);
 			});
