@@ -1,4 +1,3 @@
-import os from 'os';
 import glob from 'fast-glob';
 import { unlink, writeFile } from 'fs/promises';
 import { join } from 'path';
@@ -40,6 +39,9 @@ export async function importFile<FileType>(
 				.includes(filename)
 		) {
 			const file = await compile(join(path, `/${filename}`));
+			console.log(tempPath);
+			console.log(file);
+
 			await writeFile(tempPath, file, 'utf8');
 			const config = await import(tempPath);
 
