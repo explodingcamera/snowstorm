@@ -8,6 +8,7 @@ import { SnowstormRoutesConfig } from './router/routes.js';
 import { Logger } from 'tslog';
 import { fileURLToPath } from 'url';
 import { CSSOptions, JsonOptions, PluginOption } from 'vite';
+import { mkdir } from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -154,6 +155,8 @@ export const loadConfig = async (
 
 	const rootFolder = path;
 	const snowstormFolder = join(rootFolder, './.snowstorm');
+
+	await mkdir(snowstormFolder);
 
 	const config = await importFile<SnowstormBaseConfig>(
 		path,
