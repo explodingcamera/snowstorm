@@ -66,7 +66,6 @@ const App = ({
  
 	const pageLoader = (r: SnowstormRoute) => () => {
 		const page = usePage(r.page, lastPage);
-		console.log(1);
 
 		useEffect(() => {
 			setPage(page)

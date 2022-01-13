@@ -14,6 +14,7 @@
     "watch:core": "nx run @snowstorm/core:watch",
     "watch:cli": "nx run @snowstorm/cli:watch",
     "watch:serverprops": "nx run @snowstorm/serverprops:watch",
+    "www:export": "nx run @snowstorm/www:export",
     "watch:head": "nx run @snowstorm/head:watch"
   },
   "dependencies": {
@@ -26,9 +27,9 @@
     "@auto-it/all-contributors": "^10.32.5",
     "@auto-it/conventional-commits": "^10.32.5",
     "@auto-it/npm": "^10.32.5",
-    "@nrwl/cli": "^13.4.3",
-    "@nrwl/tao": "^13.4.3",
-    "@nrwl/workspace": "^13.4.3",
+    "@nrwl/cli": "^13.4.4",
+    "@nrwl/tao": "^13.4.4",
+    "@nrwl/workspace": "^13.4.4",
     "auto": "^10.32.5",
     "eslint-plugin-prettier": "^4.0.0",
     "lerna": "^4.0.0",

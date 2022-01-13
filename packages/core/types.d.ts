@@ -5,6 +5,7 @@ export {
 
 export {
 	SnowstormCustomApp,
+	SnowstormCustomAppProps,
 } from './client/router/shared';
 
 import 'vite/client';

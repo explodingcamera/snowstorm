@@ -8,7 +8,7 @@ export const Config: SnowstormConfig = {
 			vitePlugins: [
 				VitePluginFonts({
 					google: {
-						families: ['Inter'],
+						families: ['Inter', 'Space Mono'],
 					},
 				}),
 				RollupPluginMdx({}),

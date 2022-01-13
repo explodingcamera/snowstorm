@@ -15,6 +15,6 @@
     "outDir": "lib/",
     "declaration": true
   },
-  "include": ["**/src/**/*", "packages/example/**/*", "packages/docs/**/*"],
+  "include": ["**/src/**/*", "packages/example/**/*", "packages/www/**/*"],
   "exclude": ["**/node_modules/*", "**/.snowstorm/*"]
 }

@@ -125,17 +125,6 @@ const viteBaseConfig = (
 		},
 	};
 
-	// // we use a set to remove any duplicate plugins
-	// ...new Set([
-	//
-	// 	...[react(), snowstormCollectModules(site.internal.baseFolder)],
-
-	//
-	//
-
-	//
-	// ]),
-
 	res?.plugins?.push(
 		// snowstorm's default plugins
 		...[
