@@ -35,20 +35,22 @@ export const exportProject = async ({
 	await startServer({ dev: false, path, overrideConfig: config, debug }).catch(
 		e => log.error('failed to start server', e),
 	);
+
 	const directory = join(config.internal.rootFolder, config.export.outDir);
 
 	const urls: string[] = [];
 	const copy = [];
 	for (const { site, paths } of sites) {
+		let dir = directory;
+		if (!(sites.length === 1 && sites[0].site.domain === 'default')) {
+			dir = join(dir, site.domain);
+		}
+
 		copy.push(
-			cp(
-				join(site.internal.viteFolder, '/client'),
-				join(directory, site.domain),
-				{
-					recursive: true,
-					dereference: false,
-				},
-			),
+			cp(join(site.internal.viteFolder, '/client'), directory, {
+				recursive: true,
+				dereference: false,
+			}),
 		);
 
 		const url = `http://${

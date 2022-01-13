@@ -25,6 +25,11 @@
       "root": "packages/serverprops",
       "projectType": "library",
       "implicitDependencies": []
+    },
+    "@snowstorm/www": {
+      "root": "packages/www",
+      "projectType": "application",
+      "implicitDependencies": []
     }
   }
 }
