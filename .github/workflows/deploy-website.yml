@@ -1,6 +1,11 @@
 name: Deploy Website
 
-on: push
+on:
+  push:
+    paths:
+      - "packages/www/**"
+    branches:
+      - main
 
 jobs:
   release:
