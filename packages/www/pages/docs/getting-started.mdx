@@ -1,3 +1,30 @@
 export const title = "Getting Started";
 
-Welcome to Snowstorm's Documentation!
+> **Welcome to Snowstorm's Documentation!**<br/>
+> Please note that this site is still incomplete - you might have noticed the links on the left side don't lead anywhere.<br/><br/>
+> I'm actively working on version 1.0, which will hopefully be ready in the coming months. Until then, expect bugs and breaking changes.
+
+Getting started with snowstorm takes less than a minute and doesn't any require confusing `init` commands:
+
+```bash
+# install the required dependencies
+$ npm install -S @snowstorm/core @snowstorm/cli react react-dom
+
+# this folder will contain all webpages
+$ mkdir pages
+$ echo 'export const Index = () => <h1>Hello World</h1>' > pages/index.tsx
+
+# (optional) enable typescript support
+$ echo '{ "extends": "@snowstorm/core/tsconfig.base.json" }' > tsconfig.json
+
+# start the development server
+$ npx snowstorm dev
+```
+
+<pre className="language-terminal">
+  <code className="language-terminal">
+    <b>INFO</b> starting snowstorm v0.0.1 (development mode)
+    <b>INFO</b> started in 19ms
+    <b>INFO</b> listening on <u>http:/​/localhost:2020/</u>
+  </code>
+</pre>

@@ -2,7 +2,7 @@
   max-width: 40rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 8rem;
 
   h1,
   h2 {
@@ -16,4 +16,28 @@
   h2 {
     margin-top: 2rem;
   }
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 3rem;
+  padding-bottom: 3rem;
+  h1 {
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+button {
+  cursor: pointer;
+  width: fit-content;
+  border: none;
+  background: linear-gradient(111deg, #00bbff, #2777f7);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  margin: 0 auto;
 }

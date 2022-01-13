@@ -1,6 +1,9 @@
 import { PageMeta } from '../types';
 
 import styles from './index.module.scss';
+import Logo from './../assets/logo.svg';
+
+import { Link } from '@snowstorm/core';
 
 export const meta: PageMeta = {
 	disableSidebar: true,
@@ -9,7 +12,13 @@ export const meta: PageMeta = {
 
 export const Index = () => (
 	<>
+		<div className={styles.logo}>
+			<img width="100" height="100" src={Logo} />
+			<h1>Snowstorm</h1>
+		</div>
 		<h1>The lightning-fast and minimalist React Framework</h1>
+		<br />
+
 		<h2>What?</h2>
 		<p>
 			Snowstorm is a "framework" for react, which handles the heavy lifting
@@ -37,5 +46,9 @@ export const Index = () => (
 				"serverless solutions
 			</li>
 		</ul>
+		<br />
+		<Link to="/docs">
+			<button>get started</button>
+		</Link>
 	</>
 );

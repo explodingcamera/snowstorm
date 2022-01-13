@@ -16,7 +16,7 @@ nav.nav {
   width: 100%;
 
   ul {
-    width: 60rem;
+    width: 80rem;
     max-width: 100%;
     margin: 0;
     padding: 0;
@@ -46,7 +46,7 @@ nav.nav {
 }
 
 main.main {
-  width: 62rem;
+  width: 80rem;
   max-width: 100%;
   display: flex;
   flex: 1;
@@ -55,14 +55,20 @@ main.main {
   > div {
     flex: 1;
     padding: 1rem;
+    width: 100%;
   }
 }
 
 aside.sidebar {
   padding: 1rem;
-  width: 14rem;
+  width: 18rem;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (max-width: 70rem) {
+    display: none;
+  }
 
   ul {
     display: flex;
@@ -71,12 +77,36 @@ aside.sidebar {
     margin: 0;
     padding: 0;
 
+    > li:last-of-type {
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      color: rgba(1, 6, 37, 0.856);
+    }
+
+    h2 {
+      cursor: pointer;
+      font-weight: 200;
+      font-size: 1rem;
+
+      color: rgba(0, 0, 0, 0.493);
+      span {
+        color: rgba(0, 0, 0, 0.815);
+      }
+    }
+
+    li {
+      display: flex;
+      flex-direction: column;
+    }
+
     li,
     li > a {
       font-family: "Space Mono", monospace;
+      margin-top: 0.6rem;
       list-style: none;
       display: flex;
-      margin-bottom: 1rem;
     }
 
     li > a {

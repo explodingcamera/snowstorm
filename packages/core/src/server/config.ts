@@ -156,7 +156,7 @@ export const loadConfig = async (
 	const rootFolder = path;
 	const snowstormFolder = join(rootFolder, './.snowstorm');
 
-	await mkdir(snowstormFolder);
+	await mkdir(snowstormFolder, { recursive: true });
 
 	const config = await importFile<SnowstormBaseConfig>(
 		path,

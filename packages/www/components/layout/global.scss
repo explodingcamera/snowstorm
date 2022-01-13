@@ -7,3 +7,34 @@ p,
 li {
   font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+blockquote {
+  background: #00000026;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5em;
+}
+
+pre[class*="language-"] {
+  a {
+    color: white;
+  }
+}
+
+pre.language-terminal {
+  position: relative;
+  &::after {
+    content: "expected terminal output";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.3rem 0.6rem;
+    color: rgb(13, 199, 13);
+    font-size: 0.7rem;
+  }
+
+  background: #000000e7 !important;
+  b {
+    color: rgb(140, 90, 155);
+  }
+}
