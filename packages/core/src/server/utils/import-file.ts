@@ -42,8 +42,11 @@ export async function importFile<FileType>(
 			console.log(tempPath);
 			console.log(file);
 
+			console.log('write file: ', tempPath);
 			await writeFile(tempPath, file, 'utf8');
-			console.log('read', await readFile(tempPath));
+
+			const ahhh = await readFile(tempPath);
+			console.log('read file: ', ahhh);
 
 			await new Promise(resolve => {
 				setTimeout(resolve, 100);
