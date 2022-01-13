@@ -43,6 +43,10 @@ export async function importFile<FileType>(
 			console.log(file);
 
 			await writeFile(tempPath, file, 'utf8');
+			await new Promise(resolve => {
+				setTimeout(resolve, 100);
+			});
+
 			const config = await import(tempPath);
 
 			importedFile =
