@@ -70,6 +70,10 @@ aside.sidebar {
     display: none;
   }
 
+  ul.retracted {
+    display: none;
+  }
+
   ul {
     display: flex;
     flex-direction: column;
@@ -78,7 +82,7 @@ aside.sidebar {
     padding: 0;
 
     > li:last-of-type {
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
 
     h1 {
@@ -104,7 +108,7 @@ aside.sidebar {
     li,
     li > a {
       font-family: "Space Mono", monospace;
-      margin-top: 0.6rem;
+      margin-top: 0.4rem;
       list-style: none;
       display: flex;
     }

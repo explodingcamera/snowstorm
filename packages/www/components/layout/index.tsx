@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import '@snowstorm/core/base.css';
 import './global.scss';
@@ -10,7 +10,8 @@ import { Link } from '@snowstorm/core';
 import Logo from './../../assets/logo.svg';
 import { PageMeta } from '../../types';
 
-type Sidebar = Array<Section | Page>;
+type SidebarItem = Section | Page;
+type Sidebar = SidebarItem[];
 
 interface Section {
 	title: string;
@@ -41,11 +42,11 @@ const sidebar: Sidebar = [
 					},
 					{
 						title: 'static assets',
-						slug: '/static',
+						slug: 'static',
 					},
 					{
 						title: 'importing libraries',
-						slug: '/imports',
+						slug: 'imports',
 					},
 				],
 			},
@@ -54,7 +55,7 @@ const sidebar: Sidebar = [
 				pages: [
 					{
 						title: 'webassembly',
-						slug: '/wasm',
+						slug: 'wasm',
 					},
 					{
 						title: 'workers',
@@ -64,32 +65,32 @@ const sidebar: Sidebar = [
 					},
 					{
 						title: 'custom `App`',
-						slug: '/custom-app',
+						slug: 'custom-app',
 					},
 				],
 			},
 			{ title: 'plugins' },
 			{
 				title: 'deploying a site',
-				slug: '/deploy',
+				slug: 'deploy',
 			},
 			{
 				title: 'browser support',
-				slug: '/browser-support',
+				slug: 'browser-support',
 			},
 		],
 	},
 	{
 		title: 'api reference',
 		pages: [
-			{ title: 'configuration', slug: '/api/config' },
-			{ title: 'CLI', slug: '/api/cli' },
-			{ title: 'Plugin API', slug: '/api/plugins' },
+			{ title: 'configuration', slug: 'api/config' },
+			{ title: 'cli', slug: 'api/cli' },
+			{ title: 'plugin api', slug: 'api/plugins' },
 		],
 	},
 	{
 		title: 'inspirations',
-		slug: '/inspirations',
+		slug: 'inspirations',
 	},
 ];
 
@@ -106,7 +107,14 @@ const Nav = () => (
 				<Link to="/docs">docs</Link>
 			</li>
 			<li>
-				<a href="https://github.com/explodingcamera/snowstorm">github</a>
+				<a
+					target="_blank"
+					referrerPolicy="no-referrer"
+					href="https://github.com/explodingcamera/snowstorm"
+					rel="noreferrer"
+				>
+					github
+				</a>
 			</li>
 		</ul>
 	</nav>
@@ -114,40 +122,53 @@ const Nav = () => (
 
 const isSection = (x: Section | Page): x is Section => (x as any).pages;
 
+const Item = ({ level = 0, item }: { level?: number; item: SidebarItem }) => {
+	const [expanded, setExpanded] = useState(false);
+	const toggle = () => setExpanded(x => !x);
+
+	let component: React.ReactElement;
+	if (isSection(item)) {
+		component = (
+			<>
+				{level === 0 ? (
+					<h1># {item.title}</h1>
+				) : (
+					<h2 onClick={toggle}>
+						{expanded ? '-' : '+'} <span>{item.title}</span>
+					</h2>
+				)}
+				<ul
+					className={
+						(level !== 0 && !expanded && styles.retracted) || undefined
+					}
+				>
+					{item.pages.map(i => (
+						<Item key={i.title} level={level + 1} item={i} />
+					))}
+				</ul>
+			</>
+		);
+	} else {
+		component = (
+			<h2>
+				{level <= 1 ? '> ' : <>&nbsp;&gt;&nbsp;</>}
+				<span>{item.title}</span>
+			</h2>
+		);
+		component = (
+			<Link to={'/docs/' + (item.slug ?? item.title)}>{component}</Link>
+		);
+	}
+
+	return <li key={item.title}>{component}</li>;
+};
+
 const SidebarComponent = () => (
 	<aside className={styles.sidebar}>
 		<ul>
-			{sidebar.map(a =>
-				isSection(a) ? (
-					<li key={a.title}>
-						<h1># {a.title}</h1>
-						<ul>
-							{a.pages.map(b =>
-								isSection(b) ? (
-									<li>
-										<h2 key={b.title}>
-											+ <span>{b.title}</span>
-										</h2>
-									</li>
-								) : (
-									<li>
-										<h2 key={b.title}>
-											{'> '}
-											<span>{b.title}</span>
-										</h2>
-									</li>
-								),
-							)}
-						</ul>
-					</li>
-				) : (
-					<li key={a.title}>
-						<h2>
-							<span>{a.title}</span>
-						</h2>
-					</li>
-				),
-			)}
+			{sidebar.map(item => (
+				<Item key={item.title} item={item} />
+			))}
 		</ul>
 	</aside>
 );
