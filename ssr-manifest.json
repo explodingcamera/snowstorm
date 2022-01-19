@@ -135,15 +135,15 @@
     "/assets/jsx-runtime.4a4136f8.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.c0c6a186.js",
+    "/assets/index.878823ca.js",
     "/assets/index.e9fd4148.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.c0c6a186.js",
+    "/assets/index.878823ca.js",
     "/assets/index.e9fd4148.css"
   ],
   "../../../www/pages/inspirations.mdx": [
-    "/assets/inspirations.da1455a4.js"
+    "/assets/inspirations.15a5860c.js"
   ],
   "../../../www/pages/api/cli.mdx": [
     "/assets/cli.074ad046.js"
@@ -155,36 +155,39 @@
     "/assets/plugins.dacfaac0.js"
   ],
   "../../../www/pages/docs/browser-support.mdx": [
-    "/assets/browser-support.b0cb2144.js"
+    "/assets/browser-support.6a4fa432.js"
   ],
-  "../../../www/pages/docs/custom-app.tsx": [
-    "/assets/custom-app.63dfd367.js"
+  "../../../www/pages/docs/custom-app.mdx": [
+    "/assets/custom-app.2f187548.js"
   ],
   "../../../www/pages/docs/deploy.mdx": [
-    "/assets/deploy.aa69ed7d.js"
+    "/assets/deploy.3cf1a416.js"
   ],
   "../../../www/pages/docs/env-variables.mdx": [
-    "/assets/env-variables.85471423.js"
+    "/assets/env-variables.a7516c24.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.fc9fbe0e.js"
+    "/assets/getting-started.9b018f0c.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.720e3873.js"
+    "/assets/index.f699a38a.js"
   ],
   "../../../www/pages/docs/pages.mdx": [
-    "/assets/pages.1d121c0c.js"
+    "/assets/pages.31165c5b.js"
   ],
   "../../../www/pages/docs/plugins.mdx": [
-    "/assets/plugins.b0df4480.js"
+    "/assets/plugins.08d9557e.js"
   ],
   "../../../www/pages/docs/routing.mdx": [
-    "/assets/routing.5b813580.js"
+    "/assets/routing.9db843b8.js"
+  ],
+  "../../../www/pages/docs/sites.mdx": [
+    "/assets/sites.4b239241.js"
   ],
   "../../../www/pages/docs/wasm.mdx": [
-    "/assets/wasm.8938c023.js"
+    "/assets/wasm.cc27584e.js"
   ],
   "../../../www/pages/docs/workers.mdx": [
-    "/assets/workers.6ab42dcf.js"
+    "/assets/workers.e3305bcf.js"
   ]
 }
