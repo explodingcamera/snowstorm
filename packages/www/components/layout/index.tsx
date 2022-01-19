@@ -62,6 +62,7 @@ const sidebar: Sidebar = [
 					},
 					{
 						title: 'environment variables',
+						slug: 'env-variables',
 					},
 					{
 						title: 'custom `App`',
