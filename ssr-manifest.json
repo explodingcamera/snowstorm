@@ -135,17 +135,56 @@
     "/assets/jsx-runtime.4a4136f8.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.45be6b16.js",
+    "/assets/index.c0c6a186.js",
     "/assets/index.e9fd4148.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.45be6b16.js",
+    "/assets/index.c0c6a186.js",
     "/assets/index.e9fd4148.css"
+  ],
+  "../../../www/pages/inspirations.mdx": [
+    "/assets/inspirations.da1455a4.js"
+  ],
+  "../../../www/pages/api/cli.mdx": [
+    "/assets/cli.074ad046.js"
+  ],
+  "../../../www/pages/api/config.mdx": [
+    "/assets/config.81b9c928.js"
+  ],
+  "../../../www/pages/api/plugins.mdx": [
+    "/assets/plugins.dacfaac0.js"
+  ],
+  "../../../www/pages/docs/browser-support.mdx": [
+    "/assets/browser-support.b0cb2144.js"
+  ],
+  "../../../www/pages/docs/custom-app.tsx": [
+    "/assets/custom-app.63dfd367.js"
+  ],
+  "../../../www/pages/docs/deploy.mdx": [
+    "/assets/deploy.aa69ed7d.js"
+  ],
+  "../../../www/pages/docs/env-variables.mdx": [
+    "/assets/env-variables.85471423.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
     "/assets/getting-started.fc9fbe0e.js"
   ],
   "../../../www/pages/docs/index.tsx": [
     "/assets/index.720e3873.js"
+  ],
+  "../../../www/pages/docs/pages.mdx": [
+    "/assets/pages.1d121c0c.js"
+  ],
+  "../../../www/pages/docs/plugins.mdx": [
+    "/assets/plugins.b0df4480.js"
+  ],
+  "../../../www/pages/docs/routing.mdx": [
+    "/assets/routing.5b813580.js"
+  ],
+  "../../../www/pages/docs/wasm.mdx": [
+    "/assets/wasm.8938c023.js"
+  ],
+  "../../../www/pages/docs/workers.mdx": [
+    "/assets/workers.6ab42dcf.js"
   ]
 }
