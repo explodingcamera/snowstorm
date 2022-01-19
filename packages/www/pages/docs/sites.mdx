@@ -1,0 +1,55 @@
+export const title = "Multiple Sites";
+
+A key difference to other react frameworks is that a snowstorm project can consist of multiple sites.
+For a simple setup, you will probably only have a single site. Here, your pages can be defined a `pages` folder you create at the root of your project.
+
+As your project grows, you might want add more sites, for example you might want to host your documentation on `docs.example.com`.
+Sharing your components, configs and assets between multiple projects in the same repository is a first-class supported feature with snowstorm.
+
+To add new sites, simply create a new folder calld `sites`.
+In this folder, create sub-folders named after the different sites you want to develop, e.g:
+
+<pre className="language-tree">
+{/* <!-- prettier-disable --> */}
+├── sites
+│   ├── admin.example.com
+│   │   ├── components
+│   │   └── pages
+│   ├── docs.example.com
+│   │   ├── components
+│   │   └── pages
+│   └── example.com
+│       ├── components
+│       └── pages
+├── package.json
+└── snowstorm.config.ts
+</pre>
+
+Now, you can keep your `snowstorm.config` like before or even configure plugins, routes, etc for each site individually.
+
+<br />
+`snowstorm.config.ts`
+
+```ts
+import { SnowstormConfig } from "@snowstorm/core/server";
+
+export const Config: SnowstormConfig = {
+  sites: [
+    {
+      domain: "docs.example.com",
+      build: {
+        vitePlugins: [
+          // plugins applied only to docs.example.com
+        ],
+      },
+    },
+  ],
+  site: {
+    build: {
+      vitePlugins: [
+        // plugins applied to all sites
+      ],
+    },
+  },
+};
+```

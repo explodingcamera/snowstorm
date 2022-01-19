@@ -1,0 +1,25 @@
+export const title = "Routing";
+
+Routing is based on the filename of a page:
+
+```
+index.tsx                   => GET /
+page.tsx                    => GET /page
+users/[userID].tsx          => GET /users/example
+users/[userID]/profile.tsx  => GET /users/example/profile
+```
+
+To do routing in your Application, we provide the following APIs:
+
+```tsx
+import {Link, useLocation} from "@snowstorm/code";
+
+// ..
+const [location, setLocation] = useLocation();
+
+// ..
+<Link to="/"><a>home</a></Link>
+<Link to="/help"><button>help</button></Link>
+```
+
+For more advanced routing, please check out [wouter](https://github.com/molefrog/wouter) which is the base of our client side routing.

@@ -6,6 +6,12 @@ import mdxPrism from 'mdx-prism';
 import remarkGfm from 'remark-gfm';
 
 export const Config: SnowstormConfig = {
+	sites: [
+		{
+			domain: 'docs.example.com',
+			build: { css: { modules: { generateScopedName: 'example' } } },
+		},
+	],
 	site: {
 		build: {
 			vitePlugins: [

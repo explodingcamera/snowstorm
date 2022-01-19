@@ -16,8 +16,32 @@ blockquote {
 }
 
 pre[class*="language-"] {
+  > * {
+    font-family: "Space Mono", monospace;
+  }
+
   a {
     color: white;
+  }
+}
+
+pre.language-tree {
+  position: relative;
+  line-height: 1.1;
+
+  &::after {
+    content: "directory layout";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.3rem 0.6rem;
+    color: rgb(132, 148, 241);
+    font-size: 0.7rem;
+  }
+
+  background: #000000e7 !important;
+  b {
+    color: rgb(140, 90, 155);
   }
 }
 
@@ -37,4 +61,17 @@ pre.language-terminal {
   b {
     color: rgb(140, 90, 155);
   }
+}
+
+p > code {
+  background: #dbdce3;
+  border-radius: 0.5em;
+  padding: 0.4em;
+}
+
+pre {
+  background: #dbdce3;
+  border-radius: 0.5em;
+  padding: 1em;
+  margin: 0.5em 0;
 }

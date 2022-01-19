@@ -48,7 +48,7 @@ export const Index = () => (
 		</ul>
 		<br />
 		<Link to="/docs">
-			<button>get started</button>
+			<button type="button">get started</button>
 		</Link>
 	</>
 );

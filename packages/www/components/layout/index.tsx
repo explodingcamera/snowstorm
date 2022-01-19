@@ -32,6 +32,9 @@ const sidebar: Sidebar = [
 				title: 'basic features',
 				pages: [
 					{
+						title: 'sites',
+					},
+					{
 						title: 'pages',
 					},
 					{

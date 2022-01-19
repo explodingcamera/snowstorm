@@ -1,0 +1,34 @@
+Pages are React Components exported from `.js`, `jsx`, `.ts`, `tsx` files in a sites pages directory.
+Supported are either the pages `default` export or a named export based on the file name, e.g:
+
+```tsx
+// page.tsx
+
+// named export:
+export const Page = () => <h1>Hello World</h1>;
+// default export:
+const Page = () => <h1>Hello World</h1>;
+export default Page;
+```
+
+Further, pages can use any other export to provide data to a custom app component:
+
+```tsx
+// page.tsx
+export const Page = () => <h1>Hello World</h1>;
+export const title = "Some Page";
+```
+
+```tsx
+// _app.tsx
+import { SnowstormCustomAppProps } from "@snowstorm/core/types";
+
+const App = ({ children, exports }: SnowstormCustomAppProps) => (
+  <>
+    {exports?.title && <h1>{exports.title}</h1>}
+    {children}
+  </>
+);
+
+export default App;
+```
