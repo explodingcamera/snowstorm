@@ -21,6 +21,11 @@ export const generateRouter = async ({
 	const pagesLocation = '_snowstorm-pages';
 
 	let pages = await loadPages(site.internal.pagesFolder);
+	if (!pages.length) {
+		site.internal.log.fatal('No pages, have you created a pages folder?');
+		process.exit(1);
+	}
+
 	const normalizedPages = stripFileExtensions(pages);
 
 	const customErrorPage = normalizedPages.includes('_error');

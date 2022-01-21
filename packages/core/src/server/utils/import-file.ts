@@ -30,7 +30,7 @@ export async function importFile<FileType>(
 	try {
 		const filename = existingFiles[0] || undefined;
 		if (!filename) {
-			throw new Error('no files');
+			return;
 		}
 
 		if (
