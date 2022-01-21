@@ -1,3 +1,16 @@
+# v0.7.2 (Fri Jan 21 2022)
+
+#### 🐛 Bug Fix
+
+- fix: small fixes & upgrade deps [#25](https://github.com/explodingcamera/snowstorm/pull/25) ([@explodingcamera](https://github.com/explodingcamera))
+- docs: update website ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.7.1 (Thu Jan 13 2022)
 
 #### 🐛 Bug Fix
