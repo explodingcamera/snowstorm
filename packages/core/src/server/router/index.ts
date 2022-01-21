@@ -43,9 +43,13 @@ export const generateRouter = async ({
 		tmp = `import App from "${pagesLocation}/_app";\n${tmp}`;
 	}
 
-	tmp = `import Error from "${
-		customErrorPage ? `${pagesLocation}/_error` : `_snowstorm/_error.js`
-	}";\n${tmp}`;
+	if (customErrorPage) {
+		tmp = `import Error from "${
+			customErrorPage
+				? `${pagesLocation}/_error`
+				: `@snowstorm/core/client/_error.js`
+		}";\n${tmp}`;
+	}
 
 	processedPages.push(
 		`  "_app": () => ${customAppPage ? 'App' : 'undefined'}`,
