@@ -8,7 +8,7 @@
     "./server": "./server.js",
     "./server/export": "./server/export.js",
     ".": "./index.js",
-    "./client": "./client.d.ts",
+    "./client/": "./client/",
     "./types": "./types.d.ts",
     "./tsconfig.base.json": "./tsconfig.base.json",
     "./base.css": "./base.css"
