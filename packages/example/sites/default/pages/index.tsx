@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './index.module.css';
 
 import './../components/lol';
-
+asdf;
 const { useSP: useStuff } = createSP('load-stuff', async () => ({ hi: 1 }), {
 	type: 'dynamic',
 	runOnClient: false,
