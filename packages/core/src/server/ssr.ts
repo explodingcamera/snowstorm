@@ -6,6 +6,7 @@ import { ViteDevServer } from 'vite';
 import { checkFileExists } from './utils/file-exists';
 import { modules } from './site';
 import { fileIsPage } from './utils/is-page';
+import Youch from '@explodingcamera/youch';
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -145,7 +146,14 @@ export const ssr =
 				site.internal.pagesFolder,
 			);
 
-			console.error(error);
+			error.stack = error.stack?.replaceAll(
+				'_snowstorm/',
+				'file://' + config.internal.snowstormClientFolder + '/',
+			);
+
+			error.stack = error.stack
+				?.replace('    at eval (', `    at eval (${config.internal.rootFolder}`)
+				.replaceAll(`/@fs/`, 'file:///');
 
 			site.internal.log.error(
 				'SSR error:',
@@ -153,7 +161,15 @@ export const ssr =
 				error.message,
 				error.stack,
 			);
-			ctx.status = 500;
+
+			if (dev) {
+				const youch = new Youch(error, ctx.req);
+				const html = await youch.toHTML();
+				ctx.res.write(html);
+				ctx.status = 200;
+			} else {
+				ctx.status = 500;
+			}
 		}
 
 		ctx.set('Content-Type', 'text/html; charset=UTF-8');
