@@ -1,3 +1,21 @@
+# v0.8.0 (Sun Jan 23 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`
+  - feat: Error Page [#26](https://github.com/explodingcamera/snowstorm/pull/26) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- `@snowstorm/core`
+  - fix: fix plugin loading on multisite projects [#27](https://github.com/explodingcamera/snowstorm/pull/27) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.7.2 (Fri Jan 21 2022)
 
 #### 🐛 Bug Fix
