@@ -1,5 +1,5 @@
 import glob from 'fast-glob';
-import { readFile, unlink, writeFile } from 'fs/promises';
+import { unlink, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { compile } from './compile.js';
 

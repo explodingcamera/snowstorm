@@ -125,14 +125,18 @@ const viteBaseConfig = (
 		},
 	};
 
+	const defaultPlugins =
+		(config.site.build?.vitePlugins as Array<PluginOption | PluginOption[]>) ||
+		[];
+
 	res?.plugins?.push(
 		// snowstorm's default plugins
 		...[
 			react({ jsxRuntime: 'classic' }),
 			snowstormCollectModules(site.internal.baseFolder),
 		],
-		// default site plugins
-		...(site.build.vitePlugins || []),
+		// default plugins
+		...defaultPlugins,
 	);
 
 	// site specific plugins
@@ -141,11 +145,7 @@ const viteBaseConfig = (
 		config.internal.sitesFolder &&
 		site.pagesFolder.startsWith(config.internal.sitesFolder)
 	) {
-		res?.plugins?.push(
-			...((config.site.build?.vitePlugins as Array<
-				PluginOption | PluginOption[]
-			>) || []),
-		);
+		res?.plugins?.push(...(site.build.vitePlugins || []));
 	}
 
 	return res;

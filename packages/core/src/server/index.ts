@@ -9,7 +9,6 @@ import { startSite } from './site.js';
 import { isSnowstormProject } from './utils/is-snowstorm-project.js';
 
 import { createRequire } from 'module';
-import { rejects } from 'assert';
 import { createServer } from 'http';
 const require = createRequire(import.meta.url);
 
