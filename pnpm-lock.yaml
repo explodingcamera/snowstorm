@@ -54,7 +54,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@explodingcamera/youch': 3.1.0-test2
+      '@explodingcamera/youch': 3.1.0-fix
       '@rollup/pluginutils': ^4.1.1
       '@snowstorm/head': link:../head
       '@snowstorm/serverprops': link:../serverprops
@@ -88,9 +88,8 @@ importers:
       vite: ^2.6.14
       website-scraper: ^4.2.3
       wouter: ^2.7.5
-      youch: ^3.1.0
     dependencies:
-      '@explodingcamera/youch': 3.1.0-test2
+      '@explodingcamera/youch': 3.1.0-fix
       '@rollup/pluginutils': 4.1.2
       '@snowstorm/head': link:../head
       '@snowstorm/serverprops': link:../serverprops
@@ -99,7 +98,6 @@ importers:
       typescript: 4.5.4
       vite: 2.7.10
       wouter: 2.7.5_react@18.0.0-rc.0
-      youch: 3.1.0
     devDependencies:
       '@types/koa': 2.13.4
       '@types/koa-compress': 4.0.3
@@ -893,8 +891,8 @@ packages:
       - typescript
     dev: false
 
-  /@explodingcamera/youch/3.1.0-test2:
-    resolution: {integrity: sha512-HHB84hZesJJnXWle+S/CZvBJ26CbHJuSiZXVHsL7TdVtWMoUpbt7ZBTCh9IflWIqlk5he/YBZlHd6d3c3jTnJQ==}
+  /@explodingcamera/youch/3.1.0-fix:
+    resolution: {integrity: sha512-YW6x87Cg8XLNfv4NPCsZlfgAVJcXFopD9zeP5lq9f4mdeQE/lsV2hAH5qDLbgaVr2NynPw+wT4XaTyy1yZ5Vrg==}
     dependencies:
       cookie: 0.4.1
       mustache: 4.2.0
@@ -11064,14 +11062,6 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: false
-
-  /youch/3.1.0:
-    resolution: {integrity: sha512-MMuA/zwHgETTtmA2AHIjVgW0LOwkYLOzblGRlnBnfFgQFxBZUF6/8bzvC1dJCQsVTw//mtO8MrBGigP5+SJWEg==}
-    dependencies:
-      cookie: 0.4.1
-      mustache: 4.2.0
-      stacktracey: 2.1.8
     dev: false
 
   /zwitch/2.0.2:

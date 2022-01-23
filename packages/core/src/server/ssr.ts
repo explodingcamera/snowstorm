@@ -139,7 +139,7 @@ export const ssr =
 			setTimeout(abort as () => void, ABORT_DELAY);
 		} catch (error: unknown) {
 			if (!(error instanceof Error)) return;
-			// devServer.ssrFixStacktrace(error);
+			devServer.ssrFixStacktrace(error);
 
 			error.stack = error.stack?.replaceAll(
 				'/_snowstorm/pages',
@@ -154,9 +154,6 @@ export const ssr =
 			error.stack = error.stack
 				?.replace('    at eval (', `    at eval (${config.internal.rootFolder}`)
 				.replaceAll(`/@fs/`, 'file:///');
-			console.log(error.stack);
-
-			// console.error(error);
 
 			site.internal.log.error(
 				'SSR error:',

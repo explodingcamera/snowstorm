@@ -41,7 +41,7 @@
     "watch": "run-p --print-label \"build:** -- --watch\""
   },
   "dependencies": {
-    "@explodingcamera/youch": "3.1.0-test2",
+    "@explodingcamera/youch": "3.1.0-fix",
     "@rollup/pluginutils": "^4.1.1",
     "@snowstorm/head": "link:../head",
     "@snowstorm/serverprops": "link:../serverprops",
@@ -49,8 +49,7 @@
     "tslog": "^3.3.0",
     "typescript": "^4.5.2",
     "vite": "^2.6.14",
-    "wouter": "^2.7.5",
-    "youch": "^3.1.0"
+    "wouter": "^2.7.5"
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
