@@ -1,0 +1,52 @@
+export const title = "CSS";
+
+Out of the box, snowstorm supports just importing your css files:
+
+<br />
+
+`pages/index.css`
+
+```css
+html {
+  color: red;
+}
+```
+
+`pages/index.ts`
+
+```tsx
+import "./index.css";
+```
+
+<br />
+
+## CSS-Modules
+
+If you want to be a bit more fancy and utilise css modules, you can change the
+name of yout file to `{file}.module.css`:
+
+<br />
+
+`pages/index.module.css`
+
+```css
+.wrapper {
+  color: red;
+}
+```
+
+`pages/index.ts`
+
+```tsx
+import styles from "./index.module.css";
+export const Index = <div className={styles.wrapper} />;
+```
+
+<br />
+## SCSS
+
+If you want to be even more fancy, you can install `sass` to enable sass/scss support:
+
+```bash
+$ npm install -S sass
+```

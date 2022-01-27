@@ -32,9 +32,6 @@ const sidebar: Sidebar = [
 				title: 'basic features',
 				pages: [
 					{
-						title: 'sites',
-					},
-					{
 						title: 'pages',
 					},
 					{
@@ -45,7 +42,14 @@ const sidebar: Sidebar = [
 					},
 					{
 						title: 'static assets',
-						slug: 'static',
+						slug: 'static-assets',
+					},
+					{
+						title: 'sites',
+					},
+					{
+						title: 'custom fonts',
+						slug: 'custom-fonts',
 					},
 					{
 						title: 'importing libraries',
@@ -59,6 +63,10 @@ const sidebar: Sidebar = [
 					{
 						title: 'webassembly',
 						slug: 'wasm',
+					},
+					{
+						title: 'dynamic routes',
+						slug: 'dynamic-routes',
 					},
 					{
 						title: 'workers',

@@ -1,1 +1,17 @@
-# work in progress
+# Deploying your website
+
+Deploying your website is as easy as running `$ npx snowstorm export`.
+For convenience, you can also add a export script to your `package.json`:
+
+```json
+{
+  "name": "@snowstorm/www",
+  "scripts": {
+    "dev": "snowstorm dev",
+    "export": "snowstorm export",
+    "start": "snowstorm start"
+  }
+}
+```
+
+If you have any issues in export mode, you can also test out a production build using the start command which might help reveal more errors.

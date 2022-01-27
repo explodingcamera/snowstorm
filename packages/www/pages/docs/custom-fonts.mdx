@@ -1,0 +1,28 @@
+export const title = "Custom Fonts";
+
+Adding custom fonts is very straight forward. Since Snowstorm supports any `vite` and `rollup.js` plugin, we can istall the amazing `vite-plugin-fonts`:
+
+```bash
+npm i -S vite-plugin-fonts
+```
+
+And enable it in our `snowstorm.config.ts`:
+
+```tsx
+import { SnowstormConfig } from "@snowstorm/core/server";
+import { Plugin as VitePluginFonts } from "vite-plugin-fonts";
+
+export const Config: SnowstormConfig = {
+  site: {
+    build: {
+      vitePlugins: [
+        VitePluginFonts({
+          google: {
+            families: ["Inter"],
+          },
+        }),
+      ],
+    },
+  },
+};
+```

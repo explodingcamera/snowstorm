@@ -1,14 +1,26 @@
+import { Link } from "@snowstorm/core";
 export const title = "Getting Started";
 
 > **Welcome to Snowstorm's Documentation!**<br/>
-> Please note that this site is still incomplete - you might have noticed the links on the left side don't lead anywhere.<br/><br/>
+> Please note that this site is still incomplete.
 > I'm actively working on version 1.0, which will hopefully be ready in the coming months. Until then, expect bugs and breaking changes.
+
+## Caveats
+
+- A major difference to `next.js` is that snowstorm focuses more on the experience of using a static site generator (=> `next.js`'s export mode').
+- Routing can sometimes be a bit buggy, especially when pages have errors. I'm currently rewriting the client side page requesting code which will be ready for the 1.0 release.
+- Dynamic routing is not supported for exported sites yet. Alternatively, you can specify routes on build-time, more on that <Link to="/docs/dynamic-routes">here</Link>.
+
+## Alright, let's actually get started now!
 
 Getting started with snowstorm takes less than a minute and doesn't any require confusing `init` commands:
 
 ```bash
 # install the required dependencies
-$ npm install -S @snowstorm/core @snowstorm/cli react react-dom
+$ npm install -S @snowstorm/core @snowstorm/cli react@rc react-dom@rc typescript
+
+# (optional) enable scss support:
+$ npm install -S sass
 
 # this folder will contain all webpages
 $ mkdir pages

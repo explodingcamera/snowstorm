@@ -63,7 +63,8 @@ pre.language-terminal {
   }
 }
 
-p > code {
+p > code,
+li > code {
   background: #dbdce3;
   border-radius: 0.5em;
   padding: 0.4em;

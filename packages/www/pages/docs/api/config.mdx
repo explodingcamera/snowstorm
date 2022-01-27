@@ -1,0 +1,100 @@
+# Configuration
+
+Work-in-progress, for now, use the typescript type-definitions as a guide:
+
+```tsx
+export interface SnowstormConfig {
+  /**
+   * The root folder for the snowstorm project
+   */
+  rootFolder: string;
+  /**
+   * Multisite only: The folder containing sites in Multisite-mode
+   */
+  sitesFolder?: string;
+  /**
+   * Multisite only: Sites includes a list of config ovverides for specific sites
+   * (just an array of the same type as site below with added `domain: string; alias: string[];` fields)
+   */
+  sites: SnowstormMultiSiteConfig[];
+  /**
+   * Site is the base site config for all sites included in a snowstorm project
+   */
+  site: {
+    pagesFolder: string;
+    staticFolder: string;
+    basePath: string;
+    domain: string;
+    build: {
+      css?: {
+        /**
+         * https://github.com/css-modules/postcss-modules
+         */
+        modules?: CSSModulesOptions | false;
+        preprocessorOptions?: Record<string, any>;
+        postcss?:
+          | string
+          | (Postcss.ProcessOptions & {
+              plugins?: Postcss.Plugin[];
+            });
+      };
+      json?: {
+        /**
+         * Generate a named export for every property of the JSON object
+         * @default true
+         */
+        namedExports?: boolean;
+        /**
+         * Generate performant output as JSON.parse("stringified").
+         * Enabling this will disable namedExports.
+         * @default false
+         */
+        stringify?: boolean;
+      };
+      vitePlugins?: Array<PluginOption | PluginOption[]>;
+      // force pre-bundle module. can be helpful if commonjs packages are not detected and thus not converted to esm
+      forcePrebundle?: string[];
+    };
+    routes?: {
+      fileSystemRouting?: boolean;
+      customRoutes?: Record<
+        string,
+        {
+          page: string;
+          disabled?: boolean;
+          exportParams?: () => Promise<string[][]>;
+        }
+      >;
+    };
+  };
+  /**
+   * Configuration relevant for exporting sites
+   */
+  export: {
+    /**
+     * The directory where the website will be output to.
+     * In the case of `site`, this can be relative to the project root or an absolute path,
+     * in the case of `sites`, relative paths are relative to the outputDir set in `site`
+     */
+    outDir: string;
+    target:
+      | "github-pages"
+      | "gitlab-pages"
+      | "cloudflare-pages"
+      | "netlify"
+      | "independent";
+  };
+  /**
+   * Configuration relevant for development
+   */
+  development: {
+    port: number;
+  };
+  /**
+   * Configuration relevant for production
+   */
+  production: {
+    port: number;
+  };
+}
+```

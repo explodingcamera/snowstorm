@@ -1,0 +1,12 @@
+export const title = "Static Assets";
+
+To include static assets such as videos and images in you website, you can simply import them and you will get the corresponding url:
+
+`pages/index.tsx`
+
+```tsx
+import image from "./../assets/image.png";
+export const Index = () => <img src={image} />;
+```
+
+Note that the folder can be any folder, however it should be somewhere inside of your root directory.

@@ -1,0 +1,22 @@
+# Dynamic Routes
+
+While dynamic routes are not supported at runtime, you can customize you routes on build time:
+
+`snowstorm.config.ts`
+
+```ts
+import { SnowstormConfig } from "@snowstorm/core/server";
+
+export const Config: SnowstormConfig = {
+  site: {
+    routes: {
+      customRoutes: {
+        "/:param": {
+          page: "[param]",
+          exportParams: async () => [["page1"], ["page2"]],
+        },
+      },
+    },
+  },
+};
+```
