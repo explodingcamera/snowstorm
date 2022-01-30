@@ -2,6 +2,8 @@ node_modules
 packages/*/dist
 packages/*/lib
 
+.nyc_output
+
 .pnp.*
 .pnpm-debug.log
 
