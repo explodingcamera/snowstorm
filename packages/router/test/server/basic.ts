@@ -1,7 +1,7 @@
 import tap from 'tap';
-import { processRoute, Route } from './../src/index.js';
+import { processRoute, Route } from '../../src/server/index.js';
 
-tap.test('', t => {
+void tap.test('', t => {
 	const shouldErr = [''];
 	for (const route of shouldErr) {
 		t.throws(() => processRoute(route));
