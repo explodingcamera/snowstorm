@@ -1,11 +1,12 @@
 name: Deploy Website
 
 on:
-  push:
-    paths:
-      - "packages/www/**"
-    branches:
-      - main
+  - workflow_dispatch
+  - push:
+      paths:
+        - "packages/www/**"
+      branches:
+        - main
 
 jobs:
   release:
