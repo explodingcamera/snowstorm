@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Inter&family=Space Mono&display=swap">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="module" crossorigin src="../../../assets/index.95032109.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.f1139e42.js">
+    <link rel="stylesheet" href="../../../assets/index.3db77b68.css">
+  </head>
+  <body>
+    <div id="app"><p aria-live="assertive" id="__snowstorm-route-announcer__" role="alert" style="border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;white-space:nowrap;word-wrap:normal"></p><div class="_wrapper_fqyvw_1"><nav class="_nav_fqyvw_8"><ul><li class="_logo_fqyvw_34"><a href="/"><img src="../../../assets/logo.4a8e5f82.svg" height="40" width="40">Snowstorm<!-- --></a></li><li><a href="/docs">docs</a></li><li><a target="_blank" referrerPolicy="no-referrer" href="https://github.com/explodingcamera/snowstorm" rel="noreferrer">github</a></li></ul></nav><main class="_main_fqyvw_42"><aside class="_sidebar_fqyvw_55"><ul><li><h1># <!-- -->documentation<!-- --></h1><ul><li><h2 href="/docs/">&gt; <!-- --><span>getting started</span></h2></li><li><h2>-<!-- --> <!-- --><span>basic features</span></h2><ul><li><h2 href="/docs/pages"> &gt; <!-- --><span>pages</span></h2></li><li><h2 href="/docs/routing"> &gt; <!-- --><span>routing</span></h2></li><li><h2 href="/docs/css"> &gt; <!-- --><span>css</span></h2></li><li><h2 href="/docs/static-assets"> &gt; <!-- --><span>static assets</span></h2></li><li><h2 href="/docs/sites"> &gt; <!-- --><span>sites</span></h2></li><li><h2 href="/docs/custom-fonts"> &gt; <!-- --><span>custom fonts</span></h2></li><li><h2 href="/docs/imports"> &gt; <!-- --><span>importing libraries</span></h2></li></ul></li><li><h2>-<!-- --> <!-- --><span>advanced features</span></h2><ul><li><h2 href="/docs/wasm"> &gt; <!-- --><span>webassembly</span></h2></li><li><h2 href="/docs/dynamic-routes"> &gt; <!-- --><span>dynamic routes</span></h2></li><li><h2 href="/docs/workers"> &gt; <!-- --><span>workers</span></h2></li><li><h2 href="/docs/env-variables"> &gt; <!-- --><span>environment variables</span></h2></li><li><h2 href="/docs/custom-app"> &gt; <!-- --><span>custom `App`</span></h2></li></ul></li><li><h2 href="/docs/plugins">&gt; <!-- --><span>plugins</span></h2></li><li><h2 href="/docs/deploy">&gt; <!-- --><span>deploying a site</span></h2></li><li><h2 href="/docs/browser-support">&gt; <!-- --><span>browser support</span></h2></li></ul></li><li><h1># <!-- -->api reference<!-- --></h1><ul><li><h2 class="_active_fqyvw_92" href="/docs/api/config">&gt; <!-- --><span>configuration</span></h2></li><li><h2 href="/docs/api/cli">&gt; <!-- --><span>cli</span></h2></li><li><h2 href="/docs/api/plugins">&gt; <!-- --><span>plugin api</span></h2></li></ul></li><li><h2 href="/docs/inspirations">&gt; <!-- --><span>inspirations</span></h2></li></ul></aside><div><!--$?--><template id="B:0"></template><h1>Loading page...</h1><!--/$--></div></main></div><div hidden id="S:0"><template id="P:1"></template></div></div>
+        <!--SNOWSTORM ENTRYPOINT--><!--/SNOWSTORM ENTRYPOINT-->
+  </body>
+</html>
+<div hidden id="S:1"><h1>Configuration</h1>
+<!-- --><p>Work-in-progress, for now, use the typescript type-definitions as a guide:</p>
+<!-- --><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">export</span> <!-- --><span class="token keyword">interface</span> <!-- --><span class="token class-name"><span class="token maybe-class-name">SnowstormConfig</span></span> <!-- --><span class="token punctuation">{</span>
+  <!-- --><span class="token comment">/**
+   * The root folder for the snowstorm project
+   */</span>
+  rootFolder<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+  <!-- --><span class="token comment">/**
+   * Multisite only: The folder containing sites in Multisite-mode
+   */</span>
+  sitesFolder<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+  <!-- --><span class="token comment">/**
+   * Multisite only: Sites includes a list of config ovverides for specific sites
+   * (just an array of the same type as site below with added `domain: string; alias: string[];` fields)
+   */</span>
+  sites<!-- --><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">SnowstormMultiSiteConfig</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <!-- --><span class="token comment">/**
+   * Site is the base site config for all sites included in a snowstorm project
+   */</span>
+  site<!-- --><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+    pagesFolder<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+    staticFolder<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+    basePath<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+    domain<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+    build<!-- --><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+      css<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+        <!-- --><span class="token comment">/**
+         * https://github.com/css-modules/postcss-modules
+         */</span>
+        modules<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">CSSModulesOptions</span> <!-- --><span class="token operator">|</span> <!-- --><span class="token boolean">false</span><span class="token punctuation">;</span>
+        preprocessorOptions<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">Record</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <!-- --><span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+        postcss<!-- --><span class="token operator">?</span><span class="token operator">:</span>
+          <!-- --><span class="token operator">|</span> <!-- --><span class="token builtin">string</span>
+          <!-- --><span class="token operator">|</span> <!-- --><span class="token punctuation">(</span><span class="token maybe-class-name">Postcss</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">ProcessOptions</span></span> <!-- --><span class="token operator">&amp;</span> <!-- --><span class="token punctuation">{</span>
+              plugins<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">Postcss</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Plugin</span></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <!-- --><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+      json<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+        <!-- --><span class="token comment">/**
+         * Generate a named export for every property of the JSON object
+         * @default true
+         */</span>
+        namedExports<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token builtin">boolean</span><span class="token punctuation">;</span>
+        <!-- --><span class="token comment">/**
+         * Generate performant output as JSON.parse(&quot;stringified&quot;).
+         * Enabling this will disable namedExports.
+         * @default false
+         */</span>
+        stringify<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token builtin">boolean</span><span class="token punctuation">;</span>
+      <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+      vitePlugins<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token known-class-name class-name">Array</span><span class="token operator">&lt;</span><span class="token maybe-class-name">PluginOption</span> <!-- --><span class="token operator">|</span> <!-- --><span class="token maybe-class-name">PluginOption</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+      <!-- --><span class="token comment">// force pre-bundle module. can be helpful if commonjs packages are not detected and thus not converted to esm</span>
+      forcePrebundle<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    routes<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+      fileSystemRouting<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token builtin">boolean</span><span class="token punctuation">;</span>
+      customRoutes<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">Record</span><span class="token operator">&lt;</span>
+        <!-- --><span class="token builtin">string</span><span class="token punctuation">,</span>
+        <!-- --><span class="token punctuation">{</span>
+          page<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+          disabled<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token builtin">boolean</span><span class="token punctuation">;</span>
+          exportParams<!-- --><span class="token operator">?</span><span class="token operator">:</span> <!-- --><span class="token punctuation">(</span><span class="token punctuation">)</span> <!-- --><span class="token arrow operator">=&gt;</span> <!-- --><span class="token known-class-name class-name">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+        <!-- --><span class="token punctuation">}</span>
+      <!-- --><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+    <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <!-- --><span class="token comment">/**
+   * Configuration relevant for exporting sites
+   */</span>
+  <!-- --><span class="token keyword">export</span><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+    <!-- --><span class="token comment">/**
+     * The directory where the website will be output to.
+     * In the case of `site`, this can be relative to the project root or an absolute path,
+     * in the case of `sites`, relative paths are relative to the outputDir set in `site`
+     */</span>
+    outDir<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">string</span><span class="token punctuation">;</span>
+    target<!-- --><span class="token operator">:</span>
+      <!-- --><span class="token operator">|</span> <!-- --><span class="token string">&quot;github-pages&quot;</span>
+      <!-- --><span class="token operator">|</span> <!-- --><span class="token string">&quot;gitlab-pages&quot;</span>
+      <!-- --><span class="token operator">|</span> <!-- --><span class="token string">&quot;cloudflare-pages&quot;</span>
+      <!-- --><span class="token operator">|</span> <!-- --><span class="token string">&quot;netlify&quot;</span>
+      <!-- --><span class="token operator">|</span> <!-- --><span class="token string">&quot;independent&quot;</span><span class="token punctuation">;</span>
+  <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <!-- --><span class="token comment">/**
+   * Configuration relevant for development
+   */</span>
+  development<!-- --><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+    port<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">number</span><span class="token punctuation">;</span>
+  <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <!-- --><span class="token comment">/**
+   * Configuration relevant for production
+   */</span>
+  production<!-- --><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
+    port<!-- --><span class="token operator">:</span> <!-- --><span class="token builtin">number</span><span class="token punctuation">;</span>
+  <!-- --><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<!-- --><span class="token punctuation">}</span>
+<!-- --></code></pre></div><script>function $RS(a,b){a=document.getElementById(a);b=document.getElementById(b);for(a.parentNode.removeChild(a);a.firstChild;)b.parentNode.insertBefore(a.firstChild,b);b.parentNode.removeChild(b)};$RS("S:1","P:1")</script><script>function $RC(a,b){a=document.getElementById(a);b=document.getElementById(b);b.parentNode.removeChild(b);if(a){a=a.previousSibling;var f=a.parentNode,c=a.nextSibling,e=0;do{if(c&&8===c.nodeType){var d=c.data;if("/$"===d)if(0===e)break;else e--;else"$"!==d&&"$?"!==d&&"$!"!==d||e++}d=c.nextSibling;f.removeChild(c);c=d}while(c);for(;b.firstChild;)f.insertBefore(b.firstChild,c);a.data="$";a._reactRetry&&a._reactRetry()}};$RC("B:0","S:0")</script>
