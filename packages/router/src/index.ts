@@ -5,38 +5,35 @@
  */
 
 import locationHook, {
+	HookNavigationOptions,
 	BaseLocationHook,
 	HookReturnValue,
-	HookNavigationOptions,
 	LocationHook,
 } from './use-location.js';
 
 import makeMatcher, {
-	DefaultParams,
 	Path,
 	Match,
 	MatcherFn,
+	DefaultParams,
 } from './matcher.js';
 
 import {
+	FC,
 	useRef,
-	useLayoutEffect,
+	Fragment,
+	ReactNode,
 	useContext,
 	useCallback,
-	createContext,
-	isValidElement,
 	cloneElement,
-	createElement as h,
-	Fragment,
-} from './react.js';
-
-import {
-	AnchorHTMLAttributes,
-	PropsWithChildren,
-	ComponentType,
 	ReactElement,
-	ReactNode,
-	FC,
+	createContext,
+	ComponentType,
+	isValidElement,
+	useLayoutEffect,
+	PropsWithChildren,
+	AnchorHTMLAttributes,
+	createElement as h,
 } from 'react';
 
 // re-export types from these modules
@@ -144,7 +141,8 @@ export interface RouterProps {
 // when no value is provided — default object is used.
 // allows us to use the router context as a global ref to store
 // the implicitly created router (see `useRouter` below)
-const RouterCtx = createContext<{ v?: ReturnType<typeof buildRouter> }>({});
+type RouterCtxType = { v?: ReturnType<typeof buildRouter> };
+const RouterCtx = createContext<RouterCtxType>({});
 
 const buildRouter = ({
 	hook = locationHook,
@@ -195,13 +193,12 @@ export const Router: FC<
 		children: ReactNode;
 	}
 > = props => {
-	const ref = useRef();
+	const ref = useRef<RouterCtxType>();
 
 	// this little trick allows to avoid having unnecessary
 	// calls to potentially expensive `buildRouter` method.
 	// https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
-	const value =
-		ref.current || ((ref.current as any) = { v: buildRouter(props) });
+	const value = ref.current || (ref.current = { v: buildRouter(props) });
 
 	return h(RouterCtx.Provider, {
 		value,

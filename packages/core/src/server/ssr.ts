@@ -133,6 +133,7 @@ export const ssr =
 					if (!(error instanceof Error)) return;
 					devServer.ssrFixStacktrace(error);
 					didError = true;
+					throw error;
 				},
 			});
 			// Abandon and switch to client rendering if enough time passes.

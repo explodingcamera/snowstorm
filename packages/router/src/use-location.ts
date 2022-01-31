@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from './react.js';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 export type LocationTuple = HookReturnValue<LocationHook>;
 type Path = string;
