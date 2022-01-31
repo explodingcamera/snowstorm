@@ -1,4 +1,3 @@
-export { createSP } from '@snowstorm/serverprops';
 export { Head } from '@snowstorm/head';
 import {
 	Link,

@@ -1,16 +1,16 @@
-import { createSP, Head, Link } from '@snowstorm/core';
+import { Head, Link } from '@snowstorm/core';
 import { useState } from 'react';
 import styles from './index.module.css';
 
 import './../components/lol';
 
-const { useSP: useStuff } = createSP('load-stuff', async () => ({ hi: 1 }), {
-	type: 'dynamic',
-	runOnClient: false,
-});
+// const { useSP: useStuff } = createSP('load-stuff', async () => ({ hi: 1 }), {
+// 	type: 'dynamic',
+// 	runOnClient: false,
+// });
 
 export const Index = () => {
-	const data = useStuff();
+	// const data = useStuff();
 	const [title, setTitle] = useState('pog');
 
 	return (
@@ -25,7 +25,7 @@ export const Index = () => {
 				value={title}
 				onChange={e => setTitle(e.target.value)}
 			/>
-			hi lol eadfs geht {data?.hi}
+			hi lol eadfs geht
 			<Link href="/zasdf">
 				<a>hier</a>
 			</Link>
