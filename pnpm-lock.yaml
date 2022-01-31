@@ -58,7 +58,6 @@ importers:
       '@rollup/pluginutils': ^4.1.1
       '@snowstorm/head': link:../head
       '@snowstorm/router': link:../router
-      '@snowstorm/serverprops': link:../serverprops
       '@types/koa': ^2.13.4
       '@types/koa-compress': ^4.0.3
       '@types/koa-logger': ^3.1.2
@@ -93,7 +92,6 @@ importers:
       '@rollup/pluginutils': 4.1.2
       '@snowstorm/head': link:../head
       '@snowstorm/router': link:../router
-      '@snowstorm/serverprops': link:../serverprops
       '@vitejs/plugin-react': 1.1.4
       tslog: 3.3.1
       typescript: 4.5.4
