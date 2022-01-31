@@ -20,7 +20,7 @@
     "build:esbuild": "esbuild src/*.ts src/server/index.ts --minify --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --external:react --target=node16 --format=esm",
     "watch": "npm run build -- --watch",
     "types": "tsc -p tsconfig.build.json",
-    "test": "tap --ts --node-arg=--loader=ts-node/esm"
+    "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm"
   },
   "dependencies": {
     "deepmerge": "^4.2.2"

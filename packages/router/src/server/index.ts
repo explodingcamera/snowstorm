@@ -30,8 +30,16 @@ const defaultRouteConfig: RouterConfig = {
 };
 
 export const processRoute = (route: string): Route => {
+	if (route.includes('..'))
+		throw new Error(`route can't contains two adjacent dots: ${route}`);
+
+	if (!/^[/0-9a-zA-Z[\]._-]*$/g.test(route))
+		throw new Error(`route contains invalid characters: ${route}`);
+
 	let parts = route.split('/');
-	if (!parts || parts[0] === '') throw new Error(`invalid empty route`);
+	if (!parts || parts[0] === '')
+		throw new Error(`invalid empty route: ${route}`);
+
 	let decorator;
 	let lastEl = parts[parts.length - 1];
 	if (lastEl.includes('.')) {

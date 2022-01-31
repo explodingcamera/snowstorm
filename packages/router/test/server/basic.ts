@@ -1,10 +1,12 @@
 import tap from 'tap';
 import { processRoute, Route } from '../../src/server/index.js';
 
-void tap.test('', t => {
-	const shouldErr = [''];
+void tap.test('processRoute should handle edge-cases: ', t => {
+	const shouldErr = ['', '/test', '../../test', '%$@#.asdfasdf.asd'];
 	for (const route of shouldErr) {
-		t.throws(() => processRoute(route));
+		void t.test(`${route} should throw`, async t => {
+			t.throws(() => processRoute(route));
+		});
 	}
 
 	const shouldNotErr: Array<[string, Route]> = [
@@ -47,6 +49,7 @@ void tap.test('', t => {
 	];
 
 	for (const [route, res] of shouldNotErr) {
+		t.comment('should eq: ', route, res);
 		t.same(processRoute(route), res);
 	}
 

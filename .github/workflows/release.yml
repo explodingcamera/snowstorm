@@ -27,8 +27,11 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions - update submodules"
 
-      - name: build deps
+      - name: Build Deps
         run: pnpm build
+
+      - name: Run Tests
+        run: pnpm test
 
       - name: Create Release
         env:
