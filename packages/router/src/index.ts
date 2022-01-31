@@ -98,7 +98,6 @@ export type NavigationalProps<H extends BaseLocationHook = LocationHook> = (
 ) &
 	HookNavigationOptions<H>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type LinkProps<H extends BaseLocationHook = LocationHook> = Omit<
 	AnchorHTMLAttributes<HTMLAnchorElement>,
 	'href'

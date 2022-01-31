@@ -1,5 +1,7 @@
 {
-  "extends": "@snowstorm/core/tsconfig.base.json",
+  "buildOptions": {
+    "types": ["../core/types.d.ts"]
+  },
   "include": ["**/*", "types.d.ts"],
   "exclude": ["node_modules/*", ".snowstorm/*"]
 }
