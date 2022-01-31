@@ -5,15 +5,7 @@ import serve from 'koa-static';
 import compress from 'koa-compress';
 import chokidar from 'chokidar';
 
-import {
-	build,
-	createServer,
-	CSSOptions,
-	InlineConfig,
-	JsonOptions,
-	Plugin,
-	PluginOption,
-} from 'vite';
+import { build, createServer, InlineConfig, Plugin, PluginOption } from 'vite';
 
 import {
 	SnowstormConfigInternal,
@@ -30,6 +22,8 @@ import { generateRouter } from './router/index.js';
 import { fileURLToPath } from 'url';
 import deepmerge from 'deepmerge';
 import { pageGlob } from './utils/is-page.js';
+import glob from 'fast-glob';
+import { brotliify } from './utils/brotliify.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -234,10 +228,8 @@ export const startSite = async ({
 			}),
 		]);
 
-		// const files = await glob(`${site.internal.snowpackFolder}/**/*`, {
-		// 	nodir: true,
-		// });
-		// brotliify(files);
+		const files = await glob(`${site.internal.viteFolder}/**/*`);
+		brotliify(files);
 	}
 
 	app.use(
@@ -258,13 +250,12 @@ export const startSite = async ({
 	app.use(async (ctx, next) => c2k(viteServer.middlewares)(ctx, next));
 
 	if (!dev) {
-		app.use(compress());
-		// TODO: use a simpler html minifier (previously koa html minifier was used)
-		// app.use(
-		// 	htmlMinify({
-		// 		collapseWhitespace: true,
-		// 	}),
-		// );
+		app.use(
+			compress({
+				threshold: 2048,
+				br: {},
+			}),
+		);
 	}
 
 	app.use(

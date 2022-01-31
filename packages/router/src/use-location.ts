@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
+const polyfill: Location = {
+	pathname: '',
+	port: '80',
+	host: 'localhost',
+} as any;
+const loc: Location = typeof location === 'undefined' ? polyfill : location;
+
 export type LocationTuple = HookReturnValue<LocationHook>;
 type Path = string;
 // the base useLocation hook type. Any custom hook (including the
@@ -23,8 +30,6 @@ export type HookNavigationOptions<H extends BaseLocationHook> =
 			: Record<string, unknown>
 		: Record<string, unknown>;
 
-const location = window?.location || global?.location || { pathname: '/' };
-
 /**
  * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
  */
@@ -45,7 +50,7 @@ interface LocationState {
 const useLocation: LocationHook = ({ base = '' } = {}) => {
 	const [{ path, search }, update] = useState<LocationState>(() => ({
 		path: currentPathname(base),
-		search: location.search,
+		search: loc.search,
 	})); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
 	const prevHash = useRef(path + search);
 
@@ -56,7 +61,7 @@ const useLocation: LocationHook = ({ base = '' } = {}) => {
 		// that's why we store the last pathname in a ref.
 		const checkForUpdates = () => {
 			const pathname = currentPathname(base);
-			const { search } = location;
+			const { search } = loc;
 			const hash = pathname + search;
 
 			if (prevHash.current !== hash) {
@@ -126,7 +131,7 @@ if (typeof history !== 'undefined') {
 	}
 }
 
-const currentPathname = (base: string, path = location.pathname) =>
+const currentPathname = (base: string, path = loc.pathname) =>
 	path.toLowerCase().indexOf(base.toLowerCase())
 		? '~' + path
 		: path.slice(base.length) || '/';
