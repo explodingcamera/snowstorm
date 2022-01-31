@@ -16,7 +16,8 @@
     "lib/"
   ],
   "scripts": {
-    "build": "esbuild src/*.ts src/server/index.ts --minify --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --external:react --target=node16 --format=esm",
+    "build": "run-p --print-label build:esbuild types",
+    "build:esbuild": "esbuild src/*.ts src/server/index.ts --minify --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --external:react --target=node16 --format=esm",
     "watch": "npm run build -- --watch",
     "types": "tsc -p tsconfig.build.json",
     "test": "tap --ts --node-arg=--loader=ts-node/esm"
