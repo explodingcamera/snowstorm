@@ -29,7 +29,10 @@ Getting started with snowstorm takes less than a minute and doesn't any require 
 
 ```bash
 # install the required dependencies
-$ npm install -S @snowstorm/core @snowstorm/cli react react-dom
+$ npm install -S @snowstorm/core @snowstorm/cli react@rc react-dom@rc typescript
+
+# (optional) enable scss support:
+$ npm install -S sass
 
 # this folder will contain all webpages
 $ mkdir pages
@@ -42,20 +45,12 @@ $ echo '{ "extends": "@snowstorm/core/tsconfig.base.json" }' > tsconfig.json
 $ npx snowstorm dev
 ```
 
-<pre><code><b>INFO</b> starting snowstorm v0.0.1 (development mode)
+<pre><code><b>INFO</b> starting snowstorm v0.10.0 (development mode)
 <b>INFO</b> listening on <u>http://localhost:2020/</u>
 <b>INFO</b> started in 19ms</code></pre>
 
 ### Visit [snowstorm.js.org/docs](https://snowstorm.js.org/docs/getting-started) for the full documentation
 
 <br/>
-
-## FAQ
-
-<details>
-  <summary>Why are issues disabled?</summary>
-  I'm not responding to bug reports and other issues.
-  For smaller things, you can open a pr, outside of that discussions are available to ask questions and paid support is also available at (henrygressmann.de)[https://henrygressmann.de].
-</details>
 
 > License: [MIT](LICENSE.md)
