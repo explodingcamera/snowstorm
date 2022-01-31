@@ -1,4 +1,3 @@
-import { hydrateSPs } from '@snowstorm/serverprops/lib/internal';
 import React from 'react';
 
 import {} from 'react-dom/next';
@@ -40,7 +39,7 @@ if (!loc.startsWith('/')) loc = '/' + loc;
 		</Router>
 	);
 
-	const hydrate = Boolean(element?.childNodes.length);
-	if (hydrate) hydrateSPs();
+	// const hydrate = Boolean(element?.childNodes.length);
+	// if (hydrate) hydrateSPs();
 	if (element) hydrateRoot(element, page);
 })();

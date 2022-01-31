@@ -55,13 +55,8 @@ export const ssr =
 				? await devServer.ssrLoadModule('_snowstorm/load-html.js')
 				: await import(site.internal.viteFolder + '/server/load-html.js');
 
-			const {
-				loadPage,
-				renderPage,
-				serverprops,
-				getHead,
-				renderToPipeableStream,
-			} = ssrModule;
+			const { loadPage, renderPage, getHead, renderToPipeableStream } =
+				ssrModule;
 
 			const page = await loadPage({ path: ctx.path });
 
@@ -70,7 +65,7 @@ export const ssr =
 				internalHead = await collectPreload(page.page, site, config, manifest);
 			}
 
-			await serverprops.processSPs();
+			// await serverprops.processSPs();
 			const reactPage: string = await renderPage({
 				...page,
 				path: ctx.path,
@@ -94,7 +89,7 @@ export const ssr =
 				htmlFile = await devServer.transformIndexHtml(ctx.path, htmlFile);
 			}
 
-			const props: string = await serverprops.collectProps();
+			// const props: string = await serverprops.collectProps();
 			const head: string = getHead();
 			const basePath = site.basePath === '/' ? '' : site.basePath;
 
@@ -103,9 +98,10 @@ export const ssr =
 				.replace(/\/_snowstorm/g, `${basePath}/_snowstorm`)
 				.replace(
 					'<!--SNOWSTORM DATA-->',
-					props.length
-						? `<script id="__serverprops" type="application/json">${props}</script>`
-						: '',
+					// props.length
+					// 	? `<script id="__serverprops" type="application/json">${props}</script>`
+					// 	:
+					'',
 				)
 				.replace('<!--SNOWSTORM INTERNAL-HEAD-->', internalHead)
 				.replace('<!--SNOWSTORM HEAD-->', head);
