@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-const polyfill: Location = {} as any;
+const polyfill: Location = {
+	pathname: '',
+	port: '80',
+	host: 'localhost',
+} as any;
 const loc: Location = typeof location === 'undefined' ? polyfill : location;
 
 export type LocationTuple = HookReturnValue<LocationHook>;
