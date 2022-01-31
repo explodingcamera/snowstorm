@@ -1,3 +1,20 @@
+# v0.11.0 (Mon Jan 31 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/router`
+  - fix: fix location for ssr [#30](https://github.com/explodingcamera/snowstorm/pull/30) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- docs: remove faq in readme ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.10.0 (Mon Jan 31 2022)
 
 #### 🚀 Enhancement
