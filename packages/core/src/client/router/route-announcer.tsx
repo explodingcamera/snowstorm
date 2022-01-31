@@ -24,7 +24,7 @@
 // SOFTWARE.
 
 import React, { useEffect, useState, useRef } from 'react';
-import { useLocation } from 'wouter';
+import { useLocation } from '@snowstorm/router';
 
 export const RouteAnnouncer = () => {
 	const [location] = useLocation();

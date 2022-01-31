@@ -1,11 +1,11 @@
 {
   "extends": "./../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./",
+    "outDir": "./lib",
     "allowJs": true,
     "checkJs": false,
     "emitDeclarationOnly": true
   },
-  "include": ["./src/client/**/*", "./src/index.ts"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules", "lib", "dist"]
 }

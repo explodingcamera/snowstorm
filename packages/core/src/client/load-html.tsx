@@ -9,12 +9,11 @@ import {
 	ImportedPageModule,
 } from './router';
 
-import { Router } from 'wouter';
-import staticLocationHook from 'wouter/static-location';
-import makeMatcher from 'wouter/matcher';
+import { Router } from '@snowstorm/router';
+import staticLocationHook from '@snowstorm/router/lib/static-location';
+import makeMatcher from '@snowstorm/router/lib/matcher';
 
 // these are exported so we can use the transformed client code on our server
-export * as serverprops from '@snowstorm/serverprops/lib/internal';
 export { getHead } from '@snowstorm/head/lib/internal';
 
 import {} from 'react-dom/next';

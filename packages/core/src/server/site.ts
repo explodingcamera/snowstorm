@@ -84,7 +84,7 @@ const viteBaseConfig = (
 		configFile: false,
 		plugins: [],
 		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
-		ssr: { noExternal: ['wouter', /@snowstorm/] },
+		ssr: { noExternal: [/@snowstorm/] },
 		css: deepmerge.all([
 			// snowstorm's default css options
 			{

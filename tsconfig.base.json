@@ -15,5 +15,5 @@
     "outDir": "lib/",
     "declaration": true
   },
-  "include": ["**/src/**/*", "packages/example/**/*", "packages/example-*/**/*"]
+  "include": ["**/src/**/*", "**/test/**/*"]
 }
