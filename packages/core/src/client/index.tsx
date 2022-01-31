@@ -12,6 +12,9 @@ import {
 } from './router';
 import makeMatcher from '@snowstorm/router/lib/matcher';
 
+// prevent flash-of-unstyled-content in dev-mode
+document.querySelector('.__snowstorm-dev-floc')?.remove();
+
 const element = document.getElementById('app');
 
 let loc = document.location.pathname;

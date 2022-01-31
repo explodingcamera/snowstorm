@@ -9,10 +9,13 @@ import { fileIsPage } from './utils/is-page';
 import Youch from '@explodingcamera/youch';
 
 import ssrPrepass from 'react-ssr-prepass';
+import EventEmitter from 'events';
 
 const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
+
+EventEmitter.defaultMaxListeners = 100;
 
 export const ssr =
 	({
@@ -93,8 +96,12 @@ export const ssr =
 			}
 
 			// const props: string = await serverprops.collectProps();
-			const head: string = getHead();
+			let head: string = getHead();
 			const basePath = site.basePath === '/' ? '' : site.basePath;
+
+			if (dev) {
+				head += `<style type="text/css" class="__snowstorm-dev-floc">* {display: none;}</style>`;
+			}
 
 			const doc = htmlFile
 				.replace(/\/_snowstorm\/index.js/g, `/_snowstorm/index.js?v=${version}`)
