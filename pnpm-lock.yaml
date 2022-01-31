@@ -57,6 +57,7 @@ importers:
       '@explodingcamera/youch': 3.1.0-fix
       '@rollup/pluginutils': ^4.1.1
       '@snowstorm/head': link:../head
+      '@snowstorm/router': link:../router
       '@snowstorm/serverprops': link:../serverprops
       '@types/koa': ^2.13.4
       '@types/koa-compress': ^4.0.3
@@ -87,17 +88,16 @@ importers:
       typescript: ^4.5.2
       vite: ^2.6.14
       website-scraper: ^4.2.3
-      wouter: ^2.7.5
     dependencies:
       '@explodingcamera/youch': 3.1.0-fix
       '@rollup/pluginutils': 4.1.2
       '@snowstorm/head': link:../head
+      '@snowstorm/router': link:../router
       '@snowstorm/serverprops': link:../serverprops
       '@vitejs/plugin-react': 1.1.4
       tslog: 3.3.1
       typescript: 4.5.4
       vite: 2.7.10
-      wouter: 2.7.5_react@18.0.0-rc.0
     devDependencies:
       '@types/koa': 2.13.4
       '@types/koa-compress': 4.0.3
@@ -198,7 +198,6 @@ importers:
       remark-gfm: ^3.0.1
       sass: ^1.44.0
       vite-plugin-fonts: ^0.2.2
-      wouter: ^2.7.5
     dependencies:
       '@mdx-js/rollup': 2.0.0-rc.1
       '@snowstorm/cli': link:../cli
@@ -210,7 +209,6 @@ importers:
       remark-gfm: 3.0.1
       sass: 1.47.0
       vite-plugin-fonts: 0.2.2
-      wouter: 2.7.5_react@18.0.0-rc.0
 
 packages:
 
@@ -11539,14 +11537,6 @@ packages:
       reduce-flatten: 2.0.0
       typical: 5.2.0
     dev: true
-
-  /wouter/2.7.5_react@18.0.0-rc.0:
-    resolution: {integrity: sha512-TOI9gD1wa7a8wW+lh3rjg0C+MjYGKMV3eC+++6D+7n1z36ZJIBPWe2G9Hs1jYNPsV7oKiPTI3UFC5TGhZjQfrQ==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.0.0-rc.0
-    dev: false
 
   /wrap-ansi/6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}

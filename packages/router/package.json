@@ -4,22 +4,31 @@
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
   "type": "module",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib": "./lib",
+    "./lib/matcher": "./lib/matcher.js",
+    "./lib/static-location": "./lib/static-location.js"
+  },
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --target=node16 --format=esm",
+    "build": "esbuild src/*.ts src/server/index.ts --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --target=node16 --format=esm",
     "watch": "npm run build -- --watch",
+    "types": "tsc -p tsconfig.build.json",
     "test": "tap --ts --node-arg=--loader=ts-node/esm"
   },
   "dependencies": {
-    "@testing-library/react": "^12.1.2",
     "deepmerge": "^4.2.2"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/react": "17.0.38",
     "@types/tap": "^15.0.5",

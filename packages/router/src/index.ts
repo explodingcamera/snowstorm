@@ -217,7 +217,7 @@ export function Route<
 	match,
 	component,
 	children,
-}: RouteProps<T, RoutePath> & { match: any }): ReactElement | null {
+}: RouteProps<T, RoutePath> & { match?: any }): ReactElement | null {
 	const useRouteMatch = useRoute(path as any);
 
 	// `props.match` is present - Route is controlled by the Switch

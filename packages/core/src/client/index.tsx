@@ -2,8 +2,8 @@ import { hydrateSPs } from '@snowstorm/serverprops/lib/internal';
 import React from 'react';
 
 import {} from 'react-dom/next';
-import { createRoot, hydrateRoot } from 'react-dom';
-import { Router } from 'wouter';
+import { hydrateRoot } from 'react-dom';
+import { Router } from '@snowstorm/router';
 import {
 	basePath,
 	findRoute,
@@ -11,7 +11,7 @@ import {
 	Page,
 	requestPage,
 } from './router';
-import makeMatcher from 'wouter/matcher';
+import makeMatcher from '@snowstorm/router/lib/matcher';
 
 const element = document.getElementById('app');
 
