@@ -47,7 +47,7 @@ void tap.test('`value` first argument', async t => {
 		});
 
 		await new Promise(resolve => {
-			setTimeout(resolve, 10);
+			setTimeout(resolve, 100);
 		});
 
 		t.equal(result.current[0], '/');
