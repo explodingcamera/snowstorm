@@ -23,7 +23,7 @@ export type HookNavigationOptions<H extends BaseLocationHook> =
 			: Record<string, unknown>
 		: Record<string, unknown>;
 
-const location = global.location || { pathname: '/' };
+const location = window?.location || global?.location || { pathname: '/' };
 
 /**
  * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
