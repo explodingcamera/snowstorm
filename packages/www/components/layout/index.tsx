@@ -1,11 +1,11 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 
 import '@snowstorm/core/base.css';
 import './global.scss';
 import './dracula.css';
 
 import styles from './index.module.scss';
-import { Link } from '@snowstorm/core';
+import { Link, useLocation } from '@snowstorm/core';
 
 import Logo from './../../assets/logo.svg';
 import { PageMeta } from '../../types';
@@ -135,7 +135,8 @@ const Nav = () => (
 const isSection = (x: Section | Page): x is Section => (x as any).pages;
 
 const Item = ({ level = 0, item }: { level?: number; item: SidebarItem }) => {
-	const [expanded, setExpanded] = useState(false);
+	const [expanded, setExpanded] = useState(true);
+	const [location] = useLocation();
 	const toggle = () => setExpanded(x => !x);
 
 	let component: React.ReactElement;
@@ -162,7 +163,12 @@ const Item = ({ level = 0, item }: { level?: number; item: SidebarItem }) => {
 		);
 	} else {
 		component = (
-			<h2>
+			<h2
+				className={
+					(location.endsWith(item.slug || item.title) && styles.active) ||
+					undefined
+				}
+			>
 				{level <= 1 ? '> ' : <>&nbsp;&gt;&nbsp;</>}
 				<span>{item.title}</span>
 			</h2>

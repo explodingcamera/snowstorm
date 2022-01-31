@@ -13,17 +13,15 @@ Important: Snowstorm isn't Production-Ready yet. Documentation is rough, outdate
 
 ## What?
 
-Snowstorm is a "framework" for react, which handles the heavy lifting involved with shipping a react project so you can focus on creating awesome things!
+Snowstorm is a framework (or Static-Site-Generator) for react, which handles the heavy lifting involved with shipping a react project so you can focus on creating awesome things!
 
 ## Why?
 
-- Develop faster, with a dev server that starts up in less then 100ms
-- Unbloated: only includes features which you actually use
-- Builds thousands of pages in seconds
-- Versitile: supports everything from complex server side code to blazing fast, javascript free static websites
-- File system based routing (which can also be disabled)
-- Multi-Site support: routes can not only based on the path but also your domain
-- First-class static exports: no features gated behind proprietary "serverless solutions
+- **Develop faster**: with a dev server that starts up in less then 30ms and build thousands of pages in seconds
+- **Open**: not VC-backed, no upsell, no cloud-platform exclusive features
+- **Unbloated**: only includes features which you actually use
+- **Multi-Site support**: develop for multiple domains at the same time
+- **Great UX**: file system based routing, react suspense support, great TypeScript support, CSS-Modules
 
 ## How?
 

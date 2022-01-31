@@ -1,4 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+	lazy,
+	Suspense,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import { Route, Switch } from '@snowstorm/router';
 import makeMatcher from '@snowstorm/router/lib/matcher';
 
@@ -44,7 +51,6 @@ const capitalize = (string: string) =>
 	string.charAt(0).toUpperCase() + string.slice(1);
 
 const pagesCache = new Map<string, ImportedPageModule>();
-let lastPage = '';
 
 const App = ({
 	Wrapper,
@@ -59,31 +65,32 @@ const App = ({
 		ImportedPageModule | undefined
 	>(() => (initialPageName && pagesCache.get(initialPageName)) || undefined);
 
-	const setPage = (page?: ImportedPageModule) => {
-		if (page !== currentPage) setCurrentPage(page);
-	};
+	const currentp = useRef<ImportedPageModule | undefined>();
+	if (!currentp.current)
+		currentp.current = initialPageName
+			? pagesCache.get(initialPageName)
+			: undefined;
 
-	const pageLoader = (r: SnowstormRoute) => () => {
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const page = usePage(r.page, lastPage);
-
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		useEffect(() => {
-			setPage(page);
-		}, [page]);
-
-		lastPage = r.page;
-		if (!page?.Component) return <h1>loading</h1>;
-
-		const { Component } = page;
-		return <Component />;
-	};
-
-	const routeComponents = useMemo(
+	const page = useMemo(
 		() => (
 			<Switch>
 				{allRoutes.map(r => (
-					<Route path={r.path} key={r.page} component={pageLoader(r)} />
+					<Route
+						path={r.path}
+						key={r.page}
+						component={() => {
+							const Page = lazy(async () => {
+								const p = await loadPage(r.page);
+								setCurrentPage(p);
+								return { default: p.Component };
+							});
+							return (
+								<Suspense fallback={<h1>Loading page...</h1>}>
+									<Page />
+								</Suspense>
+							);
+						}}
+					/>
 				))}
 			</Switch>
 		),
@@ -91,9 +98,9 @@ const App = ({
 	);
 
 	const site = Wrapper ? (
-		<Wrapper exports={currentPage?.exports}>{routeComponents}</Wrapper>
+		<Wrapper exports={currentPage?.exports}>{page}</Wrapper>
 	) : (
-		routeComponents
+		page
 	);
 
 	return (
@@ -104,39 +111,18 @@ const App = ({
 	);
 };
 
-type PageStatus = 'ERROR' | 'LOADING' | 'LOADED';
+const loadPage = async (page: string) => {
+	const cachedPage = pagesCache.get(page);
 
-const usePage = (page: string, lastPage: string) => {
-	const [status, setStatus] = useState<PageStatus>('LOADING');
-	const [error, setError] = useState<string>('');
+	// cache hit
+	if (cachedPage) return cachedPage;
 
-	const [{ Page, loadPageAsync }, setPage] = useState<{
-		loadPageAsync: boolean;
-		Page: ImportedPageModule | undefined;
-	}>(() => {
-		const cachedPage = pagesCache.get(page);
-		if (lastPage !== '' && lastPage !== page && !cachedPage) {
-			return { Page: pagesCache.get(lastPage), loadPageAsync: true }; // keep the old page rendered till the new one is loaded
-		}
+	const newPage = await requestPage(page);
 
-		return { Page: cachedPage, loadPageAsync: cachedPage !== undefined };
-	});
+	// save to cache
+	if (!cachedPage) pagesCache.set(page, newPage);
 
-	// load page asynchronously when the current page !== last page and
-	useEffect(() => {
-		if (loadPageAsync) {
-			requestPage(page)
-				.then(loadedPage => {
-					if (!pagesCache.get(page)) pagesCache.set(page, loadedPage);
-					setPage({ Page: loadedPage, loadPageAsync: false });
-				})
-				.catch(e => {
-					console.error(e);
-					setError(e);
-				});
-		}
-	}, [loadPageAsync]);
-	return Page;
+	return newPage;
 };
 
 const calculateAlternativePageName = (page: string) =>
@@ -181,7 +167,6 @@ export const Page = ({ initialPage }: { initialPage: InitialPage }) => {
 				Component: initialPage.Component,
 				exports: initialPage.exports || {},
 			});
-			lastPage = initalPageName;
 		}
 	});
 
