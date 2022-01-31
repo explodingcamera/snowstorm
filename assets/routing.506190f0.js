@@ -1,4 +1,4 @@
-import{j as s}from"./jsx-runtime.4a4136f8.js";import"./vendor.82f5f2d7.js";const r="Routing";function p(n={}){const{wrapper:a}=n.components||{};return a?s.exports.jsx(a,Object.assign({},n,{children:s.exports.jsx(t,{})})):t();function t(){const e=Object.assign({p:"p",pre:"pre",code:"code",span:"span",a:"a"},n.components);return s.exports.jsxs(s.exports.Fragment,{children:[s.exports.jsx(e.p,{children:"Routing is based on the filename of a page:"}),`
+import{j as s}from"./jsx-runtime.ccab6159.js";import"./vendor.aa87bd79.js";const r="Routing";function p(n={}){const{wrapper:a}=n.components||{};return a?s.exports.jsx(a,Object.assign({},n,{children:s.exports.jsx(t,{})})):t();function t(){const e=Object.assign({p:"p",pre:"pre",code:"code",span:"span",a:"a"},n.components);return s.exports.jsxs(s.exports.Fragment,{children:[s.exports.jsx(e.p,{children:"Routing is based on the filename of a page:"}),`
 `,s.exports.jsx(e.pre,{children:s.exports.jsx(e.code,{children:`index.tsx                   => GET /
 page.tsx                    => GET /page
 users/[userID].tsx          => GET /users/example

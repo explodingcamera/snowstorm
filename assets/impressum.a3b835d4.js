@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime.4a4136f8.js";import"./vendor.82f5f2d7.js";const a={disableSidebar:!0};function c(r={}){const{wrapper:n}=r.components||{};return n?e.exports.jsx(n,Object.assign({},r,{children:e.exports.jsx(o,{})})):o();function o(){const t=Object.assign({h1:"h1",p:"p",a:"a",h2:"h2"},r.components);return e.exports.jsxs(e.exports.Fragment,{children:[e.exports.jsx(t.h1,{children:"legal notice"}),`
+import{j as e}from"./jsx-runtime.ccab6159.js";import"./vendor.aa87bd79.js";const a={disableSidebar:!0};function c(r={}){const{wrapper:n}=r.components||{};return n?e.exports.jsx(n,Object.assign({},r,{children:e.exports.jsx(o,{})})):o();function o(){const t=Object.assign({h1:"h1",p:"p",a:"a",h2:"h2"},r.components);return e.exports.jsxs(e.exports.Fragment,{children:[e.exports.jsx(t.h1,{children:"legal notice"}),`
 `,e.exports.jsx(t.p,{children:"Information according to \xA7 5 TMG & Represented by:"}),`
 `,e.exports.jsx("br",{}),`
 `,e.exports.jsx(t.p,{children:"Henry Gressmann Software Engineering"}),`
