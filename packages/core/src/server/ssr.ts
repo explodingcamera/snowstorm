@@ -8,6 +8,8 @@ import { modules } from './site';
 import { fileIsPage } from './utils/is-page';
 import Youch from '@explodingcamera/youch';
 
+import ssrPrepass from 'react-ssr-prepass';
+
 const startDate = Date.now();
 const version = startDate.toString();
 const ABORT_DELAY = 2000;
@@ -65,11 +67,12 @@ export const ssr =
 				internalHead = await collectPreload(page.page, site, config, manifest);
 			}
 
-			// await serverprops.processSPs();
 			const reactPage: string = await renderPage({
 				...page,
 				path: ctx.path,
 			});
+
+			await ssrPrepass(reactPage);
 
 			const indexHTML = dev
 				? join(config.internal.snowstormAssetsFolder, './index.html')
