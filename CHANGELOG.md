@@ -1,3 +1,16 @@
+# v0.12.0 (Mon Jan 31 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`, `@snowstorm/router`
+  - feat: re-enable automatic brotli compression [#32](https://github.com/explodingcamera/snowstorm/pull/32) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.11.1 (Mon Jan 31 2022)
 
 #### 🐛 Bug Fix
