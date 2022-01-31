@@ -5,7 +5,7 @@
   "../../../router/lib/chunks/chunk-RID4INJF.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
-  "../../../router/lib/chunks/chunk-ZU4GYCAW.js": [
+  "../../../router/lib/chunks/chunk-UVTHJ5TJ.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
   "../../../router/lib/index.js": [
@@ -38,7 +38,7 @@
   "../../../www/.snowstorm/default/internal/routes.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
-  "../../chunks/chunk-FWZRUCZJ.js": [
+  "../../chunks/chunk-APIEY6GF.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
   "../../client/index.js": [
@@ -123,12 +123,12 @@
     "/assets/jsx-runtime.ccab6159.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.7c5af107.js",
-    "/assets/index.e9fd4148.css"
+    "/assets/index.d1112505.js",
+    "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.7c5af107.js",
-    "/assets/index.e9fd4148.css"
+    "/assets/index.d1112505.js",
+    "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/inspirations.mdx": [
     "/assets/inspirations.9147dac3.js"
@@ -155,13 +155,13 @@
     "/assets/env-variables.55217277.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.7bf432dc.js"
+    "/assets/getting-started.43e33a29.js"
   ],
   "../../../www/pages/docs/imports.mdx": [
     "/assets/imports.00a8483f.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.bbb0d10a.js"
+    "/assets/index.c9b52716.js"
   ],
   "../../../www/pages/docs/pages.mdx": [
     "/assets/pages.76855857.js"
