@@ -2,19 +2,41 @@
   max-width: 40rem;
   display: flex;
   flex-direction: column;
-  margin-top: 8rem;
+  margin-top: 6rem;
+  padding: 2rem !important;
+
+  @media only screen and (max-width: 60rem) {
+    margin-top: 1rem;
+  }
+
+  @media only screen and (max-height: 70rem) {
+    margin-top: 1rem;
+  }
+
+  @media only screen and (max-width: 100rem) {
+    margin-top: 2rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
 
   h1,
   h2 {
     text-align: center;
   }
 
-  h1 {
-    margin-bottom: 1rem;
+  h2 {
+    margin-top: 1rem;
   }
 
-  h2 {
-    margin-top: 2rem;
+  @media only screen and (max-width: 60rem) {
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      margin-top: 0rem;
+    }
   }
 }
 
@@ -29,6 +51,16 @@
     margin-left: 1rem;
     margin-bottom: 0;
   }
+
+  @media only screen and (max-width: 140rem) {
+    padding-bottom: 1rem;
+  }
+
+  @media only screen and (max-width: 60rem) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
 }
 
 button {
@@ -40,4 +72,23 @@ button {
   padding: 1rem 2rem;
   border-radius: 1rem;
   margin: 0 auto;
+}
+
+.features {
+  padding: 0;
+  margin-left: 0.5rem;
+  line-height: 1.6;
+  list-style: none;
+  font-size: 1.3rem;
+
+  li {
+    padding-bottom: 0.5rem;
+  }
+
+  li:before {
+    content: ">";
+    display: inline-block;
+    margin-left: -1.3em; /* same as padding-left set on li */
+    width: 1.3em; /* same as padding-left set on li */
+  }
 }

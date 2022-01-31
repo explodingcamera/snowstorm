@@ -1,6 +1,9 @@
 {
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
   "buildOptions": {
-    "types": ["../core/types.d.ts"]
+    "types": ["../core/types.d.ts"],
   },
   "include": ["**/*", "types.d.ts"],
   "exclude": ["node_modules/*", ".snowstorm/*"]
