@@ -5,7 +5,7 @@
   "../../../router/lib/chunks/chunk-RID4INJF.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
-  "../../../router/lib/chunks/chunk-UVTHJ5TJ.js": [
+  "../../../router/lib/chunks/chunk-TK5JFW4A.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
   "../../../router/lib/index.js": [
@@ -123,11 +123,11 @@
     "/assets/jsx-runtime.ccab6159.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.d1112505.js",
+    "/assets/index.bb01a2a0.js",
     "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.d1112505.js",
+    "/assets/index.bb01a2a0.js",
     "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/inspirations.mdx": [
@@ -155,13 +155,13 @@
     "/assets/env-variables.55217277.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.43e33a29.js"
+    "/assets/getting-started.3adb933f.js"
   ],
   "../../../www/pages/docs/imports.mdx": [
     "/assets/imports.00a8483f.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.c9b52716.js"
+    "/assets/index.57c4860a.js"
   ],
   "../../../www/pages/docs/pages.mdx": [
     "/assets/pages.76855857.js"

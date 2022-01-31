@@ -1,0 +1,1 @@
+import"./vendor.aa87bd79.js";import t from"./getting-started.3adb933f.js";import{title as a}from"./getting-started.3adb933f.js";import"./jsx-runtime.ccab6159.js";import"./index.42f1c0d9.js";const i=t;export{i as Index,a as title};
