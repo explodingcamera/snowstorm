@@ -2,9 +2,6 @@
   "name": "@snowstorm/root",
   "version": "0.1.3",
   "private": true,
-  "repository": "explodingcamera/snowstorm",
-  "license": "MIT",
-  "author": "<mail@henrygressmann.de>",
   "workspaces": [
     "packages/*"
   ],
@@ -61,10 +58,5 @@
       ],
       "released"
     ]
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "17.0.38"
-    }
   }
 }
