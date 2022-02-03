@@ -2,8 +2,8 @@
 // https://github.com/vercel/next.js/blob/29402f3c68b641f2a40622b16e7954dff5195625/packages/next/client/route-announcer.tsx
 // The MIT License (MIT)
 
+// Copyright (c) 2022 Henry Gressmannn
 // Copyright (c) 2021 Vercel, Inc.
-// Copyright (c) 2021 Henry Gressmannn.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal

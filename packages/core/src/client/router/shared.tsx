@@ -6,10 +6,11 @@ export type Pages = {
 } & Record<string, () => Promise<Record<string, SnowstormPage>>>;
 
 export type SnowstormPage = FunctionComponent;
-export type SnowstormCustomError = FunctionComponent;
+export type SnowstormCustomError = FunctionComponent<{ status?: number }>;
 
 export interface SnowstormCustomAppProps {
 	exports?: Record<string, any>;
+	status?: number;
 	children: React.ReactNode;
 }
 export type SnowstormCustomApp = FunctionComponent<SnowstormCustomAppProps>;

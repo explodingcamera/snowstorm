@@ -9,6 +9,7 @@
   "exports": {
     ".": "./lib/index.js",
     "./lib": "./lib",
+    "./lib/server": "./lib/server/index.js",
     "./lib/matcher": "./lib/matcher.js",
     "./lib/static-location": "./lib/static-location.js"
   },
@@ -17,7 +18,7 @@
   ],
   "scripts": {
     "build": "run-p --print-label build:esbuild types",
-    "build:esbuild": "esbuild src/*.ts src/server/index.ts --minify --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --external:react --target=node16 --format=esm",
+    "build:esbuild": "esbuild src/*.ts src/server/index.ts --bundle --outdir=lib --platform=node --external:react --target=esnext --format=esm",
     "watch": "npm run build -- --watch",
     "types": "tsc -p tsconfig.build.json",
     "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm"
