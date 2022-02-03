@@ -3,3 +3,55 @@
 Importing any library on npm should work, however be warned that a lot of `common.js` based projects (code using `require()`) use weird and unsupported tricks and global variables, which can't be easily translated to es modules.
 
 Thankfully, most recent and popular projects have switched to es-modules too.
+
+## Common Issues
+
+### SSR error: Error require() of ES Module ... not supported
+
+This happens for some packages when running in production mode (`snowstorm start` or `snowstorm export`). This is due to the way esm packages are externalized to speed up builds.
+To fix this, add the package to the `noExternalize` field in your build config.
+
+`snowstorm.config.ts`
+
+```tsx
+import { SnowstormConfig } from "@snowstorm/core/server";
+
+export const Config: SnowstormConfig = {
+  site: {
+    build: {
+      noExternal: [
+        "@pognetwork/proto",
+        "champ-wasm",
+        "d3-array",
+        "d3-time-format",
+      ],
+    },
+  },
+};
+```
+
+### Issues when importing Webassembly modules
+
+Use the following plugin that we provide:
+
+```bash
+npm i @pognetwork/vite-plugin-wasm-pack
+```
+
+```tsx
+import { SnowstormConfig } from "@snowstorm/core/server";
+import vitePluginWasmPack from "@pognetwork/vite-plugin-wasm-pack";
+
+export const Config: SnowstormConfig = {
+  site: {
+    build: {
+      noExternal: ["your-wasm-module"],
+      plugins: [vitePluginWasmPack([], ["your-wasm-module"])],
+    },
+  },
+};
+```
+
+### `load-html.js` not found
+
+Check the previous errors, something has prevented snowstorm from compiling a javascript bundle.
