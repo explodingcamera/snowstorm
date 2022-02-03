@@ -100,7 +100,7 @@ const PageComponent = ({
 			{component}
 		</Wrapper>
 	) : (
-		page
+		component
 	);
 
 	return (
