@@ -11,6 +11,7 @@
     "build": "exit 0"
   },
   "dependencies": {
+    "@pognetwork/proto": "^0.2.0-b566fd1",
     "@snowstorm/cli": "link:../cli",
     "@snowstorm/core": "link:../core",
     "react": "18.0.0-rc.0",

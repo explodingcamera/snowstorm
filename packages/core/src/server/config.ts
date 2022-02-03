@@ -31,10 +31,20 @@ export interface SnowstormExportConfig {
 export interface SnowstormBuildOptions {
 	css?: CSSOptions;
 	json?: JsonOptions;
+
+	/**
+	 * @deprecated renamed to plugins
+	 */
 	vitePlugins?: Array<PluginOption | PluginOption[]>;
+
+	// an array of snowstorm, vite and rollup plugins
+	plugins?: Array<PluginOption | PluginOption[]>;
 
 	// force pre-bundle module. can be helpful if commonjs packages are not detected and thus not converted to esm
 	forcePrebundle?: string[];
+
+	// force module not to be externalized. can be helpful if esm packages are not compatible with nodejs's strict module resolution
+	noExternal?: Array<RegExp | string>;
 }
 
 export interface SnowstormSiteConfigInternal {
@@ -164,6 +174,15 @@ export const loadConfig = async (
 		snowstormFolder,
 		'Config',
 	);
+
+	// gracefully deprecate the old plugins field - to be removed at a later relase
+	if (config) {
+		if (config?.site.build?.vitePlugins)
+			config.site.build.plugins = config.site.build.vitePlugins;
+		for (const site of config.sites) {
+			if (site.build?.vitePlugins) site.build.plugins = site.build.vitePlugins;
+		}
+	}
 
 	const res: SnowstormBaseConfig = deepmerge(
 		baseConfig,

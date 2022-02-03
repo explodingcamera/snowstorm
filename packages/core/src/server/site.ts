@@ -78,7 +78,13 @@ const viteBaseConfig = (
 		configFile: false,
 		plugins: [],
 		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
-		ssr: { noExternal: [/@snowstorm/] },
+		ssr: {
+			noExternal: [
+				/@snowstorm/,
+				...(config?.site?.build?.noExternal || []),
+				...(site?.build?.noExternal || []),
+			],
+		},
 		css: deepmerge.all([
 			// snowstorm's default css options
 			{
@@ -120,8 +126,7 @@ const viteBaseConfig = (
 	};
 
 	const defaultPlugins =
-		(config.site.build?.vitePlugins as Array<PluginOption | PluginOption[]>) ||
-		[];
+		(config.site.build?.plugins as Array<PluginOption | PluginOption[]>) || [];
 
 	res?.plugins?.push(
 		// snowstorm's default plugins
@@ -139,7 +144,7 @@ const viteBaseConfig = (
 		config.internal.sitesFolder &&
 		site.pagesFolder.startsWith(config.internal.sitesFolder)
 	) {
-		res?.plugins?.push(...(site.build.vitePlugins || []));
+		res?.plugins?.push(...(site.build.plugins || []));
 	}
 
 	return res;
