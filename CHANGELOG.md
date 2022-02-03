@@ -1,3 +1,16 @@
+# v0.14.0 (Thu Feb 03 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`
+  - feat: better esm support + add more config options [#34](https://github.com/explodingcamera/snowstorm/pull/34) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.13.0 (Thu Feb 03 2022)
 
 #### 🚀 Enhancement
