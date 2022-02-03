@@ -1,3 +1,19 @@
+# v0.13.0 (Thu Feb 03 2022)
+
+#### 🚀 Enhancement
+
+- feat: improve routing, performance, error handling [#33](https://github.com/explodingcamera/snowstorm/pull/33) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- docs: update readme, npm meta data ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.12.0 (Mon Jan 31 2022)
 
 #### 🚀 Enhancement
