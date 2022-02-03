@@ -12,6 +12,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "types": ["@snowstorm/core/types.d.ts"]
+    "types": ["@snowstorm/core/types"]
   }
 }

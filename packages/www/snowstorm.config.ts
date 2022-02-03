@@ -14,7 +14,7 @@ export const Config: SnowstormConfig = {
 	],
 	site: {
 		build: {
-			vitePlugins: [
+			plugins: [
 				VitePluginFonts({
 					google: {
 						families: ['Inter', 'Space Mono'],
