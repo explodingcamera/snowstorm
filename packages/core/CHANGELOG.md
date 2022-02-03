@@ -1,3 +1,16 @@
+# v0.14.1 (Thu Feb 03 2022)
+
+#### 🐛 Bug Fix
+
+- fic: quick hotfix [#36](https://github.com/explodingcamera/snowstorm/pull/36) ([@explodingcamera](https://github.com/explodingcamera))
+- fix: hotfix - broken import [#35](https://github.com/explodingcamera/snowstorm/pull/35) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.14.0 (Thu Feb 03 2022)
 
 #### 🚀 Enhancement
