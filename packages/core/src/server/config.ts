@@ -176,13 +176,13 @@ export const loadConfig = async (
 	);
 
 	// gracefully deprecate the old plugins field - to be removed at a later relase
-	if (config) {
-		if (config?.site.build?.vitePlugins)
-			config.site.build.plugins = config.site.build.vitePlugins;
+	if (config?.site.build?.vitePlugins)
+		config.site.build.plugins = config.site.build.vitePlugins;
+
+	if (config?.sites)
 		for (const site of config.sites) {
 			if (site.build?.vitePlugins) site.build.plugins = site.build.vitePlugins;
 		}
-	}
 
 	const res: SnowstormBaseConfig = deepmerge(
 		baseConfig,
