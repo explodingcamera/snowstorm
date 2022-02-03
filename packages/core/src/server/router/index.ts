@@ -43,17 +43,15 @@ export const generateRouter = async ({
 		tmp = `import App from "${pagesLocation}/_app";\n${tmp}`;
 	}
 
-	if (customErrorPage) {
-		tmp = `import Error from "${
-			customErrorPage
-				? `${pagesLocation}/_error`
-				: `@snowstorm/core/client/_error.js`
-		}";\n${tmp}`;
-	}
+	tmp = `import ErrorComponent from "${
+		customErrorPage
+			? `${pagesLocation}/_error`
+			: `@snowstorm/core/client/_error.js`
+	}";\n${tmp}`;
 
 	processedPages.push(
 		`  "_app": () => ${customAppPage ? 'App' : 'undefined'}`,
-		`  "_error": () => Error`,
+		`  "_error": () => ErrorComponent`,
 	);
 
 	const routes = await loadRoutes(normalizedPages, site);

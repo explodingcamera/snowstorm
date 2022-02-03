@@ -1,12 +1,13 @@
+import {} from 'react/next';
 import React, {
-	lazy,
+	startTransition,
 	Suspense,
 	useEffect,
-	useMemo,
 	useRef,
 	useState,
 } from 'react';
-import { Route, Switch } from '@snowstorm/router';
+
+import { useLocation, useRouter } from '@snowstorm/router';
 import makeMatcher from '@snowstorm/router/lib/matcher';
 
 import {
@@ -52,7 +53,7 @@ const capitalize = (string: string) =>
 
 const pagesCache = new Map<string, ImportedPageModule>();
 
-const App = ({
+const PageComponent = ({
 	Wrapper,
 	ErrorPage,
 	initialPageName,
@@ -61,44 +62,43 @@ const App = ({
 	ErrorPage: SnowstormCustomError;
 	initialPageName?: string;
 }) => {
-	const [currentPage, setCurrentPage] = useState<
-		ImportedPageModule | undefined
-	>(() => (initialPageName && pagesCache.get(initialPageName)) || undefined);
+	const initialPage: ImportedPageModule | undefined =
+		(initialPageName && pagesCache.get(initialPageName)) || undefined;
 
-	const currentp = useRef<ImportedPageModule | undefined>();
-	if (!currentp.current)
-		currentp.current = initialPageName
-			? pagesCache.get(initialPageName)
-			: undefined;
+	const [page, setPage] = useState(initialPage);
+	const router = useRouter();
+	const [location] = useLocation();
 
-	const page = useMemo(
-		() => (
-			<Switch>
-				{allRoutes.map(r => (
-					<Route
-						path={r.path}
-						key={r.page}
-						component={() => {
-							const Page = lazy(async () => {
-								const p = await loadPage(r.page);
-								setCurrentPage(p);
-								return { default: p.Component };
-							});
-							return (
-								<Suspense fallback={<h1>Loading page...</h1>}>
-									<Page />
-								</Suspense>
-							);
-						}}
-					/>
-				))}
-			</Switch>
-		),
-		[],
+	const initialLoad = useRef(true);
+
+	useEffect(() => {
+		if (initialLoad.current) {
+			initialLoad.current = false;
+			return;
+		}
+
+		startTransition(() => {
+			const currentPage = allRoutes.filter(
+				r => router.matcher(r.path, location)[0],
+			)?.[0];
+
+			void (async () => {
+				const p = await loadPage(currentPage.page);
+				setPage(p);
+			})();
+		});
+	}, [location]);
+
+	const component = page?.Component ? (
+		<page.Component />
+	) : (
+		<ErrorPage status={404} />
 	);
 
 	const site = Wrapper ? (
-		<Wrapper exports={currentPage?.exports}>{page}</Wrapper>
+		<Wrapper exports={page?.exports} status={page ? 200 : 404}>
+			{component}
+		</Wrapper>
 	) : (
 		page
 	);
@@ -171,11 +171,13 @@ export const Page = ({ initialPage }: { initialPage: InitialPage }) => {
 	});
 
 	return (
-		<App
-			Wrapper={CustomApp}
-			ErrorPage={ErrorPage}
-			initialPageName={initalPageName}
-		/>
+		<Suspense fallback="loading">
+			<PageComponent
+				Wrapper={CustomApp}
+				ErrorPage={ErrorPage}
+				initialPageName={initalPageName}
+			/>
+		</Suspense>
 	);
 };
 

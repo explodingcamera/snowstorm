@@ -205,28 +205,28 @@ export const Router: FC<
 	});
 };
 
-export function Route<
-	T extends DefaultParams | undefined = undefined,
-	RoutePath extends Path = Path,
->({
-	path,
-	match,
-	component,
-	children,
-}: RouteProps<T, RoutePath> & { match?: any }): ReactElement | null {
-	const useRouteMatch = useRoute(path as any);
+// export function Route<
+// 	T extends DefaultParams | undefined = undefined,
+// 	RoutePath extends Path = Path,
+// >({
+// 	path,
+// 	match,
+// 	component,
+// 	children,
+// }: RouteProps<T, RoutePath> & { match?: any }): ReactElement | null {
+// 	const useRouteMatch = useRoute(path as any);
 
-	// `props.match` is present - Route is controlled by the Switch
-	const [matches, params] = match || useRouteMatch;
+// 	// `props.match` is present - Route is controlled by the Switch
+// 	const [matches, params] = match || useRouteMatch;
 
-	if (!matches) return null;
+// 	if (!matches) return null;
 
-	// React-Router style `component` prop
-	if (component) return h(component, { params });
+// 	// React-Router style `component` prop
+// 	if (component) return h(component, { params });
 
-	// support render prop or plain children
-	return typeof children === 'function' ? children(params) : children;
-}
+// 	// support render prop or plain children
+// 	return typeof children === 'function' ? children(params) : children;
+// }
 
 export function Link<H extends BaseLocationHook = LocationHook>(
 	props: PropsWithChildren<LinkProps<H>>,
@@ -273,51 +273,51 @@ export function Link<H extends BaseLocationHook = LocationHook>(
 	return cloneElement(jsx, extraProps);
 }
 
-const flattenChildren = (children: ReactNode): any =>
-	Array.isArray(children)
-		? [].concat(
-				...children.map(c =>
-					c && c.type === Fragment
-						? flattenChildren(c.props.children)
-						: flattenChildren(c),
-				),
-		  )
-		: [children];
+// const flattenChildren = (children: ReactNode): any =>
+// 	Array.isArray(children)
+// 		? [].concat(
+// 				...children.map(c =>
+// 					c && c.type === Fragment
+// 						? flattenChildren(c.props.children)
+// 						: flattenChildren(c),
+// 				),
+// 		  )
+// 		: [children];
 
-export const Switch: FC<SwitchProps> = ({ children, location }) => {
-	const { matcher } = useRouter();
-	const [originalLocation] = useLocation();
+// export const Switch: FC<SwitchProps> = ({ children, location }) => {
+// 	const { matcher } = useRouter();
+// 	const [originalLocation] = useLocation();
 
-	for (const element of flattenChildren(children)) {
-		let match: number | any = 0;
+// 	for (const element of flattenChildren(children)) {
+// 		let match: number | any = 0;
 
-		if (
-			isValidElement(element) &&
-			// we don't require an element to be of type Route,
-			// but we do require it to contain a truthy `path` prop.
-			// this allows to use different components that wrap Route
-			// inside of a switch, for example <AnimatedRoute />.
-			(match = (element.props as any).path
-				? matcher((element.props as any).path, location || originalLocation)
-				: [true, {}])[0]
-		)
-			return (cloneElement as any)(element, { match });
-	}
+// 		if (
+// 			isValidElement(element) &&
+// 			// we don't require an element to be of type Route,
+// 			// but we do require it to contain a truthy `path` prop.
+// 			// this allows to use different components that wrap Route
+// 			// inside of a switch, for example <AnimatedRoute />.
+// 			(match = (element.props as any).path
+// 				? matcher((element.props as any).path, location || originalLocation)
+// 				: [true, {}])[0]
+// 		)
+// 			return (cloneElement as any)(element, { match });
+// 	}
 
-	return null;
-};
+// 	return null;
+// };
 
-export function Redirect<H extends BaseLocationHook = LocationHook>(
-	props: PropsWithChildren<RedirectProps<H>>,
-): ReactElement<any, any> | null {
-	const navRef = useNavigate(props) as any;
+// export function Redirect<H extends BaseLocationHook = LocationHook>(
+// 	props: PropsWithChildren<RedirectProps<H>>,
+// ): ReactElement<any, any> | null {
+// 	const navRef = useNavigate(props) as any;
 
-	// empty array means running the effect once, navRef is a ref so it never changes
-	useLayoutEffect(() => {
-		navRef.current();
-	}, []);
+// 	// empty array means running the effect once, navRef is a ref so it never changes
+// 	useLayoutEffect(() => {
+// 		navRef.current();
+// 	}, []);
 
-	return null;
-}
+// 	return null;
+// }
 
 export default useRoute;
