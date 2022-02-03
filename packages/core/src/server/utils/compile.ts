@@ -1,13 +1,18 @@
-import typescript, { CompilerOptions } from 'typescript';
+import typescript, { CompilerOptions, ModuleResolutionKind } from 'typescript';
 import { readFile } from 'fs/promises';
 
 const { ModuleKind, ScriptTarget, transpileModule } = typescript;
 const options: CompilerOptions = {
 	allowJs: true,
 	checkJs: true,
-	lib: ['ESNext'],
-	target: ScriptTarget.ES2021,
-	module: ModuleKind.ES2022,
+	skipLibCheck: true,
+	lib: ['DOM', 'ESNext'],
+	resolveJsonModule: true,
+	moduleResolution: ModuleResolutionKind.NodeJs,
+	allowSyntheticDefaultImports: true,
+	target: ScriptTarget.ESNext,
+	module: ModuleKind.ESNext,
+	esModuleInterop: true,
 };
 
 export const compile = async (file: string) => {
