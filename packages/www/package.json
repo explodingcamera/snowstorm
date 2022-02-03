@@ -3,6 +3,7 @@
   "version": "0.13.0",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "author": "<mail@henrygressmann.de>",
   "scripts": {
     "build": "exit 0",

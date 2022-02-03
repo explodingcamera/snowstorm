@@ -1,5 +1,5 @@
 import { Middleware } from 'koa';
-import { readFile } from 'fs/promises';
+import { copyFile, readFile } from 'fs/promises';
 import { SnowstormConfigInternal, SnowstormSiteConfigInternal } from './config';
 import { join } from 'path';
 import { ViteDevServer } from 'vite';
@@ -56,9 +56,16 @@ export const ssr =
 		try {
 			(global as any).___snowstorm_collect_modules = [];
 
+			if (!dev) {
+				const from = site.internal.viteFolder + '/server/load-html.js';
+				const to = site.internal.viteFolder + '/server/load-html.cjs';
+				await copyFile(from, to);
+			}
+
 			const ssrModule = dev
 				? await devServer.ssrLoadModule('_snowstorm/load-html.js')
-				: await import(site.internal.viteFolder + '/server/load-html.js');
+				: // eslint-disable-next-line @typescript-eslint/no-require-imports
+				  require(site.internal.viteFolder + '/server/load-html.cjs');
 
 			const { loadPage, renderPage, getHead, renderToPipeableStream } =
 				ssrModule;
