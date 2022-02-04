@@ -21,12 +21,14 @@ export const start = async ({
 	debug,
 	clearCache,
 	overrideConfig,
+	returnAfterListening,
 }: {
 	dev: boolean;
 	path: string;
 	debug?: boolean;
 	clearCache?: boolean;
 	overrideConfig?: SnowstormConfigInternal;
+	returnAfterListening?: boolean;
 }) => {
 	const config = overrideConfig ? overrideConfig : await loadConfig(path);
 	const { log } = config.internal;
@@ -97,7 +99,7 @@ export const start = async ({
 
 	log.info(`started in ${Math.round(performance.now() - serverStart)}ms`);
 
-	listening
+	const p = listening
 		.then(() => {
 			startSites.forEach(({ site }) => {
 				if (site.domain === 'default')
@@ -113,4 +115,8 @@ export const start = async ({
 			log.error(`failed to listen on port ${port}`);
 			process.exit(0);
 		});
+
+	if (returnAfterListening) {
+		return p;
+	}
 };

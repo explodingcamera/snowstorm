@@ -2,6 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { checkFileExists } from './file-exists';
 
+import writeFileAtomic from 'write-file-atomic';
+
 interface WriteFileOptions {
 	encoding?: BufferEncoding | string | null | undefined;
 	flag?: string | undefined;
@@ -33,5 +35,5 @@ export async function outputFile(
 		recursive: true,
 	});
 
-	await fs.writeFile(file, data, encoding);
+	await writeFileAtomic(file, data, encoding);
 }

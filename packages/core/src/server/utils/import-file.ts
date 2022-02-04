@@ -1,6 +1,6 @@
 import glob from 'fast-glob';
-import { unlink, writeFile } from 'fs/promises';
-import { join } from 'path';
+import { unlink, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { compile } from './compile.js';
 
 const supportedFileEndings = ['.ts', '.js', '.cjs', '.mjs', '.json'];

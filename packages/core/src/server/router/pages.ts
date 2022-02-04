@@ -1,5 +1,5 @@
 import glob from 'fast-glob';
-import { join } from 'path';
+import { join } from 'node:path';
 
 import { pageGlob } from '../utils/is-page.js';
 

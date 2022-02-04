@@ -1,5 +1,5 @@
 import zlib from 'zlib';
-import fs from 'fs';
+import fs from 'node:fs';
 
 export const brotliify = (files: string[]) => {
 	for (const file of files) {
