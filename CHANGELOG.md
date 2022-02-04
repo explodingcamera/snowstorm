@@ -1,3 +1,22 @@
+# v0.15.0 (Fri Feb 04 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`
+  - fix: multisite export use correct path [#38](https://github.com/explodingcamera/snowstorm/pull/38) ([@explodingcamera](https://github.com/explodingcamera))
+  - feat: add better render metrics to exports ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- `@snowstorm/core`
+  - chore: remove irrelevant error log ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.14.2 (Fri Feb 04 2022)
 
 #### 🐛 Bug Fix
