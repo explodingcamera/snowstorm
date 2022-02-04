@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join } from 'node:path';
 import scrape from 'website-scraper';
 import bySiteStructureFilenameGenerator from 'website-scraper/lib/filename-generator/by-site-structure.js';
 
@@ -10,7 +10,7 @@ import { outputFile } from './utils/output';
 
 import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
 import { loadPages } from './router/pages.js';
-import { cp } from 'fs/promises';
+import { cp } from 'node:fs/promises';
 import { stripFileExtensions } from './utils/strip-file-extension.js';
 
 export const exportProject = async ({
@@ -60,12 +60,7 @@ export const exportProject = async ({
 	}
 
 	log.info('copying build results...');
-	await Promise.all(copy).catch(
-		_e => {
-			// ignore result here, always throws error even though it worked
-		},
-		// log.error('failed to copy build results', e),
-	);
+	void (await Promise.all(copy).catch(e => log.error(e)));
 
 	log.info('rendering pages...');
 	const renderStart = performance.now();
@@ -85,7 +80,9 @@ export const exportProject = async ({
 	}).catch(e => log.error('failed to scrape files', e));
 
 	log.info(
-		`finished rendering in ${Math.round(performance.now() - renderStart)}ms`,
+		`finished exporting all sites in ${Math.round(
+			performance.now() - renderStart,
+		)}ms`,
 	);
 
 	process.exit(0);

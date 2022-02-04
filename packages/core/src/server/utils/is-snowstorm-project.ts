@@ -1,5 +1,5 @@
-import { lstatSync } from 'fs';
-import { join } from 'path';
+import { lstatSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);

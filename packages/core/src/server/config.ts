@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { dirname, join, resolve } from 'path';
+import { dirname, join, resolve } from 'node:path';
 import { importFile } from './utils/import-file.js';
 import { checkFileExists } from './utils/file-exists.js';
 import { Except, PartialDeep } from 'type-fest';
@@ -8,7 +8,7 @@ import { SnowstormRoutesConfig } from './router/routes.js';
 import { Logger } from 'tslog';
 import { fileURLToPath } from 'url';
 import { CSSOptions, JsonOptions, PluginOption } from 'vite';
-import { mkdir } from 'fs/promises';
+import { mkdir } from 'node:fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -13,8 +13,8 @@ import {
 } from './config.js';
 import react from '@vitejs/plugin-react';
 
-import { dirname, join } from 'path';
-import { mkdir } from 'fs/promises';
+import { dirname, join } from 'node:path';
+import { mkdir } from 'node:fs/promises';
 
 import { getFreePort } from './utils/free-port.js';
 import { ssr } from './ssr.js';

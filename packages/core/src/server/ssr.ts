@@ -1,7 +1,7 @@
 import { Middleware } from 'koa';
-import { copyFile, readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 import { SnowstormConfigInternal, SnowstormSiteConfigInternal } from './config';
-import { join } from 'path';
+import { join } from 'node:path';
 import { ViteDevServer } from 'vite';
 import { checkFileExists } from './utils/file-exists';
 import { modules } from './site';
@@ -10,6 +10,7 @@ import Youch from '@explodingcamera/youch';
 
 import ssrPrepass from 'react-ssr-prepass';
 import EventEmitter from 'events';
+import { copyFileAtomic } from './utils/copy-file-atomic';
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -59,7 +60,7 @@ export const ssr =
 			if (!dev) {
 				const from = site.internal.viteFolder + '/server/load-html.js';
 				const to = site.internal.viteFolder + '/server/load-html.cjs';
-				await copyFile(from, to);
+				await copyFileAtomic(from, to);
 			}
 
 			const ssrModule = dev
