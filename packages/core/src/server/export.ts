@@ -60,7 +60,8 @@ export const exportProject = async ({
 	}
 
 	log.info('copying build results...');
-	void (await Promise.all(copy).catch(e => log.error(e)));
+	// this will often throw irrelevant errors
+	void (await Promise.all(copy).catch(_e => undefined));
 
 	log.info('rendering pages...');
 	const renderStart = performance.now();
