@@ -48,7 +48,7 @@ export const exportProject = async ({
 		}
 
 		copy.push(
-			cp(join(site.internal.viteFolder, '/client'), directory, {
+			cp(join(site.internal.viteFolder, '/client'), dir, {
 				recursive: true,
 				dereference: false,
 			}),
