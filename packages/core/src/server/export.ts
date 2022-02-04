@@ -20,6 +20,7 @@ export const exportProject = async ({
 	path: string;
 	debug?: boolean;
 }) => {
+	const buildStart = performance.now();
 	const config = await loadConfig(path);
 	const { log } = config.internal;
 
@@ -80,10 +81,11 @@ export const exportProject = async ({
 		],
 	}).catch(e => log.error('failed to scrape files', e));
 
+	const now = performance.now();
 	log.info(
-		`finished exporting all sites in ${Math.round(
-			performance.now() - renderStart,
-		)}ms`,
+		`finished export in ${Math.round(now - buildStart)}ms (build: ${Math.round(
+			renderStart - buildStart,
+		)}ms render: ${Math.round(now - renderStart)}ms)`,
 	);
 
 	process.exit(0);
