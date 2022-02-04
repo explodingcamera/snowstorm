@@ -1,3 +1,15 @@
+# v0.14.2 (Fri Feb 04 2022)
+
+#### 🐛 Bug Fix
+
+- fix: a bug caused by weird nodejs behavior (I'm mad at node.js) [#37](https://github.com/explodingcamera/snowstorm/pull/37) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.14.1 (Thu Feb 03 2022)
 
 #### 🐛 Bug Fix
