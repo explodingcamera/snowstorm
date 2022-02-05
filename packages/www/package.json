@@ -12,15 +12,15 @@
     "start": "snowstorm start"
   },
   "dependencies": {
-    "@mdx-js/rollup": "^2.0.0-rc.1",
+    "@mdx-js/rollup": "^2.0.0",
     "@snowstorm/cli": "link:../cli",
     "@snowstorm/core": "link:../core",
-    "@types/react": "17.0.38",
+    "@types/react": "17.0.39",
     "mdx-prism": "^0.3.4",
     "react": "18.0.0-rc.0",
     "react-dom": "18.0.0-rc.0",
     "remark-gfm": "^3.0.1",
-    "sass": "^1.44.0",
+    "sass": "^1.49.7",
     "vite-plugin-fonts": "^0.2.2"
   }
 }

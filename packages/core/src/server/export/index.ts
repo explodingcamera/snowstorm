@@ -1,17 +1,19 @@
 import { join } from 'node:path';
 import scrape from 'website-scraper';
-import bySiteStructureFilenameGenerator from 'website-scraper/lib/filename-generator/by-site-structure.js';
 
-import { loadConfig } from './config.js';
-import { start as startServer } from './index.js';
+// currently using a forked version of website-scraper since website-scraper doesn't export plugins correctly for use with ts :(
+import { GenerateFilenameBySiteStructurePlugin } from 'website-scraper/lib/plugins';
 
-import { getFreePort } from './utils/free-port.js';
-import { outputFile } from './utils/output';
+import { loadConfig } from '../config.js';
+import { start as startServer } from '../index.js';
 
-import { loadRoutes, SnowstormCustomRouteInternal } from './router/routes.js';
-import { loadPages } from './router/pages.js';
+import { getFreePort } from '../utils/free-port.js';
+import { outputFile } from '../utils/output';
+
+import { loadRoutes, SnowstormCustomRouteInternal } from '../router/routes.js';
+import { loadPages } from '../router/pages.js';
 import { cp } from 'node:fs/promises';
-import { stripFileExtensions } from './utils/strip-file-extension.js';
+import { stripFileExtensions } from '../utils/strip-file-extension.js';
 
 export const exportProject = async ({
 	path,
@@ -70,6 +72,7 @@ export const exportProject = async ({
 		urls,
 		directory,
 		filenameGenerator: '',
+		defaultFilename: 'index.html',
 		request: {
 			headers: {
 				Accept:
@@ -103,16 +106,11 @@ class SnowstormScrapePlugin {
 		let absoluteDirectoryPath: string;
 		const loadedResources = [];
 
-		registerAction('generateFilename', ({ resource }) => {
-			const filename = bySiteStructureFilenameGenerator(resource, {
-				defaultFilename: 'index.html',
-			});
-			return { filename };
-		});
-
 		registerAction('beforeStart', ({ options }) => {
 			absoluteDirectoryPath = options.directory;
 		});
+
+		new GenerateFilenameBySiteStructurePlugin().apply(registerAction);
 
 		registerAction('saveResource', async ({ resource }) => {
 			const parts = (resource.getFilename() as string).split('/');
