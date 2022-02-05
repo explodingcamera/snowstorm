@@ -43,9 +43,10 @@ export const exportProject = async ({
 
 	const urls: string[] = [];
 	const copy = [];
+	const multisite = !(sites.length === 1 && sites[0].site.domain === 'default');
 	for (const { site, paths } of sites) {
 		let dir = directory;
-		if (!(sites.length === 1 && sites[0].site.domain === 'default')) {
+		if (multisite) {
 			dir = join(dir, site.domain);
 		}
 
@@ -79,9 +80,7 @@ export const exportProject = async ({
 					'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
 			},
 		},
-		plugins: [
-			new SnowstormScrapePlugin({ multisite: sites.length > 1 || undefined }),
-		],
+		plugins: [new SnowstormScrapePlugin({ multisite })],
 	}).catch(e => log.error('failed to scrape files', e));
 
 	const now = performance.now();
@@ -95,8 +94,8 @@ export const exportProject = async ({
 };
 
 class SnowstormScrapePlugin {
-	multisite?: true;
-	constructor({ multisite }: { multisite?: true }) {
+	multisite: boolean;
+	constructor({ multisite }: { multisite: boolean }) {
 		this.multisite = multisite;
 	}
 
