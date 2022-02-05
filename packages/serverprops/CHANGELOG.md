@@ -1,3 +1,15 @@
+# v0.15.1 (Sat Feb 05 2022)
+
+#### 🐛 Bug Fix
+
+- fix: write all files atomically [#39](https://github.com/explodingcamera/snowstorm/pull/39) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.9.0 (Mon Jan 31 2022)
 
 #### 🚀 Enhancement
