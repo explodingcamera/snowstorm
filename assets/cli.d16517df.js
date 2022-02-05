@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.24976dc0.js";import"./vendor.d642c0c8.js";function x(e={}){const{wrapper:n}=e.components||{};return n?t.exports.jsx(n,Object.assign({},e,{children:t.exports.jsx(r,{})})):r();function r(){return t.exports.jsx(t.exports.Fragment,{})}}export{x as default};
