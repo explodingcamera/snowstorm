@@ -19,7 +19,7 @@ import { mkdir } from 'node:fs/promises';
 import { getFreePort } from './utils/free-port.js';
 import { ssr } from './ssr.js';
 import { generateRouter } from './router/index.js';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import deepmerge from 'deepmerge';
 import { pageGlob } from './utils/is-page.js';
 import glob from 'fast-glob';
