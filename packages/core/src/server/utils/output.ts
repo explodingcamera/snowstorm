@@ -28,7 +28,7 @@ export async function outputFile(
 
 	const dir = path.dirname(file);
 	const exists = await checkFileExists(dir);
-	if (exists) return fs.writeFile(file, data, encoding);
+	if (exists) return writeFileAtomic(file, data, encoding);
 
 	await fs.mkdir(dir, {
 		mode: getMode(options),

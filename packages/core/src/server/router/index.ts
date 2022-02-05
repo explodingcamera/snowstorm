@@ -1,10 +1,12 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { SnowstormSiteConfigInternal } from '../config.js';
 import {
 	stripFileExtension,
 	stripFileExtensions,
 } from '../utils/strip-file-extension.js';
+
+import writeFileAtomic from 'write-file-atomic';
 
 import { loadPages } from './pages.js';
 import { loadRoutes, SnowstormRoute } from './routes.js';
@@ -77,5 +79,5 @@ export const generateRouter = async ({
 		.replace('// insert-routes', processedRoutes.join(',\n'))
 		.replace('/* insert-base-path */', basePath);
 
-	await writeFile(join(site.internal.internalFolder, '/routes.js'), tmp);
+	await writeFileAtomic(join(site.internal.internalFolder, '/routes.js'), tmp);
 };
