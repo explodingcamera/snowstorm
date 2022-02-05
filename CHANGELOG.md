@@ -1,3 +1,16 @@
+# v0.15.2 (Sat Feb 05 2022)
+
+#### 🐛 Bug Fix
+
+- `@snowstorm/core`
+  - fix: fix single site in multisite mode [#40](https://github.com/explodingcamera/snowstorm/pull/40) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.15.1 (Sat Feb 05 2022)
 
 #### 🐛 Bug Fix
