@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { startServer } from '@snowstorm/core/server';
-import { exportProject } from '@snowstorm/core/server/export';
+import { startServer } from '@snowstorm/core/server.js';
+import { exportProject } from '@snowstorm/core/server/export/index.js';
 
 yargs(hideBin(process.argv))
 	.scriptName('snowstorm')

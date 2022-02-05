@@ -6,7 +6,7 @@ import { Except, PartialDeep } from 'type-fest';
 import glob from 'fast-glob';
 import { SnowstormRoutesConfig } from './router/routes.js';
 import { Logger } from 'tslog';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import { CSSOptions, JsonOptions, PluginOption } from 'vite';
 import { mkdir } from 'node:fs/promises';
 

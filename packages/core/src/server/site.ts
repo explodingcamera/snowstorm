@@ -19,7 +19,7 @@ import { mkdir } from 'node:fs/promises';
 import { getFreePort } from './utils/free-port.js';
 import { ssr } from './ssr.js';
 import { generateRouter } from './router/index.js';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import deepmerge from 'deepmerge';
 import { pageGlob } from './utils/is-page.js';
 import glob from 'fast-glob';
@@ -203,23 +203,20 @@ export const startSite = async ({
 	site: SnowstormSiteConfigInternal;
 }): Promise<Koa> => {
 	if (dev) site.basePath = '/';
-	const internalFolderReady = mkdir(site.internal.internalFolder, {
+	await mkdir(site.internal.internalFolder, {
 		recursive: true,
 	});
 
-	const genRoutes = async () => {
-		await internalFolderReady;
-		return generateRouter({
+	const genRoutes = async () =>
+		generateRouter({
 			template: join(__dirname, '../assets/routes.js.template'),
 			site,
 		});
-	};
 
-	const routesDone = genRoutes();
+	await genRoutes();
 	const viteServer = await createViteServer({ dev, config, site });
 
 	const app = new Koa();
-	await routesDone;
 
 	if (!dev) {
 		await Promise.all([

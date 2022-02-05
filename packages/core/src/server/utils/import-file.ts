@@ -1,7 +1,8 @@
 import glob from 'fast-glob';
-import { unlink, writeFile } from 'node:fs/promises';
+import { unlink } from 'node:fs/promises';
 import { join } from 'node:path';
 import { compile } from './compile.js';
+import writeFileAtomic from 'write-file-atomic';
 
 const supportedFileEndings = ['.ts', '.js', '.cjs', '.mjs', '.json'];
 
@@ -39,7 +40,7 @@ export async function importFile<FileType>(
 				.includes(filename)
 		) {
 			const file = await compile(join(path, `/${filename}`));
-			await writeFile(tempPath, file, 'utf8');
+			await writeFileAtomic(tempPath, file, 'utf8');
 
 			await new Promise(resolve => {
 				setTimeout(resolve, 100);
