@@ -203,23 +203,20 @@ export const startSite = async ({
 	site: SnowstormSiteConfigInternal;
 }): Promise<Koa> => {
 	if (dev) site.basePath = '/';
-	const internalFolderReady = mkdir(site.internal.internalFolder, {
+	await mkdir(site.internal.internalFolder, {
 		recursive: true,
 	});
 
-	const genRoutes = async () => {
-		await internalFolderReady;
-		return generateRouter({
+	const genRoutes = async () =>
+		generateRouter({
 			template: join(__dirname, '../assets/routes.js.template'),
 			site,
 		});
-	};
 
-	const routesDone = genRoutes();
+	await genRoutes();
 	const viteServer = await createViteServer({ dev, config, site });
 
 	const app = new Koa();
-	await routesDone;
 
 	if (!dev) {
 		await Promise.all([
