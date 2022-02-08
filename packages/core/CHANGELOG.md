@@ -1,3 +1,15 @@
+# v0.15.3 (Tue Feb 08 2022)
+
+#### 🐛 Bug Fix
+
+- fix: fix rare empty files [#41](https://github.com/explodingcamera/snowstorm/pull/41) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.15.2 (Sat Feb 05 2022)
 
 #### 🐛 Bug Fix
