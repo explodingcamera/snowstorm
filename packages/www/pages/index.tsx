@@ -16,15 +16,15 @@ export const Index = () => (
 			<img width="100" height="100" src={Logo} />
 			<h1>Snowstorm</h1>
 		</div>
-		<h1>The lightning-fast and minimalist React Tool</h1>
+		<h1>The lightning-fast and minimalist React Framework</h1>
 		<br />
 
 		<h2>What?</h2>
 		<br />
 		<p>
-			Snowstorm is a Framework/Static-Site-Generator for react, which handles
-			the heavy lifting involved with shipping a react project so you can focus
-			on creating awesome things!
+			Snowstorm is a Framework and Static-Site-Generator for react, which
+			handles the heavy lifting involved with shipping a react project so you
+			can focus on creating awesome things!
 		</p>
 		<h2>Why?</h2>
 		<ul className={styles.features}>
