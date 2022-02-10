@@ -1,4 +1,4 @@
-import{j as s}from"./jsx-runtime.d2728d72.js";import"./vendor.c293d705.js";const p="Pages";function c(n={}){const{wrapper:a}=n.components||{};return a?s.exports.jsx(a,Object.assign({},n,{children:s.exports.jsx(t,{})})):t();function t(){const e=Object.assign({p:"p",code:"code",pre:"pre",span:"span"},n.components);return s.exports.jsxs(s.exports.Fragment,{children:[s.exports.jsxs(e.p,{children:["Pages are React Components exported from ",s.exports.jsx(e.code,{children:".js"}),", ",s.exports.jsx(e.code,{children:"jsx"}),", ",s.exports.jsx(e.code,{children:".ts"}),", ",s.exports.jsx(e.code,{children:"tsx"}),` files in a sites pages directory.
+import{j as s}from"./jsx-runtime.d2728d72.js";import"./vendor.c293d705.js";const r="Pages";function c(n={}){const{wrapper:a}=n.components||{};return a?s.exports.jsx(a,Object.assign({},n,{children:s.exports.jsx(t,{})})):t();function t(){const e=Object.assign({p:"p",code:"code",pre:"pre",span:"span"},n.components);return s.exports.jsxs(s.exports.Fragment,{children:[s.exports.jsxs(e.p,{children:["Pages are React Components exported from ",s.exports.jsx(e.code,{children:".js"}),", ",s.exports.jsx(e.code,{children:"jsx"}),", ",s.exports.jsx(e.code,{children:".ts"}),", ",s.exports.jsx(e.code,{children:"tsx"}),` files in a sites pages directory.
 Supported are either the pages `,s.exports.jsx(e.code,{children:"default"})," export or a named export based on the file name, e.g:"]}),`
 `,s.exports.jsx(e.pre,{className:"language-tsx",children:s.exports.jsxs(e.code,{className:"language-tsx",children:[s.exports.jsx(e.span,{className:"token comment",children:"// page.tsx"}),`
 
@@ -24,4 +24,4 @@ Supported are either the pages `,s.exports.jsx(e.code,{children:"default"})," ex
 `,s.exports.jsx(e.span,{className:"token punctuation",children:")"}),s.exports.jsx(e.span,{className:"token punctuation",children:";"}),`
 
 `,s.exports.jsx(e.span,{className:"token keyword",children:"export"})," ",s.exports.jsx(e.span,{className:"token keyword",children:"default"})," ",s.exports.jsx(e.span,{className:"token maybe-class-name",children:"App"}),s.exports.jsx(e.span,{className:"token punctuation",children:";"}),`
-`]})})]})}}export{c as default,p as title};
+`]})})]})}}export{c as default,r as title};

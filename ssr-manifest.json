@@ -120,11 +120,11 @@
     "/assets/jsx-runtime.d2728d72.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.befbe090.js",
+    "/assets/index.01f3bcec.js",
     "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.befbe090.js",
+    "/assets/index.01f3bcec.js",
     "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/inspirations.mdx": [
@@ -152,13 +152,13 @@
     "/assets/env-variables.5352a068.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.1b3f7706.js"
+    "/assets/getting-started.d5722b73.js"
   ],
   "../../../www/pages/docs/imports.mdx": [
     "/assets/imports.a3d792d2.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.7b9f8ecd.js"
+    "/assets/index.a1059af4.js"
   ],
   "../../../www/pages/docs/pages.mdx": [
     "/assets/pages.a6f2a6f3.js"
