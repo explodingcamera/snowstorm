@@ -11,5 +11,5 @@
     "checkJs": false,
     "emitDeclarationOnly": true
   },
-  "include": ["./src/server/*", "./src/server.ts", "./src/types.ts"]
+  "include": ["./src/server/*", "./src/*.d.ts", "./src/types.ts"]
 }

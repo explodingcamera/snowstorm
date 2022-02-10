@@ -74,6 +74,7 @@ importers:
       '@types/koa-logger': ^3.1.2
       '@types/koa-mount': ^4.0.1
       '@types/koa-static': ^4.0.2
+      '@types/mock-fs': ^4.13.1
       '@types/node': ^17.0.16
       '@types/react': 17.0.39
       '@types/react-dom': ^17.0.11
@@ -91,6 +92,7 @@ importers:
       koa-logger: ^3.2.1
       koa-mount: ^4.0.0
       koa-static: ^5.0.0
+      mock-fs: ^5.1.2
       node-fetch: ^3.2.0
       react: 18.0.0-rc.0
       react-dom: 18.0.0-rc.0
@@ -121,6 +123,7 @@ importers:
       '@types/koa-logger': 3.1.2
       '@types/koa-mount': 4.0.1
       '@types/koa-static': 4.0.2
+      '@types/mock-fs': 4.13.1
       '@types/node': 17.0.16
       '@types/react': 17.0.39
       '@types/react-dom': 17.0.11
@@ -136,6 +139,7 @@ importers:
       koa-logger: 3.2.1
       koa-mount: 4.0.0
       koa-static: 5.0.0
+      mock-fs: 5.1.2
       node-fetch: 3.2.0
       react: 18.0.0-rc.0
       react-dom: 18.0.0-rc.0_react@18.0.0-rc.0
@@ -2530,6 +2534,12 @@ packages:
 
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
+    dev: true
+
+  /@types/mock-fs/4.13.1:
+    resolution: {integrity: sha512-m6nFAJ3lBSnqbvDZioawRvpLXSaPyn52Srf7OfzjubYbYX8MTUdIgDxQl0wEapm4m/pNYSd9TXocpQ0TvZFlYA==}
+    dependencies:
+      '@types/node': 17.0.16
     dev: true
 
   /@types/ms/0.7.31:
@@ -8244,6 +8254,11 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: true
+
+  /mock-fs/5.1.2:
+    resolution: {integrity: sha512-YkjQkdLulFrz0vD4BfNQdQRVmgycXTV7ykuHMlyv+C8WCHazpkiQRDthwa02kSyo8wKnY9wRptHfQLgmf0eR+A==}
+    engines: {node: '>=12.0.0'}
     dev: true
 
   /modify-values/1.0.1:

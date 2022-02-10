@@ -1,4 +1,4 @@
-import { isString } from './is-string';
+import { isString } from './is-string.js';
 
 export const stripFileExtension = (str: string) => {
 	const split = RegExp(/(.*)\.(.*)/).exec(str);
