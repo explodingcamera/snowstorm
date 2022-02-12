@@ -45,7 +45,7 @@ export const start = async ({
 	}
 
 	const reason = isSnowstormProject();
-	if (reason) {
+	if (reason instanceof Error) {
 		log.fatal(
 			'Please run this command only in a valid snowstorm project: ',
 			reason,
