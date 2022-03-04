@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {} from 'react-dom/next';
-import { hydrateRoot } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { Router } from '@snowstorm/router';
 import {
 	basePath,

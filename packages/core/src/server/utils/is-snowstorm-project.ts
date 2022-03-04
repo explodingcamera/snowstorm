@@ -25,7 +25,6 @@ export const isSnowstormProject = (dir: string = cwd()): Error | true => {
 		sitesExists = lstatSync(join(dir, './sites')).isDirectory();
 	} catch (_: unknown) {}
 
-	console.log(Object.keys(deps));
 	if (!Object.keys(deps).includes('@snowstorm/core')) {
 		return new Error('snowstorm not installed');
 	}

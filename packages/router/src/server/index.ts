@@ -44,7 +44,6 @@ export const processRoute = (route: string): Route => {
 	let lastEl = parts[parts.length - 1];
 	if (lastEl.includes('.')) {
 		[lastEl, decorator] = lastEl.split('.');
-		console.log(lastEl, decorator);
 		parts[parts.length - 1] = lastEl;
 	}
 
