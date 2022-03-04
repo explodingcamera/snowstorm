@@ -1,3 +1,27 @@
+# v0.16.0 (Fri Mar 04 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`, `@snowstorm/head`, `@snowstorm/router`, `@snowstorm/serverprops`
+  - feat: react@18rc.1 support [#43](https://github.com/explodingcamera/snowstorm/pull/43) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- `@snowstorm/core`
+  - chore: upgrade deps ([@explodingcamera](https://github.com/explodingcamera))
+  - fix: fix regression caused by improving isSnowstormProject ([@explodingcamera](https://github.com/explodingcamera))
+  - test: add tests to core ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/core`, `@snowstorm/serverprops`
+  - chore: upgrade deps ([@explodingcamera](https://github.com/explodingcamera))
+- `@snowstorm/core`, `@snowstorm/router`
+  - chore: upgrade deps ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.15.3 (Tue Feb 08 2022)
 
 #### 🐛 Bug Fix

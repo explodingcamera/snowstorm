@@ -1,3 +1,19 @@
+# v0.16.0 (Fri Mar 04 2022)
+
+#### 🚀 Enhancement
+
+- feat: react@18rc.1 support [#43](https://github.com/explodingcamera/snowstorm/pull/43) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### 🐛 Bug Fix
+
+- chore: upgrade deps ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.15.1 (Sat Feb 05 2022)
 
 #### 🐛 Bug Fix
