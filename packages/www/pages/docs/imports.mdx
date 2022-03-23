@@ -14,7 +14,7 @@ To fix this, add the package to the `noExternalize` field in your build config.
 `snowstorm.config.ts`
 
 ```tsx
-import { SnowstormConfig } from "@snowstorm/core/server";
+import { SnowstormConfig } from "@snowstorm/core";
 
 export const Config: SnowstormConfig = {
   site: {
@@ -39,7 +39,7 @@ npm i @pognetwork/vite-plugin-wasm-pack
 ```
 
 ```tsx
-import { SnowstormConfig } from "@snowstorm/core/server";
+import { SnowstormConfig } from "@snowstorm/core";
 import vitePluginWasmPack from "@pognetwork/vite-plugin-wasm-pack";
 
 export const Config: SnowstormConfig = {

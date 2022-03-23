@@ -133,7 +133,7 @@ export const ssr =
 
 			let didError = false;
 			const { pipe, abort } = renderToPipeableStream(reactPage, {
-				onCompleteShell() {
+				onShellReady() {
 					ctx.status = didError ? 500 : 200;
 					ctx.res.write(
 						top + `<div id="app"${(dev && 'data-hmr=true') || ''}>`,
@@ -141,6 +141,11 @@ export const ssr =
 
 					pipe(ctx.res);
 					ctx.res.write('</div>' + bottom);
+				},
+				onShellError() {
+					// Something errored before we could complete the shell so we emit an alternative shell.
+					ctx.res.statusCode = 500;
+					ctx.res.write('<!doctype><p>Error</p>');
 				},
 				onError(error: unknown) {
 					config.internal.log.error(error);

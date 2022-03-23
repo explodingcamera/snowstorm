@@ -30,11 +30,11 @@
     "react": ">=18.0.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^12.1.3",
+    "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^7.0.2",
-    "@types/react": "17.0.39",
-    "react": "^18.0.0-rc.2",
-    "react-dom": "^18.0.0-rc.2"
+    "@types/react": "17.0.42",
+    "react": "^18.0.0-rc.3-next-de516ca5a-20220321",
+    "react-dom": "^18.0.0-rc.3-next-de516ca5a-20220321"
   },
   "publishConfig": {
     "access": "public"

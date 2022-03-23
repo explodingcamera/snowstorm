@@ -15,12 +15,12 @@
     "watch": "tsc -p tsconfig.build.json --watch"
   },
   "peerDependencies": {
-    "react": "18.0.0-rc.2",
-    "react-dom": "18.0.0-rc.2"
+    "react": "18.0.0-rc.3",
+    "react-dom": "18.0.0-rc.3"
   },
   "devDependencies": {
-    "react": "18.0.0-rc.2",
-    "react-dom": "18.0.0-rc.2"
+    "react": "18.0.0-rc.3",
+    "react-dom": "18.0.0-rc.3"
   },
   "peerDependenciesMeta": {
     "react": {
