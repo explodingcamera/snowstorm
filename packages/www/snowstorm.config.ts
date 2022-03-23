@@ -1,10 +1,11 @@
+import { SnowstormConfig } from '@snowstorm/core';
 import { VitePluginFonts } from 'vite-plugin-fonts';
 import RollupPluginMdx from '@mdx-js/rollup';
 
 import mdxPrism from 'mdx-prism';
 import remarkGfm from 'remark-gfm';
 
-export const Config = {
+export const Config: SnowstormConfig = {
 	sites: [
 		{
 			domain: 'docs.example.com',
