@@ -4,8 +4,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-<link rel="modulepreload" href="/assets/imports.1a07e1ca.js">    <script type="module" crossorigin="" src="../../assets/index.dc9c6f26.js"></script>
-    <link rel="modulepreload" href="/assets/vendor.8a5ef2fe.js">
+<link rel="modulepreload" href="/assets/imports.70369b39.js">    <script type="module" crossorigin="" src="../../assets/index.f33f2a6e.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.5ec0fc27.js">
     <link rel="stylesheet" href="../../assets/index.3db77b68.css">
   </head>
   <body>
@@ -17,7 +17,7 @@
 <!-- --><p>This happens for some packages when running in production mode (<!-- --><code>snowstorm start</code> or <!-- --><code>snowstorm export</code>). This is due to the way esm packages are externalized to speed up builds.
 To fix this, add the package to the <!-- --><code>noExternalize</code> field in your build config.<!-- --></p>
 <!-- --><p><code>snowstorm.config.ts</code></p>
-<!-- --><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <!-- --><span class="token imports"><span class="token punctuation">{</span> <!-- --><span class="token maybe-class-name">SnowstormConfig</span> <!-- --><span class="token punctuation">}</span></span> <!-- --><span class="token keyword">from</span> <!-- --><span class="token string">"@snowstorm/core/server"</span><span class="token punctuation">;</span>
+<!-- --><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <!-- --><span class="token imports"><span class="token punctuation">{</span> <!-- --><span class="token maybe-class-name">SnowstormConfig</span> <!-- --><span class="token punctuation">}</span></span> <!-- --><span class="token keyword">from</span> <!-- --><span class="token string">"@snowstorm/core"</span><span class="token punctuation">;</span>
 
 <!-- --><span class="token keyword">export</span> <!-- --><span class="token keyword">const</span> <!-- --><span class="token maybe-class-name">Config</span><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">SnowstormConfig</span> <!-- --><span class="token operator">=</span> <!-- --><span class="token punctuation">{</span>
   site<!-- --><span class="token operator">:</span> <!-- --><span class="token punctuation">{</span>
@@ -36,7 +36,7 @@ To fix this, add the package to the <!-- --><code>noExternalize</code> field in 
 <!-- --><p>Use the following plugin that we provide:</p>
 <!-- --><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> i @pognetwork/vite-plugin-wasm-pack
 <!-- --></code></pre>
-<!-- --><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <!-- --><span class="token imports"><span class="token punctuation">{</span> <!-- --><span class="token maybe-class-name">SnowstormConfig</span> <!-- --><span class="token punctuation">}</span></span> <!-- --><span class="token keyword">from</span> <!-- --><span class="token string">"@snowstorm/core/server"</span><span class="token punctuation">;</span>
+<!-- --><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <!-- --><span class="token imports"><span class="token punctuation">{</span> <!-- --><span class="token maybe-class-name">SnowstormConfig</span> <!-- --><span class="token punctuation">}</span></span> <!-- --><span class="token keyword">from</span> <!-- --><span class="token string">"@snowstorm/core"</span><span class="token punctuation">;</span>
 <!-- --><span class="token keyword">import</span> <!-- --><span class="token imports">vitePluginWasmPack</span> <!-- --><span class="token keyword">from</span> <!-- --><span class="token string">"@pognetwork/vite-plugin-wasm-pack"</span><span class="token punctuation">;</span>
 
 <!-- --><span class="token keyword">export</span> <!-- --><span class="token keyword">const</span> <!-- --><span class="token maybe-class-name">Config</span><span class="token operator">:</span> <!-- --><span class="token maybe-class-name">SnowstormConfig</span> <!-- --><span class="token operator">=</span> <!-- --><span class="token punctuation">{</span>

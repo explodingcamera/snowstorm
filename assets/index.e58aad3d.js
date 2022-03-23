@@ -1,1 +1,0 @@
-import"./vendor.8a5ef2fe.js";import t from"./getting-started.dbefb26b.js";import{title as x}from"./getting-started.dbefb26b.js";import"./jsx-runtime.9ff45209.js";import"./index.dc9c6f26.js";const e=t;export{e as Index,x as title};
