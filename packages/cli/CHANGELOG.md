@@ -1,3 +1,15 @@
+# v0.17.0 (Wed Mar 23 2022)
+
+#### 🚀 Enhancement
+
+- feat: support latest react rc [#44](https://github.com/explodingcamera/snowstorm/pull/44) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.15.3 (Tue Feb 08 2022)
 
 #### 🐛 Bug Fix
