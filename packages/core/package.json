@@ -1,13 +1,13 @@
 {
   "name": "@snowstorm/core",
   "version": "0.16.0",
+  "description": "The lightning-fast and minimalist React Framework",
+  "homepage": "https://snowstorm.js.org",
+  "bugs": "https://github.com/explodingcamera/snowstorm/issues",
+  "repository": "explodingcamera/snowstorm",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
-  "description": "The lightning-fast and minimalist React Framework",
   "type": "module",
-  "repository": "explodingcamera/snowstorm",
-  "bugs": "https://github.com/explodingcamera/snowstorm/issues",
-  "homepage": "https://snowstorm.js.org",
   "exports": {
     "./server": "./server.js",
     "./server.js": "./server.js",
@@ -41,10 +41,10 @@
     "build:index": "esbuild src/index.ts --outdir=. --platform=node --target=node16 --format=esm --minify",
     "build:server": "esbuild src/server.ts src/server/export/index.ts --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=. --platform=node --target=node16 --format=esm --metafile=server.meta.json --external:typescript --external:@snowstorm/* --external:react-ssr-prepass --external:node-fetch --external:vite --external:@vitejs/* --external:@explodingcamera/youch --external:write-file-atomic --banner:js='import { createRequire as topLevelCreateRequire } from \"module\";\n const require = topLevelCreateRequire(import.meta.url);'",
     "clean": "rimraf -rf index.d.ts index.js index.js.map server.d.ts server.js server.meta.json client.meta.json server/ client/ chunks/ lib/",
+    "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm",
     "types": "run-p --print-label types:**",
     "types:client": "tsc -p tsconfig.client.json",
     "types:server": "tsc -p tsconfig.server.json",
-    "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm",
     "watch": "run-p --print-label \"build:** -- --watch\""
   },
   "dependencies": {
@@ -96,14 +96,14 @@
     "typescript": "^4.6.0"
   },
   "peerDependenciesMeta": {
-    "sass": {
-      "optional": true
-    },
     "react": {
       "optional": false
     },
     "react-dom": {
       "optional": false
+    },
+    "sass": {
+      "optional": true
     },
     "typescript": {
       "optional": false
