@@ -16,7 +16,6 @@ import makeMatcher from '@snowstorm/router/lib/matcher';
 // these are exported so we can use the transformed client code on our server
 export { getHead } from '@snowstorm/head/lib/internal';
 
-import {} from 'react-dom/next';
 export { renderToPipeableStream } from 'react-dom/server';
 
 interface args {
