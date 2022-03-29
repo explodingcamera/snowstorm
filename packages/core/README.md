@@ -9,7 +9,7 @@
 
 ## Warning
 
-Important: Snowstorm isn't Production-Ready yet. Documentation is rough, outdated and inconsistent and only the latest alpha versions of react 18 are supported.
+Important: Snowstorm is in beta. It's already being used in production, however there might be rough edges and unexpected issues.
 
 ## What?
 
@@ -29,7 +29,7 @@ Getting started with snowstorm takes less than a minute and doesn't any require 
 
 ```bash
 # install the required dependencies
-$ npm install -S @snowstorm/core @snowstorm/cli react@rc react-dom@rc typescript
+$ npm install -S @snowstorm/core @snowstorm/cli react@18 react-dom@18 typescript
 
 # (optional) enable scss support:
 $ npm install -S sass

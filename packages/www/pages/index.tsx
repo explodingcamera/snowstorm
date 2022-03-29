@@ -22,7 +22,7 @@ export const Index = () => (
 		<h2>What?</h2>
 		<br />
 		<p>
-			Snowstorm is a Framework and Static-Site-Generator for react, which
+			Snowstorm (beta) is a Framework and Static-Site-Generator for react, which
 			handles the heavy lifting involved with shipping a react project so you
 			can focus on creating awesome things!
 		</p>
@@ -43,7 +43,7 @@ export const Index = () => (
 				<b>Multi-Site</b>: develop for multiple domains at the same time
 			</li>
 			<li>
-				<b>Great UX</b> file system based routing, react suspense support, great
+				<b>Great UX</b>: file system based routing, react suspense, great
 				TypeScript support, CSS-Modules
 			</li>
 		</ul>
