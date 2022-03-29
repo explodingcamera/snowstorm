@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/core",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "The lightning-fast and minimalist React Framework",
   "homepage": "https://snowstorm.js.org",
   "bugs": "https://github.com/explodingcamera/snowstorm/issues",
