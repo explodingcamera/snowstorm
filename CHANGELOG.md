@@ -1,3 +1,16 @@
+# v0.18.0 (Tue Mar 29 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/core`, `@snowstorm/head`, `@snowstorm/router`, `@snowstorm/serverprops`
+  - feat: react 18 :confetti_ball: [#45](https://github.com/explodingcamera/snowstorm/pull/45) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.17.0 (Wed Mar 23 2022)
 
 #### 🚀 Enhancement
