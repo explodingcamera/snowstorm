@@ -113,6 +113,7 @@ importers:
       '@types/normalize-path': 3.0.0
       '@types/write-file-atomic': 4.0.0
       '@vitejs/plugin-react': 1.2.0
+      fast-glob: 3.2.11
       normalize-path: 3.0.0
       react-ssr-prepass: 1.5.0_react@18.0.0
       rollup: 2.70.1
@@ -134,7 +135,6 @@ importers:
       deepmerge: 4.2.2
       esbuild: 0.14.28
       esbuild-visualizer: 0.3.1
-      fast-glob: 3.2.11
       koa: 2.13.4
       koa-compress: 5.1.0
       koa-connect: 2.1.0
