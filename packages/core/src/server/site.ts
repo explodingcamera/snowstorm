@@ -22,8 +22,9 @@ import { generateRouter } from './router/index.js';
 import { fileURLToPath } from 'node:url';
 import deepmerge from 'deepmerge';
 import { pageGlob } from './utils/is-page.js';
-import glob from 'fast-glob';
+import glob from './utils/glob.js';
 import { brotliify } from './utils/brotliify.js';
+import normalizePath from 'normalize-path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -73,7 +74,7 @@ const viteBaseConfig = (
 	site: SnowstormSiteConfigInternal,
 ): InlineConfig => {
 	const res: InlineConfig = {
-		root: config.internal.rootFolder,
+		root: config.internal.snowstormAssetsFolder,
 		cacheDir: join(site.internal.viteFolder, './.vite'),
 		configFile: false,
 		plugins: [],
@@ -104,11 +105,11 @@ const viteBaseConfig = (
 		},
 		resolve: {
 			alias: {
-				_snowstorm: config.internal.snowstormClientFolder,
-				'_snowstorm-internal': site.internal.internalFolder,
-				'_snowstorm-pages': site.internal.pagesFolder,
+				_snowstorm: normalizePath(config.internal.snowstormClientFolder),
+				'_snowstorm-internal': normalizePath(site.internal.internalFolder),
+				'_snowstorm-pages': normalizePath(site.internal.pagesFolder),
 			},
-		},
+		}, 
 		optimizeDeps: {
 			include: [
 				...(site.build.forcePrebundle || []),
@@ -149,6 +150,7 @@ const viteBaseConfig = (
 
 	return res;
 };
+
 
 const viteProdConfig = (
 	config: SnowstormConfigInternal,

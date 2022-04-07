@@ -3,7 +3,7 @@ import { dirname, join, resolve } from 'node:path';
 import { importFile } from './utils/import-file.js';
 import { checkFileExists } from './utils/file-exists.js';
 import { Except, PartialDeep } from 'type-fest';
-import glob from 'fast-glob';
+import glob from './utils/glob.js';
 import { SnowstormRoutesConfig } from './router/routes.js';
 import { Logger } from 'tslog';
 import { fileURLToPath } from 'node:url';

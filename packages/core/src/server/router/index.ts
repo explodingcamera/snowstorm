@@ -29,7 +29,6 @@ export const generateRouter = async ({
 	}
 
 	const normalizedPages = stripFileExtensions(pages);
-
 	const customErrorPage = normalizedPages.includes('_error');
 	const customAppPage = normalizedPages.includes('_app');
 

@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "run-p --print-label build:esbuild types",
-    "build:esbuild": "esbuild src/*.ts src/server/index.ts --bundle --outdir=lib --platform=node --external:react --target=esnext --format=esm",
+    "build:esbuild": "esbuild src/index.ts src/matcher.ts src/use-location.ts src/static-location.ts src/server/index.ts --bundle --outdir=lib --platform=node --external:react --target=esnext --format=esm",
     "watch": "npm run build -- --watch",
     "types": "tsc -p tsconfig.build.json",
     "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm"
