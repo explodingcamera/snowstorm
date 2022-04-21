@@ -237,7 +237,7 @@ export function Link<H extends BaseLocationHook = LocationHook>(
 	let { to, href = to, children, onClick } = props;
 
 	const handleClick = useCallback(
-		event => {
+		(event: any) => {
 			// ignores the navigation when clicked using right mouse button or
 			// by holding a special modifier key: ctrl, command, win, alt, shift
 			if (

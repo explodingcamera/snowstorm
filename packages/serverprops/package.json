@@ -19,7 +19,7 @@
     "@types/snowpack-env": "^2.3.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "type-fest": "^2.12.1"
+    "type-fest": "^2.12.2"
   },
   "publishConfig": {
     "access": "public"

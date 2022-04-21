@@ -11,6 +11,6 @@
   "author": "",
   "dependencies": {
     "@snowstorm/core": "link:../core",
-    "yargs": "^17.4.0"
+    "yargs": "^17.4.1"
   }
 }
