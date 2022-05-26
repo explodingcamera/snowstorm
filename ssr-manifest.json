@@ -2,6 +2,45 @@
   "../../../www/vite/modulepreload-polyfill": [
     "/assets/logo.4a8e5f82.svg"
   ],
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.1.0/node_modules/react/index.js?commonjs-module": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.1.0/node_modules/react/cjs/react.production.min.js?commonjs-exports": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/react@18.1.0/node_modules/react/cjs/react.production.min.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/react@18.1.0/node_modules/react/index.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.1.0_react@18.1.0/node_modules/react-dom/index.js?commonjs-module": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.1.0_react@18.1.0/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/scheduler@0.22.0/node_modules/scheduler/index.js?commonjs-module": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/scheduler@0.22.0/node_modules/scheduler/cjs/scheduler.production.min.js?commonjs-exports": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/scheduler@0.22.0/node_modules/scheduler/cjs/scheduler.production.min.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/scheduler@0.22.0/node_modules/scheduler/index.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/react-dom@18.1.0_react@18.1.0/node_modules/react-dom/cjs/react-dom.production.min.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/react-dom@18.1.0_react@18.1.0/node_modules/react-dom/index.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
+  "../../../../node_modules/.pnpm/react-dom@18.1.0_react@18.1.0/node_modules/react-dom/client.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
   "../../../router/lib/index.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
@@ -44,153 +83,90 @@
   "index.html": [
     "/assets/logo.4a8e5f82.svg"
   ],
-  "../../../www/\u0000commonjsHelpers.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0/node_modules/react/index.js?commonjs-module": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0/node_modules/react/cjs/react.production.min.js?commonjs-exports": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/react@18.0.0/node_modules/react/cjs/react.production.min.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0/node_modules/react/cjs/react.production.min.js?commonjs-proxy": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/react@18.0.0/node_modules/react/index.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/client.js?commonjs-exports": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/index.js?commonjs-module": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-exports": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0/node_modules/react/index.js?commonjs-proxy": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/scheduler@0.21.0/node_modules/scheduler/index.js?commonjs-module": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/scheduler@0.21.0/node_modules/scheduler/cjs/scheduler.production.min.js?commonjs-exports": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/scheduler@0.21.0/node_modules/scheduler/cjs/scheduler.production.min.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/scheduler@0.21.0/node_modules/scheduler/cjs/scheduler.production.min.js?commonjs-proxy": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/scheduler@0.21.0/node_modules/scheduler/index.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/scheduler@0.21.0/node_modules/scheduler/index.js?commonjs-proxy": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/cjs/react-dom.production.min.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/cjs/react-dom.production.min.js?commonjs-proxy": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/index.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/index.js?commonjs-proxy": [
-    "/assets/vendor.28fdfebd.js"
-  ],
-  "../../../../node_modules/.pnpm/react-dom@18.0.0_react@18.0.0/node_modules/react-dom/client.js": [
-    "/assets/vendor.28fdfebd.js"
-  ],
   "../../../www/pages/impressum.mdx": [
-    "/assets/impressum.8cce3746.js"
+    "/assets/impressum.32e5a474.js"
   ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0/node_modules/react/jsx-runtime.js?commonjs-module": [
-    "/assets/jsx-runtime.ddeb186f.js"
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.1.0/node_modules/react/jsx-runtime.js?commonjs-module": [
+    "/assets/jsx-runtime.f9f14ca4.js"
   ],
-  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.0.0/node_modules/react/cjs/react-jsx-runtime.production.min.js?commonjs-exports": [
-    "/assets/jsx-runtime.ddeb186f.js"
+  "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.1.0/node_modules/react/cjs/react-jsx-runtime.production.min.js?commonjs-exports": [
+    "/assets/jsx-runtime.f9f14ca4.js"
   ],
-  "../../../../node_modules/.pnpm/react@18.0.0/node_modules/react/cjs/react-jsx-runtime.production.min.js": [
-    "/assets/jsx-runtime.ddeb186f.js"
+  "../../../../node_modules/.pnpm/react@18.1.0/node_modules/react/cjs/react-jsx-runtime.production.min.js": [
+    "/assets/jsx-runtime.f9f14ca4.js"
   ],
-  "../../../../node_modules/.pnpm/react@18.0.0/node_modules/react/jsx-runtime.js": [
-    "/assets/jsx-runtime.ddeb186f.js"
+  "../../../../node_modules/.pnpm/react@18.1.0/node_modules/react/jsx-runtime.js": [
+    "/assets/jsx-runtime.f9f14ca4.js"
   ],
   "../../../www/pages/index.module.scss?used": [
-    "/assets/index.254afdcc.js",
+    "/assets/index.922e6636.js",
     "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.254afdcc.js",
+    "/assets/index.922e6636.js",
     "/assets/index.1c1c71bf.css"
   ],
   "../../../www/pages/inspirations.mdx": [
-    "/assets/inspirations.a09b6fe1.js"
+    "/assets/inspirations.ba5e5a0f.js"
   ],
   "../../../www/pages/docs/browser-support.mdx": [
-    "/assets/browser-support.e67c8db2.js"
+    "/assets/browser-support.9c1e3c41.js"
   ],
   "../../../www/pages/docs/css.mdx": [
-    "/assets/css.6906663a.js"
+    "/assets/css.b6125ec8.js"
   ],
   "../../../www/pages/docs/custom-app.mdx": [
-    "/assets/custom-app.d0564cdf.js"
+    "/assets/custom-app.0a2a23e0.js"
   ],
   "../../../www/pages/docs/custom-fonts.mdx": [
-    "/assets/custom-fonts.c463755e.js"
+    "/assets/custom-fonts.fa98bd95.js"
   ],
   "../../../www/pages/docs/deploy.mdx": [
-    "/assets/deploy.9e101a75.js"
+    "/assets/deploy.06e902f9.js"
   ],
   "../../../www/pages/docs/dynamic-routes.mdx": [
-    "/assets/dynamic-routes.979fae8d.js"
+    "/assets/dynamic-routes.93ad3133.js"
   ],
   "../../../www/pages/docs/env-variables.mdx": [
-    "/assets/env-variables.d22e9622.js"
+    "/assets/env-variables.0851e7f5.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.a4e3db09.js"
+    "/assets/getting-started.a15cbaab.js"
   ],
   "../../../www/pages/docs/imports.mdx": [
-    "/assets/imports.35346dc9.js"
+    "/assets/imports.d1891d74.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.a5b15cd7.js"
+    "/assets/index.ade7474a.js"
   ],
   "../../../www/pages/docs/pages.mdx": [
-    "/assets/pages.4358bc0f.js"
+    "/assets/pages.f3d485bb.js"
   ],
   "../../../www/pages/docs/plugins.mdx": [
-    "/assets/plugins.91cb23e9.js"
+    "/assets/plugins.fe0a06de.js"
   ],
   "../../../www/pages/docs/routing.mdx": [
-    "/assets/routing.ad7c3c6c.js"
+    "/assets/routing.ab810c8d.js"
   ],
   "../../../www/pages/docs/sites.mdx": [
-    "/assets/sites.90dd84c4.js"
+    "/assets/sites.a2b141a8.js"
   ],
   "../../../www/pages/docs/static-assets.mdx": [
-    "/assets/static-assets.1ad19444.js"
+    "/assets/static-assets.dd3c53e2.js"
   ],
   "../../../www/pages/docs/wasm.mdx": [
-    "/assets/wasm.36d7f34b.js"
+    "/assets/wasm.c6898d68.js"
   ],
   "../../../www/pages/docs/workers.mdx": [
-    "/assets/workers.18638e4d.js"
+    "/assets/workers.afdc014f.js"
   ],
   "../../../www/pages/docs/api/cli.mdx": [
-    "/assets/cli.c5b8b9f7.js"
+    "/assets/cli.6613f6db.js"
   ],
   "../../../www/pages/docs/api/config.mdx": [
-    "/assets/config.6cd05d77.js"
+    "/assets/config.28a3970a.js"
   ],
   "../../../www/pages/docs/api/plugins.mdx": [
-    "/assets/plugins.5bdd2569.js"
+    "/assets/plugins.a9b7718a.js"
   ]
 }
