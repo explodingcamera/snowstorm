@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "run-p --print-label build:esbuild types",
-    "build:esbuild": "esbuild src/*.ts src/server/index.ts --bundle --outdir=lib --platform=node --external:react --target=esnext --format=esm",
+    "build:esbuild": "esbuild src/index.ts src/matcher.ts src/use-location.ts src/static-location.ts src/server/index.ts --bundle --outdir=lib --platform=node --external:react --target=esnext --format=esm",
     "watch": "npm run build -- --watch",
     "types": "tsc -p tsconfig.build.json",
     "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm"
@@ -30,11 +30,10 @@
     "react": ">=18.0.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/react-hooks": "^7.0.2",
-    "@types/react": "17.0.43",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@testing-library/react": "^13.2.0",
+    "@types/react": "18.0.9",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "publishConfig": {
     "access": "public"
