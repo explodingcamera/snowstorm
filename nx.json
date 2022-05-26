@@ -1,13 +1,11 @@
 {
-  "extends": "@nrwl/workspace/presets/npm.json",
-  "npmScope": "snowstorm",
+  "extends": "nx/presets/npm.json",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": [
           "build",
-          "compile",
           "test",
           "lint",
           "package",
@@ -38,5 +36,10 @@
   },
   "affected": {
     "defaultBase": "main"
+  },
+  "pluginsConfig": {
+    "@nrwl/js": {
+      "analyzeSourceFiles": false
+    }
   }
 }

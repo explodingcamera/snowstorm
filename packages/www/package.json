@@ -15,12 +15,12 @@
     "@mdx-js/rollup": "^2.1.1",
     "@snowstorm/cli": "link:../cli",
     "@snowstorm/core": "link:../core",
-    "@types/react": "18.0.6",
+    "@types/react": "18.0.9",
     "mdx-prism": "^0.3.4",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
     "remark-gfm": "^3.0.1",
-    "sass": "^1.50.1",
-    "vite-plugin-fonts": "^0.3.0"
+    "sass": "^1.52.1",
+    "vite-plugin-fonts": "^0.4.0"
   }
 }
