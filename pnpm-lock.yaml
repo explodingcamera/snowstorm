@@ -171,7 +171,6 @@ importers:
   packages/router:
     specifiers:
       '@testing-library/react': ^13.2.0
-      '@testing-library/react-hooks': ^8.0.0
       '@types/react': 18.0.9
       deepmerge: ^4.2.2
       react: ^18.1.0
@@ -180,7 +179,6 @@ importers:
       deepmerge: 4.2.2
     devDependencies:
       '@testing-library/react': 13.2.0_react-dom@18.1.0+react@18.1.0
-      '@testing-library/react-hooks': 8.0.0_71dc17fa2f93091b2e1d43ec53f70836
       '@types/react': 18.0.9
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
@@ -723,13 +721,6 @@ packages:
       '@babel/plugin-syntax-jsx': 7.17.12_@babel+core@7.18.2
       '@babel/types': 7.18.2
     dev: false
-
-  /@babel/runtime/7.17.9:
-    resolution: {integrity: sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.9
-    dev: true
 
   /@babel/runtime/7.18.3:
     resolution: {integrity: sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==}
@@ -2513,29 +2504,6 @@ packages:
       dom-accessibility-api: 0.5.14
       lz-string: 1.4.4
       pretty-format: 27.5.1
-    dev: true
-
-  /@testing-library/react-hooks/8.0.0_71dc17fa2f93091b2e1d43ec53f70836:
-    resolution: {integrity: sha512-uZqcgtcUUtw7Z9N32W13qQhVAD+Xki2hxbTR461MKax8T6Jr8nsUvZB+vcBTkzY2nFvsUet434CsgF0ncW2yFw==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      '@types/react': ^16.9.0 || ^17.0.0
-      react: ^16.9.0 || ^17.0.0
-      react-dom: ^16.9.0 || ^17.0.0
-      react-test-renderer: ^16.9.0 || ^17.0.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      react-dom:
-        optional: true
-      react-test-renderer:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.17.9
-      '@types/react': 18.0.9
-      react: 18.1.0
-      react-dom: 18.1.0_react@18.1.0
-      react-error-boundary: 3.1.4_react@18.1.0
     dev: true
 
   /@testing-library/react/13.2.0_react-dom@18.1.0+react@18.1.0:
@@ -9848,16 +9816,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.1.0
       scheduler: 0.22.0
-
-  /react-error-boundary/3.1.4_react@18.1.0:
-    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
-    engines: {node: '>=10', npm: '>=6'}
-    peerDependencies:
-      react: '>=16.13.1'
-    dependencies:
-      '@babel/runtime': 7.17.9
-      react: 18.1.0
-    dev: true
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
