@@ -2,7 +2,7 @@ import './setup-dom.js';
 
 import tap from 'tap';
 
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react';
 import useLocation from '../src/use-location.js';
 
 void tap.test('returns a pair [value, update]', async t => {
@@ -101,32 +101,22 @@ void tap.test('`value` first argument', async t => {
 		const { result, unmount } = renderHook(() => useLocation());
 
 		t.equal(result.current[0], '/');
-		t.equal(result.all.length, 1);
 
 		act(() => history.pushState(null, '', '/foo'));
-
 		t.equal(result.current[0], '/foo');
-		t.equal(result.all.length, 2);
 
 		act(() => history.pushState(null, '', '/foo'));
-
 		t.equal(result.current[0], '/foo');
-		t.equal(result.all.length, 2); // no re-render
 
 		act(() => history.pushState(null, '', '/foo?hello=world'));
-
 		t.equal(result.current[0], '/foo');
-		t.equal(result.all.length, 3);
 
 		act(() => history.pushState(null, '', '/foo?goodbye=world'));
-
 		await new Promise(resolve => {
 			setTimeout(resolve, 100);
 		});
 
 		t.equal(result.current[0], '/foo');
-		t.equal(result.all.length, 4);
-
 		unmount();
 	});
 });

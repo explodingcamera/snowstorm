@@ -11,6 +11,7 @@ import Youch from '@explodingcamera/youch';
 import ssrPrepass from 'react-ssr-prepass';
 import EventEmitter from 'events';
 import { copyFileAtomic } from './utils/copy-file-atomic';
+import normalizePath from 'normalize-path';
 
 const startDate = Date.now();
 const version = startDate.toString();
@@ -84,6 +85,7 @@ export const ssr =
 			});
 
 			await ssrPrepass(reactPage);
+			const basePath = site.basePath === '/' ? '' : site.basePath;
 
 			const indexHTML = dev
 				? join(config.internal.snowstormAssetsFolder, './index.html')
@@ -96,7 +98,7 @@ export const ssr =
 				htmlFile = htmlFile.replace(
 					/<!--SNOWSTORM ENTRYPOINT-->[\s\S]*?<!--\/SNOWSTORM ENTRYPOINT-->/,
 					`<script type="module" src="${join(
-						config.internal.snowstormClientFolder,
+						basePath,
 						'./index.js',
 					)}"></script>`,
 				);
@@ -105,7 +107,6 @@ export const ssr =
 
 			// const props: string = await serverprops.collectProps();
 			let head: string = getHead();
-			const basePath = site.basePath === '/' ? '' : site.basePath;
 
 			if (dev) {
 				head += `<style type="text/css" class="__snowstorm-dev-floc">* {display: none;}</style>`;

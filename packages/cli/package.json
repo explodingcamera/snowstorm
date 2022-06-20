@@ -1,6 +1,6 @@
 {
   "name": "@snowstorm/cli",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "license": "MIT",
   "type": "module",
   "description": "",
@@ -11,6 +11,6 @@
   "author": "",
   "dependencies": {
     "@snowstorm/core": "link:../core",
-    "yargs": "^17.4.0"
+    "yargs": "^17.5.1"
   }
 }

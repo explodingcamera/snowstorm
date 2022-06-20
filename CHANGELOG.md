@@ -1,3 +1,16 @@
+# v0.19.0 (Thu May 26 2022)
+
+#### 🚀 Enhancement
+
+- `@snowstorm/cli`, `@snowstorm/core`, `@snowstorm/head`, `@snowstorm/router`, `@snowstorm/serverprops`
+  - feat: initial windows support [#46](https://github.com/explodingcamera/snowstorm/pull/46) ([@explodingcamera](https://github.com/explodingcamera))
+
+#### Authors: 1
+
+- Henry Gressmann ([@explodingcamera](https://github.com/explodingcamera))
+
+---
+
 # v0.18.0 (Tue Mar 29 2022)
 
 #### 🚀 Enhancement

@@ -3,9 +3,7 @@ import './setup-dom.js';
 import tap from 'tap';
 import React from 'react';
 
-// switch to @testing-library/react when ready https://github.com/testing-library/react-testing-library/pull/991
-import { renderHook } from '@testing-library/react-hooks';
-
+import { renderHook } from '@testing-library/react';
 import { Router, useRouter } from '../src/index.js';
 
 void tap.test('creates a router object on demand', async t => {

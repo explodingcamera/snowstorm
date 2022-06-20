@@ -15,14 +15,14 @@ export const Config: SnowstormConfig = {
 	site: {
 		build: {
 			plugins: [
+				RollupPluginMdx({
+					remarkPlugins: [remarkGfm],
+					rehypePlugins: [mdxPrism],
+				}),
 				VitePluginFonts({
 					google: {
 						families: ['Inter', 'Space Mono'],
 					},
-				}),
-				RollupPluginMdx({
-					remarkPlugins: [remarkGfm],
-					rehypePlugins: [mdxPrism],
 				}),
 			],
 		},
