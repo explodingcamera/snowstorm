@@ -1,4 +1,4 @@
-import { SnowstormCustomAppProps } from '@snowstorm/core/types';
+import { SnowstormCustomAppProps } from '@snowstorm/core';
 import { Layout } from '../components/layout';
 import { PageMeta } from '../types';
 

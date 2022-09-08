@@ -15,3 +15,11 @@ export type SnowstormSiteConfig = _SnowstormSiteConfig;
 export type SnowstormExportConfig = _SnowstormExportConfig;
 export type SnowstormMultiSiteConfig = _SnowstormMultiSiteConfig;
 export type SnowstormBuildOptions = _SnowstormBuildOptions;
+
+export type {
+	SnowstormCustomApp,
+	SnowstormCustomAppProps,
+	SnowstormCustomError,
+	SnowstormPage,
+	SnowstormRoute,
+} from './client/router/shared';

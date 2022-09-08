@@ -78,12 +78,11 @@ const viteBaseConfig = (
 		cacheDir: join(site.internal.viteFolder, './.vite'),
 		configFile: false,
 		plugins: [],
-		// @ts-expect-error - ssr is considered in alpha, so not yet exposed by Vite
 		ssr: {
 			noExternal: [
 				/@snowstorm/,
-				...(config?.site?.build?.noExternal || []),
-				...(site?.build?.noExternal || []),
+				...((config?.site?.build?.noExternal ?? []) as any),
+				...((site?.build?.noExternal ?? []) as any),
 			],
 		},
 		css: deepmerge.all([
@@ -109,7 +108,7 @@ const viteBaseConfig = (
 				'_snowstorm-internal': normalizePath(site.internal.internalFolder),
 				'_snowstorm-pages': normalizePath(site.internal.pagesFolder),
 			},
-		}, 
+		},
 		optimizeDeps: {
 			include: [
 				...(site.build.forcePrebundle || []),
@@ -151,7 +150,6 @@ const viteBaseConfig = (
 	return res;
 };
 
-
 const viteProdConfig = (
 	config: SnowstormConfigInternal,
 	site: SnowstormSiteConfigInternal,
@@ -187,7 +185,8 @@ const createViteServer = async ({
 }) => {
 	const hmrPort = (dev && (await getFreePort())) || 0;
 	const server = await createServer({
-		server: { middlewareMode: 'ssr', hmr: { port: hmrPort } },
+		appType: 'custom',
+		server: { middlewareMode: true, hmr: { port: hmrPort } },
 		// publicDir: snowstormAssetsFolder,
 		...viteBaseConfig(config, site),
 	});

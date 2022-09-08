@@ -191,11 +191,11 @@ const SidebarComponent = () => (
 	</aside>
 );
 
-export const Layout: FC<{ className?: string; meta: PageMeta }> = ({
-	children,
-	className,
-	meta,
-}) => (
+export const Layout: FC<{
+	className?: string;
+	meta: PageMeta;
+	children: React.ReactNode;
+}> = ({ children, className, meta }) => (
 	<div
 		className={`${className || ''} ${meta?.layoutClassName || ''} ${
 			styles.wrapper
