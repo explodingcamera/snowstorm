@@ -1,0 +1,3 @@
+import{j as n}from"./jsx-runtime.aa958f43.js";import"./index.6d5cacd0.js";function t(o){const e=Object.assign({h1:"h1",p:"p",code:"code"},o.components);return n.exports.jsxs(n.exports.Fragment,{children:[n.exports.jsx(e.h1,{children:"Plugins"}),`
+`,n.exports.jsxs(e.p,{children:["Snowstorm supports any ",n.exports.jsx(e.code,{children:"vite"})," and ",n.exports.jsx(e.code,{children:"rollup.js"})," plugin, just add them in the ",n.exports.jsx(e.code,{children:"plugins"}),` field in your config.
+More information following soon.`]})]})}function i(o={}){const{wrapper:e}=o.components||{};return e?n.exports.jsx(e,Object.assign({},o,{children:n.exports.jsx(t,o)})):t(o)}export{i as default};

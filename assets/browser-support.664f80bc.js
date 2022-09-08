@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime.aa958f43.js";import"./index.6d5cacd0.js";function o(t){const n=Object.assign({h1:"h1"},t.components);return e.exports.jsx(n.h1,{children:"work in progress"})}function c(t={}){const{wrapper:n}=t.components||{};return n?e.exports.jsx(n,Object.assign({},t,{children:e.exports.jsx(o,t)})):o(t)}export{c as default};
