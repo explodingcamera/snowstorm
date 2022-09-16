@@ -1,13 +1,7 @@
 import React from 'react';
 
-import {
-	Page,
-	findRoute,
-	requestPage,
-	SnowstormRoute,
-	basePath,
-	ImportedPageModule,
-} from './router';
+import type { SnowstormRoute, ImportedPageModule } from './router';
+import { Page, findRoute, requestPage, basePath } from './router';
 
 import { Router } from '@snowstorm/router';
 import staticLocationHook from '@snowstorm/router/lib/static-location';

@@ -1,2 +1,2 @@
 export { start as startServer } from './server/index.js';
-export { SnowstormConfig } from './server/config';
+export type { SnowstormConfig } from './server/config';

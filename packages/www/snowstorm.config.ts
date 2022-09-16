@@ -1,4 +1,4 @@
-import { SnowstormConfig } from '@snowstorm/core';
+import type { SnowstormConfig } from '@snowstorm/core';
 import { VitePluginFonts } from 'vite-plugin-fonts';
 import RollupPluginMdx from '@mdx-js/rollup';
 

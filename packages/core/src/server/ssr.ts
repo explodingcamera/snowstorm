@@ -1,8 +1,11 @@
-import { Middleware } from 'koa';
+import type { Middleware } from 'koa';
 import { readFile } from 'node:fs/promises';
-import { SnowstormConfigInternal, SnowstormSiteConfigInternal } from './config';
+import type {
+	SnowstormConfigInternal,
+	SnowstormSiteConfigInternal,
+} from './config';
 import { join } from 'node:path';
-import { ViteDevServer } from 'vite';
+import type { ViteDevServer } from 'vite';
 import { checkFileExists } from './utils/file-exists';
 import { modules } from './site';
 import { fileIsPage } from './utils/is-page';

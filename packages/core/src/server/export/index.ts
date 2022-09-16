@@ -10,7 +10,8 @@ import { start as startServer } from '../index.js';
 import { getFreePort } from '../utils/free-port.js';
 import { outputFile } from '../utils/output';
 
-import { loadRoutes, SnowstormCustomRouteInternal } from '../router/routes.js';
+import type { SnowstormCustomRouteInternal } from '../router/routes.js';
+import { loadRoutes } from '../router/routes.js';
 import { loadPages } from '../router/pages.js';
 import { cp } from 'node:fs/promises';
 import { stripFileExtensions } from '../utils/strip-file-extension.js';

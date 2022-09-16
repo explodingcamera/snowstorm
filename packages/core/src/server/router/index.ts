@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { SnowstormSiteConfigInternal } from '../config.js';
+import type { SnowstormSiteConfigInternal } from '../config.js';
 import {
 	stripFileExtension,
 	stripFileExtensions,
@@ -9,7 +9,8 @@ import {
 import writeFileAtomic from 'write-file-atomic';
 
 import { loadPages } from './pages.js';
-import { loadRoutes, SnowstormRoute } from './routes.js';
+import type { SnowstormRoute } from './routes.js';
+import { loadRoutes } from './routes.js';
 
 export const generateRouter = async ({
 	template,

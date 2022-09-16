@@ -16,6 +16,7 @@
     "declaration": true
   },
   "include": [
+    "**/*.d.ts",
     "**/src/**/*",
     "**/test/**/*",
     "packages/example/**/*",

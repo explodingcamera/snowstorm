@@ -4,7 +4,8 @@ import Koa from 'koa';
 import mount from 'koa-mount';
 import logger from 'koa-logger';
 
-import { loadConfig, SnowstormConfigInternal } from './config.js';
+import type { SnowstormConfigInternal } from './config.js';
+import { loadConfig } from './config.js';
 import { startSite } from './site.js';
 import { isSnowstormProject } from './utils/is-snowstorm-project.js';
 

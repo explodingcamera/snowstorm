@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { SnowstormSiteConfigInternal } from './../config';
+import type { SnowstormSiteConfigInternal } from './../config';
 
 export interface SnowstormRoute {
 	path: string;

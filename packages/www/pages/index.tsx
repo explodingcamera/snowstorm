@@ -1,4 +1,4 @@
-import { PageMeta } from '../types';
+import type { PageMeta } from '../types';
 
 import styles from './index.module.scss';
 import Logo from './../assets/logo.svg';

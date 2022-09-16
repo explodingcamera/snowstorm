@@ -18,15 +18,15 @@ import {
 } from '_snowstorm-internal/routes.js';
 import { RouteAnnouncer } from './route-announcer';
 
-import {
-	Pages,
+import type { Pages } from './shared.js';
+import type {
 	SnowstormCustomApp,
 	SnowstormCustomError,
 	SnowstormPage,
 	SnowstormRoute,
 } from './shared.js';
 
-export {
+export type {
 	SnowstormCustomApp,
 	SnowstormCustomError,
 	SnowstormPage,

@@ -3,13 +3,8 @@ import React from 'react';
 import {} from 'react-dom/next';
 import { hydrateRoot } from 'react-dom/client';
 import { Router } from '@snowstorm/router';
-import {
-	basePath,
-	findRoute,
-	ImportedPageModule,
-	Page,
-	requestPage,
-} from './router';
+import type { ImportedPageModule } from './router';
+import { basePath, findRoute, Page, requestPage } from './router';
 import makeMatcher from '@snowstorm/router/lib/matcher';
 
 // prevent flash-of-unstyled-content in dev-mode

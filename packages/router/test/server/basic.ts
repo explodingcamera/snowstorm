@@ -1,5 +1,6 @@
 import tap from 'tap';
-import { processRoute, Route } from '../../src/server/index.js';
+import type { Route } from '../../src/server/index.js';
+import { processRoute } from '../../src/server/index.js';
 
 void tap.test('processRoute should handle edge-cases: ', t => {
 	const shouldErr = ['', '/test', '../../test', '%$@#.asdfasdf.asd'];

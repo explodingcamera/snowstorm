@@ -1,5 +1,5 @@
-import { Path } from './index.js';
-import { LocationHook } from './use-location.js';
+import type { Path } from './index.js';
+import type { LocationHook } from './use-location.js';
 
 interface StaticLocationHookOptions {
 	record?: boolean;

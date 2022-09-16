@@ -5,9 +5,10 @@ import serve from 'koa-static';
 import compress from 'koa-compress';
 import chokidar from 'chokidar';
 
-import { build, createServer, InlineConfig, Plugin, PluginOption } from 'vite';
+import type { InlineConfig, Plugin, PluginOption } from 'vite';
+import { build, createServer } from 'vite';
 
-import {
+import type {
 	SnowstormConfigInternal,
 	SnowstormSiteConfigInternal,
 } from './config.js';

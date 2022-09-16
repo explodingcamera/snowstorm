@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import type { FC } from 'react';
+import { useState } from 'react';
 
 import '@snowstorm/core/base.css';
 import './global.scss';
@@ -8,7 +9,7 @@ import styles from './index.module.scss';
 import { Link, useLocation } from '@snowstorm/core';
 
 import Logo from './../../assets/logo.svg';
-import { PageMeta } from '../../types';
+import type { PageMeta } from '../../types';
 
 type SidebarItem = Section | Page;
 type Sidebar = SidebarItem[];

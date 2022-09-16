@@ -1,4 +1,5 @@
-import typescript, { CompilerOptions } from 'typescript';
+import type { CompilerOptions } from 'typescript';
+import typescript from 'typescript';
 import { readFile } from 'node:fs/promises';
 
 const { ModuleKind, ScriptTarget, transpileModule, ModuleResolutionKind } =

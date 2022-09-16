@@ -4,35 +4,34 @@
  * Since the included types weren't 100% compatible with the actual source, a lot of any's are (ab)used
  */
 
-import locationHook, {
+import type {
 	HookNavigationOptions,
 	BaseLocationHook,
 	HookReturnValue,
 	LocationHook,
 } from './use-location.js';
+import locationHook from './use-location.js';
 
-import makeMatcher, {
-	Path,
-	Match,
-	MatcherFn,
-	DefaultParams,
-} from './matcher.js';
+import type { Path, Match, MatcherFn, DefaultParams } from './matcher.js';
+import makeMatcher from './matcher.js';
 
-import {
+import type {
 	FC,
+	ReactNode,
+	ReactElement,
+	ComponentType,
+	PropsWithChildren,
+	AnchorHTMLAttributes,
+} from 'react';
+import {
 	useRef,
 	Fragment,
-	ReactNode,
 	useContext,
 	useCallback,
 	cloneElement,
-	ReactElement,
 	createContext,
-	ComponentType,
 	isValidElement,
 	useLayoutEffect,
-	PropsWithChildren,
-	AnchorHTMLAttributes,
 	createElement as h,
 } from 'react';
 
@@ -251,7 +250,7 @@ export function Link<H extends BaseLocationHook = LocationHook>(
 
 			event.preventDefault();
 			(navRef.current as any)?.();
-			// eslint-disable-next-line @typescript-eslint/prefer-optional-chain, babel/no-unused-expressions, @typescript-eslint/no-unused-expressions
+			// eslint-disable-next-line @typescript-eslint/prefer-optional-chain, @typescript-eslint/no-unused-expressions
 			onClick && onClick(event);
 		},
 		// navRef is a ref so it never changes

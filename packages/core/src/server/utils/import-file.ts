@@ -45,7 +45,7 @@ export async function importFile<FileType>(
 			await new Promise(resolve => {
 				setTimeout(resolve, 100);
 			});
-			
+
 			const config = await import(`file://${normalizePath(tempPath)}`);
 			importedFile =
 				(exportKey && config?.[exportKey]) || config.default || config;

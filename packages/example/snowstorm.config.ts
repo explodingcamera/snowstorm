@@ -1,4 +1,4 @@
-import { SnowstormConfig } from '@snowstorm/core/server';
+import type { SnowstormConfig } from '@snowstorm/core/server';
 
 export const Config: SnowstormConfig = {
 	development: {

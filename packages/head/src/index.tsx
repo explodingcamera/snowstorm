@@ -1,4 +1,5 @@
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface HeadTag {
 	parentID: string;

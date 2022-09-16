@@ -1,4 +1,4 @@
-import { SPOptions } from './server-props';
+import type { SPOptions } from './server-props';
 
 const serverProps: Record<string, any> = {};
 const spFuncs: Array<{

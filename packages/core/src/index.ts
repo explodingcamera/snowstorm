@@ -2,7 +2,7 @@ export { Head } from '@snowstorm/head';
 import { Link, useRoute, useLocation, Router } from '@snowstorm/router';
 export { Link, useRoute, useLocation, Router };
 
-import {
+import type {
 	SnowstormConfig as _SnowstormConfig,
 	SnowstormSiteConfig as _SnowstormSiteConfig,
 	SnowstormExportConfig as _SnowstormExportConfig,
