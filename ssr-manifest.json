@@ -2,6 +2,9 @@
   "../../../www/vite/modulepreload-polyfill": [
     "/assets/logo.4a8e5f82.svg"
   ],
+  "../../../www/\u0000commonjsHelpers.js": [
+    "/assets/logo.4a8e5f82.svg"
+  ],
   "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.2.0/node_modules/react/index.js?commonjs-module": [
     "/assets/logo.4a8e5f82.svg"
   ],
@@ -47,7 +50,7 @@
   "../../../router/lib/matcher.js": [
     "/assets/logo.4a8e5f82.svg"
   ],
-  "../../../www/vite/preload-helper": [
+  "../../../www/\u0000vite/preload-helper": [
     "/assets/logo.4a8e5f82.svg"
   ],
   "../../client/_error.js": [
@@ -62,7 +65,7 @@
   "../../../www/components/layout/dracula.css": [
     "/assets/logo.4a8e5f82.svg"
   ],
-  "../../../www/components/layout/index.module.scss": [
+  "../../../www/components/layout/index.module.scss?used": [
     "/assets/logo.4a8e5f82.svg"
   ],
   "../../../www/assets/logo.svg": [
@@ -84,89 +87,89 @@
     "/assets/logo.4a8e5f82.svg"
   ],
   "../../../www/pages/impressum.mdx": [
-    "/assets/impressum.12ee771a.js"
+    "/assets/impressum.4a01c66f.js"
   ],
   "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.2.0/node_modules/react/jsx-runtime.js?commonjs-module": [
-    "/assets/jsx-runtime.aa958f43.js"
+    "/assets/jsx-runtime.c93d6323.js"
   ],
   "../../../www/\u0000/home/runner/work/snowstorm/snowstorm/node_modules/.pnpm/react@18.2.0/node_modules/react/cjs/react-jsx-runtime.production.min.js?commonjs-exports": [
-    "/assets/jsx-runtime.aa958f43.js"
+    "/assets/jsx-runtime.c93d6323.js"
   ],
   "../../../../node_modules/.pnpm/react@18.2.0/node_modules/react/cjs/react-jsx-runtime.production.min.js": [
-    "/assets/jsx-runtime.aa958f43.js"
+    "/assets/jsx-runtime.c93d6323.js"
   ],
   "../../../../node_modules/.pnpm/react@18.2.0/node_modules/react/jsx-runtime.js": [
-    "/assets/jsx-runtime.aa958f43.js"
+    "/assets/jsx-runtime.c93d6323.js"
   ],
-  "../../../www/pages/index.module.scss": [
-    "/assets/index.97035aed.js",
-    "/assets/index.57d4260d.css"
+  "../../../www/pages/index.module.scss?used": [
+    "/assets/index.83b52a30.js",
+    "/assets/index.a7d571e1.css"
   ],
   "../../../www/pages/index.tsx": [
-    "/assets/index.97035aed.js",
-    "/assets/index.57d4260d.css"
+    "/assets/index.83b52a30.js",
+    "/assets/index.a7d571e1.css"
   ],
   "../../../www/pages/inspirations.mdx": [
-    "/assets/inspirations.db78ff51.js"
+    "/assets/inspirations.3489178b.js"
   ],
   "../../../www/pages/docs/browser-support.mdx": [
-    "/assets/browser-support.664f80bc.js"
+    "/assets/browser-support.9d771565.js"
   ],
   "../../../www/pages/docs/css.mdx": [
-    "/assets/css.28094bbd.js"
+    "/assets/css.8543da3b.js"
   ],
   "../../../www/pages/docs/custom-app.mdx": [
-    "/assets/custom-app.307a6d32.js"
+    "/assets/custom-app.e87a7a9b.js"
   ],
   "../../../www/pages/docs/custom-fonts.mdx": [
-    "/assets/custom-fonts.1f6ee492.js"
+    "/assets/custom-fonts.52080171.js"
   ],
   "../../../www/pages/docs/deploy.mdx": [
-    "/assets/deploy.2e1a7b5b.js"
+    "/assets/deploy.d52e5938.js"
   ],
   "../../../www/pages/docs/dynamic-routes.mdx": [
-    "/assets/dynamic-routes.f9bd0683.js"
+    "/assets/dynamic-routes.01937dac.js"
   ],
   "../../../www/pages/docs/env-variables.mdx": [
-    "/assets/env-variables.09f16542.js"
+    "/assets/env-variables.5a5d93e6.js"
   ],
   "../../../www/pages/docs/getting-started.mdx": [
-    "/assets/getting-started.da4f5f1a.js"
+    "/assets/getting-started.059f9560.js"
   ],
   "../../../www/pages/docs/imports.mdx": [
-    "/assets/imports.188d1335.js"
+    "/assets/imports.326ff457.js"
   ],
   "../../../www/pages/docs/index.tsx": [
-    "/assets/index.b14668f4.js"
+    "/assets/index.288e69ca.js"
   ],
   "../../../www/pages/docs/pages.mdx": [
-    "/assets/pages.e57080f8.js"
+    "/assets/pages.2f789395.js"
   ],
   "../../../www/pages/docs/plugins.mdx": [
-    "/assets/plugins.90d7c30e.js"
+    "/assets/plugins.c2903489.js"
   ],
   "../../../www/pages/docs/routing.mdx": [
-    "/assets/routing.52fa76f5.js"
+    "/assets/routing.a292d8d5.js"
   ],
   "../../../www/pages/docs/sites.mdx": [
-    "/assets/sites.2996bd1d.js"
+    "/assets/sites.d2c2c0ba.js"
   ],
   "../../../www/pages/docs/static-assets.mdx": [
-    "/assets/static-assets.e5cc406f.js"
+    "/assets/static-assets.ddfc735c.js"
   ],
   "../../../www/pages/docs/wasm.mdx": [
-    "/assets/wasm.b92ef4c5.js"
+    "/assets/wasm.d5dfe390.js"
   ],
   "../../../www/pages/docs/workers.mdx": [
-    "/assets/workers.fe8136f5.js"
+    "/assets/workers.06f23a5e.js"
   ],
   "../../../www/pages/docs/api/cli.mdx": [
-    "/assets/cli.61f804a7.js"
+    "/assets/cli.20d93877.js"
   ],
   "../../../www/pages/docs/api/config.mdx": [
-    "/assets/config.b67fecd8.js"
+    "/assets/config.365efc2f.js"
   ],
   "../../../www/pages/docs/api/plugins.mdx": [
-    "/assets/plugins.91f92f61.js"
+    "/assets/plugins.ea78f529.js"
   ]
 }
